@@ -1,0 +1,143 @@
+import { StyleSheet, } from 'react-native'
+
+const styles = StyleSheet.create({
+    container:{
+        marginHorizontal:10,
+        position:'relative'
+    },
+    scrollContainer:{
+        marginBottom:120,
+    },
+    imageContainer:{
+        aspectRatio: 3/2, // Aspect ratio for the image
+        width: '100%',
+        borderRadius: 20,
+        overflow: 'hidden', // Ensure image stays within bounds of container
+    },
+    image:{
+        flex: 1,
+        width: '100%',
+    },
+    user:{
+        flex:1
+    },
+    name:{
+        fontSize:30,
+        fontWeight:'bold',
+        // marginBottom:10,
+        color:'#413b3b',
+    },
+    bedroom:{
+        marginTop:5,
+        fontSize:18,
+        color:'#413b3b',
+    },
+    
+    location:{
+        fontSize:18,
+        fontWeight:'bold',
+        color:'#413b3b',
+    },
+    reviewIconRow:{
+        flexDirection:'row',
+        alignItems:'center',
+        gap:5
+    },
+    star:{
+        color:'#07021f',
+        fontSize:20,
+    },
+    reviewTxt:{
+        fontSize:18,
+    },
+    descriptionContainer:{
+        flexDirection:'row'
+    },
+    description:{
+        marginTop:10,
+        fontSize:21,
+        lineHeight:25
+    },
+    readMoreLess:{
+        color:'#009b0f',
+    },
+    price:{
+        fontSize:19,
+        fontWeight:'400',
+    },
+    sub:{
+        fontStyle:'italic',
+        fontSize:19,
+        fontWeight:'bold',
+        marginRight:7
+    },
+    priceRow:{
+        flexDirection:'row',
+        marginTop:10,
+    },
+    priceRowTotal:{
+        marginTop:4,
+        flexDirection:'row',
+    },
+    borderLine:{
+        marginVertical:20,
+        borderBottomWidth:1,
+        borderColor:'#a7a7a7',
+    },
+    totalPrice:{
+        fontWeight:'bold',
+        fontSize:19,
+        textDecorationLine:'underline'
+    },
+    rateContainer:{
+        flex:1,
+        gap:10,
+    },
+    rateTxt:{
+        fontSize:20,
+        fontWeight:'bold'
+    },
+    starContainer:{
+        flex:1,
+        flexDirection:'row',
+        width:"70%",
+        justifyContent:'space-between',
+        alignSelf:'center',
+    },
+    writeReview:{
+        fontSize:16,
+        color:'#00a2ff',
+    },
+    seeReviewsBtn:{
+        marginVertical:10,
+        padding:5,
+        borderWidth:1,
+        justifyContent:'center',
+        alignItems:'center',
+        marginHorizontal:70,
+        backgroundColor:'transparent',
+        borderRadius:10,
+    },
+    seeReviewsBtnTxt:{
+        fontSize:16,
+        fontWeight:'bold',
+    },
+    getinTouchContainer:{
+        position:'absolute',
+        justifyContent:'center',
+        alignItems:'center',
+        right:10,
+        left:10,
+        height:60,
+        bottom:50,
+        backgroundColor:'#0b021f',
+        borderRadius:30
+    },
+    getInTouchTxt:{
+        color:'#dddcdc',
+        fontSize:25,
+        fontWeight:"bold",
+    },
+})
+
+export default styles;

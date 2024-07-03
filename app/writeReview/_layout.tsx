@@ -2,10 +2,10 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Stack } from 'expo-router'
 
-const FullViewLayout = () => {
+const WriteReviewLayout = () => {
   return (
-    <Stack screenOptions={{headerShown:false}}/>
+    <Stack screenOptions={{}}/>
   )
 }
 
-export default FullViewLayout
+export default WriteReviewLayout

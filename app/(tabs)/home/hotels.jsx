@@ -1,12 +1,12 @@
 import { View, Text, ImageBackground, Pressable, StyleSheet, Dimensions, FlatList, ScrollView } from 'react-native'
 import React from 'react'
-import PostList from '../../../components/HouseComponents/PostList'
+import HotelPostList from '../../../components/HotelComponents/HotelPostList'
 import BannerAds from '../../../components/BannerAds'
 import { FontAwesome } from '@expo/vector-icons';
 import {Link} from "expo-router";
 
 
-const HomeScreen = () => {
+const HotelScreen = () => {
 
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ const HomeScreen = () => {
           <Pressable style={styles.searchBtn} onPress={()=> console.warn('you want to navigate')}>
               <FontAwesome name="search" size={24} color="black" />
               <Text style= {styles.searchBtnTxt}>
-                Search for Houses
+                Search for Hotels
               </Text>
           </Pressable>
         </Link>
@@ -28,7 +28,7 @@ const HomeScreen = () => {
       
       {/* Random Listings */}
 
-        <PostList/>
+        <HotelPostList/>
         
     </View>
   )
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default HomeScreen
+export default HotelScreen

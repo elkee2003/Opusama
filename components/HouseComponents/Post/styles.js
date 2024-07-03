@@ -2,54 +2,60 @@ import { StyleSheet, } from 'react-native'
 
 const styles = StyleSheet.create({
     container:{
-        marginHorizontal:10,
-
+        marginTop:35,
+        marginHorizontal:20,
     },
     imageContainer:{
         aspectRatio: 3/2, // Aspect ratio for the image
         width: '100%',
         borderRadius: 20,
         overflow: 'hidden', // Ensure image stays within bounds of container
+        backgroundColor:'#15141A'
     },
     image:{
         flex: 1,
         width: '100%',
+        objectFit:'contain'
     },
     bedroom:{
-        marginTop:10,
-        fontSize:18,
+        fontSize:14,
         color:'#413b3b',
     },
     
     location:{
-        fontSize:18,
-        fontWeight:'bold',
+        fontSize:14,
         color:'#413b3b',
     },
-    user:{
+    contact:{
         flexDirection:'row',
-        alignItems:'flex-start'
+        justifyContent:'space-between',
+        marginBottom:10,
     },
     name:{
-        fontSize:20,
-        marginBottom:10,
-        color:'#413b3b',
+        fontSize:14,
+        color:'#141414',
     },
     description:{
-        marginTop:10,
-        fontSize:21,
+        fontSize:19,
         lineHeight:25
     },
-    prices:{
+    price:{
         fontSize:19,
-        marginVertical:10
+        fontWeight:'400',
     },
-    oldPrice:{
-        color:'#7c7676',
-        textDecorationLine:'line-through'
+    sub:{
+        fontStyle:'italic',
+        fontSize:19,
+        fontWeight:'bold',
+        marginRight:7
     },
-    newPrice:{
-        fontWeight:'500'
+    priceRow:{
+        flexDirection:'row',
+        marginTop:10,
+    },
+    priceRowTotal:{
+        marginTop:4,
+        flexDirection:'row',
     },
     totalPrice:{
         fontWeight:'bold',

@@ -10,7 +10,6 @@ const SearchLayout = () => {
         <Stack.Screen name='index'/>
         <Stack.Screen name='searchResults'/>
         <Stack.Screen name='[id]'/>
-        <Stack.Screen name='fullView'/>
     </Stack>
   )
 }

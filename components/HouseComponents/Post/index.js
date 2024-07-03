@@ -19,7 +19,7 @@ const Post = ({post}) => {
 
         <View style={styles.sub}>
           {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>A {post.bed} Bedroom Apartment</Text>
+          <Text style={styles.bedroom}>{post.bedroom} Bedroom Apartment</Text>
 
           {/* Location */}
           <Text style={styles.location}>{post.location}</Text>
@@ -35,16 +35,21 @@ const Post = ({post}) => {
         <Text style={styles.description} numberOfLines={2}>{post.description}</Text>
 
         {/* Old Price & New Price */}
-        <Text style={styles.prices}>
-          <Text style={styles.oldPrice}>₦{post.oldPrice} </Text>
-          <Text style={styles.newPrice}>  ₦{post.newPrice}{' '}</Text>
-          / year 
-        </Text>
+        {/* Rent */}
+        <View style={styles.priceRow}>
+          <Text style={styles.sub}>Rent: </Text>
+          <Text style={styles.price}> 
+            ₦{post.rent} / year
+          </Text>
+        </View>
 
         {/* Total Price */}
-        <Text style={styles.totalPrice}>
-          ₦{post.totalPrice} 
-        </Text>
+        <View style={styles.priceRowTotal}>
+          <Text style={styles.sub}>Total:</Text>
+          <Text style={styles.totalPrice}>
+             {''}₦{post.totalRent}
+          </Text>
+        </View>
       </View>
       
     

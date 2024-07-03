@@ -17,11 +17,6 @@ const styles = StyleSheet.create({
         width: '100%',
         objectFit:'contain'
     },
-    sub:{
-        marginTop:5,
-        flexDirection:'row',
-        justifyContent:'space-between'
-    },
     bedroom:{
         fontSize:14,
         color:'#413b3b',
@@ -44,16 +39,23 @@ const styles = StyleSheet.create({
         fontSize:19,
         lineHeight:25
     },
-    prices:{
+    price:{
         fontSize:19,
-        marginVertical:10
+        fontWeight:'400',
     },
-    oldPrice:{
-        color:'#7c7676',
-        textDecorationLine:'line-through'
+    sub:{
+        fontStyle:'italic',
+        fontSize:19,
+        fontWeight:'bold',
+        marginRight:7
     },
-    newPrice:{
-        fontWeight:'500'
+    priceRow:{
+        flexDirection:'row',
+        marginTop:10,
+    },
+    priceRowTotal:{
+        marginTop:4,
+        flexDirection:'row',
     },
     totalPrice:{
         fontWeight:'bold',

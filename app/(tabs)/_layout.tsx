@@ -1,3 +1,4 @@
+import { Image } from 'react-native';
 import { Tabs, } from 'expo-router'
 import React from 'react'
 import { FontAwesome } from '@expo/vector-icons';
@@ -16,7 +17,11 @@ export default function TabsLayout() {
         name='home'
         options={{
           tabBarLabel:'Home',
-          tabBarIcon:({color})=> <FontAwesome name="home" size={28} color={color} />
+          tabBarIcon:({color})=> <FontAwesome name="home" size={28} color={color} />,
+          headerShown:true,
+          title:'Center',
+          headerTitleAlign:'center',
+          headerTitle: ()=><Image source={require('../../assets/data/images/Opusama3.png')} style={{resizeMode:'contain', width:50, height:50}}/>
         }}
         />
 

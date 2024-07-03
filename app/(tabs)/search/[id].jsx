@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, Pressable } from 'react-native'
 import React from 'react'
-import DetailedPost from '../../../components/DetailedPost'
+import DetailedPost from '../../../components/HouseComponents/DetailedPost'
 import { useLocalSearchParams } from 'expo-router'
 import feed from '../../../assets/data/feed'
 
