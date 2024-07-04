@@ -1,7 +1,7 @@
-import { View, Text, Image,ScrollView, TouchableOpacity, } from 'react-native'
+import { View, Text, Image ,ScrollView, TouchableOpacity, } from 'react-native'
 import React, { useState } from 'react'
 import { Link } from 'expo-router'
-import ReviewProperty from '../ReviewProperty'
+import ReviewHotel from '../ReviewHotel'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router'
@@ -27,22 +27,26 @@ const DetailedPost = ({post}) => {
   return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/fullView/${post.id}`} asChild>
+          {/* <Link href={`/fullView/${post.id}`} asChild> */}
             <TouchableOpacity onPress={()=>console.log(post.image)}>
               <View style={styles.imageContainer}>
                 {/* Image */}
                 <Image source={{uri: post.image[0]}} style={styles.image}/>
               </View>
             </TouchableOpacity>
-          </Link>
+          {/* </Link> */}
         
           {/* User */}
           <View style={styles.user}>
             <Text style={styles.name}>{post.username}</Text>
           </View>
+
+          {/* Type */}
+          <Text style={styles.bedroom}>{post.type}</Text>
           
           {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>{post.bedroom} Bedroom Apartment</Text>
+          <Text style={styles.bedroom}>Beds:{post.beds} </Text>
+          <Text style={styles.bedroom}>Bedrooms:{post.bedroom} </Text>
 
           {/* Location */}
           <Text style={styles.location}>{post.location}</Text>
@@ -72,9 +76,9 @@ const DetailedPost = ({post}) => {
 
           {/* Rent */}
           <View style={styles.priceRow}>
-            <Text style={styles.sub}>Rent: </Text>
+            <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
-              ₦{post.rent} / year
+              ₦{post.price} / Night
             </Text>
           </View>
 
@@ -82,7 +86,7 @@ const DetailedPost = ({post}) => {
           <View style={styles.priceRowTotal}>
             <Text style={styles.sub}>Total:</Text>
             <Text style={styles.totalPrice}>
-              {''}₦{post.totalRent}
+              {''}₦{post.totalPrice}
             </Text>
           </View>
 
@@ -122,7 +126,7 @@ const DetailedPost = ({post}) => {
                 </Text>
                 {post.reviews.slice(0,2).map(item=>(
                   <View key={item.userId}>
-                    <ReviewProperty review={item}/>
+                    <ReviewHotel review={item}/>
                   </View>
                 ))}
               </View>): null
@@ -139,8 +143,8 @@ const DetailedPost = ({post}) => {
           }
           
         </ScrollView>
-        <View style={styles.getinTouchContainer}>
-            <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
+        <View style={styles.bookContainer}>
+            <Text style={styles.bookTxt}>Book</Text>
         </View>
       </View>
   )

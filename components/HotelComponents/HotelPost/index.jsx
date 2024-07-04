@@ -8,14 +8,14 @@ const HotelPost = ({post}) => {
 
   return (
       <View style={styles.container}>
-        {/* <Link href={`/search/${post.id}`} asChild> */}
+        <Link href={`/hotelsearch/${post.id}`} asChild>
           <Pressable onPress={()=>console.warn('Check Post')}>
             <View style={styles.imageContainer}>
               {/* Image */}
               <Image source={{uri: post.image[0]}} style={styles.image}/>
             </View>
           </Pressable>
-        {/* </Link> */}
+        </Link>
 
         <View style={styles.sub}>
           {/* Bed & Bedrooms */}

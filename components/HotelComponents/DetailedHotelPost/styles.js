@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         fontSize:16,
         fontWeight:'bold',
     },
-    getinTouchContainer:{
+    bookContainer:{
         position:'absolute',
         justifyContent:'center',
         alignItems:'center',
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#0b021f',
         borderRadius:30
     },
-    getInTouchTxt:{
+    bookTxt:{
         color:'#dddcdc',
         fontSize:25,
         fontWeight:"bold",

@@ -1,6 +1,6 @@
 export default [
     {
-        id:0,
+        id:'0',
         username:'Le Merida',
         image:[
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0JxgI2qCHTsxA7QPfdfjYhu9rf6CT_-1mAA&s',
@@ -22,7 +22,7 @@ export default [
         },
     },
     {
-        id:1,
+        id:'1',
         username:'GranPez',
         image:[
             'https://t3.ftcdn.net/jpg/06/19/00/08/360_F_619000872_AxiwLsfQqRHMkNxAbN4l5wg1MsPgBsmo.jpg',
@@ -44,7 +44,7 @@ export default [
         },
     },
     {
-        id:2,
+        id:'2',
         username:'La Cabra',
         image:[
             'https://www.travelandleisure.com/thmb/OiDnPGo3k9QLRT9__TPhFZcr7PU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/rosewood-carlyle-presidential-suite-LUXESUITE0122-0046808a88924e57922d78c7f1d9ca60.jpg',
@@ -66,7 +66,7 @@ export default [
         },
     },
     {
-        id:3,
+        id:'3',
         username:'Opusingi Resorts',
         image:[
             'https://t3.ftcdn.net/jpg/06/39/88/70/360_F_639887058_HCisflmW1CTF4EoNBv2CADRdf0RftNoR.jpg',
@@ -88,7 +88,7 @@ export default [
         },
     },
     {
-        id:4,
+        id:'4',
         username:'Baale Hotel and Suites',
         image:[
             'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iyix1OYhVxdA/v2/-1x-1.jpg',
@@ -110,7 +110,7 @@ export default [
         },
     },
     {
-        id:5,
+        id:'5',
         username:'Atees Home',
         image:[
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ77x4bvGRJhuPujf_PUNm0jQmLxzAIAt9pXOQgehqWJWKWa-7D6MJS1UkwbaeKu53jQ58&usqp=CAU',
