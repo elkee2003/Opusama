@@ -1,4 +1,5 @@
 import { StyleSheet, } from 'react-native'
+import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
     container:{
@@ -24,19 +25,18 @@ const styles = StyleSheet.create({
     name:{
         fontSize:30,
         fontWeight:'bold',
-        // marginBottom:10,
-        color:'#413b3b',
+        color: Colors.HEADING,
+        letterSpacing:0.8,
     },
     bedroom:{
-        marginTop:5,
-        fontSize:18,
-        color:'#413b3b',
+        fontSize:17,
+        color:Colors.COMMENTS,
     },
     
     location:{
-        fontSize:18,
+        fontSize:17,
         fontWeight:'bold',
-        color:'#413b3b',
+        color:Colors.COMMENTS,
     },
     reviewIconRow:{
         flexDirection:'row',
@@ -45,32 +45,34 @@ const styles = StyleSheet.create({
     },
     star:{
         color:'#07021f',
-        fontSize:20,
-    },
-    reviewTxt:{
         fontSize:18,
+    },
+    starTxt:{
+        fontSize:17,
     },
     descriptionContainer:{
         flexDirection:'row'
     },
     description:{
         marginTop:10,
-        fontSize:20,
+        fontSize:19,
         lineHeight:25,
-        color:'#1b1b1b',
+        color:Colors.TEXTCOLOUR,
     },
     readMoreLess:{
         color:'#009b0f',
     },
     price:{
-        fontSize:19,
+        fontSize:18,
         fontWeight:'400',
+        color:Colors.TEXTCOLOUR,
     },
     sub:{
         fontStyle:'italic',
-        fontSize:19,
+        fontSize:18,
         fontWeight:'bold',
-        marginRight:7
+        marginRight:7,
+        color:Colors.TEXTCOLOUR,
     },
     priceRow:{
         flexDirection:'row',
@@ -88,15 +90,28 @@ const styles = StyleSheet.create({
     totalPrice:{
         fontWeight:'bold',
         fontSize:19,
-        textDecorationLine:'underline'
+        textDecorationLine:'underline',
+        color:Colors.TEXTCOLOUR,
+    },
+    luxPolHeadTxt:{
+        fontSize:25.888,
+        fontWeight:'bold',
+        marginBottom:10,
+        color:Colors.HEADING,
+    },
+    luxPolTxt:{
+        fontSize:16,
+        color:Colors.COMMENTS,
+        lineHeight:23,
     },
     rateContainer:{
         flex:1,
         gap:10,
     },
     rateTxt:{
-        fontSize:20,
-        fontWeight:'bold'
+        fontSize:25.888,
+        fontWeight:'bold',
+        color:Colors.HEADING,
     },
     starContainer:{
         flex:1,
@@ -105,9 +120,18 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignSelf:'center',
     },
+    // writeReviewCon:{
+    //     borderBottomWidth:1.5,
+    //     marginRight:'auto',
+    //     borderColor:'#19ad25',
+    //     borderRadius:20,
+       
+    // },
     writeReview:{
         fontSize:16,
-        color:'#00a2ff',
+        color:'#07630e',
+        textDecorationLine:'underline'
+
     },
     seeReviewsBtn:{
         marginVertical:10,
@@ -120,8 +144,9 @@ const styles = StyleSheet.create({
         borderRadius:10,
     },
     seeReviewsBtnTxt:{
-        fontSize:16,
+        fontSize:17,
         fontWeight:'bold',
+        color: Colors.HEADING,
     },
     bookContainer:{
         position:'absolute',
@@ -131,7 +156,7 @@ const styles = StyleSheet.create({
         left:10,
         height:60,
         bottom:50,
-        backgroundColor:'#0b021f',
+        backgroundColor:'#19ad25',
         borderRadius:30
     },
     bookTxt:{

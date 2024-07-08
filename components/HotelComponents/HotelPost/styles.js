@@ -1,4 +1,5 @@
 import { StyleSheet, } from 'react-native'
+import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
     container:{
@@ -15,52 +16,45 @@ const styles = StyleSheet.create({
     image:{
         flex: 1,
         width: '100%',
-        objectFit:'contain'
+        resizeMode:'contain'
     },
-    bedroom:{
-        fontSize:14,
-        color:'#413b3b',
-    },
-    
-    location:{
-        fontSize:14,
-        color:'#413b3b',
+    name:{
+        fontSize:17,
+        fontWeight:'bold',
+        letterSpacing:0.7,
+        color:'#141414',
     },
     contact:{
         flexDirection:'row',
+    },
+    bedroom:{
+        fontSize:15.5,
+        color: Colors.COMMENTS,
+    },
+    
+    room:{
+        flexDirection:'row',
         justifyContent:'space-between',
-        marginBottom:10,
+        alignItems:'center'
     },
-    name:{
-        fontSize:14,
-        color:'#141414',
+
+    location:{
+        fontSize:15.5,
+        color: Colors.COMMENTS,
     },
+    
     description:{
-        fontSize:19,
-        lineHeight:25
+        fontSize:17,
+        lineHeight:22,
+        color: Colors.PRIMARY,
     },
     price:{
-        fontSize:19,
-        fontWeight:'400',
-    },
-    sub:{
-        fontStyle:'italic',
-        fontSize:19,
+        fontSize:17,
         fontWeight:'bold',
-        marginRight:7
     },
     priceRow:{
         flexDirection:'row',
-        marginTop:10,
-    },
-    priceRowTotal:{
-        marginTop:4,
-        flexDirection:'row',
-    },
-    totalPrice:{
-        fontWeight:'bold',
-        fontSize:19,
-        textDecorationLine:'underline'
+        marginTop:5,
     },
 })
 

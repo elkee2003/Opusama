@@ -4,7 +4,11 @@ import { Stack } from 'expo-router'
 
 const AllReviewsLayout = () => {
   return (
-    <Stack screenOptions={{headerShown:false}}/>
+    <Stack screenOptions={{headerShown:false}}>
+      <Stack.Screen name='[id]' 
+      // options={{presentation:'modal'}}
+      />
+    </Stack>
   )
 }
 

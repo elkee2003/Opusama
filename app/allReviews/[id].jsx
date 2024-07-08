@@ -9,10 +9,13 @@ import { router } from 'expo-router';
 const AllReviews = () => {
 
     const {id} = useLocalSearchParams()
-    const review = feeds.find(item => item.id === id)
+
+    const postReviews = feeds.flatMap(feed=> feed.posts.map(post => post))
+
+    const review = postReviews.find(item => item.id === id)
   return (
     <View style={styles.container}>
-        <Text style={styles.header}>Reviews</Text>
+        <Text style={styles.header}>Ratings and Reviews</Text>
         <AntDesign name="arrowleft" style={styles.backIcon} onPress={()=>router.back()}/>
         <View style={styles.flatList}>
             <FlatList
@@ -39,12 +42,12 @@ const styles = StyleSheet.create({
     header:{
         textAlign:'center',
         fontWeight:'bold',
-        fontSize:30,
+        fontSize:25,
     },
     backIcon:{
         position:'absolute',
-        top:5,
-        fontSize:40,
+        top:2,
+        fontSize:35,
         color:'#060320',
     }
 })

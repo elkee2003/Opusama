@@ -1,4 +1,5 @@
 import { StyleSheet, } from 'react-native'
+import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
     container:{
@@ -18,50 +19,38 @@ const styles = StyleSheet.create({
         objectFit:'contain'
     },
     bedroom:{
-        fontSize:14,
-        color:'#413b3b',
+        fontSize:15.5,
+        color: Colors.COMMENTS,
     },
     
     location:{
-        fontSize:14,
-        color:'#413b3b',
+        fontSize:15.5,
+        color: Colors.COMMENTS,
     },
     contact:{
         flexDirection:'row',
         justifyContent:'space-between',
-        marginBottom:10,
     },
     name:{
-        fontSize:14,
+        fontSize:17,
+        fontWeight:'bold',
+        letterSpacing:0.7,
         color:'#141414',
     },
     description:{
-        fontSize:19,
-        lineHeight:25
+        fontSize:17,
+        lineHeight:22,
+        color: Colors.PRIMARY,
     },
     price:{
-        fontSize:19,
-        fontWeight:'400',
-    },
-    sub:{
-        fontStyle:'italic',
-        fontSize:19,
+        fontSize:17,
         fontWeight:'bold',
-        marginRight:7
     },
     priceRow:{
         flexDirection:'row',
-        marginTop:10,
+        marginTop:5,
     },
-    priceRowTotal:{
-        marginTop:4,
-        flexDirection:'row',
-    },
-    totalPrice:{
-        fontWeight:'bold',
-        fontSize:19,
-        textDecorationLine:'underline'
-    },
+
 })
 
 export default styles;

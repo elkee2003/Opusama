@@ -1,4 +1,4 @@
-import { View, Text, Image ,ScrollView, TouchableOpacity, } from 'react-native'
+import { View, Text, Image ,ScrollView, TouchableOpacity, Pressable} from 'react-native'
 import React, { useState } from 'react'
 import { Link } from 'expo-router'
 import ReviewHotel from '../ReviewHotel'
@@ -6,10 +6,20 @@ import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router'
 
-const DetailedPost = ({post}) => {
+const DetailedHotelPost = ({post}) => {
 
   const [readMore, setReadMore] = useState(false)
+  const [readMoreLux, setReadMoreLux] = useState(false)
+  const [readMorePol, setReadMorePol] = useState(false)
   const [userRating, setUserRating] = useState(0)
+
+  if (!post) {
+    return (
+      <View style={{ top: 50, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Error: No post data available</Text>
+      </View>
+    );
+  }
 
   const goToAllReviews = ()=>{
     router.push(`/allReviews/${post.id}`)
@@ -19,7 +29,7 @@ const DetailedPost = ({post}) => {
     router.push(`/writeReview/${post.id}`)
   }
 
-  // funciton to handle ratin click
+  // funciton to handle rating click
   const handleRating = (rating)=>{
     setUserRating(rating)
   }
@@ -27,39 +37,42 @@ const DetailedPost = ({post}) => {
   return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          {/* <Link href={`/fullView/${post.id}`} asChild> */}
-            <TouchableOpacity onPress={()=>console.log(post.image)}>
+          <Link href={`/hotelfullView/${post.id}`} asChild>
+            <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}
-                <Image source={{uri: post.image[0]}} style={styles.image}/>
+                <Image source={{uri: post.media[0].urls?.[0]}} style={styles.image}/>
               </View>
             </TouchableOpacity>
-          {/* </Link> */}
+          </Link>
         
           {/* User */}
-          <View style={styles.user}>
-            <Text style={styles.name}>{post.username}</Text>
-          </View>
+          <Link href={`/realtorprofilepage/${post.userId}`} asChild>
+            <Pressable style={styles.user}>
+              <Text style={styles.name}>{post.username}</Text>
+            </Pressable>
+          </Link>
 
           {/* Type */}
           <Text style={styles.bedroom}>{post.type}</Text>
           
           {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>Beds:{post.beds} </Text>
-          <Text style={styles.bedroom}>Bedrooms:{post.bedroom} </Text>
+          <Text style={styles.bedroom}>Beds: {post.beds} </Text>
+          <Text style={styles.bedroom}>Bedrooms: {post.bedroom} </Text>
 
           {/* Location */}
           <Text style={styles.location}>{post.location}</Text>
 
+          {/* Medium of Review Star */}
           <View style={styles.reviewIconRow}>
             <FontAwesome name="star" style={styles.star} />
-            <Text style={styles.reviewTxt}>4.7</Text>
+            <Text style={styles.starTxt}>4.7</Text>
           </View>
 
           {/* Type & Description */}
           <View style={styles.descriptionContainer}>
             <Text style={styles.description}>
-              {readMore ? post.description : `${post.description.substring(0,150)}...`}
+              {readMore ? post.description : `${post.description?.substring(0,150)}...`}
 
               {/* Button to toggle */}
               { readMore ?
@@ -74,7 +87,7 @@ const DetailedPost = ({post}) => {
             </Text>
           </View>
 
-          {/* Rent */}
+          {/* Price */}
           <View style={styles.priceRow}>
             <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
@@ -92,7 +105,52 @@ const DetailedPost = ({post}) => {
 
           {/* Border Line */}
           <View style={styles.borderLine}/>
+          
+          {/* Amenities */}
+          <View>
+            <Text style={styles.luxPolHeadTxt}>Guest Luxuries</Text>
+            <Text style={styles.luxPolTxt}>
+              {readMoreLux ? post.amenities : `${post.amenities.substring(0, 100)}...`}
+              
+              {/* Button to toggle */}
+              { readMoreLux ?
+                <Text onPress={()=>setReadMoreLux(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
+                  {' '}show less
+                </Text>
+                :
+                <Text style={styles.readMoreLess} onPress={()=>setReadMoreLux(true)}>
+                  {' '}read more
+                </Text>
+              }
+            </Text>
+          </View>
 
+          {/* Border Line */}
+          <View style={styles.borderLine}/>
+
+          {/* Policies */}
+          <View>
+            <Text style={styles.luxPolHeadTxt}>Stay Policies</Text>
+              <Text style={styles.luxPolTxt}>
+                {readMorePol ? post.policies : `${post.policies.substring(0,100)}...`}
+                
+                {/* Button to toggle */}
+                { readMorePol ?
+                  <Text onPress={()=>setReadMorePol(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
+                    {' '}show less
+                  </Text>
+                  :
+                  <Text style={styles.readMoreLess} onPress={()=>setReadMorePol(true)}>
+                    {' '}read more
+                  </Text>
+                }
+            </Text>
+          </View>
+
+          {/* Border Line */}
+          <View style={styles.borderLine}/>
+          
+          {/* Rate */}
           <View style={styles.rateContainer}>
             <Text style={styles.rateTxt}>Rate</Text>
             <View style={styles.starContainer}>
@@ -107,7 +165,7 @@ const DetailedPost = ({post}) => {
                 </TouchableOpacity>
               ))}
             </View>
-            <TouchableOpacity onPress={goToWriteReview}>
+            <TouchableOpacity style={styles.writeReviewCon} onPress={goToWriteReview}>
               <Text style={styles.writeReview}>
                 Write a review
               </Text>
@@ -117,7 +175,7 @@ const DetailedPost = ({post}) => {
           {/* Border Line */}
           <View style={styles.borderLine}/>
 
-          {/* Reviews of People */}
+          {/* Rating and Reviews of People */}
             {
               post. reviews && post.reviews.length > 0 ? (
               <View>
@@ -150,4 +208,4 @@ const DetailedPost = ({post}) => {
   )
 }
 
-export default DetailedPost;
+export default DetailedHotelPost;

@@ -1,4 +1,5 @@
 import { StyleSheet, } from 'react-native'
+import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
     reviewContainer:{
@@ -21,8 +22,9 @@ const styles = StyleSheet.create({
         backgroundColor:"grey"
     },
     username:{
-        fontSize:16,
-        fontWeight:'bold'
+        fontSize:17,
+        fontWeight:'bold',
+        color:Colors.HEADING
     },
     profileStarContainer:{
         flexDirection:'row',
@@ -34,7 +36,8 @@ const styles = StyleSheet.create({
     },
     profileReviewTxt:{
         fontSize:16,
-        color:'#4b4a4a'
+        lineHeight:23,
+        color:Colors.COMMENTS,
     },
     readMoreLess:{
         color:'#009b0f',

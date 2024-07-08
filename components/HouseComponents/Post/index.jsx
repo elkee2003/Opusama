@@ -2,13 +2,13 @@ import { View, Text, Image, SafeAreaView, Pressable } from 'react-native'
 import { Link } from 'expo-router'
 import React from 'react'
 import styles from './styles'
-import { FontAwesome6 } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
-const HotelPost = ({post}) => {
+const Post = ({post}) => {
 
   return (
       <View style={styles.container}>
-        <Link href={`/hotelsearch/${post.id}`} asChild>
+        <Link href={`/search/${post.id}`} asChild>
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}
@@ -24,15 +24,12 @@ const HotelPost = ({post}) => {
           </Pressable>
         </Link>
 
-        <View style={styles.room}>
-          {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>Beds: {post.beds} </Text>
-
-          <Text style={styles.bedroom}>Bedrooms:{post.bedroom} </Text>
-        </View>
+        {/* Bed & Bedrooms */}
+        <Text style={styles.bedroom}>{post.bedroom} Bedroom Apartment</Text>
 
         {/* Location */}
         <Text style={styles.location}>{post.location}</Text>
+
 
         {/* Type & Description */}
         <Text style={styles.description} numberOfLines={2}>{post.description}</Text>
@@ -40,9 +37,8 @@ const HotelPost = ({post}) => {
         {/* Old Price & New Price */}
         {/* Rent */}
         <View style={styles.priceRow}>
-          <Text style={styles.sub}></Text>
           <Text style={styles.price}> 
-            ₦{post.price} / Night
+            ₦{post.price} / year
           </Text>
         </View>
 
@@ -52,4 +48,4 @@ const HotelPost = ({post}) => {
   )
 }
 
-export default HotelPost
+export default Post

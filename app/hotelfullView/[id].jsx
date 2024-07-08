@@ -1,27 +1,28 @@
 import { View, FlatList, Pressable, StyleSheet} from 'react-native'
 import React from 'react'
-import SpecificPhoto from '../../components/HouseComponents/SpecificPhoto'
-import ShowPhotos from '../../components/HouseComponents/ShowPhotos'
-import places from '../../assets/data/feed'
+import SpecificHotelPhoto from '../../components/HotelComponents/SpecificHotelPhoto'
+
+import hotels from '../../assets/data/hotels'
 import { useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router'
 
 
 
-const FullView = () => {
+const HotelFullView = () => {
+
 
   const {id}= useLocalSearchParams()
 
-  const flattenPost = places.flatMap(place => place.posts.map(post => post))
+  const flattenHotelPosts = hotels.flatMap(hotel => hotel.posts.map(post => post))
 
-  const house = flattenPost.find(item=>item.id === id)
+  const hotel = flattenHotelPosts.find(item=>item.id === id)
 
   return (
     <View style={{flex:1, position:'relative' }} >
         <FlatList
-        data={house.media[0].urls}
-        renderItem={({item})=><SpecificPhoto photo={item}/>}
+        data={hotel.media[0].urls}
+        renderItem={({item})=><SpecificHotelPhoto photo={item}/>}
         horizontal
         pagingEnabled
         />
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FullView;
+export default HotelFullView;

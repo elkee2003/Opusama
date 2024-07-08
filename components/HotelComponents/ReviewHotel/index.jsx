@@ -5,7 +5,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 
-const ReviewProperty = ({review}) => {
+const ReviewHotel = ({review}) => {
 
     const [readMore, setReadMore] = useState(false)
 
@@ -52,4 +52,4 @@ const ReviewProperty = ({review}) => {
   )
 }
 
-export default ReviewProperty
+export default ReviewHotel;

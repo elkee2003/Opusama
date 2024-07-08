@@ -1,16 +1,26 @@
 import { View, Text, FlatList } from 'react-native'
 import React from 'react'
-import feed from '../../../assets/data/feed'
+import feeds from '../../../assets/data/feed'
 import Post from '../Post'
 import styles from './styles'
 
 const PostList = () => {
+
+  const feedData = feeds.flatMap(feed=>feed.posts.map(post=>({
+      ...post, // Include all properties of the post
+      postId: feed.id,
+      username: feed.username, // Add parent hotel information
+      phoneNumber: feed.phoneNumber,
+      email: feed.email,
+      mydescription: feed.myDescription
+  })))
+
   return (
     <View style={styles.container}>
       {
-        feed && feed.length > 0 ?
+        feedData && feedData.length > 0 ?
         <FlatList 
-            data={feed}
+            data={feedData}
             renderItem={({item})=> <Post post={item}/>}
         />
         :

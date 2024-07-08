@@ -4,6 +4,7 @@ import PostList from '../../../components/HouseComponents/PostList'
 import BannerAds from '../../../components/BannerAds'
 import { FontAwesome } from '@expo/vector-icons';
 import {Link} from "expo-router";
+import {Colors} from '../../../constants/Colors'
 
 
 const HomeScreen = () => {
