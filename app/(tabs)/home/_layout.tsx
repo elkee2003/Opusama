@@ -16,7 +16,7 @@ const HomeLayout = () => {
       tabBarLabelStyle:{fontWeight:'bold', textTransform:'capitalize'}
     }}>
       <MaterialTobTabs.Screen name='index' options={{title:'Houses'}}/>
-      <MaterialTobTabs.Screen name='hotels' options={{title:'Hotels'}}/>
+      <MaterialTobTabs.Screen name='hotels' options={{title:'Hotels / Shorlets'}}/>
       <MaterialTobTabs.Screen name='lands' options={{title:'lands'}}/>
       <MaterialTobTabs.Screen name='stores' options={{title:'stores'}}/>
     </MaterialTobTabs>

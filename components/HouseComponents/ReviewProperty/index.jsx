@@ -1,8 +1,8 @@
 import { View, Text, Image } from 'react-native'
 import React, {useState} from 'react'
 import styles from './styles'
-import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const ReviewProperty = ({review}) => {
@@ -15,7 +15,12 @@ const ReviewProperty = ({review}) => {
 
             <View style={styles.profileDetails}>
                 <View style={styles.profilePicContainer}>
-                <Image/>
+                {
+                    review?.profilePicture ? 
+                    <Image source={{uri: review.profilePicture}} style={styles.profileImg}/>
+                    :
+                    <Ionicons style={styles.vectorIcon}name="person-sharp" />
+                }
                 </View>
                 <Text style={styles.username}>
                     {review.username}

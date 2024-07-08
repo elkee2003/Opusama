@@ -19,7 +19,20 @@ const styles = StyleSheet.create({
         height:45,
         width:45,
         borderRadius:20,
-        backgroundColor:"grey"
+        backgroundColor:"grey",
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    profileImg:{
+        width:'100%',
+        height:'100%',
+        resizeMode:"contain",
+        borderRadius:35,
+    },
+    vectorIcon:{
+        fontSize:20,
+        alignSelf:'center',
+        color:'#3a3a3a',
     },
     username:{
         fontSize:17,

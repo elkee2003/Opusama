@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
         resizeMode:"contain",
         borderRadius:35,
     },
+    vectorIcon:{
+        fontSize:100,
+        alignSelf:'center',
+        color:'#838181',
+    },
     // row:{
     //     flexDirection:'row',
     //     gap:10,
@@ -52,6 +57,7 @@ const styles = StyleSheet.create({
     },
     profileBtnCon:{
         flexDirection:'row',
+        justifyContent:'center',
         gap:10,
         marginBottom:20,
     },
@@ -92,7 +98,7 @@ const styles = StyleSheet.create({
         width: imageSize,
         aspectRatio: 3 / 4,
         margin: margin / 10, // Ensure the empty view takes up space
-        backgroundColor: 'blue', // Make it invisible
+        // backgroundColor: 'blue', // Make it invisible
       },
     mediaContainer:{
         width:imageSize,

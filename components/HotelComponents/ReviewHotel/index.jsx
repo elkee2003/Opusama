@@ -1,8 +1,9 @@
 import { View, Text, Image } from 'react-native'
 import React, {useState} from 'react'
 import styles from './styles'
-import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+
 
 
 const ReviewHotel = ({review}) => {
@@ -15,7 +16,10 @@ const ReviewHotel = ({review}) => {
 
             <View style={styles.profileDetails}>
                 <View style={styles.profilePicContainer}>
-                <Image/>
+                {
+                    
+                    <Ionicons style={styles.vectorIcon}name="person-sharp" />
+                }
                 </View>
                 <Text style={styles.username}>
                     {review.username}

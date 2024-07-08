@@ -27,7 +27,7 @@ const HotelPostList = () => {
           renderItem={({item})=> <HotelPost post={item}/>}
       />
       :
-          <Text style={styles.noListings}>There are no Hotel listings</Text>
+          <Text style={styles.noListings}>No Hotel listings</Text>
       }
     </View>
   )

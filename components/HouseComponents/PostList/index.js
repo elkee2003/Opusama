@@ -24,7 +24,7 @@ const PostList = () => {
             renderItem={({item})=> <Post post={item}/>}
         />
         :
-        <Text style={styles.noListings}>There are no House listings</Text>
+        <Text style={styles.noListings}>No House listings</Text>
       }
     </View>
   )

@@ -1,6 +1,8 @@
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import React from 'react';
 import styles from './styles'
+import { Link } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 const RealtorProfilePage = ({realtor}) => {
 
@@ -17,11 +19,12 @@ const RealtorProfilePage = ({realtor}) => {
         return rows.map((row, rowIndex)=>(
             <View key={rowIndex} style={styles.mediaRow}>
                 {row.map((url,index)=>(
-                    <TouchableOpacity>
-                        <View key={index} style={styles.mediaContainer}>
+                
+                    <TouchableOpacity key={index}>
+                        <View style={styles.mediaContainer}>
 
                             {/* Image */}
-                            <Image source={{uri:url}} style={styles.media}/>
+                            <Image key={index} source={{uri:url}} style={styles.media}/>
 
                         </View>
                     </TouchableOpacity>
@@ -32,9 +35,6 @@ const RealtorProfilePage = ({realtor}) => {
                     <View key={index} style={styles.emptyContainer} />
                     ))
                 )}
-                {/* {row.map((url, index)=>(
-                    <Image key={index} source={{uri:url}}style={styles.mediaImage}/>
-                ))} */}
             </View>
         ))
     }
@@ -45,7 +45,12 @@ const RealtorProfilePage = ({realtor}) => {
 
             {/* Profile Picture */}
             <TouchableOpacity style={styles.profilePicContainer}>
-                <Image source={{ uri: realtor.profilePicture }} style={styles.profileImg} />
+                {
+                    realtor.profilePicture ?<Image source={{ uri: realtor.profilePicture }} style={styles.profileImg} /> 
+                    :
+                    <Ionicons 
+                    style={styles.vectorIcon} name="person-sharp" />
+                }
             </TouchableOpacity>
         
             <View style={styles.details}>
@@ -73,7 +78,7 @@ const RealtorProfilePage = ({realtor}) => {
                 {/* ratings and review */}
                 <TouchableOpacity style={styles.rateReviewBtn}>
                     <Text style={styles.rateReviewBtnTxt}>
-                        See Ratings & Review
+                        Ratings & Review
                     </Text>
                 </TouchableOpacity>
             </View>

@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, {useState} from 'react'
-import WriteReviewItem from '../../components/HouseComponents/WriteReviewItem'
+import WriteReviewItem from '../../components/WriteReviewItem'
 import { useLocalSearchParams } from 'expo-router'
 import feeds from '../../assets/data/feed'
 
