@@ -4,7 +4,7 @@ export default [
         profilePicture:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQJxKGGpPc9-5g25KWwnsCCy9O_dlS4HWo5A&s',
         username: 'Le Merida',
         phoneNumber: '08034536627',
-        email: 'opusivan@opus.com',
+        email: 'merida@opus.com',
         myDescription: 'With a range of exclusive packages and special offers, we provide unmatched value, ensuring a memorable stay without breaking the bank.',
         posts: [
             {
@@ -246,8 +246,8 @@ export default [
         id: '1',
         username: 'GranPez',
         profilePicture:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQJxKGGpPc9-5g25KWwnsCCy9O_dlS4HWo5A&s',
-        phoneNumber: '08034536627',
-        email: 'opusivan@opus.com',
+        phoneNumber: '08080355527',
+        email: 'granpex@atua.com',
         myDescription: 'Our hotel offers comprehensive business services and flexible meeting spaces, making it the perfect choice for corporate travelers.',
         posts: [
             {
@@ -488,8 +488,8 @@ export default [
         id: '2',
         username: 'La Cabra',
         profilePicture:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQJxKGGpPc9-5g25KWwnsCCy9O_dlS4HWo5A&s',
-        phoneNumber: '08034536627',
-        email: 'opusivan@opus.com',
+        phoneNumber: '08039970627',
+        email: 'lacabra@ateesgrub.com',
         myDescription: 'Take advantage of our state-of-the-art facilities, including a fully-equipped fitness center, relaxing spa, and inviting swimming pool.',
         posts: [
             {
@@ -673,7 +673,7 @@ export default [
         id: '3',
         username: 'Opusingi Resorts',
         profilePicture:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQJxKGGpPc9-5g25KWwnsCCy9O_dlS4HWo5A&s',
-        phoneNumber: '08034536627',
+        phoneNumber: '0802063627',
         email: 'opusivan@opus.com',
         myDescription: 'Enjoy world-class dining at our on-site restaurants, where our renowned chefs create delectable dishes using the finest ingredients.',
         posts: [
@@ -915,8 +915,8 @@ export default [
         id: '4',
         username: 'Baale Hotel and Suites',
         profilePicture:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQJxKGGpPc9-5g25KWwnsCCy9O_dlS4HWo5A&s',
-        phoneNumber: '08034536627',
-        email: 'opusivan@opus.com',
+        phoneNumber: '08030036027',
+        email: 'baale@opus.com',
         myDescription: 'Our dedicated staff is committed to providing exceptional service, catering to your every need with warmth and professionalism.',
         posts: [
             {
@@ -1157,8 +1157,8 @@ export default [
         id: '5',
         username: 'Atees Home',
         profilePicture:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQJxKGGpPc9-5g25KWwnsCCy9O_dlS4HWo5A&s',
-        phoneNumber: '08034536627',
-        email: 'opusivan@opus.com',
+        phoneNumber: '080455644353',
+        email: 'atua@atees.com',
         myDescription: 'Our dedicated staff is committed to providing exceptional service, catering to your every need with warmth and professionalism.',
         posts: [
             {

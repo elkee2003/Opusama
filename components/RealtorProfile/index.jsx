@@ -69,11 +69,13 @@ const RealtorProfilePage = ({realtor}) => {
             {/* Contact & Rating & Review */}
             <View style={styles.profileBtnCon}>
                 {/* contact */}
+                <Link href={`/realtorcontact/${realtor.id}`} asChild>
                 <TouchableOpacity style={styles.contactBtn}>
                     <Text style={styles.contactBtnTxt}>
                         Get in Touch!
                     </Text>
                 </TouchableOpacity>
+                </Link>
 
                 {/* ratings and review */}
                 <TouchableOpacity style={styles.rateReviewBtn}>
