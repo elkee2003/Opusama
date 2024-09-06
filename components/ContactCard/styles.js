@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         borderRadius:35,
     },
     vectorIcon:{
-        fontSize:100,
+        fontSize:90,
         alignSelf:'center',
         color:'#838181',
     },

@@ -1,0 +1,49 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String
+  lastName: String
+  profilePic: String
+  rating: Float
+  comment: String
+}
+
+type Post @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  propertyType: String!
+  type: String!
+  availableDocs: [String]
+  accommodationParts: String
+  media: [String]
+  description: String!
+  address: String!
+  lat: Float
+  lng: Float
+  price: Float!
+  totalPrice: Float!
+  bed: Int
+  bedrooms: Int
+  amenities: String
+  policies: String
+  country: String!
+  state: String!
+  city: String!
+  rating: String
+  review: [String]
+  realtorID: ID! @index(name: "byRealtor")
+}
+
+type Realtor @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: String
+  profilePic: String!
+  address: String
+  phoneNumber: Int!
+  bankName: String
+  accountName: String
+  accountNumber: Int
+  rating: Float
+  review: [String]
+  Posts: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
+} 

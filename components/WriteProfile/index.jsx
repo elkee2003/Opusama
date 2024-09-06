@@ -2,6 +2,7 @@ import { View, Text, TextInput,Pressable, Alert, ScrollView} from 'react-native'
 import React, { useState, } from 'react'
 import styles from './styles'
 import { Link } from 'expo-router'
+import { signOut } from 'aws-amplify/auth';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -13,6 +14,14 @@ const Profile = () => {
     const [phoneNumber, setPhoneNumber]= useState("")
     
     const [phoneNumberError, setPhoneNumberError] = useState('')
+
+    const handleSignOut = async()=> {
+      try {
+        await signOut();
+      } catch (error) {
+        console.log('error signing out: ', error);
+      }
+    }
 
 
     return (
@@ -60,7 +69,7 @@ const Profile = () => {
                 </Pressable>
             </Link>
 
-            <Pressable onPress={()=>console.warn('sign out')} style={styles.signoutBtn}>
+            <Pressable onPress={handleSignOut} style={styles.signoutBtn}>
             <Text style={styles.signoutTxt}>Sign Out</Text>
             </Pressable>
         </View>
