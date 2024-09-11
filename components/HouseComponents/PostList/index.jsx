@@ -25,7 +25,7 @@ const PostList = () => {
   }
 
   useEffect(()=>{
-    fetchHouse();
+    // fetchHouse();
   },[])
 
   return (

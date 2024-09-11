@@ -13,7 +13,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View>
         {/* Search Bar */}
-        <Link href={'search'} asChild>
+        <Link href={'search/searchhouse'} asChild>
           <Pressable style={styles.searchBtn} onPress={()=> console.warn('you want to navigate')}>
               <FontAwesome name="search" size={24} color="black" />
               <Text style= {styles.searchBtnTxt}>
