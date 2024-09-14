@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     },
     card:{
         width:300,
-        height:350,
-        backgroundColor:'#08012c',
+        height:550,
+        backgroundColor:'#126901',
         // justifyContent:'center',
         alignItems:'center',
         borderRadius:40,
@@ -57,7 +57,27 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'#cccccc',
         textAlign:'center',
+    },
+    bookContainer:{
+        marginTop:10,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    bookHeader:{
+        fontSize:20,
+        fontWeight:'bold',
+        color:'white'
+    },
+    bookRow:{
+        flexDirection:'row',
+        gap:10,
+        marginTop:10,
+    },
+    bookBtn:{
+        fontSize:17,
+        color:'#b8b7b7'
     }
+
 })
 
 export default styles

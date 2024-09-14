@@ -26,7 +26,7 @@ export default [
               description: 'Step into this quaint 2-bedroom bungalow, perfect for cozy evenings by the fireplace, with a secure neighborhood setting ideal for families or retirees seeking tranquility',
               bedroom: 2,
               beds: '2',
-              price: '450,000.00',
+              price: '4500000.00',
               totalPrice: '500,000.00',
               location: 'Woji',
               coordinate: {

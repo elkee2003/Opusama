@@ -8,7 +8,7 @@ const SearchLayout = () => {
       headerShown:false
     }}>
         <Stack.Screen name='index'/>
-        <Stack.Screen name='[id]'/>
+        {/* <Stack.Screen name='[id]'/> */}
     </Stack>
   )
 }

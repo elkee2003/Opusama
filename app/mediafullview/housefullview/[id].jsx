@@ -1,28 +1,43 @@
 import { View, FlatList, Pressable, StyleSheet} from 'react-native'
-import React from 'react'
-import SpecificHotelPhoto from '../../components/HotelComponents/SpecificHotelPhoto'
-
-import hotels from '../../assets/data/hotels'
+import React, {useState, useEffect} from 'react'
+import SpecificPhoto from '../../../components/HouseComponents/SpecificPhoto/index.jsx'
 import { useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router'
+import { DataStore } from 'aws-amplify/datastore'
+import { Post } from '../../../src/models'
 
 
 
-const HotelFullView = () => {
-
+const FullView = () => {
 
   const {id}= useLocalSearchParams()
+  const [media, setMedia] = useState(null);
 
-  const flattenHotelPosts = hotels.flatMap(hotel => hotel.posts.map(post => post))
+  const fetchPostMedia = async () =>{
+    try{
+      if(id){
+        const foundPost = await DataStore.query(Post, id)
+        
+        if(foundPost && foundPost.media){
+          setMedia(foundPost.media);
+        }
+      }
+    }catch(error){
+      console.error('this is error for full view images', error)
+    }
+  }
 
-  const hotel = flattenHotelPosts.find(item=>item.id === id)
+  useEffect(() => {
+    fetchPostMedia();
+  }, [id]);
 
   return (
     <View style={{flex:1, position:'relative' }} >
         <FlatList
-        data={hotel.media[0].urls}
-        renderItem={({item})=><SpecificHotelPhoto photo={item}/>}
+        data={media}
+        keyExtractor={(item)=>item.toString()}
+        renderItem={({item})=><SpecificPhoto photo={item}/>}
         horizontal
         pagingEnabled
         />
@@ -51,4 +66,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default HotelFullView;
+export default FullView;

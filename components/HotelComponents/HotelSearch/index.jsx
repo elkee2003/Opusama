@@ -1,30 +1,29 @@
-import { View, Text, TextInput, FlatList, } from 'react-native'
-import React, {useState, useEffect,} from 'react';
-import styles from './styles';
-import SearchResults from './searchResultsCom'
-import { DataStore } from 'aws-amplify/datastore';
-import { Realtor, Post } from '../../../src/models';
+import { View, Text, TextInput, FlatList } from 'react-native'
+import React, {useState, useEffect,} from 'react'
+import styles from './styles'
+import SearchResults from './searchResults'
+import { DataStore } from 'aws-amplify/datastore'
+import { Realtor, Post } from '../../../src/models'
 
-const HouseSearch = () => {
+const HotelSearch = () => {
+    
     const [searchQuery, setSearchQuery] = useState('')
-    const [housePosts, setHousePosts] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
+    const [hotelPosts, setHotelPosts] = useState([])
+    const [filteredData, setFilteredData] = useState([])
 
-    const handleSearch = (query) => {
-      setSearchQuery(query);
+    const handleSearch = (query) =>{
+      setSearchQuery(query)
 
-      // Wait until housePosts is populated before attempting to filter
-      if (housePosts.length === 0) {
-        return; // Exit if housePosts is not yet populated
+      if (hotelPosts.length === 0){
+        return;
       }
 
-      // if query is empty, show all data
       if(!query){
         setFilteredData([])
       }else{
         const lowercasedQuery = query.toLowerCase();
 
-        const filtered = housePosts.filter(item => {
+        const filtered = hotelPosts.filter(item => {
           const matchesRealtorName = item?.firstName?.toLowerCase().includes(lowercasedQuery);
 
           const matchesLocation = item.address?.toLowerCase().includes(lowercasedQuery);
@@ -42,7 +41,7 @@ const HouseSearch = () => {
         const realtors = await DataStore.query(Realtor);
         const posts = await DataStore.query(Post);
 
-        const housePostData = posts.map(post =>{
+        const hotelPostData = posts.map(post =>{
           const realtor = realtors.find(r => r.id === post.realtorID);
           return {
             ...post,
@@ -50,21 +49,21 @@ const HouseSearch = () => {
           };
         });
 
-        setHousePosts(housePostData);
+        setHotelPosts(hotelPostData);
       }catch(error){
         console.error('This is the error from searchbar:', error)
       }
     };
 
-    useEffect(() => {
-     fetchRealtorsAndPosts()
-    }, []);
+    useEffect(()=>{
+      fetchRealtorsAndPosts()
+    },[])
 
   return (
     <View style={styles.container}>
       <TextInput 
         style={styles.searchInput}
-        placeholder='Search House'
+        placeholder='Search Hotel'
         value={searchQuery}
         onChangeText={handleSearch}
       />
@@ -84,4 +83,4 @@ const HouseSearch = () => {
   )
 }
 
-export default HouseSearch;
+export default HotelSearch

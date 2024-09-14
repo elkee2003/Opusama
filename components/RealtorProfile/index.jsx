@@ -3,11 +3,16 @@ import React from 'react';
 import styles from './styles'
 import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
-const RealtorProfilePage = ({realtor}) => {
+const RealtorProfilePage = ({realtor, posts}) => {
 
     // Extract the first image URLs from the posts
-    const mediaUrls = realtor.posts.map(post => post.media[0].urls[0]);
+    const mediaUrls = posts.map(post => ({
+        id:post.id,
+        url:post.media[0]
+    }));
+
 
     const renderMediaGrid = (mediaUrls) =>{
         // Group media URLs into rows of three
@@ -16,15 +21,15 @@ const RealtorProfilePage = ({realtor}) => {
             rows.push(mediaUrls.slice(i, i + 3));
         }
 
-        return rows.map((row, rowIndex)=>(
+        return rows.map((row, rowIndex) => (
             <View key={rowIndex} style={styles.mediaRow}>
                 {row.map((url,index)=>(
-                
-                    <TouchableOpacity key={index}>
+                    
+                    <TouchableOpacity onPress={()=> router.push(`/search/housesearch/${url.id}`)} key={index}>
                         <View style={styles.mediaContainer}>
 
                             {/* Image */}
-                            <Image key={index} source={{uri:url}} style={styles.media}/>
+                            <Image key={index} source={{uri:url.url}} style={styles.media}/>
 
                         </View>
                     </TouchableOpacity>
@@ -46,7 +51,7 @@ const RealtorProfilePage = ({realtor}) => {
             {/* Profile Picture */}
             <TouchableOpacity style={styles.profilePicContainer}>
                 {
-                    realtor.profilePicture ?<Image source={{ uri: realtor.profilePicture }} style={styles.profileImg} /> 
+                    realtor.profilePic ?<Image source={{ uri: realtor.profilePic }} style={styles.profileImg} /> 
                     :
                     <Ionicons 
                     style={styles.vectorIcon} name="person-sharp" />
@@ -56,7 +61,7 @@ const RealtorProfilePage = ({realtor}) => {
             <View style={styles.details}>
                 {/* Name */}
                 <View style={styles.row}>
-                    <Text style={styles.name}>{realtor.username}</Text>
+                    <Text style={styles.name}>{realtor.firstName}</Text>
                 </View>
                 <View style={styles.descriptionCon}>
                     <Text style={styles.description}>

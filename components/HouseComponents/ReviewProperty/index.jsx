@@ -39,16 +39,17 @@ const ReviewProperty = ({review}) => {
             </View>
 
             <Text style={styles.profileReviewTxt}>
-                {readMore ? review.review : `${review.review.substring(0,150)}...`}
+                {readMore || review.review.length <= 150 ? review.review : `${review.review.substring(0,150)}...`}
+
                 {/* Button to toggle */}
-                { readMore ?
+                { review.review.length > 150 &&(readMore ?
                     <Text onPress={()=>setReadMore(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
                     {' '}show less
                     </Text>
                     :
                     <Text style={styles.readMoreLess} onPress={()=>setReadMore(true)}>
                     {' '}read more
-                    </Text>
+                    </Text>)
                 }
             </Text>
 

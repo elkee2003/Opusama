@@ -1,11 +1,11 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './styles'
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-const ContactCard = ({realtor}) => {
+const HotelContact = ({realtor}) => {
   return (
     <View style={styles.container}>
 
@@ -15,7 +15,7 @@ const ContactCard = ({realtor}) => {
         {/* Image */}
         <View style={styles.imgContainer}>
             {
-                realtor.profilePicture ? <Image source={{ uri: realtor.profilePicture }} style={styles.profileImg} /> 
+                realtor.profilePic ? <Image source={{ uri: realtor.profilePic }} style={styles.profileImg} /> 
                 :
                 <Ionicons 
                 style={styles.vectorIcon} name="person-sharp" />
@@ -35,10 +35,30 @@ const ContactCard = ({realtor}) => {
                 <FontAwesome style={styles.icon} name="phone"  />
                 <Text style={styles.txt}>{realtor.phoneNumber}</Text>
             </View>
+
+            <View style={styles.bookContainer}>
+              <Text style={styles.bookHeader}>
+                Schedule Viewing
+              </Text>
+              <View style={styles.bookRow}>
+
+                <TouchableOpacity>
+                  <Text style={styles.bookBtn}>Reserve</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                  <Text style={styles.bookBtn}>Book</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity>
+                  <Text style={styles.bookBtn}>Booked</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
         </View>
       </View>
     </View>
   )
 }
 
-export default ContactCard
+export default HotelContact

@@ -3,10 +3,20 @@ import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
     container:{
+        marginTop:30,
         marginHorizontal:10,
         position:'relative'
     },
+    bckContainer:{
+        position:'absolute',
+    },
+    bckIcon:{
+        fontSize:30,
+        color:'black',
+        zIndex:3,
+    },
     scrollContainer:{
+        marginTop:40,
         marginBottom:120,
     },
     imageContainer:{
@@ -155,7 +165,7 @@ const styles = StyleSheet.create({
         right:10,
         left:10,
         height:60,
-        bottom:50,
+        bottom:20,
         backgroundColor:'#19ad25',
         borderRadius:30
     },

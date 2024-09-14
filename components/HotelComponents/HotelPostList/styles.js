@@ -1,9 +1,33 @@
-import { StyleSheet, } from 'react-native'
+import { StyleSheet, Dimensions} from 'react-native'
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
         marginBottom:30,
+    },
+    searchBtn:{
+        // position:'fixed',
+        // top: 50,
+        marginTop:10,
+        backgroundColor:'#ffffff',
+        height:60,
+        width:Dimensions.get('screen').width - 20,
+        marginHorizontal:10,
+        borderRadius:20,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    searchBtnTxt:{
+        fontSize:16,
+        fontWeight:'bold',
+        margin:15,
+    },
+    bannerAds:{
+      height:'10%',
+      backgroundColor:'#cfcbcb',
+      marginVertical:10,
+      justifyContent:'center'
     },
     noListings:{
         textAlign:'center',
@@ -12,7 +36,7 @@ const styles = StyleSheet.create({
         fontSize:30,
         top:'45%',
         marginHorizontal:10
-    }
+    },
 })
 
 export default styles

@@ -5,30 +5,31 @@ import styles from './styles'
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Post = ({post}) => {
+  const formattedPrice = Number(post.price).toLocaleString();
 
   return (
       <View style={styles.container}>
-        <Link href={`/search/${post.id}`} asChild>
+        <Link href={`/search/housesearch/${post.id}`} asChild>
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}
-              <Image source={{uri: post.media[0].urls?.[0]}} style={styles.image}/>
+              <Image source={{uri: post.media[0]}} style={styles.image}/>
             </View>
           </Pressable>
         </Link>
 
         {/* Username */}
-        <Link href={`/realtorprofilepage/${post.userId}`} asChild>
+        <Link href={`/realtor/houserealtorprofilepage/${post.realtorId}`} asChild>
           <Pressable style={styles.contact}>
-            <Text style={styles.name}>{post.username}</Text>
+            <Text style={styles.name}>{post.firstName}</Text>
           </Pressable>
         </Link>
 
         {/* Bed & Bedrooms */}
-        <Text style={styles.bedroom}>{post.bedroom} Bedroom Apartment</Text>
+        <Text style={styles.bedroom}>{post.bedrooms} Bedroom Apartment</Text>
 
         {/* Location */}
-        <Text style={styles.location}>{post.location}</Text>
+        <Text style={styles.location}>{post.address}</Text>
 
 
         {/* Type & Description */}
@@ -38,7 +39,7 @@ const Post = ({post}) => {
         {/* Rent */}
         <View style={styles.priceRow}>
           <Text style={styles.price}> 
-            ₦{post.price} / year
+            ₦{formattedPrice} / year
           </Text>
         </View>
 

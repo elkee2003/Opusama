@@ -1,4 +1,4 @@
-import { StyleSheet, } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
@@ -6,12 +6,36 @@ const styles = StyleSheet.create({
         flex:1,
         marginBottom:30,
     },
+    searchBtn:{
+        // position:'fixed',
+        // top: 50,
+        marginTop:10,
+        backgroundColor:'#ffffff',
+        height:60,
+        width:Dimensions.get('screen').width - 20,
+        marginHorizontal:10,
+        borderRadius:20,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    searchBtnTxt:{
+        fontSize:16,
+        fontWeight:'bold',
+        margin:15,
+    },
+    bannerAds:{
+      height:'10%',
+      backgroundColor:'#cfcbcb',
+      marginVertical:10,
+      justifyContent:'center'
+    },
     noListings:{
         textAlign:'center',
         fontWeight:'bold',
         color:'#afadad',
         fontSize:30,
-        top:'45%',
+        top:'30%',
         marginHorizontal:10
     },
     searchInput:{

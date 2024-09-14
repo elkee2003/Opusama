@@ -4,14 +4,18 @@ import { Link } from 'expo-router'
 import ReviewProperty from '../ReviewProperty'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router'
 
-const DetailedPost = ({post}) => {
+const DetailedPost = ({post, realtor}) => {
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false)
   const [readMorePol, setReadMorePol] = useState(false)
   const [userRating, setUserRating] = useState(0)
+
+  const formattedPrice = Number(post.price).toLocaleString();
+  const formattedTotalPrice = Number(post.totalPrice).toLocaleString();
 
   const goToAllReviews = ()=>{
     router.push(`/allReviews/${post.id}`)
@@ -28,28 +32,35 @@ const DetailedPost = ({post}) => {
 
   return (
       <View style={styles.container}>
+
+        {/* Back Button */}
+        <TouchableOpacity style={styles.bckContainer} onPress={()=>router.back()}>
+          <Ionicons name="arrow-back" style={styles.bckIcon}/>
+        </TouchableOpacity>
+
+        {/* ScrollView */}
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/fullView/${post.id}`} asChild>
+          <Link href={`/mediafullview/housefullview/${post.id}`} asChild>
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}
-                <Image source={{uri: post.media[0].urls?.[0]}} style={styles.image}/>
+                <Image source={{uri: post.media[0]}} style={styles.image}/>
               </View>
             </TouchableOpacity>
           </Link>
         
           {/* User */}
-          <Link href={`/realtorprofilepage/${post.userId}`} asChild>
+          <Link href={`/realtor/houserealtorprofilepage/${realtor.id}`} asChild>
             <Pressable style={styles.user}>
-              <Text style={styles.name}>{post.username}</Text>
+              <Text style={styles.name}>{realtor.firstName}</Text>
             </Pressable>
           </Link>
           
           {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>{post.bedroom} Bedroom Apartment</Text>
+          <Text style={styles.bedroom}>{post.bedrooms} Bedroom Apartment</Text>
 
           {/* Location */}
-          <Text style={styles.location}>{post.location}</Text>
+          <Text style={styles.location}>{post.address}</Text>
 
           {/* Medium of Review Star */}
           <View style={styles.reviewIconRow}>
@@ -60,17 +71,17 @@ const DetailedPost = ({post}) => {
           {/* Type & Description */}
           <View style={styles.descriptionContainer}>
             <Text style={styles.description}>
-              {readMore ? post.description : `${post.description.substring(0,150)}...`}
+            {readMore || post.description.length <= 150 ? post.description : `${post.description.substring(0, 150)}...`}
 
               {/* Button to toggle */}
-              { readMore ?
+              { post.description.length > 150 &&(readMore ?
                 <Text onPress={()=>setReadMore(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
                   {' '}show less
                 </Text>
                 :
                 <Text style={styles.readMoreLess} onPress={()=>setReadMore(true)}>
                   {' '}read more
-                </Text>
+                </Text>)
               }
             </Text>
           </View>
@@ -79,7 +90,7 @@ const DetailedPost = ({post}) => {
           <View style={styles.priceRow}>
             <Text style={styles.sub}>Rent: </Text>
             <Text style={styles.price}> 
-              ₦{post.price} / year
+              ₦{formattedPrice} / year
             </Text>
           </View>
 
@@ -87,7 +98,7 @@ const DetailedPost = ({post}) => {
           <View style={styles.priceRowTotal}>
             <Text style={styles.sub}>Total:</Text>
             <Text style={styles.totalPrice}>
-              {''}₦{post.totalPrice}
+              {''}₦{formattedTotalPrice}
             </Text>
           </View>
 
@@ -98,17 +109,17 @@ const DetailedPost = ({post}) => {
           <View>
             <Text style={styles.luxPolHeadTxt}>Living Luxuries</Text>
             <Text style={styles.luxPolTxt}>
-              {readMoreLux ? post.amenities : `${post.amenities.substring(0, 100)}...`}
+              {readMoreLux ||post.amenities.length <= 150 ? post.amenities : `${post.amenities.substring(0, 100)}...`}
 
               {/* Button to toggle */}
-              { readMoreLux ?
+              { post.amenities.length > 100 &&(readMoreLux ?
                 <Text onPress={()=>setReadMoreLux(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
                   {' '}show less
                 </Text>
                 :
                 <Text style={styles.readMoreLess} onPress={()=>setReadMoreLux(true)}>
                   {' '}read more
-                </Text>
+                </Text>)
               }
             </Text>
           </View>
@@ -120,17 +131,17 @@ const DetailedPost = ({post}) => {
           <View>
             <Text style={styles.luxPolHeadTxt}>Stay Policies</Text>
             <Text style={styles.luxPolTxt}>
-              {readMorePol ? post.policies : `${post.policies.substring(0,100)}...`}
+              {readMorePol || post.policies.length <= 100 ? post.policies : `${post.policies.substring(0,100)}...`}
 
               {/* Button to toggle */}
-              { readMorePol ?
+              { post.policies.length > 100 &&(readMorePol ?
                   <Text onPress={()=>setReadMorePol(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
                     {' '}show less
                   </Text>
                   :
                   <Text style={styles.readMoreLess} onPress={()=>setReadMorePol(true)}>
                     {' '}read more
-                  </Text>
+                  </Text>)
               }
             </Text>
           </View>
@@ -189,9 +200,9 @@ const DetailedPost = ({post}) => {
           }
           
         </ScrollView>
-        <View style={styles.getinTouchContainer}>
+        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/houserealtorcontact/${realtor.id}`)}>
             <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
-        </View>
+        </TouchableOpacity>
       </View>
   )
 }

@@ -1,10 +1,26 @@
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
-  firstName: String
+  firstName: String!
   lastName: String
   profilePic: String
-  rating: Float
   comment: String
+}
+
+type Realtor @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String!
+  lastName: String
+  myDescription: String
+  profilePic: String
+  email: String!
+  address: String
+  phoneNumber: Int!
+  bankName: String
+  accountName: String
+  accountNumber: Int
+  rating: Float
+  Posts: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
+  review: [String]
 }
 
 type Post @model @auth(rules: [{allow: public}]) {
@@ -31,19 +47,4 @@ type Post @model @auth(rules: [{allow: public}]) {
   review: [String]
   realtorID: ID! @index(name: "byRealtor")
 }
-
-type Realtor @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  firstName: String!
-  lastName: String
-  email: String
-  profilePic: String!
-  address: String
-  phoneNumber: Int!
-  bankName: String
-  accountName: String
-  accountNumber: Int
-  rating: Float
-  review: [String]
-  Posts: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
-} 
+ 

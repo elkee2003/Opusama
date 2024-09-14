@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import HouseSearch from '../../../components/HouseComponents/HouseSearch'
+import HouseSearch from '../../../../components/HouseComponents/HouseSearch'
 
 const HouseSearchScreen = () => {
   return (
@@ -10,4 +10,4 @@ const HouseSearchScreen = () => {
   )
 }
 
-export default HouseSearchScreen
+export default HouseSearchScreen;

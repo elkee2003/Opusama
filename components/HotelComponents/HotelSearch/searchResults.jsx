@@ -10,7 +10,7 @@ const SearchResultCom = ({post}) => {
   const formattedPrice = Number(post.price).toLocaleString();
   
   return (
-    <TouchableOpacity onPress={() => router.push(`/search/housesearch/${post.id}`)} style={styles.locationRow}>
+    <TouchableOpacity onPress={() => router.push(`/search/hotelsearch/${post.id}`)} style={styles.locationRow}>
 
       {/* Icon Container */}
       <View style={styles.iconContainer}>
