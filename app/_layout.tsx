@@ -1,3 +1,4 @@
+navigator.geolocation = require('@react-native-community/geolocation');
 import { Stack } from "expo-router";
 import {
   withAuthenticator,

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         height:550,
         backgroundColor:'#08012c',
         // justifyContent:'center',
-        alignItems:'center',
+        // alignItems:'center',
         borderRadius:40,
         paddingHorizontal:15,
         overflow:'hidden'
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#d4d4ca',
         justifyContent:'center',
         alignItems:'center',
+        alignSelf:'center',
         marginVertical:30,
     },
     profileImg:{
@@ -38,8 +39,8 @@ const styles = StyleSheet.create({
         color:'#838181',
     },
     contactDetails:{
-        marginLeft:5,
-        marginRight:20,
+        // marginLeft:5,
+        // marginRight:20,
     },
     row:{
         flexDirection:'row',
@@ -51,12 +52,33 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'#cccccc',
     },
-    txt:{
+    txtEmail:{
+        flex:1,
         marginLeft:10,
-        marginRight:'auto',
         fontSize:20,
         color:'#cccccc',
         textAlign:'center',
+    },
+    phoneNumberTxt:{
+        marginLeft:10,
+        fontSize:20,
+        color:'#cccccc',
+        textAlign:'center',
+    },
+    paymentBtn:{
+        padding:9,
+        justifyContent:'center',
+        alignItems:'center',
+        marginHorizontal: 20,
+        borderRadius:20,
+        backgroundColor:'#0dca0d',
+        marginVertical:10,
+    },
+    paymentTxt:{
+        fontSize:18,
+        fontWeight:'bold',
+        textAlign:'center',
+        color:'#e4e1e1'
     },
     scheduleContainer:{
         marginTop:10,

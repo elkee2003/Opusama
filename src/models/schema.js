@@ -1,5 +1,319 @@
 export const schema = {
     "models": {
+        "RealtorReview": {
+            "name": "RealtorReview",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "rating": {
+                    "name": "rating",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "review": {
+                    "name": "review",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "RealtorReviews",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "PostReview": {
+            "name": "PostReview",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "rating": {
+                    "name": "rating",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "review": {
+                    "name": "review",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "postID": {
+                    "name": "postID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "PostReviews",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPost",
+                        "fields": [
+                            "postID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Booking": {
+            "name": "Booking",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "adults": {
+                    "name": "adults",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "children": {
+                    "name": "children",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "infants": {
+                    "name": "infants",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "guestFirstName": {
+                    "name": "guestFirstName",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "gusetLastName": {
+                    "name": "gusetLastName",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "guestPhoneNumber": {
+                    "name": "guestPhoneNumber",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "purposeOfStay": {
+                    "name": "purposeOfStay",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "duration": {
+                    "name": "duration",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "accomodationType": {
+                    "name": "accomodationType",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "price": {
+                    "name": "price",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Realtor": {
+                    "name": "Realtor",
+                    "isArray": false,
+                    "type": {
+                        "model": "Realtor"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "bookingRealtorId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "bookingRealtorId": {
+                    "name": "bookingRealtorId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Bookings",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "User": {
             "name": "User",
             "fields": {
@@ -7,6 +321,13 @@ export const schema = {
                     "name": "id",
                     "isArray": false,
                     "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sub": {
+                    "name": "sub",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -38,6 +359,58 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "RealtorReview": {
+                    "name": "RealtorReview",
+                    "isArray": false,
+                    "type": {
+                        "model": "RealtorReview"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "userRealtorReviewId"
+                        ]
+                    }
+                },
+                "PostReview": {
+                    "name": "PostReview",
+                    "isArray": false,
+                    "type": {
+                        "model": "PostReview"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "userPostReviewId"
+                        ]
+                    }
+                },
+                "Bookings": {
+                    "name": "Bookings",
+                    "isArray": true,
+                    "type": {
+                        "model": "Booking"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "userID"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -53,6 +426,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "userRealtorReviewId": {
+                    "name": "userRealtorReviewId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userPostReviewId": {
+                    "name": "userPostReviewId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -90,11 +477,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "sub": {
+                    "name": "sub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "firstName": {
                     "name": "firstName",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "lastName": {
@@ -122,7 +516,7 @@ export const schema = {
                     "name": "email",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "address": {
@@ -135,12 +529,12 @@ export const schema = {
                 "phoneNumber": {
                     "name": "phoneNumber",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
-                "bankName": {
-                    "name": "bankName",
+                "bankname": {
+                    "name": "bankname",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -156,19 +550,12 @@ export const schema = {
                 "accountNumber": {
                     "name": "accountNumber",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "rating": {
-                    "name": "rating",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Posts": {
-                    "name": "Posts",
+                "Post": {
+                    "name": "Post",
                     "isArray": true,
                     "type": {
                         "model": "Post"
@@ -182,14 +569,6 @@ export const schema = {
                             "realtorID"
                         ]
                     }
-                },
-                "review": {
-                    "name": "review",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -257,6 +636,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "nameOfType": {
+                    "name": "nameOfType",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "availableDocs": {
                     "name": "availableDocs",
                     "isArray": true,
@@ -285,6 +671,13 @@ export const schema = {
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "available": {
+                    "name": "available",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "address": {
@@ -357,6 +750,22 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "PostReviews": {
+                    "name": "PostReviews",
+                    "isArray": true,
+                    "type": {
+                        "model": "PostReview"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "postID"
+                        ]
+                    }
+                },
                 "state": {
                     "name": "state",
                     "isArray": false,
@@ -370,21 +779,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
-                },
-                "rating": {
-                    "name": "rating",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "review": {
-                    "name": "review",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
                 },
                 "realtorID": {
                     "name": "realtorID",
@@ -448,5 +842,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "194e68a7069e0981876d9f80b1d27f9d"
+    "version": "937ab800c93e3393f579d40e9ffe0bfe"
 };

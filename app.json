@@ -13,14 +13,18 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.Opusama"
+      "package": "com.anonymous.Opusama",
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "bundler": "metro",
@@ -33,6 +37,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7d18c041-52aa-49d9-8a87-ea15915fffbb"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/7d18c041-52aa-49d9-8a87-ea15915fffbb"
     }
   }
 }

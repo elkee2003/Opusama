@@ -1,6 +1,261 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createRealtorReview = /* GraphQL */ `
+  mutation CreateRealtorReview(
+    $input: CreateRealtorReviewInput!
+    $condition: ModelRealtorReviewConditionInput
+  ) {
+    createRealtorReview(input: $input, condition: $condition) {
+      id
+      rating
+      review
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateRealtorReview = /* GraphQL */ `
+  mutation UpdateRealtorReview(
+    $input: UpdateRealtorReviewInput!
+    $condition: ModelRealtorReviewConditionInput
+  ) {
+    updateRealtorReview(input: $input, condition: $condition) {
+      id
+      rating
+      review
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteRealtorReview = /* GraphQL */ `
+  mutation DeleteRealtorReview(
+    $input: DeleteRealtorReviewInput!
+    $condition: ModelRealtorReviewConditionInput
+  ) {
+    deleteRealtorReview(input: $input, condition: $condition) {
+      id
+      rating
+      review
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createPostReview = /* GraphQL */ `
+  mutation CreatePostReview(
+    $input: CreatePostReviewInput!
+    $condition: ModelPostReviewConditionInput
+  ) {
+    createPostReview(input: $input, condition: $condition) {
+      id
+      rating
+      review
+      postID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updatePostReview = /* GraphQL */ `
+  mutation UpdatePostReview(
+    $input: UpdatePostReviewInput!
+    $condition: ModelPostReviewConditionInput
+  ) {
+    updatePostReview(input: $input, condition: $condition) {
+      id
+      rating
+      review
+      postID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deletePostReview = /* GraphQL */ `
+  mutation DeletePostReview(
+    $input: DeletePostReviewInput!
+    $condition: ModelPostReviewConditionInput
+  ) {
+    deletePostReview(input: $input, condition: $condition) {
+      id
+      rating
+      review
+      postID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createBooking = /* GraphQL */ `
+  mutation CreateBooking(
+    $input: CreateBookingInput!
+    $condition: ModelBookingConditionInput
+  ) {
+    createBooking(input: $input, condition: $condition) {
+      id
+      adults
+      children
+      infants
+      guestFirstName
+      gusetLastName
+      guestPhoneNumber
+      purposeOfStay
+      duration
+      accomodationType
+      price
+      userID
+      Realtor {
+        id
+        sub
+        firstName
+        lastName
+        myDescription
+        profilePic
+        email
+        address
+        phoneNumber
+        bankname
+        accountName
+        accountNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      bookingRealtorId
+      __typename
+    }
+  }
+`;
+export const updateBooking = /* GraphQL */ `
+  mutation UpdateBooking(
+    $input: UpdateBookingInput!
+    $condition: ModelBookingConditionInput
+  ) {
+    updateBooking(input: $input, condition: $condition) {
+      id
+      adults
+      children
+      infants
+      guestFirstName
+      gusetLastName
+      guestPhoneNumber
+      purposeOfStay
+      duration
+      accomodationType
+      price
+      userID
+      Realtor {
+        id
+        sub
+        firstName
+        lastName
+        myDescription
+        profilePic
+        email
+        address
+        phoneNumber
+        bankname
+        accountName
+        accountNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      bookingRealtorId
+      __typename
+    }
+  }
+`;
+export const deleteBooking = /* GraphQL */ `
+  mutation DeleteBooking(
+    $input: DeleteBookingInput!
+    $condition: ModelBookingConditionInput
+  ) {
+    deleteBooking(input: $input, condition: $condition) {
+      id
+      adults
+      children
+      infants
+      guestFirstName
+      gusetLastName
+      guestPhoneNumber
+      purposeOfStay
+      duration
+      accomodationType
+      price
+      userID
+      Realtor {
+        id
+        sub
+        firstName
+        lastName
+        myDescription
+        profilePic
+        email
+        address
+        phoneNumber
+        bankname
+        accountName
+        accountNumber
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      bookingRealtorId
+      __typename
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -8,15 +263,46 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       id
+      sub
       firstName
       lastName
       profilePic
       comment
+      RealtorReview {
+        id
+        rating
+        review
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      PostReview {
+        id
+        rating
+        review
+        postID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userRealtorReviewId
+      userPostReviewId
       __typename
     }
   }
@@ -28,15 +314,46 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       id
+      sub
       firstName
       lastName
       profilePic
       comment
+      RealtorReview {
+        id
+        rating
+        review
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      PostReview {
+        id
+        rating
+        review
+        postID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userRealtorReviewId
+      userPostReviewId
       __typename
     }
   }
@@ -48,15 +365,46 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       id
+      sub
       firstName
       lastName
       profilePic
       comment
+      RealtorReview {
+        id
+        rating
+        review
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      PostReview {
+        id
+        rating
+        review
+        postID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      userRealtorReviewId
+      userPostReviewId
       __typename
     }
   }
@@ -68,6 +416,7 @@ export const createRealtor = /* GraphQL */ `
   ) {
     createRealtor(input: $input, condition: $condition) {
       id
+      sub
       firstName
       lastName
       myDescription
@@ -75,16 +424,14 @@ export const createRealtor = /* GraphQL */ `
       email
       address
       phoneNumber
-      bankName
+      bankname
       accountName
       accountNumber
-      rating
-      Posts {
+      Post {
         nextToken
         startedAt
         __typename
       }
-      review
       createdAt
       updatedAt
       _version
@@ -101,6 +448,7 @@ export const updateRealtor = /* GraphQL */ `
   ) {
     updateRealtor(input: $input, condition: $condition) {
       id
+      sub
       firstName
       lastName
       myDescription
@@ -108,16 +456,14 @@ export const updateRealtor = /* GraphQL */ `
       email
       address
       phoneNumber
-      bankName
+      bankname
       accountName
       accountNumber
-      rating
-      Posts {
+      Post {
         nextToken
         startedAt
         __typename
       }
-      review
       createdAt
       updatedAt
       _version
@@ -134,6 +480,7 @@ export const deleteRealtor = /* GraphQL */ `
   ) {
     deleteRealtor(input: $input, condition: $condition) {
       id
+      sub
       firstName
       lastName
       myDescription
@@ -141,16 +488,14 @@ export const deleteRealtor = /* GraphQL */ `
       email
       address
       phoneNumber
-      bankName
+      bankname
       accountName
       accountNumber
-      rating
-      Posts {
+      Post {
         nextToken
         startedAt
         __typename
       }
-      review
       createdAt
       updatedAt
       _version
@@ -169,10 +514,12 @@ export const createPost = /* GraphQL */ `
       id
       propertyType
       type
+      nameOfType
       availableDocs
       accommodationParts
       media
       description
+      available
       address
       lat
       lng
@@ -183,10 +530,13 @@ export const createPost = /* GraphQL */ `
       amenities
       policies
       country
+      PostReviews {
+        nextToken
+        startedAt
+        __typename
+      }
       state
       city
-      rating
-      review
       realtorID
       createdAt
       updatedAt
@@ -206,10 +556,12 @@ export const updatePost = /* GraphQL */ `
       id
       propertyType
       type
+      nameOfType
       availableDocs
       accommodationParts
       media
       description
+      available
       address
       lat
       lng
@@ -220,10 +572,13 @@ export const updatePost = /* GraphQL */ `
       amenities
       policies
       country
+      PostReviews {
+        nextToken
+        startedAt
+        __typename
+      }
       state
       city
-      rating
-      review
       realtorID
       createdAt
       updatedAt
@@ -243,10 +598,12 @@ export const deletePost = /* GraphQL */ `
       id
       propertyType
       type
+      nameOfType
       availableDocs
       accommodationParts
       media
       description
+      available
       address
       lat
       lng
@@ -257,10 +614,13 @@ export const deletePost = /* GraphQL */ `
       amenities
       policies
       country
+      PostReviews {
+        nextToken
+        startedAt
+        __typename
+      }
       state
       city
-      rating
-      review
       realtorID
       createdAt
       updatedAt

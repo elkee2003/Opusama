@@ -84,7 +84,7 @@ const HotelPostList = () => {
         <FlatList 
           data={realtorPosts}
           renderItem={({item})=> <HotelPost post={item}/>}
-      />
+        />
       :
           <Text style={styles.noListings}>No Hotel listings</Text>
       }

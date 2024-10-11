@@ -1,13 +1,16 @@
 import { View, Text, Image ,ScrollView, TouchableOpacity, Pressable} from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'expo-router'
 import ReviewHotel from '../ReviewHotel'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useBookingContext } from '../../../providers/BookingProvider'
 import { router } from 'expo-router'
 
 const DetailedHotelPost = ({post, realtor}) => {
+
+  const {realtorIdContext, setRealtorIdContext, postIdContext, setPostIdContext, postIdTotalPrice, setPostIdTotalPrice} = useBookingContext()
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false)
@@ -25,6 +28,15 @@ const DetailedHotelPost = ({post, realtor}) => {
     );
   }
 
+   // Loading state
+   if (!post || !post.totalPrice) {
+    return (
+      <View style={{ top: 50, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Loading...</Text> {/* Or handle this with a spinner */}
+      </View>
+    );
+  }
+
   const goToAllReviews = ()=>{
     router.push(`/allReviews/${post.id}`)
   }
@@ -37,6 +49,17 @@ const DetailedHotelPost = ({post, realtor}) => {
   const handleRating = (rating)=>{
     setUserRating(rating)
   }
+
+  const handleNavigate = () => {
+    router.push(`/realtor/hotelrealtor/accommodationguestinfo`);
+  };
+
+  useEffect(() => {
+    console.log('totalprice:', post.totalPrice)
+    setPostIdTotalPrice(post.totalPrice);
+    setRealtorIdContext('hi');
+    console.log(realtorIdContext)
+  }, [formattedTotalPrice, realtor.id]); // Run this effect when these values change
 
   return (
       <View style={styles.container}>
@@ -57,7 +80,7 @@ const DetailedHotelPost = ({post, realtor}) => {
           </Link>
         
           {/* User */}
-          <Link href={`/realtor/hotelrealtorprofilepage/${realtor.id}`} asChild>
+          <Link href={`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`} asChild>
             <Pressable style={styles.user}>
               <Text style={styles.name}>{realtor.firstName}</Text>
             </Pressable>
@@ -211,7 +234,7 @@ const DetailedHotelPost = ({post, realtor}) => {
           }
           
         </ScrollView>
-        <TouchableOpacity style={styles.bookContainer} onPress={()=>router.push(`/realtor/hotelrealtorcontact/${realtor.id}`)}>
+        <TouchableOpacity style={styles.bookContainer} onPress={handleNavigate}>
             <Text style={styles.bookTxt}>Book</Text>
         </TouchableOpacity>
       </View>

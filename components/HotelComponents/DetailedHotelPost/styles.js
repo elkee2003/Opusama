@@ -3,7 +3,7 @@ import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
     container:{
-        marginTop:30,
+        marginTop:10,
         marginHorizontal:10,
         position:'relative'
     },

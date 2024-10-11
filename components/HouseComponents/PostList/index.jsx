@@ -12,6 +12,7 @@ import {Realtor, Post} from '../../../src/models'
 const PostList = () => {
 
   const [realtorPosts, setRealtorPosts] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   const fetchRealtorsAndPosts = async () => {
     try {

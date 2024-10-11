@@ -27,18 +27,23 @@ const HotelContact = ({realtor}) => {
             {/* Email */}
             <View style={styles.row}>
                 <MaterialIcons style={styles.icon} name="email" />
-                <Text style={styles.txt}>{realtor.email}</Text>
+                <Text style={styles.txtEmail}>{realtor.email}</Text>
             </View>
 
             {/* Phone Number */}
             <View style={styles.row}>
                 <FontAwesome style={styles.icon} name="phone"  />
-                <Text style={styles.txt}>{realtor.phoneNumber}</Text>
+                <Text style={styles.phoneNumberTxt}>{realtor.phoneNumber}</Text>
             </View>
 
+            {/* Make Payments */}
+            <TouchableOpacity style={styles.paymentBtn}>
+              <Text style={styles.paymentTxt}>Make Payment</Text>
+            </TouchableOpacity>
+            {/* Book */}
             <View style={styles.bookContainer}>
               <Text style={styles.bookHeader}>
-                Schedule Viewing
+                Book!
               </Text>
               <View style={styles.bookRow}>
 

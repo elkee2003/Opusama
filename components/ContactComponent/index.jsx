@@ -4,6 +4,7 @@ import styles from './styles'
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 const ContactCard = ({realtor}) => {
   return (
@@ -27,15 +28,21 @@ const ContactCard = ({realtor}) => {
             {/* Email */}
             <View style={styles.row}>
                 <MaterialIcons style={styles.icon} name="email" />
-                <Text style={styles.txt}>{realtor.email}</Text>
+                <Text style={styles.phoneNumberTxt}>{realtor.email}</Text>
             </View>
 
             {/* Phone Number */}
             <View style={styles.row}>
                 <FontAwesome style={styles.icon} name="phone"  />
-                <Text style={styles.txt}>{realtor.phoneNumber}</Text>
+                <Text style={styles.txtEmail}>{realtor.phoneNumber}</Text>
             </View>
 
+            {/* Make Payments */}
+            <TouchableOpacity style={styles.paymentBtn}>
+              <Text onPress={()=>router.push('/payment')} style={styles.paymentTxt}>Make Payment</Text>
+            </TouchableOpacity>
+
+            {/* Schedule */}
             <View style={styles.scheduleContainer}>
               <Text style={styles.scheduleHeader}>
                 Schedule Viewing

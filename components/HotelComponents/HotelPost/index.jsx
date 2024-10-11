@@ -10,7 +10,7 @@ const HotelPost = ({post}) => {
 
   return (
       <View style={styles.container}>
-        <Link href={`/search/hotelsearch/${post.id}`} asChild>
+        <Link href={`/explore/hotelinfo/${post.id}`} asChild>
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}

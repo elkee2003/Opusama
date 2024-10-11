@@ -9,7 +9,7 @@ const Post = ({post}) => {
 
   return (
       <View style={styles.container}>
-        <Link href={`/search/housesearch/${post.id}`} asChild>
+        <Link href={`/explore/houseinfo/${post.id}`} asChild>
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}

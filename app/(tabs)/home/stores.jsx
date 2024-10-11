@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import StorePostList from '../../../components/StoreComponents/StorePostList'
+
 
 const Stores = () => {
   return (
-    <View>
-      <Text>Stores</Text>
+    <View style={{flex:1}}>
+      <StorePostList/>
     </View>
   )
 }

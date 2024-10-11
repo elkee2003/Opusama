@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         color:'#afadad',
         fontSize:30,
-        top:'45%',
+        top:'30%',
         marginHorizontal:10
     },
 })

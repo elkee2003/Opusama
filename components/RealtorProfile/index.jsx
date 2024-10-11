@@ -25,7 +25,7 @@ const RealtorProfilePage = ({realtor, posts}) => {
             <View key={rowIndex} style={styles.mediaRow}>
                 {row.map((url,index)=>(
                     
-                    <TouchableOpacity onPress={()=> router.push(`/search/housesearch/${url.id}`)} key={index}>
+                    <TouchableOpacity onPress={()=> router.push(`/explore/houseinfo/${url.id}`)} key={index}>
                         <View style={styles.mediaContainer}>
 
                             {/* Image */}

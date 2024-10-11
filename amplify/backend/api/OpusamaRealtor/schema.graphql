@@ -1,36 +1,70 @@
+type RealtorReview @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  rating: Float
+  review: String
+}
+
+type PostReview @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  rating: Float
+  review: String
+  postID: ID! @index(name: "byPost")
+}
+
+type Booking @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  adults: String
+  children: String
+  infants: String
+  guestFirstName: [String]
+  gusetLastName: [String]
+  guestPhoneNumber: [String]
+  purposeOfStay: String
+  duration: String
+  accomodationType: String
+  price: String
+  userID: ID! @index(name: "byUser")
+  Realtor: Realtor @hasOne
+}
+
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
+  sub: String!
   firstName: String!
   lastName: String
   profilePic: String
   comment: String
+  RealtorReview: RealtorReview @hasOne
+  PostReview: PostReview @hasOne
+  Bookings: [Booking] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
 type Realtor @model @auth(rules: [{allow: public}]) {
   id: ID!
-  firstName: String!
+  sub: String!
+  firstName: String
   lastName: String
   myDescription: String
   profilePic: String
-  email: String!
+  email: String
   address: String
-  phoneNumber: Int!
-  bankName: String
+  phoneNumber: String
+  bankname: String
   accountName: String
-  accountNumber: Int
-  rating: Float
-  Posts: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
-  review: [String]
+  accountNumber: String
+  Post: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
 }
 
 type Post @model @auth(rules: [{allow: public}]) {
   id: ID!
   propertyType: String!
   type: String!
+  nameOfType: String
   availableDocs: [String]
   accommodationParts: String
   media: [String]
   description: String!
+  available: Boolean
   address: String!
   lat: Float
   lng: Float
@@ -41,10 +75,8 @@ type Post @model @auth(rules: [{allow: public}]) {
   amenities: String
   policies: String
   country: String!
+  PostReviews: [PostReview] @hasMany(indexName: "byPost", fields: ["id"])
   state: String!
   city: String!
-  rating: String
-  review: [String]
   realtorID: ID! @index(name: "byRealtor")
-}
- 
+} 
