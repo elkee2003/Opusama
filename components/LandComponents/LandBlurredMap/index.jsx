@@ -15,55 +15,25 @@ const LandBlurredMap = () => {
 
 
     useEffect(() => {
-      let locationSubscription;
-  
-      const requestLocationPermission = async () => {
-          try {
-              // Request location permissions
-              let { status } = await Location.requestForegroundPermissionsAsync();
-              if (status !== 'granted') {
-                  setErrorMsg('Permission to access location was denied');
-                  return;
-              }
-  
-              // Get the current location once
-              let initialLocation = await Location.getCurrentPositionAsync({});
-              setLocation({
-                  latitude: initialLocation.coords.latitude,
-                  longitude: initialLocation.coords.longitude,
-              });
-  
-              // Watch location with updates every 20 seconds or every 500 meters
-              locationSubscription = await Location.watchPositionAsync(
-                  {
-                      accuracy: Location.Accuracy.High,
-                      timeInterval: 20000, // 20 seconds
-                      distanceInterval: 200, // 500 meters
-                  },
-                  (position) => {
-                      const { latitude, longitude } = position.coords;
-                      setLocation({ latitude, longitude,
-                      // heading: heading || 0,
-                      });
-                      console.log('Updated Location:', position);
-                      // console.log(location.heading)
-                  }
-              );
-          } catch (error) {
-              console.error('Location permission error:', error);
-              setErrorMsg('Failed to request location permission');
+      (async () => {
+        try {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
           }
-      };
-  
-      requestLocationPermission();
-  
-      // Cleanup the watcher when the component unmounts
-      return () => {
-          if (locationSubscription) {
-              locationSubscription.remove();
-          }
-      };
-  }, [setLocation]);
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          });
+        } catch (error) {
+          console.error('Error fetching location:', error);
+          setErrorMsg('Failed to fetch location');
+        }
+      })();
+    }, []);
 
     if (!location || !location.latitude || !location.longitude) {
       return <ActivityIndicator style={{ marginTop: 30 }} size="large" />;

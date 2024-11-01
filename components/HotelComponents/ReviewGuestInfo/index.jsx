@@ -11,7 +11,13 @@ const ReviewGuestInfo = () => {
 
   const {dbUser} = useAuthContext();
 
-  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, accommodationType, setAccommodationType, realtorContext, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice} = useBookingContext();
+  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice} = useBookingContext();
+  
+  setPropertyType(propertyDetails.propertyType);
+  setAccommodationType(propertyDetails.type);
+  setNameOfType(propertyDetails.nameOfType);
+  setBookingLat(propertyDetails.lat);
+  setBookingLng(propertyDetails.lng);
 
   const handleBooking = async () =>{
     try{
@@ -26,12 +32,16 @@ const ReviewGuestInfo = () => {
         duration: String(duration),
         checkInDate: String(checkInDate),
         checkOutDate: String(checkOutDate),
-        propertyType:'hello',
-        accommodationType:'',
-        totalPrice: parseFloat(postTotalPrice),
-        overAllPrice: parseFloat(overAllPrice),
+        propertyType,
+        nameOfType,
+        accommodationType,
+        bookingLat,
+        bookingLng,
+        totalPrice: parseFloat(overAllPrice),
+        // overAllPrice: parseFloat(overAllPrice),
         userID: dbUser.id,
-        bookingRealtorId: realtorContext.id
+        bookingRealtorId: realtorContext.id,
+        status:'PENDING'
       }))
       setBookings(booking);
       Alert.alert('Successful', "Booking was a success")
@@ -48,7 +58,12 @@ const ReviewGuestInfo = () => {
       setCheckOutDate('')
       setPostTotalPrice('')
       setOverAllPrice('')
+      setPropertyDetails('')
+      setPropertyType('')
+      setNameOfType('')
       setAccommodationType('')
+      setBookingLat('')
+      setBookingLng('')
       setRealtorContext('')
       router.push('/home/hotels')
     }catch(e){

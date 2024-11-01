@@ -70,7 +70,10 @@ const HotelPostList = () => {
       const allPosts = await Promise.all(
         realtors.map(async (realtor) => {
           // Query posts for each realtor
-          const posts = await DataStore.query(Post, (p) => p.realtorID.eq(realtor.id));
+          const posts = await DataStore.query(Post, (p) => p.and((p)=>[
+            p.realtorID.eq(realtor.id),
+            p.available.eq(true)
+          ]));
           const filteredPosts = posts.filter((post) => post.propertyType === "Hotels / Shortlets");
 
           // Map the realtor details to each post
@@ -100,9 +103,9 @@ const HotelPostList = () => {
   useEffect(()=>{
     fetchRealtorsAndPosts()
 
-    const subscription = DataStore.observe(Realtor).subscribe(({opType})=>{
+    const subscription = DataStore.observe(Post).subscribe(({opType})=>{
       if(opType === "UPDATE"){
-        fetchOrders();
+        fetchRealtorsAndPosts();
       }
     });
 

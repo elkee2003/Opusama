@@ -20,7 +20,7 @@ const HotelPost = ({post}) => {
         </Link>
 
         {/* Username */}
-        <Link href={`/realtor/hotelrealtorprofilepage/${post.realtorId}`} asChild>
+        <Link href={`/realtor/hotelrealtor/hotelrealtorprofilepage/${post.realtorId}`} asChild>
           <Pressable style={styles.contact}>
             <Text style={styles.name}>{post.firstName}</Text>
           </Pressable>

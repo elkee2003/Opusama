@@ -9,7 +9,7 @@ import {Realtor, Post} from '../../../../src/models';
 const HotelAccommodation = () => {
 
     const {id} = useLocalSearchParams();
-    const {setRealtorContext, setAccommodationType} = useBookingContext();
+    const {setRealtorContext, setPropertyDetails} = useBookingContext();
     const [realtor, setRealtor] = useState(null);
     const [post, setPost] = useState(null);
     const [isloading, setIsLoading] = useState(true);
@@ -42,7 +42,7 @@ const HotelAccommodation = () => {
     // This useEffect should solve the problem of not retaining the realtor.id
     useEffect(()=>{
       setRealtorContext(realtor)
-      setAccommodationType(post)
+      setPropertyDetails(post)
     }, [realtor, post])
 
     if (isloading) {

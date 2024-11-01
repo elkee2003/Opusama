@@ -1,3 +1,10 @@
+enum BookingStatus {
+  PENDING
+  ACCEPTED
+  CANCELLED
+  DENIED
+}
+
 type RealtorReview @model @auth(rules: [{allow: public}]) {
   id: ID!
   rating: Float
@@ -19,16 +26,20 @@ type Booking @model @auth(rules: [{allow: public}]) {
   kids: String
   infants: String
   guestFirstName: String
-  gusetLastName: String
+  guestLastName: String
   guestPhoneNumber: String
-  purposeOfStay: String
+  purpose: String
   duration: String
   checkInDate: String
   checkOutDate: String
   propertyType: String
   Realtor: Realtor @hasOne
   accommodationType: String
+  nameOfType: String
   totalPrice: Float
+  bookingLat: Float
+  bookingLng: Float
+  status: BookingStatus
   userID: ID! @index(name: "byUser")
 }
 
@@ -87,4 +98,5 @@ type Post @model @auth(rules: [{allow: public}]) {
   state: String!
   city: String!
   realtorID: ID! @index(name: "byRealtor")
-} 
+}
+ 

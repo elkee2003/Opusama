@@ -36,6 +36,18 @@ const BookingList = () => {
         }
     }
 
+    // Delete Booking
+    const deleteBooking = async (bookingId) =>{
+      try {
+        const bookingToDelete = await DataStore.query(Booking, bookingId);
+        if(bookingToDelete && bookingToDelete.status !== 'ACCEPTED'){
+          await DataStore.delete(bookingToDelete);
+        }
+      }catch(e){
+        console.error('Error deleting order', e);
+      }
+    };
+
     useEffect(()=>{
         fetchBookings();
     
@@ -66,6 +78,7 @@ const BookingList = () => {
             renderItem={({item})=>(
                 <BookingSingle
                     booking={item}
+                    onDelete={()=>deleteBooking(item.id)}
                 />
             )}
         />

@@ -10,7 +10,7 @@ import { router } from 'expo-router'
 
 const DetailedHotelPost = ({post, realtor}) => {
 
-  const {setPostPrice, setPostTotalPrice} = useBookingContext()
+  const {setPostPrice, setPostTotalPrice} = useBookingContext();
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false)

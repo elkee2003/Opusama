@@ -12,9 +12,13 @@ const BookingContextProvider = ({children}) => {
     const [guestFirstName, setGuestFirstName] = useState('');
     const [guestLastName, setGuestLastName] = useState('');
     const [guestPhoneNumber, setGuestPhoneNumber]= useState('');
-    const [purpose, setPurpose] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [propertyDetails, setPropertyDetails] = useState('')
+    const [propertyType, setPropertyType] = useState('');
+    const [nameOfType, setNameOfType] = useState('');
     const [accommodationType, setAccommodationType] = useState('');
+    const [purpose, setPurpose] = useState('');
+    const [bookingLat, setBookingLat] = useState(null);
+    const [bookingLng, setBookingLng] = useState(null);
     const [realtorContext, setRealtorContext] = useState(null);
     const [duration, setDuration] = useState('');
     const [checkInDate, setCheckInDate] = useState('')
@@ -22,6 +26,7 @@ const BookingContextProvider = ({children}) => {
     const [postPrice, setPostPrice] = useState(null);
     const [postTotalPrice, setPostTotalPrice] = useState(null);
     const [overAllPrice, setOverAllPrice] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
         const validateInput = () => {
             setErrorMessage(''); // Clear previous errors
@@ -54,7 +59,7 @@ const BookingContextProvider = ({children}) => {
 
 
   return (
-    <BookingContext.Provider value={{bookings, setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, errorMessage, setErrorMessage, onValidateInput, accommodationType, setAccommodationType, realtorContext, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate, duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice}}>
+    <BookingContext.Provider value={{bookings, setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, setGuestPhoneNumber, purpose, setPurpose, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate, duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice}}>
         {children}
     </BookingContext.Provider>
   )

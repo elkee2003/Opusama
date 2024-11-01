@@ -2,7 +2,12 @@ import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
 
-
+export enum BookingStatus {
+  PENDING = "PENDING",
+  ACCEPTED = "ACCEPTED",
+  CANCELLED = "CANCELLED",
+  DENIED = "DENIED"
+}
 
 
 
@@ -82,16 +87,20 @@ type EagerBooking = {
   readonly kids?: string | null;
   readonly infants?: string | null;
   readonly guestFirstName?: string | null;
-  readonly gusetLastName?: string | null;
+  readonly guestLastName?: string | null;
   readonly guestPhoneNumber?: string | null;
-  readonly purposeOfStay?: string | null;
+  readonly purpose?: string | null;
   readonly duration?: string | null;
   readonly checkInDate?: string | null;
   readonly checkOutDate?: string | null;
   readonly propertyType?: string | null;
   readonly Realtor?: Realtor | null;
   readonly accommodationType?: string | null;
+  readonly nameOfType?: string | null;
   readonly totalPrice?: number | null;
+  readonly bookingLat?: number | null;
+  readonly bookingLng?: number | null;
+  readonly status?: BookingStatus | keyof typeof BookingStatus | null;
   readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -108,16 +117,20 @@ type LazyBooking = {
   readonly kids?: string | null;
   readonly infants?: string | null;
   readonly guestFirstName?: string | null;
-  readonly gusetLastName?: string | null;
+  readonly guestLastName?: string | null;
   readonly guestPhoneNumber?: string | null;
-  readonly purposeOfStay?: string | null;
+  readonly purpose?: string | null;
   readonly duration?: string | null;
   readonly checkInDate?: string | null;
   readonly checkOutDate?: string | null;
   readonly propertyType?: string | null;
   readonly Realtor: AsyncItem<Realtor | undefined>;
   readonly accommodationType?: string | null;
+  readonly nameOfType?: string | null;
   readonly totalPrice?: number | null;
+  readonly bookingLat?: number | null;
+  readonly bookingLng?: number | null;
+  readonly status?: BookingStatus | keyof typeof BookingStatus | null;
   readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

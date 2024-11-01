@@ -120,9 +120,9 @@ export const onCreateBooking = /* GraphQL */ `
       kids
       infants
       guestFirstName
-      gusetLastName
+      guestLastName
       guestPhoneNumber
-      purposeOfStay
+      purpose
       duration
       checkInDate
       checkOutDate
@@ -149,7 +149,11 @@ export const onCreateBooking = /* GraphQL */ `
         __typename
       }
       accommodationType
+      nameOfType
       totalPrice
+      bookingLat
+      bookingLng
+      status
       userID
       createdAt
       updatedAt
@@ -169,9 +173,9 @@ export const onUpdateBooking = /* GraphQL */ `
       kids
       infants
       guestFirstName
-      gusetLastName
+      guestLastName
       guestPhoneNumber
-      purposeOfStay
+      purpose
       duration
       checkInDate
       checkOutDate
@@ -198,7 +202,11 @@ export const onUpdateBooking = /* GraphQL */ `
         __typename
       }
       accommodationType
+      nameOfType
       totalPrice
+      bookingLat
+      bookingLng
+      status
       userID
       createdAt
       updatedAt
@@ -218,9 +226,9 @@ export const onDeleteBooking = /* GraphQL */ `
       kids
       infants
       guestFirstName
-      gusetLastName
+      guestLastName
       guestPhoneNumber
-      purposeOfStay
+      purpose
       duration
       checkInDate
       checkOutDate
@@ -247,7 +255,11 @@ export const onDeleteBooking = /* GraphQL */ `
         __typename
       }
       accommodationType
+      nameOfType
       totalPrice
+      bookingLat
+      bookingLng
+      status
       userID
       createdAt
       updatedAt

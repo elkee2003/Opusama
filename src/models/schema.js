@@ -218,8 +218,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "gusetLastName": {
-                    "name": "gusetLastName",
+                "guestLastName": {
+                    "name": "guestLastName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -232,8 +232,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "purposeOfStay": {
-                    "name": "purposeOfStay",
+                "purpose": {
+                    "name": "purpose",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -292,10 +292,40 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "nameOfType": {
+                    "name": "nameOfType",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "totalPrice": {
                     "name": "totalPrice",
                     "isArray": false,
                     "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "bookingLat": {
+                    "name": "bookingLat",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "bookingLng": {
+                    "name": "bookingLng",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "BookingStatus"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -892,8 +922,18 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "BookingStatus": {
+            "name": "BookingStatus",
+            "values": [
+                "PENDING",
+                "ACCEPTED",
+                "CANCELLED",
+                "DENIED"
+            ]
+        }
+    },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "f36d00161c88efffbd0392d8b9e79c95"
+    "version": "fd72697ce11c842eb5c7e357d256855d"
 };
