@@ -1,8 +1,9 @@
 import { View, useWindowDimensions, ActivityIndicator, PermissionsAndroid, Platform,} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
-// Geolocation.setRNConfiguration(config);
+import {GOOGLE_API_KEY} from '../,./../../../keys'
+import MapViewDirections from 'react-native-maps-directions';
+import * as Location from 'expo-location';
 import styles from './styles'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
@@ -14,32 +15,39 @@ const StoreMap = () => {
 
 
     useEffect(() => {
-      let watchId;
+      let locationSubscription;
   
       const requestLocationPermission = async () => {
           try {
-              // For both iOS and Android
-              if (Platform.OS === 'ios' || Platform.OS === 'android') {
-              Geolocation.requestAuthorization(); // Request permission on iOS and Android
+              // Request location permissions
+              let { status } = await Location.requestForegroundPermissionsAsync();
+              if (status !== 'granted') {
+                  setErrorMsg('Permission to access location was denied');
+                  return;
               }
-      
-              // Watch the user's location and update it continuously
-              watchId = Geolocation.watchPosition(
-              (position) => {
-                  const { latitude, longitude } = position.coords;
-                  setLocation({ latitude, longitude });
-                  console.log('Updated Location:', position);
-              },
-              (error) => {
-                  console.error('Geolocation error:', error);
-                  setErrorMsg('Error fetching location');
-              },
-              {
-                  enableHighAccuracy: true,
-                  timeout: 20000,
-                  maximumAge: 1000,
-                  distanceFilter: 500, // Update based on distance (e.g., every 500 meters)
-              }
+  
+              // Get the current location once
+              let initialLocation = await Location.getCurrentPositionAsync({});
+              setLocation({
+                  latitude: initialLocation.coords.latitude,
+                  longitude: initialLocation.coords.longitude,
+              });
+  
+              // Watch location with updates every 20 seconds or every 500 meters
+              locationSubscription = await Location.watchPositionAsync(
+                  {
+                      accuracy: Location.Accuracy.High,
+                      timeInterval: 20000, // 20 seconds
+                      distanceInterval: 200, // 500 meters
+                  },
+                  (position) => {
+                      const { latitude, longitude } = position.coords;
+                      setLocation({ latitude, longitude,
+                      // heading: heading || 0,
+                      });
+                      console.log('Updated Location:', position);
+                      // console.log(location.heading)
+                  }
               );
           } catch (error) {
               console.error('Location permission error:', error);
@@ -49,13 +57,13 @@ const StoreMap = () => {
   
       requestLocationPermission();
   
-      // Cleanup subscription when the component unmounts
+      // Cleanup the watcher when the component unmounts
       return () => {
-        if (watchId !== null) {
-          Geolocation.clearWatch(watchId);
-        }
+          if (locationSubscription) {
+              locationSubscription.remove();
+          }
       };
-    }, []);
+  }, [setLocation]);
 
     if (!location || !location.latitude || !location.longitude) {
       return <ActivityIndicator style={{ marginTop: 30 }} size="large" />;

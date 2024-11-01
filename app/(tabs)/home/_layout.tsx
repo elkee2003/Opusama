@@ -2,7 +2,6 @@ import React from 'react'
 import type {ParamListBase, TabNavigationState} from '@react-navigation/native';
 import { createMaterialTopTabNavigator, MaterialTopTabNavigationOptions, MaterialTopTabNavigationEventMap } from '@react-navigation/material-top-tabs';
 import { withLayoutContext } from 'expo-router';
-import { Stack } from 'expo-router'
 
 const {Navigator} = createMaterialTopTabNavigator();
 
@@ -13,7 +12,8 @@ MaterialTopTabNavigationOptions, typeof Navigator, TabNavigationState<ParamListB
 const HomeLayout = () => {
   return (
     <MaterialTobTabs screenOptions={{
-      tabBarLabelStyle:{fontWeight:'bold', textTransform:'capitalize'}
+      tabBarLabelStyle:{fontWeight:'bold', textTransform:'capitalize'},
+      tabBarScrollEnabled: true,
     }}>
       <MaterialTobTabs.Screen name='index' options={{title:'Houses'}}/>
       <MaterialTobTabs.Screen name='hotels' options={{title:'Hotels / Shorlets'}}/>

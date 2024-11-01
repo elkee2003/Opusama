@@ -14,10 +14,7 @@ const Booking = ({ postPrice }) => {
   });
 
   const [totalPrice, setTotalPrice] = useState(0);
-  const {postIdTotalPrice, realtorIdContext} = useBookingContext()
-  console.log(postIdTotalPrice)
-
-  console.log('this is it!!!',realtorIdContext)
+  const {postTotalPrice, setOverAllPrice, overAllPrice} = useBookingContext()
 
   const handleDateChange = (dates) => {
     setRange({
@@ -32,11 +29,17 @@ const Booking = ({ postPrice }) => {
       daysDifference = daysDifference === 0 ? 1 : daysDifference;
       console.log('Number of Days:', daysDifference);
 
-      if (postIdTotalPrice) {
-        setTotalPrice(daysDifference * postIdTotalPrice); // Calculate the total price based on the daysDifference and price
+      if (postTotalPrice) {
+        setTotalPrice(daysDifference * postTotalPrice); // Calculate the total price based on the daysDifference and price
       }
     }
-  }, [range, postIdTotalPrice]);
+  }, [range, postTotalPrice]);
+
+  useEffect(()=>{
+    if(totalPrice){
+      setOverAllPrice(totalPrice)
+    }
+  }, [totalPrice])
 
   return (
     <View style={styles.container}>
@@ -84,10 +87,11 @@ const Booking = ({ postPrice }) => {
         <View style={styles.priceContainer}>
           <Text style={styles.priceLabel}>Total Price:</Text>
           <Text style={styles.priceValue}>₦{totalPrice.toLocaleString()}</Text>
+          <Text>Overallprice:{overAllPrice}</Text>
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.nxtBtn} onPress={() => router.push(`/realtor/hotelrealtor/reviewinfo/${realtor.id}`)}>
+      <TouchableOpacity style={styles.nxtBtn} onPress={() => router.push(`/realtor/hotelrealtor/reviewinfo`)}>
         <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
       </TouchableOpacity>
     </View>

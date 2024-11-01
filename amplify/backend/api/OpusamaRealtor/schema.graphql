@@ -37,6 +37,7 @@ type User @model @auth(rules: [{allow: public}]) {
   RealtorReview: RealtorReview @hasOne
   PostReview: PostReview @hasOne
   Bookings: [Booking] @hasMany(indexName: "byUser", fields: ["id"])
+  push_token: String
 }
 
 type Realtor @model @auth(rules: [{allow: public}]) {
@@ -53,6 +54,7 @@ type Realtor @model @auth(rules: [{allow: public}]) {
   accountName: String
   accountNumber: String
   Post: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
+  push_token: String
 }
 
 type Post @model @auth(rules: [{allow: public}]) {
@@ -79,4 +81,5 @@ type Post @model @auth(rules: [{allow: public}]) {
   state: String!
   city: String!
   realtorID: ID! @index(name: "byRealtor")
-} 
+}
+ 

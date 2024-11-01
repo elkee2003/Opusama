@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         alignSelf:'center',
-        backgroundColor:'#045e04',
+        backgroundColor:'#010c01',
         borderRadius:10,
         marginTop:20,
     },
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     secBtnTxt:{
         fontSize:18,
         fontWeight:'bold',
-        color:'#058b05'
+        color:'#010a01'
     },
     secBtn_SECONDARY:{
         width: 150,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     text_SECONDARY:{
         fontSize:18,
         fontWeight:'bold',
-        color:'#058b05',
+        color:'#010a01',
         marginBottom:20,
     },
 

@@ -5,18 +5,19 @@ const BookingContext = createContext({})
 
 const BookingContextProvider = ({children}) => {
 
-    const [adults, setAdults] = useState(0)
-    const [kids, setKids] = useState(0)
-    const [infants, setInfants] = useState(0)
-    const [guestFirstName, setGuestFirstName] = useState('')
-    const [guestLastName, setGuestLastName] = useState('')
-    const [guestPhoneNumber, setGuestPhoneNumber]= useState('')
-    const [purpose, setPurpose] = useState('')
-    const [errorMessage, setErrorMessage] = useState('')
+    const [adults, setAdults] = useState(0);
+    const [kids, setKids] = useState(0);
+    const [infants, setInfants] = useState(0);
+    const [guestFirstName, setGuestFirstName] = useState('');
+    const [guestLastName, setGuestLastName] = useState('');
+    const [guestPhoneNumber, setGuestPhoneNumber]= useState('');
+    const [purpose, setPurpose] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const [realtorIdContext, setRealtorIdContext] = useState(null)
-    const [postIdContext, setPostIdContext] = useState(null)
-    const [postIdTotalPrice, setPostIdTotalPrice] = useState(null)
+    const [realtorContext, setRealtorContext] = useState(null);
+    const [postPrice, setPostPrice] = useState(null);
+    const [postTotalPrice, setPostTotalPrice] = useState(null);
+    const [overAllPrice, setOverAllPrice] = useState(null);
 
         const validateInput = () => {
             setErrorMessage(''); // Clear previous errors
@@ -49,7 +50,7 @@ const BookingContextProvider = ({children}) => {
 
 
   return (
-    <BookingContext.Provider value={{adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, errorMessage, setErrorMessage, onValidateInput, realtorIdContext, setRealtorIdContext, postIdContext, setPostIdContext, postIdTotalPrice, setPostIdTotalPrice}}>
+    <BookingContext.Provider value={{adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice}}>
         {children}
     </BookingContext.Provider>
   )

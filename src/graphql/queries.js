@@ -203,6 +203,7 @@ export const getBooking = /* GraphQL */ `
         bankname
         accountName
         accountNumber
+        push_token
         createdAt
         updatedAt
         _version
@@ -373,6 +374,7 @@ export const getUser = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version
@@ -398,6 +400,7 @@ export const listUsers = /* GraphQL */ `
         lastName
         profilePic
         comment
+        push_token
         createdAt
         updatedAt
         _version
@@ -433,6 +436,7 @@ export const syncUsers = /* GraphQL */ `
         lastName
         profilePic
         comment
+        push_token
         createdAt
         updatedAt
         _version
@@ -468,6 +472,7 @@ export const getRealtor = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version
@@ -497,6 +502,7 @@ export const listRealtors = /* GraphQL */ `
         bankname
         accountName
         accountNumber
+        push_token
         createdAt
         updatedAt
         _version
@@ -536,6 +542,7 @@ export const syncRealtors = /* GraphQL */ `
         bankname
         accountName
         accountNumber
+        push_token
         createdAt
         updatedAt
         _version

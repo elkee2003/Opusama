@@ -10,7 +10,8 @@ import { Realtor, Post } from '../../../src/models'
 
 const HotelPostList = () => {
 
-  const [realtorPosts, setRealtorPosts] = useState([])
+  const [realtorPosts, setRealtorPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // Use flatMap to flatten the posts array and include parent information
   // const hotelData = hotels.flatMap(hotel => 
@@ -24,42 +25,88 @@ const HotelPostList = () => {
   //   }))
   // );
 
-  const fetchRealtorsAndPost = async () =>{
+  // const fetchRealtorsAndPost = async () =>{
+  //   try {
+  //     const realtors = await DataStore.query(Realtor)
+  //     const allPosts = []
+
+  //     for (const realtor of realtors){
+  //       // if propertyType equal to House
+  //       const posts = await DataStore.query(Post, (p) =>
+  //         p.realtorID.eq(realtor.id)
+  //       );
+
+  //       // Filter the posts by propertyType = "Hotels / Shortlets"
+  //       const filteredPosts = posts.filter(post => post.propertyType === "Hotels / Shortlets");
+
+  //       const realtorWithPosts = filteredPosts.map(post =>({
+  //         ...post,
+  //         realtorId: realtor.id,
+  //         firstName: realtor.firstName, // Replace with fields from Realtor model
+  //         lastName: realtor.lastName,
+  //         email: realtor.email,
+  //         profilepic: realtor.profilePic,
+  //         phoneNumber: realtor.phoneNumber,
+  //       }))
+  //       allPosts.push(...realtorWithPosts);
+  //     }
+
+  //     // Sort all posts by createdAt or updatedAt field
+  //     allPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  //     setRealtorPosts(allPosts);
+  //   } catch (error) {
+  //     console.error('Error fetching realtors and posts', error)
+  //   }
+  // }
+
+  const fetchRealtorsAndPosts = async () => {
     try {
-      const realtors = await DataStore.query(Realtor)
-      const allPosts = []
+      setLoading(true);
 
-      for (const realtor of realtors){
-        // if propertyType equal to House
-        const posts = await DataStore.query(Post, (p) =>
-          p.realtorID.eq(realtor.id)
-        );
+      // Step 1: Query all realtors
+      const realtors = await DataStore.query(Realtor);
 
-        // Filter the posts by propertyType = "Hotels / Shortlets"
-        const filteredPosts = posts.filter(post => post.propertyType === "Hotels / Shortlets");
+      // Step 2: Use map and Promise.all to fetch posts for each realtor in parallel
+      const allPosts = await Promise.all(
+        realtors.map(async (realtor) => {
+          // Query posts for each realtor
+          const posts = await DataStore.query(Post, (p) => p.realtorID.eq(realtor.id));
+          const filteredPosts = posts.filter((post) => post.propertyType === "Hotels / Shortlets");
 
-        const realtorWithPosts = filteredPosts.map(post =>({
-          ...post,
-          realtorId: realtor.id,
-          firstName: realtor.firstName, // Replace with fields from Realtor model
-          lastName: realtor.lastName,
-          email: realtor.email,
-          profilepic: realtor.profilePic,
-          phoneNumber: realtor.phoneNumber,
-        }))
-        allPosts.push(...realtorWithPosts);
-      }
+          // Map the realtor details to each post
+          return filteredPosts.map((post) => ({
+            ...post,
+            realtorId: realtor.id,
+            firstName: realtor.firstName,
+            lastName: realtor.lastName,
+            email: realtor.email,
+            profilepic: realtor.profilePic,
+            phoneNumber: realtor.phoneNumber,
+          }));
+        })
+      );
 
-      // Sort all posts by createdAt or updatedAt field
-      allPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      setRealtorPosts(allPosts);
+      // Flatten the array of arrays and sort posts by createdAt or updatedAt
+      const flatPosts = allPosts.flat().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      setRealtorPosts(flatPosts);
     } catch (error) {
-      console.error('Error fetching realtors and posts', error)
+      console.error('Error fetching realtors and posts', error);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(()=>{
-    fetchRealtorsAndPost()
+    fetchRealtorsAndPosts()
+
+    const subscription = DataStore.observe(Realtor).subscribe(({opType})=>{
+      if(opType === "UPDATE"){
+        fetchOrders();
+      }
+    });
+
+    return () => subscription.unsubscribe();
   },[])
 
   return (

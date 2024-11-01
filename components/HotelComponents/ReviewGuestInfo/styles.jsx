@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:20,
         padding:10,
+        color:'white',
+        backgroundColor:'#272727',
+        marginBottom:10,
     },
     paymentBtn:{
         backgroundColor:'#23a508',

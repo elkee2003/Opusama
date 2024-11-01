@@ -134,6 +134,7 @@ type EagerUser = {
   readonly RealtorReview?: RealtorReview | null;
   readonly PostReview?: PostReview | null;
   readonly Bookings?: (Booking | null)[] | null;
+  readonly push_token?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly userRealtorReviewId?: string | null;
@@ -154,6 +155,7 @@ type LazyUser = {
   readonly RealtorReview: AsyncItem<RealtorReview | undefined>;
   readonly PostReview: AsyncItem<PostReview | undefined>;
   readonly Bookings: AsyncCollection<Booking>;
+  readonly push_token?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly userRealtorReviewId?: string | null;
@@ -184,6 +186,7 @@ type EagerRealtor = {
   readonly accountName?: string | null;
   readonly accountNumber?: string | null;
   readonly Post?: (Post | null)[] | null;
+  readonly push_token?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -206,6 +209,7 @@ type LazyRealtor = {
   readonly accountName?: string | null;
   readonly accountNumber?: string | null;
   readonly Post: AsyncCollection<Post>;
+  readonly push_token?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

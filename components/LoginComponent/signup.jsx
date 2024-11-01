@@ -19,7 +19,7 @@ const SignupCom = () => {
 
 
     // Automatically assign a role (for user app example)
-    const role = "courier"; // Automatically set based on the app
+    const role = "user"; // Automatically set based on the app
 
     const onSignUp = async (data) => {
         setLoading(true);
@@ -214,7 +214,7 @@ const SignupCom = () => {
             </TouchableOpacity>
 
             {/* Social Signins */}
-            <SocialSigninButtons/>
+            {/* <SocialSigninButtons/> */}
 
             <TouchableOpacity style={styles.secBtnCon} onPress={()=>router.push('/login')}>
                 <Text style={styles.secBtnTxt}>Sign In</Text>

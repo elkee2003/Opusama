@@ -1,19 +1,22 @@
-import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native'
-import React, {useState, useEffect} from 'react'
-import DetailedHotelPost from '../../../../components/HotelComponents/DetailedHotelPost'
-import { useLocalSearchParams } from 'expo-router'
-import { DataStore } from 'aws-amplify/datastore'
-import {Realtor, Post} from '../../../../src/models'
+import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import DetailedHotelPost from '../../../../components/HotelComponents/DetailedHotelPost';
+import { useLocalSearchParams } from 'expo-router';
+import { useBookingContext } from '../../../../providers/BookingProvider';
+import { DataStore } from 'aws-amplify/datastore';
+import {Realtor, Post} from '../../../../src/models';
 
 const HotelAccommodation = () => {
 
-    const {id} = useLocalSearchParams()
-    const [realtor, setRealtor] = useState(null)
-    const [post, setPost] = useState(null)
-    const [isloading, setIsLoading] = useState(true)
+    const {id} = useLocalSearchParams();
+    const {setRealtorContext} = useBookingContext();
+    const [realtor, setRealtor] = useState(null);
+    const [post, setPost] = useState(null);
+    const [isloading, setIsLoading] = useState(true);
 
     const fetchPost = async ()=>{
-        setIsLoading(true)
+        setIsLoading(true);
+        setRealtorContext(null);
         try{
             if(id){
                 const foundPost = await DataStore.query(Post, id)
@@ -35,6 +38,11 @@ const HotelAccommodation = () => {
     useEffect(()=>{
       fetchPost()
     },[id])
+
+    // This useEffect should solve the problem of not retaining the realtor.id
+    useEffect(()=>{
+      setRealtorContext(realtor)
+    }, [realtor])
 
     if (isloading) {
         return (

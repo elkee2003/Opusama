@@ -411,6 +411,13 @@ export const schema = {
                         ]
                     }
                 },
+                "push_token": {
+                    "name": "push_token",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -569,6 +576,13 @@ export const schema = {
                             "realtorID"
                         ]
                     }
+                },
+                "push_token": {
+                    "name": "push_token",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -842,5 +856,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "937ab800c93e3393f579d40e9ffe0bfe"
+    "version": "4e87179b1bda658569c081c12a8db7d1"
 };

@@ -1,9 +1,12 @@
 import { View, Text } from 'react-native'
-import React, {useState, useContext, createContext} from 'react'
+import React, {useState, useContext, useEffect, createContext} from 'react'
+import {useAuthContext} from './AuthProvider';
 
 const ProfileContext = createContext({})
 
 const ProfileContextProvider = ({children}) => {
+
+    const {dbUser} = useAuthContext()
 
     const [profilePic, setProfilePic] = useState(null)
     const [firstName, setFirstName] = useState("")
@@ -12,30 +15,40 @@ const ProfileContextProvider = ({children}) => {
     const [phoneNumber, setPhoneNumber]= useState("")
     const [errorMessage, setErrorMessage] = useState('')
 
-      const validateInput = () =>{
-        setErrorMessage('')
-        if(!firstName){
-          setErrorMessage('First Name is Required')
-          return false;
-        }
-        if(!address){
-          setErrorMessage('Address is required')
-          return false;
-        }
-        if(phoneNumber.length < 10){
-          setErrorMessage('Kindly fill in Phone Number')
-          return false;
-        }
-        return true;
+    const validateInput = () =>{
+      setErrorMessage('')
+      if(!firstName){
+        setErrorMessage('First Name is Required')
+        return false;
       }
+      if(!address){
+        setErrorMessage('Address is required')
+        return false;
+      }
+      if(phoneNumber.length < 10){
+        setErrorMessage('Kindly fill in Phone Number')
+        return false;
+      }
+      return true;
+    }
 
-      const onValidateInput = () =>{
-        if(validateInput()){
-          return true;
-        }else {
-          return false;
-        }
+    const onValidateInput = () =>{
+      if(validateInput()){
+        return true;
+      }else {
+        return false;
       }
+    }
+
+    useEffect(() => {
+      if (dbUser) {
+          setProfilePic(dbUser?.profilePic);
+          setFirstName(dbUser.firstName || "");
+          setLastName(dbUser.lastName || "");
+          setAddress(dbUser.address || "");
+          setPhoneNumber(dbUser.phoneNumber || "");
+      }
+    }, [dbUser]); // This effect runs whenever dbUser changes
 
 
   return (

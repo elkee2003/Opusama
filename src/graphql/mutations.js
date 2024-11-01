@@ -143,6 +143,7 @@ export const createBooking = /* GraphQL */ `
         bankname
         accountName
         accountNumber
+        push_token
         createdAt
         updatedAt
         _version
@@ -191,6 +192,7 @@ export const updateBooking = /* GraphQL */ `
         bankname
         accountName
         accountNumber
+        push_token
         createdAt
         updatedAt
         _version
@@ -239,6 +241,7 @@ export const deleteBooking = /* GraphQL */ `
         bankname
         accountName
         accountNumber
+        push_token
         createdAt
         updatedAt
         _version
@@ -296,6 +299,7 @@ export const createUser = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version
@@ -347,6 +351,7 @@ export const updateUser = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version
@@ -398,6 +403,7 @@ export const deleteUser = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version
@@ -432,6 +438,7 @@ export const createRealtor = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version
@@ -464,6 +471,7 @@ export const updateRealtor = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version
@@ -496,6 +504,7 @@ export const deleteRealtor = /* GraphQL */ `
         startedAt
         __typename
       }
+      push_token
       createdAt
       updatedAt
       _version

@@ -1,5 +1,7 @@
-navigator.geolocation = require('@react-native-community/geolocation');
 import { Stack } from "expo-router";
+import AuthProvider from "@/providers/AuthProvider";
+import ProfileProvider from '@/providers/ProfileProvider';
+import BookingProvider from "@/providers/BookingProvider";
 import {
   withAuthenticator,
   useAuthenticator
@@ -11,13 +13,18 @@ Amplify.configure(amplifyconfig);
 
 const RootLayout = () => {
   return (
-    <Stack screenOptions={{
-      headerShown:false
-    }}>
-      <Stack.Screen name="(tabs)" />
-    </Stack>
+    <AuthProvider>
+      <ProfileProvider>
+        <BookingProvider>
+          <Stack screenOptions={{
+            headerShown:false
+          }}>
+            <Stack.Screen name="(tabs)" />
+          </Stack>
+        </BookingProvider>
+      </ProfileProvider>
+    </AuthProvider>
   );
 }
 
-// export default withAuthenticator(RootLayout);
 export default RootLayout;

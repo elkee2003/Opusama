@@ -9,8 +9,7 @@ import { router } from 'expo-router';
 
 const GuestDetails = () => {
 
-    const {adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, errorMessage, onValidateInput,} = useBookingContext()
-    
+    const {adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, errorMessage, onValidateInput,} = useBookingContext();
 
     const handleProceedToBooking = () => {
             router.push(`/realtor/hotelrealtor/booking`); // Navigate to the profile screen upon successful validation

@@ -32,6 +32,14 @@ const styles = StyleSheet.create({
         fontStyle:'italic',
         color:'grey'
     },
+    priceLabel:{
+        fontWeight:'bold',
+        fontSize:20,
+    },
+    priceValue:{
+        fontSize:18,
+        textDecorationLine:'underline',
+    },
     nxtBtn:{
         backgroundColor:'#23a508',
         justifyContent:'center',
@@ -45,8 +53,7 @@ const styles = StyleSheet.create({
         fontSize:50,
         fontWeight:'bold',
         color:'white'
-    }
-
+    },
 })
 
 export default styles;

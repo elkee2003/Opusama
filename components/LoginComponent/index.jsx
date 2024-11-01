@@ -1,6 +1,6 @@
 import { View, Text, Image, Alert, ScrollView} from 'react-native'
 import React, {useState} from 'react'
-import Logo from '../../assets/images/Atua.png'
+// import Logo from '../../assets/images/Atua.png'
 import CustomInput from './customInput'
 import CustomButton from './customButtons'
 import SocialSigninButtons from './SocialSigninButtons/'
@@ -51,9 +51,9 @@ const index = () => {
     <View style={styles.container}>
 
         {/* Logo */}
-        <View style={styles.logoCon}>
+        {/* <View style={styles.logoCon}>
             <Image source={Logo} style={styles.logo}/>
-        </View>
+        </View> */}
 
         {/* Header */}
         <View style={styles.titleCon}>
@@ -116,7 +116,7 @@ const index = () => {
             />
 
             {/* Social Signin Buttons */}
-            <SocialSigninButtons/>
+            {/* <SocialSigninButtons/> */}
 
             {/* Forgot Password & Create Account Btns */}
             <View style={styles.secBtnSection}>

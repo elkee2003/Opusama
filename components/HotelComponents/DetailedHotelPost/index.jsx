@@ -10,7 +10,7 @@ import { router } from 'expo-router'
 
 const DetailedHotelPost = ({post, realtor}) => {
 
-  const {realtorIdContext, setRealtorIdContext, postIdContext, setPostIdContext, postIdTotalPrice, setPostIdTotalPrice} = useBookingContext()
+  const {setPostPrice, setPostTotalPrice} = useBookingContext()
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false)
@@ -55,10 +55,8 @@ const DetailedHotelPost = ({post, realtor}) => {
   };
 
   useEffect(() => {
-    console.log('totalprice:', post.totalPrice)
-    setPostIdTotalPrice(post.totalPrice);
-    setRealtorIdContext('hi');
-    console.log(realtorIdContext)
+    setPostTotalPrice(post.totalPrice);
+    setPostPrice(post.price);
   }, [formattedTotalPrice, realtor.id]); // Run this effect when these values change
 
   return (
