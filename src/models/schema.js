@@ -24,6 +24,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -47,6 +54,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -97,6 +113,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -127,6 +150,15 @@ export const schema = {
                         "name": "byPost",
                         "fields": [
                             "postID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
                         ]
                     }
                 },
@@ -165,8 +197,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "children": {
-                    "name": "children",
+                "kids": {
+                    "name": "kids",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -181,27 +213,24 @@ export const schema = {
                 },
                 "guestFirstName": {
                     "name": "guestFirstName",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "gusetLastName": {
                     "name": "gusetLastName",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "guestPhoneNumber": {
                     "name": "guestPhoneNumber",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "purposeOfStay": {
                     "name": "purposeOfStay",
@@ -217,25 +246,25 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "accomodationType": {
-                    "name": "accomodationType",
+                "checkInDate": {
+                    "name": "checkInDate",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "price": {
-                    "name": "price",
+                "checkOutDate": {
+                    "name": "checkOutDate",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "userID": {
-                    "name": "userID",
+                "propertyType": {
+                    "name": "propertyType",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Realtor": {
@@ -255,6 +284,27 @@ export const schema = {
                             "bookingRealtorId"
                         ]
                     }
+                },
+                "accommodationType": {
+                    "name": "accommodationType",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "totalPrice": {
+                    "name": "totalPrice",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -352,54 +402,57 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "comment": {
-                    "name": "comment",
+                "phoneNumber": {
+                    "name": "phoneNumber",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "RealtorReview": {
-                    "name": "RealtorReview",
-                    "isArray": false,
-                    "type": {
-                        "model": "RealtorReview"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": [
-                            "id"
-                        ],
-                        "targetNames": [
-                            "userRealtorReviewId"
-                        ]
-                    }
-                },
-                "PostReview": {
-                    "name": "PostReview",
-                    "isArray": false,
-                    "type": {
-                        "model": "PostReview"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": [
-                            "id"
-                        ],
-                        "targetNames": [
-                            "userPostReviewId"
-                        ]
-                    }
                 },
                 "Bookings": {
                     "name": "Bookings",
                     "isArray": true,
                     "type": {
                         "model": "Booking"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "userID"
+                        ]
+                    }
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "PostReviews": {
+                    "name": "PostReviews",
+                    "isArray": true,
+                    "type": {
+                        "model": "PostReview"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "userID"
+                        ]
+                    }
+                },
+                "RealtorReviews": {
+                    "name": "RealtorReviews",
+                    "isArray": true,
+                    "type": {
+                        "model": "RealtorReview"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -433,20 +486,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "userRealtorReviewId": {
-                    "name": "userRealtorReviewId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "userPostReviewId": {
-                    "name": "userPostReviewId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -856,5 +895,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "4e87179b1bda658569c081c12a8db7d1"
+    "version": "f36d00161c88efffbd0392d8b9e79c95"
 };

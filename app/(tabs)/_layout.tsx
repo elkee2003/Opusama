@@ -34,9 +34,9 @@ export default function TabsLayout() {
             tabBarIcon:({color})=> <FontAwesome name="search" size={28} color={color} />
           }}/>
 
-          <Tabs.Screen name='favourite'
+          <Tabs.Screen name='bookings'
           options={{
-            tabBarLabel:'Favourite',
+            tabBarLabel:'Bookings',
             tabBarIcon:({color})=> <FontAwesome5 name="heart" size={28} color={color} />
           }}/>
           

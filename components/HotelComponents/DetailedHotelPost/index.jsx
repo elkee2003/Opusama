@@ -214,7 +214,7 @@ const DetailedHotelPost = ({post, realtor}) => {
                   Ratings and reviews
                 </Text>
                 {post.reviews.slice(0,2).map(item=>(
-                  <View key={item.userId}>
+                  <View key={item?.userId}>
                     <ReviewHotel review={item}/>
                   </View>
                 ))}

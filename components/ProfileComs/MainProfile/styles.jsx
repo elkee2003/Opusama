@@ -14,6 +14,12 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         marginVertical:8,
     },
+    img:{
+        width:'100%',
+        height:'100%',
+        resizeMode:"contain",
+        borderRadius:75,
+    },
     row:{
         flexDirection:'row',
         gap:10,

@@ -28,8 +28,8 @@ const AuthProvider = ({children}) => {
     const dbCurrentUser = async () =>{
         try{
           const dbusercurrent = await DataStore.query(User, (user)=>user.sub.eq(sub))
-        //   DataStore.delete(Courier, Predicates.ALL)
-        //   DataStore.clear()
+          // DataStore.delete(User, Predicates.ALL)
+          // DataStore.clear()
           
           setDbUser(dbusercurrent[0])
         }catch(error){
@@ -57,6 +57,10 @@ const AuthProvider = ({children}) => {
     },[sub])
 
     useEffect(()=>{
+        if(!sub){
+          return;
+        }
+
         dbCurrentUser()
     }, [sub])
 

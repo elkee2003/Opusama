@@ -2,6 +2,7 @@ type RealtorReview @model @auth(rules: [{allow: public}]) {
   id: ID!
   rating: Float
   review: String
+  userID: ID! @index(name: "byUser")
 }
 
 type PostReview @model @auth(rules: [{allow: public}]) {
@@ -9,22 +10,26 @@ type PostReview @model @auth(rules: [{allow: public}]) {
   rating: Float
   review: String
   postID: ID! @index(name: "byPost")
+  userID: ID! @index(name: "byUser")
 }
 
 type Booking @model @auth(rules: [{allow: public}]) {
   id: ID!
   adults: String
-  children: String
+  kids: String
   infants: String
-  guestFirstName: [String]
-  gusetLastName: [String]
-  guestPhoneNumber: [String]
+  guestFirstName: String
+  gusetLastName: String
+  guestPhoneNumber: String
   purposeOfStay: String
   duration: String
-  accomodationType: String
-  price: String
-  userID: ID! @index(name: "byUser")
+  checkInDate: String
+  checkOutDate: String
+  propertyType: String
   Realtor: Realtor @hasOne
+  accommodationType: String
+  totalPrice: Float
+  userID: ID! @index(name: "byUser")
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -33,10 +38,11 @@ type User @model @auth(rules: [{allow: public}]) {
   firstName: String!
   lastName: String
   profilePic: String
-  comment: String
-  RealtorReview: RealtorReview @hasOne
-  PostReview: PostReview @hasOne
+  phoneNumber: String
   Bookings: [Booking] @hasMany(indexName: "byUser", fields: ["id"])
+  address: String
+  PostReviews: [PostReview] @hasMany(indexName: "byUser", fields: ["id"])
+  RealtorReviews: [RealtorReview] @hasMany(indexName: "byUser", fields: ["id"])
   push_token: String
 }
 
@@ -81,5 +87,4 @@ type Post @model @auth(rules: [{allow: public}]) {
   state: String!
   city: String!
   realtorID: ID! @index(name: "byRealtor")
-}
- 
+} 

@@ -7,6 +7,7 @@ export const getRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      userID
       createdAt
       updatedAt
       _version
@@ -27,6 +28,7 @@ export const listRealtorReviews = /* GraphQL */ `
         id
         rating
         review
+        userID
         createdAt
         updatedAt
         _version
@@ -57,6 +59,40 @@ export const syncRealtorReviews = /* GraphQL */ `
         id
         rating
         review
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const realtorReviewsByUserID = /* GraphQL */ `
+  query RealtorReviewsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelRealtorReviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    realtorReviewsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        rating
+        review
+        userID
         createdAt
         updatedAt
         _version
@@ -77,6 +113,7 @@ export const getPostReview = /* GraphQL */ `
       rating
       review
       postID
+      userID
       createdAt
       updatedAt
       _version
@@ -98,6 +135,7 @@ export const listPostReviews = /* GraphQL */ `
         rating
         review
         postID
+        userID
         createdAt
         updatedAt
         _version
@@ -129,6 +167,7 @@ export const syncPostReviews = /* GraphQL */ `
         rating
         review
         postID
+        userID
         createdAt
         updatedAt
         _version
@@ -162,6 +201,41 @@ export const postReviewsByPostID = /* GraphQL */ `
         rating
         review
         postID
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const postReviewsByUserID = /* GraphQL */ `
+  query PostReviewsByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostReviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    postReviewsByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        rating
+        review
+        postID
+        userID
         createdAt
         updatedAt
         _version
@@ -180,16 +254,16 @@ export const getBooking = /* GraphQL */ `
     getBooking(id: $id) {
       id
       adults
-      children
+      kids
       infants
       guestFirstName
       gusetLastName
       guestPhoneNumber
       purposeOfStay
       duration
-      accomodationType
-      price
-      userID
+      checkInDate
+      checkOutDate
+      propertyType
       Realtor {
         id
         sub
@@ -211,6 +285,9 @@ export const getBooking = /* GraphQL */ `
         _lastChangedAt
         __typename
       }
+      accommodationType
+      totalPrice
+      userID
       createdAt
       updatedAt
       _version
@@ -231,15 +308,18 @@ export const listBookings = /* GraphQL */ `
       items {
         id
         adults
-        children
+        kids
         infants
         guestFirstName
         gusetLastName
         guestPhoneNumber
         purposeOfStay
         duration
-        accomodationType
-        price
+        checkInDate
+        checkOutDate
+        propertyType
+        accommodationType
+        totalPrice
         userID
         createdAt
         updatedAt
@@ -271,15 +351,18 @@ export const syncBookings = /* GraphQL */ `
       items {
         id
         adults
-        children
+        kids
         infants
         guestFirstName
         gusetLastName
         guestPhoneNumber
         purposeOfStay
         duration
-        accomodationType
-        price
+        checkInDate
+        checkOutDate
+        propertyType
+        accommodationType
+        totalPrice
         userID
         createdAt
         updatedAt
@@ -313,15 +396,18 @@ export const bookingsByUserID = /* GraphQL */ `
       items {
         id
         adults
-        children
+        kids
         infants
         guestFirstName
         gusetLastName
         guestPhoneNumber
         purposeOfStay
         duration
-        accomodationType
-        price
+        checkInDate
+        checkOutDate
+        propertyType
+        accommodationType
+        totalPrice
         userID
         createdAt
         updatedAt
@@ -345,31 +431,19 @@ export const getUser = /* GraphQL */ `
       firstName
       lastName
       profilePic
-      comment
-      RealtorReview {
-        id
-        rating
-        review
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      PostReview {
-        id
-        rating
-        review
-        postID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
+      phoneNumber
       Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
+      address
+      PostReviews {
+        nextToken
+        startedAt
+        __typename
+      }
+      RealtorReviews {
         nextToken
         startedAt
         __typename
@@ -380,8 +454,6 @@ export const getUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userRealtorReviewId
-      userPostReviewId
       __typename
     }
   }
@@ -399,15 +471,14 @@ export const listUsers = /* GraphQL */ `
         firstName
         lastName
         profilePic
-        comment
+        phoneNumber
+        address
         push_token
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        userRealtorReviewId
-        userPostReviewId
         __typename
       }
       nextToken
@@ -435,15 +506,14 @@ export const syncUsers = /* GraphQL */ `
         firstName
         lastName
         profilePic
-        comment
+        phoneNumber
+        address
         push_token
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        userRealtorReviewId
-        userPostReviewId
         __typename
       }
       nextToken

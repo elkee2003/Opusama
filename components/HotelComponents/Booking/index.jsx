@@ -14,7 +14,7 @@ const Booking = ({ postPrice }) => {
   });
 
   const [totalPrice, setTotalPrice] = useState(0);
-  const {postTotalPrice, setOverAllPrice, overAllPrice} = useBookingContext()
+  const {postTotalPrice, setOverAllPrice, setDuration, setCheckInDate, setCheckOutDate} = useBookingContext()
 
   const handleDateChange = (dates) => {
     setRange({
@@ -28,6 +28,10 @@ const Booking = ({ postPrice }) => {
       let daysDifference = dayjs(range.endDate).diff(dayjs(range.startDate), 'day');
       daysDifference = daysDifference === 0 ? 1 : daysDifference;
       console.log('Number of Days:', daysDifference);
+
+      setDuration(daysDifference);
+      setCheckInDate(range.startDate);
+      setCheckOutDate(range.endDate);
 
       if (postTotalPrice) {
         setTotalPrice(daysDifference * postTotalPrice); // Calculate the total price based on the daysDifference and price
@@ -87,7 +91,6 @@ const Booking = ({ postPrice }) => {
         <View style={styles.priceContainer}>
           <Text style={styles.priceLabel}>Total Price:</Text>
           <Text style={styles.priceValue}>₦{totalPrice.toLocaleString()}</Text>
-          <Text>Overallprice:{overAllPrice}</Text>
         </View>
       </ScrollView>
 

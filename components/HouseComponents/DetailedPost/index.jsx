@@ -182,7 +182,7 @@ const DetailedPost = ({post, realtor}) => {
                   Ratings and reviews
                 </Text>
                 {post.reviews.slice(0,2).map(item=>(
-                  <View key={item.userId}>
+                  <View key={item?.userId}>
                     <ReviewProperty review={item}/>
                   </View>
                 ))}

@@ -11,10 +11,21 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign:'center'
     },
+    guestUnit:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    unitTxt:{
+        textAlign:'center',
+        borderRadius:20,
+        padding:10,
+        color:'white',
+        backgroundColor:'#272727',
+    },
     txtInputHeader:{
         fontSize:18,
         fontWeight:'bold',
-        marginTop:20,
+        marginTop:10,
     },
     txtInput:{
         fontSize:16,

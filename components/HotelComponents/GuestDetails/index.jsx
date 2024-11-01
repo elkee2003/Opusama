@@ -118,6 +118,7 @@ const GuestDetails = () => {
                     onChangeText={setGuestPhoneNumber}
                     multiline
                     placeholder='Phone number'
+                    keyboardType='numeric'
                 />
 
                 <Text style={styles.txtInputHeader}>Purpose of Stay:</Text>

@@ -14,6 +14,7 @@ type EagerRealtorReview = {
   readonly id: string;
   readonly rating?: number | null;
   readonly review?: string | null;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -26,6 +27,7 @@ type LazyRealtorReview = {
   readonly id: string;
   readonly rating?: number | null;
   readonly review?: string | null;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -45,6 +47,7 @@ type EagerPostReview = {
   readonly rating?: number | null;
   readonly review?: string | null;
   readonly postID: string;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -58,6 +61,7 @@ type LazyPostReview = {
   readonly rating?: number | null;
   readonly review?: string | null;
   readonly postID: string;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -75,17 +79,20 @@ type EagerBooking = {
   };
   readonly id: string;
   readonly adults?: string | null;
-  readonly children?: string | null;
+  readonly kids?: string | null;
   readonly infants?: string | null;
-  readonly guestFirstName?: (string | null)[] | null;
-  readonly gusetLastName?: (string | null)[] | null;
-  readonly guestPhoneNumber?: (string | null)[] | null;
+  readonly guestFirstName?: string | null;
+  readonly gusetLastName?: string | null;
+  readonly guestPhoneNumber?: string | null;
   readonly purposeOfStay?: string | null;
   readonly duration?: string | null;
-  readonly accomodationType?: string | null;
-  readonly price?: string | null;
-  readonly userID: string;
+  readonly checkInDate?: string | null;
+  readonly checkOutDate?: string | null;
+  readonly propertyType?: string | null;
   readonly Realtor?: Realtor | null;
+  readonly accommodationType?: string | null;
+  readonly totalPrice?: number | null;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly bookingRealtorId?: string | null;
@@ -98,17 +105,20 @@ type LazyBooking = {
   };
   readonly id: string;
   readonly adults?: string | null;
-  readonly children?: string | null;
+  readonly kids?: string | null;
   readonly infants?: string | null;
-  readonly guestFirstName?: (string | null)[] | null;
-  readonly gusetLastName?: (string | null)[] | null;
-  readonly guestPhoneNumber?: (string | null)[] | null;
+  readonly guestFirstName?: string | null;
+  readonly gusetLastName?: string | null;
+  readonly guestPhoneNumber?: string | null;
   readonly purposeOfStay?: string | null;
   readonly duration?: string | null;
-  readonly accomodationType?: string | null;
-  readonly price?: string | null;
-  readonly userID: string;
+  readonly checkInDate?: string | null;
+  readonly checkOutDate?: string | null;
+  readonly propertyType?: string | null;
   readonly Realtor: AsyncItem<Realtor | undefined>;
+  readonly accommodationType?: string | null;
+  readonly totalPrice?: number | null;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly bookingRealtorId?: string | null;
@@ -130,15 +140,14 @@ type EagerUser = {
   readonly firstName: string;
   readonly lastName?: string | null;
   readonly profilePic?: string | null;
-  readonly comment?: string | null;
-  readonly RealtorReview?: RealtorReview | null;
-  readonly PostReview?: PostReview | null;
+  readonly phoneNumber?: string | null;
   readonly Bookings?: (Booking | null)[] | null;
+  readonly address?: string | null;
+  readonly PostReviews?: (PostReview | null)[] | null;
+  readonly RealtorReviews?: (RealtorReview | null)[] | null;
   readonly push_token?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly userRealtorReviewId?: string | null;
-  readonly userPostReviewId?: string | null;
 }
 
 type LazyUser = {
@@ -151,15 +160,14 @@ type LazyUser = {
   readonly firstName: string;
   readonly lastName?: string | null;
   readonly profilePic?: string | null;
-  readonly comment?: string | null;
-  readonly RealtorReview: AsyncItem<RealtorReview | undefined>;
-  readonly PostReview: AsyncItem<PostReview | undefined>;
+  readonly phoneNumber?: string | null;
   readonly Bookings: AsyncCollection<Booking>;
+  readonly address?: string | null;
+  readonly PostReviews: AsyncCollection<PostReview>;
+  readonly RealtorReviews: AsyncCollection<RealtorReview>;
   readonly push_token?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly userRealtorReviewId?: string | null;
-  readonly userPostReviewId?: string | null;
 }
 
 export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser

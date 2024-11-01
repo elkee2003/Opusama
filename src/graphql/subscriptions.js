@@ -9,6 +9,7 @@ export const onCreateRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      userID
       createdAt
       updatedAt
       _version
@@ -26,6 +27,7 @@ export const onUpdateRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      userID
       createdAt
       updatedAt
       _version
@@ -43,6 +45,7 @@ export const onDeleteRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      userID
       createdAt
       updatedAt
       _version
@@ -61,6 +64,7 @@ export const onCreatePostReview = /* GraphQL */ `
       rating
       review
       postID
+      userID
       createdAt
       updatedAt
       _version
@@ -79,6 +83,7 @@ export const onUpdatePostReview = /* GraphQL */ `
       rating
       review
       postID
+      userID
       createdAt
       updatedAt
       _version
@@ -97,6 +102,7 @@ export const onDeletePostReview = /* GraphQL */ `
       rating
       review
       postID
+      userID
       createdAt
       updatedAt
       _version
@@ -111,16 +117,16 @@ export const onCreateBooking = /* GraphQL */ `
     onCreateBooking(filter: $filter) {
       id
       adults
-      children
+      kids
       infants
       guestFirstName
       gusetLastName
       guestPhoneNumber
       purposeOfStay
       duration
-      accomodationType
-      price
-      userID
+      checkInDate
+      checkOutDate
+      propertyType
       Realtor {
         id
         sub
@@ -142,6 +148,9 @@ export const onCreateBooking = /* GraphQL */ `
         _lastChangedAt
         __typename
       }
+      accommodationType
+      totalPrice
+      userID
       createdAt
       updatedAt
       _version
@@ -157,16 +166,16 @@ export const onUpdateBooking = /* GraphQL */ `
     onUpdateBooking(filter: $filter) {
       id
       adults
-      children
+      kids
       infants
       guestFirstName
       gusetLastName
       guestPhoneNumber
       purposeOfStay
       duration
-      accomodationType
-      price
-      userID
+      checkInDate
+      checkOutDate
+      propertyType
       Realtor {
         id
         sub
@@ -188,6 +197,9 @@ export const onUpdateBooking = /* GraphQL */ `
         _lastChangedAt
         __typename
       }
+      accommodationType
+      totalPrice
+      userID
       createdAt
       updatedAt
       _version
@@ -203,16 +215,16 @@ export const onDeleteBooking = /* GraphQL */ `
     onDeleteBooking(filter: $filter) {
       id
       adults
-      children
+      kids
       infants
       guestFirstName
       gusetLastName
       guestPhoneNumber
       purposeOfStay
       duration
-      accomodationType
-      price
-      userID
+      checkInDate
+      checkOutDate
+      propertyType
       Realtor {
         id
         sub
@@ -234,6 +246,9 @@ export const onDeleteBooking = /* GraphQL */ `
         _lastChangedAt
         __typename
       }
+      accommodationType
+      totalPrice
+      userID
       createdAt
       updatedAt
       _version
@@ -252,31 +267,19 @@ export const onCreateUser = /* GraphQL */ `
       firstName
       lastName
       profilePic
-      comment
-      RealtorReview {
-        id
-        rating
-        review
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      PostReview {
-        id
-        rating
-        review
-        postID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
+      phoneNumber
       Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
+      address
+      PostReviews {
+        nextToken
+        startedAt
+        __typename
+      }
+      RealtorReviews {
         nextToken
         startedAt
         __typename
@@ -287,8 +290,6 @@ export const onCreateUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userRealtorReviewId
-      userPostReviewId
       __typename
     }
   }
@@ -301,31 +302,19 @@ export const onUpdateUser = /* GraphQL */ `
       firstName
       lastName
       profilePic
-      comment
-      RealtorReview {
-        id
-        rating
-        review
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      PostReview {
-        id
-        rating
-        review
-        postID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
+      phoneNumber
       Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
+      address
+      PostReviews {
+        nextToken
+        startedAt
+        __typename
+      }
+      RealtorReviews {
         nextToken
         startedAt
         __typename
@@ -336,8 +325,6 @@ export const onUpdateUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userRealtorReviewId
-      userPostReviewId
       __typename
     }
   }
@@ -350,31 +337,19 @@ export const onDeleteUser = /* GraphQL */ `
       firstName
       lastName
       profilePic
-      comment
-      RealtorReview {
-        id
-        rating
-        review
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      PostReview {
-        id
-        rating
-        review
-        postID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
+      phoneNumber
       Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
+      address
+      PostReviews {
+        nextToken
+        startedAt
+        __typename
+      }
+      RealtorReviews {
         nextToken
         startedAt
         __typename
@@ -385,8 +360,6 @@ export const onDeleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userRealtorReviewId
-      userPostReviewId
       __typename
     }
   }

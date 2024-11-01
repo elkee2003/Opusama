@@ -21,12 +21,12 @@ const ProfileContextProvider = ({children}) => {
         setErrorMessage('First Name is Required')
         return false;
       }
-      if(!address){
-        setErrorMessage('Address is required')
-        return false;
-      }
       if(phoneNumber.length < 10){
         setErrorMessage('Kindly fill in Phone Number')
+        return false;
+      }
+      if(!address){
+        setErrorMessage('Address is required')
         return false;
       }
       return true;
