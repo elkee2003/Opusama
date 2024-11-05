@@ -306,6 +306,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "realtorPrice": {
+                    "name": "realtorPrice",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "bookingLat": {
                     "name": "bookingLat",
                     "isArray": false,
@@ -728,11 +735,10 @@ export const schema = {
                 },
                 "availableDocs": {
                     "name": "availableDocs",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "accommodationParts": {
                     "name": "accommodationParts",
@@ -801,14 +807,14 @@ export const schema = {
                 "bed": {
                     "name": "bed",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
                 "bedrooms": {
                     "name": "bedrooms",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -853,14 +859,14 @@ export const schema = {
                     "name": "state",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "city": {
                     "name": "city",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "realtorID": {
@@ -935,5 +941,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "fd72697ce11c842eb5c7e357d256855d"
+    "version": "21b2040a4a6bc5fedd9b9a3318d060c4"
 };

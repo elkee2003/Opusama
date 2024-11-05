@@ -26,6 +26,7 @@ const BookingContextProvider = ({children}) => {
     const [postPrice, setPostPrice] = useState(null);
     const [postTotalPrice, setPostTotalPrice] = useState(null);
     const [overAllPrice, setOverAllPrice] = useState(null);
+    const [realtorPrice, setRealtorPrice] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
 
         const validateInput = () => {
@@ -59,7 +60,7 @@ const BookingContextProvider = ({children}) => {
 
 
   return (
-    <BookingContext.Provider value={{bookings, setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, setGuestPhoneNumber, purpose, setPurpose, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate, duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice}}>
+    <BookingContext.Provider value={{bookings, setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, setGuestPhoneNumber, purpose, setPurpose, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate, duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice}}>
         {children}
     </BookingContext.Provider>
   )

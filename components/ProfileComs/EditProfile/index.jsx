@@ -64,7 +64,9 @@ const EditProfile = () => {
 
       {/* Upload Profile Picture */}
       <View style={styles.profilePicContainer}>
-        {profilePic && <Image source={{ uri: profilePic }} style={styles.img} />}
+        {
+          profilePic && <Image source={{ uri: profilePic }} style={styles.img} />
+        }
         <View style={styles.plusIconContainer}>
           <TouchableOpacity onPress={pickImage}>
             <AntDesign style={styles.plusIcon} name="pluscircle"  />

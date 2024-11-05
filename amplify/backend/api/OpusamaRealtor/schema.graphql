@@ -37,6 +37,7 @@ type Booking @model @auth(rules: [{allow: public}]) {
   accommodationType: String
   nameOfType: String
   totalPrice: Float
+  realtorPrice: Float
   bookingLat: Float
   bookingLng: Float
   status: BookingStatus
@@ -79,7 +80,7 @@ type Post @model @auth(rules: [{allow: public}]) {
   propertyType: String!
   type: String!
   nameOfType: String
-  availableDocs: [String]
+  availableDocs: String
   accommodationParts: String
   media: [String]
   description: String!
@@ -89,14 +90,14 @@ type Post @model @auth(rules: [{allow: public}]) {
   lng: Float
   price: Float!
   totalPrice: Float!
-  bed: Int
-  bedrooms: Int
+  bed: String
+  bedrooms: String
   amenities: String
   policies: String
   country: String!
   PostReviews: [PostReview] @hasMany(indexName: "byPost", fields: ["id"])
-  state: String!
-  city: String!
+  state: String
+  city: String
   realtorID: ID! @index(name: "byRealtor")
 }
  

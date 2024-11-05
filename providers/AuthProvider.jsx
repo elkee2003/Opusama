@@ -31,7 +31,17 @@ const AuthProvider = ({children}) => {
           // DataStore.delete(User, Predicates.ALL)
           // DataStore.clear()
           
-          setDbUser(dbusercurrent[0])
+          // If statement to check dbuser in the database
+          if (dbusercurrent.length === 0) {
+            // If no user data is found in the cloud, clear the local DataStore
+            await DataStore.clear();
+            setDbUser(null); // Set to null so the UI reflects it as blank
+          } else {
+            setDbUser(dbusercurrent[0]);
+          }
+          
+          // I commented this out because it is the same with the else if you look above. It was part of the old code before the if statement, therefore if I remove the if statement, I should uncomment setDbUser(dbusercurrent[0])
+          // setDbUser(dbusercurrent[0])
         }catch(error){
           console.error('Error getting dbuser: ', error)
         }
@@ -50,6 +60,21 @@ const AuthProvider = ({children}) => {
       );
   
       return () => subscription.unsubscribe();
+    }, [dbUser]);
+
+    useEffect(() => {
+      if (!dbUser) return;
+    
+      // Observe for deletion of the Realtor record
+      const deleteSubscription = DataStore.observe(Realtor).subscribe(
+        ({ element, opType }) => {
+          if (opType === 'DELETE' && element.id === dbUser.id) {
+            setDbUser(null); // Clear dbUser when the record is deleted
+          }
+        }
+      );
+    
+      return () => deleteSubscription.unsubscribe();
     }, [dbUser]);
 
     useEffect(()=>{

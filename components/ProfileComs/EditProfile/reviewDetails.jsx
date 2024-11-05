@@ -14,7 +14,7 @@ const ReviewDetails = () => {
 
     const {dbUser, setDbUser, sub} = useAuthContext()
 
-    // Function to create and update courier
+    // Function to create and update user
     const createUser = async () =>{
         try{
             const user = await DataStore.save(new User({

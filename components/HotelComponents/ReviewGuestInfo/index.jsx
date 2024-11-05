@@ -11,13 +11,14 @@ const ReviewGuestInfo = () => {
 
   const {dbUser} = useAuthContext();
 
-  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice} = useBookingContext();
+  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useBookingContext();
   
   setPropertyType(propertyDetails.propertyType);
   setAccommodationType(propertyDetails.type);
   setNameOfType(propertyDetails.nameOfType);
   setBookingLat(propertyDetails.lat);
   setBookingLng(propertyDetails.lng);
+  setRealtorPrice(overAllPrice * 0.85)
 
   const handleBooking = async () =>{
     try{
@@ -38,6 +39,7 @@ const ReviewGuestInfo = () => {
         bookingLat,
         bookingLng,
         totalPrice: parseFloat(overAllPrice),
+        realtorPrice,
         // overAllPrice: parseFloat(overAllPrice),
         userID: dbUser.id,
         bookingRealtorId: realtorContext.id,
@@ -58,6 +60,7 @@ const ReviewGuestInfo = () => {
       setCheckOutDate('')
       setPostTotalPrice('')
       setOverAllPrice('')
+      setRealtorPrice(null)
       setPropertyDetails('')
       setPropertyType('')
       setNameOfType('')

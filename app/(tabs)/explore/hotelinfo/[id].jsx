@@ -2,9 +2,9 @@ import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import DetailedHotelPost from '../../../../components/HotelComponents/DetailedHotelPost';
 import { useLocalSearchParams } from 'expo-router';
-import { useBookingContext } from '../../../../providers/BookingProvider';
+import { useBookingContext } from '@/providers/BookingProvider';
 import { DataStore } from 'aws-amplify/datastore';
-import {Realtor, Post} from '../../../../src/models';
+import {Realtor, Post} from '@/src/models';
 
 const HotelAccommodation = () => {
 

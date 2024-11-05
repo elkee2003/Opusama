@@ -6,7 +6,7 @@ import {useAuthContext} from '@/providers/AuthProvider';
 
 const Profile = () => {
 
-  const {dbUser} = useAuthContext()
+  const {dbUser} = useAuthContext();
 
   return (
     <View style={{flex:1}}>
