@@ -40,7 +40,7 @@ const DetailedPost = ({post, realtor}) => {
 
         {/* ScrollView */}
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/mediafullview/housefullview/${post.id}`} asChild>
+          <Link href={`/gallery/housegallery/${post.id}`} asChild>
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}

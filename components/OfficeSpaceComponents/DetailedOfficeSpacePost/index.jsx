@@ -1,16 +1,13 @@
-import { View, Text, Image ,ScrollView, TouchableOpacity, Pressable} from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Text, Image,ScrollView, TouchableOpacity, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import { Link } from 'expo-router'
-import ReviewHotel from '../ReviewHotel'
+import ReviewProperty from '../ReviewOfficeSpace'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useBookingContext } from '../../../providers/BookingProvider'
 import { router } from 'expo-router'
 
-const DetailedHotelPost = ({post, realtor}) => {
-
-  const {setPostPrice, setPostTotalPrice} = useBookingContext();
+const DetailedOfficeSpacePost = ({post, realtor}) => {
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false)
@@ -20,23 +17,6 @@ const DetailedHotelPost = ({post, realtor}) => {
   const formattedPrice = Number(post.price).toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice).toLocaleString();
 
-  if (!post) {
-    return (
-      <View style={{ top: 50, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Error: No post data available</Text>
-      </View>
-    );
-  }
-
-   // Loading state
-   if (!post || !post.totalPrice) {
-    return (
-      <View style={{ top: 50, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Loading...</Text> {/* Or handle this with a spinner */}
-      </View>
-    );
-  }
-
   const goToAllReviews = ()=>{
     router.push(`/allReviews/${post.id}`)
   }
@@ -45,22 +25,14 @@ const DetailedHotelPost = ({post, realtor}) => {
     router.push(`/writeReview/${post.id}`)
   }
 
-  // funciton to handle rating click
+  // funciton to handle ratin click
   const handleRating = (rating)=>{
     setUserRating(rating)
   }
 
-  const handleNavigate = () => {
-    router.push(`/realtor/hotelrealtor/accommodationguestinfo`);
-  };
-
-  useEffect(() => {
-    setPostTotalPrice(post.totalPrice);
-    setPostPrice(post.price);
-  }, [formattedTotalPrice, realtor.id]); // Run this effect when these values change
-
   return (
       <View style={styles.container}>
+
         {/* Back Button */}
         <TouchableOpacity style={styles.bckContainer} onPress={()=>router.back()}>
           <Ionicons name="arrow-back" style={styles.bckIcon}/>
@@ -68,7 +40,7 @@ const DetailedHotelPost = ({post, realtor}) => {
 
         {/* ScrollView */}
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/gallery/hotelgallery/${post.id}`} asChild>
+          <Link href={`/gallery/officespacegallery/${post.id}`} asChild>
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}
@@ -78,18 +50,14 @@ const DetailedHotelPost = ({post, realtor}) => {
           </Link>
         
           {/* User */}
-          <Link href={`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`} asChild>gallery
+          <Link href={`/realtor/officespaceprofilepage/${realtor.id}`} asChild>
             <Pressable style={styles.user}>
               <Text style={styles.name}>{realtor.firstName}</Text>
             </Pressable>
           </Link>
-
-          {/* Type */}
-          <Text style={styles.bedroom}>{post.type}</Text>
           
           {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>Beds: {post.bed} </Text>
-          <Text style={styles.bedroom}>Bedrooms: {post.bedrooms} </Text>
+          <Text style={styles.bedroom}>{post.bedrooms} Bedroom Apartment</Text>
 
           {/* Location */}
           <Text style={styles.location}>{post.address}</Text>
@@ -103,7 +71,7 @@ const DetailedHotelPost = ({post, realtor}) => {
           {/* Type & Description */}
           <View style={styles.descriptionContainer}>
             <Text style={styles.description}>
-              {readMore || post.description.length <= 150 ? post.description : `${post.description.substring(0, 150)}...`}
+            {readMore || post.description.length <= 150 ? post.description : `${post.description.substring(0, 150)}...`}
 
               {/* Button to toggle */}
               { post.description.length > 150 &&(readMore ?
@@ -118,11 +86,11 @@ const DetailedHotelPost = ({post, realtor}) => {
             </Text>
           </View>
 
-          {/* Price */}
+          {/* Rent */}
           <View style={styles.priceRow}>
-            <Text style={styles.sub}>Price: </Text>
+            <Text style={styles.sub}>Rent: </Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice} / Night
+              ₦{formattedPrice} / year
             </Text>
           </View>
 
@@ -136,15 +104,15 @@ const DetailedHotelPost = ({post, realtor}) => {
 
           {/* Border Line */}
           <View style={styles.borderLine}/>
-          
+
           {/* Amenities */}
           <View>
-            <Text style={styles.luxPolHeadTxt}>Guest Luxuries</Text>
+            <Text style={styles.luxPolHeadTxt}>Living Luxuries</Text>
             <Text style={styles.luxPolTxt}>
               {readMoreLux ||post.amenities.length <= 150 ? post.amenities : `${post.amenities.substring(0, 100)}...`}
-              
+
               {/* Button to toggle */}
-              {  post.amenities.length > 100 &&(readMoreLux ?
+              { post.amenities.length > 100 &&(readMoreLux ?
                 <Text onPress={()=>setReadMoreLux(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
                   {' '}show less
                 </Text>
@@ -162,11 +130,11 @@ const DetailedHotelPost = ({post, realtor}) => {
           {/* Policies */}
           <View>
             <Text style={styles.luxPolHeadTxt}>Stay Policies</Text>
-              <Text style={styles.luxPolTxt}>
-                {readMorePol || post.policies.length <= 100 ? post.policies : `${post.policies.substring(0,100)}...`}
-                
-                {/* Button to toggle */}
-                { post.policies.length > 100 &&(readMorePol ?
+            <Text style={styles.luxPolTxt}>
+              {readMorePol || post.policies.length <= 100 ? post.policies : `${post.policies.substring(0,100)}...`}
+
+              {/* Button to toggle */}
+              { post.policies.length > 100 &&(readMorePol ?
                   <Text onPress={()=>setReadMorePol(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
                     {' '}show less
                   </Text>
@@ -174,13 +142,13 @@ const DetailedHotelPost = ({post, realtor}) => {
                   <Text style={styles.readMoreLess} onPress={()=>setReadMorePol(true)}>
                     {' '}read more
                   </Text>)
-                }
+              }
             </Text>
           </View>
 
           {/* Border Line */}
           <View style={styles.borderLine}/>
-          
+
           {/* Rate */}
           <View style={styles.rateContainer}>
             <Text style={styles.rateTxt}>Rate</Text>
@@ -206,7 +174,7 @@ const DetailedHotelPost = ({post, realtor}) => {
           {/* Border Line */}
           <View style={styles.borderLine}/>
 
-          {/* Rating and Reviews of People */}
+          {/* Ratings and Reviews of People */}
             {
               post. reviews && post.reviews.length > 0 ? (
               <View>
@@ -215,7 +183,7 @@ const DetailedHotelPost = ({post, realtor}) => {
                 </Text>
                 {post.reviews.slice(0,2).map(item=>(
                   <View key={item?.userId}>
-                    <ReviewHotel review={item}/>
+                    <ReviewProperty review={item}/>
                   </View>
                 ))}
               </View>): null
@@ -232,11 +200,11 @@ const DetailedHotelPost = ({post, realtor}) => {
           }
           
         </ScrollView>
-        <TouchableOpacity style={styles.bookContainer} onPress={handleNavigate}>
-            <Text style={styles.bookTxt}>Book</Text>
+        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/officespacerealtorcontact/${realtor.id}`)}>
+            <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
         </TouchableOpacity>
       </View>
   )
 }
 
-export default DetailedHotelPost;
+export default DetailedOfficeSpacePost;
