@@ -66,7 +66,7 @@ const AuthProvider = ({children}) => {
       if (!dbUser) return;
     
       // Observe for deletion of the Realtor record
-      const deleteSubscription = DataStore.observe(Realtor).subscribe(
+      const deleteSubscription = DataStore.observe(User).subscribe(
         ({ element, opType }) => {
           if (opType === 'DELETE' && element.id === dbUser.id) {
             setDbUser(null); // Clear dbUser when the record is deleted

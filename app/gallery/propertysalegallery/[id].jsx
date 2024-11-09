@@ -1,13 +1,12 @@
 import { View, FlatList,} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import PostGallery from '../../../components/HotelComponents/PostGallery'
+import PostGallery from '../../../components/PropertySaleComponents/PostGallery'
 import { useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
 import { Post } from '../../../src/models'
 
-const HotelGallery = () => {
+const PropSaleGallery = () => {
 
   const {id}= useLocalSearchParams()
   const [media, setMedia] = useState(null);
@@ -34,6 +33,7 @@ const HotelGallery = () => {
     <View style={{flex:1, position:'relative' }} >
         <FlatList
         data={media}
+        keyExtractor={(item)=>item.toString()}
         renderItem={({item})=><PostGallery media={item}/>}
         horizontal
         pagingEnabled
@@ -42,4 +42,4 @@ const HotelGallery = () => {
   )
 }
 
-export default HotelGallery;
+export default PropSaleGallery;

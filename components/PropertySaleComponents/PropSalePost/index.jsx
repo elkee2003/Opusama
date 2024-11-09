@@ -5,7 +5,7 @@ import styles from './styles'
 import { MaterialIcons } from '@expo/vector-icons';
 import { getUrl } from 'aws-amplify/storage';
 
-const Post = ({post}) => {
+const PropSalePost = ({post}) => {
 
   const [imageUris, setImageUris] = useState([]);
   const formattedPrice = Number(post.price).toLocaleString();
@@ -44,7 +44,7 @@ const Post = ({post}) => {
 
   return (
       <View style={styles.container}>
-        <Link href={`/explore/houseinfo/${post.id}`} asChild>
+        <Link href={`/explore/propertysaleinfo/${post.id}`} asChild>
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}
@@ -84,4 +84,4 @@ const Post = ({post}) => {
   )
 }
 
-export default Post
+export default PropSalePost;

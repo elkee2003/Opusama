@@ -1,6 +1,6 @@
 import { View, FlatList,} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import OfficeSpaceGalleryCom from '../../../components/OfficeSpaceComponents/SpecificOfficeSpaceMedia'
+import PostGallery from '../../../components/OfficeSpaceComponents/PostGallery'
 import { useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router'
@@ -37,7 +37,7 @@ const OfficeSpaceGallery = () => {
         <FlatList
         data={media}
         keyExtractor={(item)=>item.toString()}
-        renderItem={({item})=><OfficeSpaceGalleryCom photo={item}/>}
+        renderItem={({item})=><PostGallery media={item}/>}
         horizontal
         pagingEnabled
         />

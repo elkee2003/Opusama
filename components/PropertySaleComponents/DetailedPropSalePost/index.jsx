@@ -1,19 +1,19 @@
 import { View, Text, Image,ScrollView, TouchableOpacity, Pressable } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'expo-router'
-import ReviewProperty from '../ReviewProperty'
+import ReviewProperty from '../ReviewPropSale'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { router } from 'expo-router'
+import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
 
-const DetailedPost = ({post, realtor}) => {
+const DetailedPropertySalePost = ({post, realtor}) => {
 
   const [readMore, setReadMore] = useState(false)
-  const [readMoreLux, setReadMoreLux] = useState(false)
-  const [readMorePol, setReadMorePol] = useState(false)
-  const [userRating, setUserRating] = useState(0)
+  const [readMoreLux, setReadMoreLux] = useState(false);
+  const [readMorePol, setReadMorePol] = useState(false);
+  const [userRating, setUserRating] = useState(0);
   const [imageUris, setImageUris] = useState([]);
 
   const formattedPrice = Number(post.price).toLocaleString();
@@ -74,7 +74,7 @@ const DetailedPost = ({post, realtor}) => {
 
         {/* ScrollView */}
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/gallery/housegallery/${post.id}`} asChild>
+          <Link href={`/gallery/propertysalegallery/${post.id}`} asChild>
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}
@@ -84,7 +84,7 @@ const DetailedPost = ({post, realtor}) => {
           </Link>
         
           {/* User */}
-          <Link href={`/realtor/houserealtor/houserealtorprofilepage/${realtor.id}`} asChild>
+          <Link href={`/realtor/houserealtorprofilepage/${realtor.id}`} asChild>
             <Pressable style={styles.user}>
               <Text style={styles.name}>{realtor.firstName}</Text>
             </Pressable>
@@ -234,11 +234,11 @@ const DetailedPost = ({post, realtor}) => {
           }
           
         </ScrollView>
-        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/houserealtor/houserealtorcontact/${realtor.id}`)}>
+        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/houserealtorcontact/${realtor.id}`)}>
             <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
         </TouchableOpacity>
       </View>
   )
 }
 
-export default DetailedPost;
+export default DetailedPropertySalePost;

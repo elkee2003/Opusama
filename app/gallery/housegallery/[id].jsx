@@ -1,6 +1,6 @@
 import { View, FlatList,} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import SpecificPhoto from '../../../components/HouseComponents/SpecificPhoto/index.jsx'
+import PostGallery from '../../../components/HouseComponents/PostGallery/index.jsx'
 import { useLocalSearchParams } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
 import { Post } from '../../../src/models'
@@ -35,7 +35,7 @@ const Gallery = () => {
         <FlatList
         data={media}
         keyExtractor={(item)=>item.toString()}
-        renderItem={({item})=><SpecificPhoto photo={item}/>}
+        renderItem={({item})=><PostGallery media={item}/>}
         horizontal
         pagingEnabled
         />

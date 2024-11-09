@@ -1,6 +1,10 @@
 enum BookingStatus {
   PENDING
+  REQUESTED
   ACCEPTED
+  VIEWING
+  VIEWED
+  SOLD
   CANCELLED
   DENIED
 }

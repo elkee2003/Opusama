@@ -1,21 +1,22 @@
 import { View, Text, Image ,ScrollView, TouchableOpacity, Pressable} from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Link } from 'expo-router'
 import ReviewHotel from '../ReviewHotel'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useBookingContext } from '../../../providers/BookingProvider'
-import { router } from 'expo-router'
+import { useBookingContext } from '../../../providers/BookingProvider';
+import { router } from 'expo-router';
+import { getUrl } from 'aws-amplify/storage';
 
 const DetailedHotelPost = ({post, realtor}) => {
 
   const {setPostPrice, setPostTotalPrice} = useBookingContext();
 
-  const [readMore, setReadMore] = useState(false)
-  const [readMoreLux, setReadMoreLux] = useState(false)
-  const [readMorePol, setReadMorePol] = useState(false)
-  const [userRating, setUserRating] = useState(0)
+  const [readMore, setReadMore] = useState(false);
+  const [readMoreLux, setReadMoreLux] = useState(false);
+  const [readMorePol, setReadMorePol] = useState(false);
+  const [userRating, setUserRating] = useState(0);
+  const [imageUris, setImageUris] = useState([]);
 
   const formattedPrice = Number(post.price).toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice).toLocaleString();
@@ -59,6 +60,38 @@ const DetailedHotelPost = ({post, realtor}) => {
     setPostPrice(post.price);
   }, [formattedTotalPrice, realtor.id]); // Run this effect when these values change
 
+  // Fetch signed URLs for each image in post.media
+  const fetchImageUrls = async () => {
+    try {
+      const urls = await Promise.all(
+        post.media.map(async (path) => {
+          const result = await getUrl({
+            path,
+            options: {
+              validateObjectExistence: true, 
+              expiresIn: null, // No expiration limit
+            },
+          });
+  
+          // Use `result.url` 
+          return result.url.toString(); 
+
+        })
+      );
+  
+      const validUrls = urls.filter(url => url !== null);
+      setImageUris(validUrls);
+    } catch (error) {
+      console.error('Error fetching image URLs:', error);
+    }
+  };
+
+  useEffect(()=>{
+    if (post.media?.length > 0) {
+      fetchImageUrls();
+    }
+  }, [post.media])
+
   return (
       <View style={styles.container}>
         {/* Back Button */}
@@ -68,21 +101,17 @@ const DetailedHotelPost = ({post, realtor}) => {
 
         {/* ScrollView */}
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/gallery/hotelgallery/${post.id}`} asChild>
-            <TouchableOpacity>
-              <View style={styles.imageContainer}>
-                {/* Image */}
-                <Image source={{uri: post.media[0]}} style={styles.image}/>
-              </View>
-            </TouchableOpacity>
-          </Link>
+          <TouchableOpacity onPress={()=>router.push(`/gallery/hotelgallery/${post.id}`)}>
+            <View style={styles.imageContainer}>
+              {/* Image */}
+              <Image source={{uri: imageUris[0]}} style={styles.image}/>
+            </View>
+          </TouchableOpacity>
         
           {/* User */}
-          <Link href={`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`} asChild>gallery
-            <Pressable style={styles.user}>
-              <Text style={styles.name}>{realtor.firstName}</Text>
-            </Pressable>
-          </Link>
+          <Pressable style={styles.user} onPress={()=> router.push(`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`)}>
+            <Text style={styles.name}>{realtor.firstName}</Text>
+          </Pressable>
 
           {/* Type */}
           <Text style={styles.bedroom}>{post.type}</Text>

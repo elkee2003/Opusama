@@ -933,7 +933,11 @@ export const schema = {
             "name": "BookingStatus",
             "values": [
                 "PENDING",
+                "REQUESTED",
                 "ACCEPTED",
+                "VIEWING",
+                "VIEWED",
+                "SOLD",
                 "CANCELLED",
                 "DENIED"
             ]

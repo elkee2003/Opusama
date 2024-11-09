@@ -4,7 +4,11 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@a
 
 export enum BookingStatus {
   PENDING = "PENDING",
+  REQUESTED = "REQUESTED",
   ACCEPTED = "ACCEPTED",
+  VIEWING = "VIEWING",
+  VIEWED = "VIEWED",
+  SOLD = "SOLD",
   CANCELLED = "CANCELLED",
   DENIED = "DENIED"
 }

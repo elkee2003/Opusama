@@ -2,6 +2,7 @@ import React from 'react'
 import type {ParamListBase, TabNavigationState} from '@react-navigation/native';
 import { createMaterialTopTabNavigator, MaterialTopTabNavigationOptions, MaterialTopTabNavigationEventMap } from '@react-navigation/material-top-tabs';
 import { withLayoutContext } from 'expo-router';
+import { Stack } from 'expo-router'
 
 const {Navigator} = createMaterialTopTabNavigator();
 
@@ -9,18 +10,15 @@ export const MaterialTobTabs = withLayoutContext<
 MaterialTopTabNavigationOptions, typeof Navigator, TabNavigationState<ParamListBase>, MaterialTopTabNavigationEventMap
 >(Navigator)
 
-const HomeLayout = () => {
+const PropSaleInfoLayout = () => {
   return (
     <MaterialTobTabs screenOptions={{
-      tabBarLabelStyle:{fontWeight:'bold', textTransform:'capitalize'},
-      tabBarScrollEnabled: true,
+      tabBarLabelStyle:{fontWeight:'bold', textTransform:'capitalize', marginTop:40,}
     }}>
-      <MaterialTobTabs.Screen name='index' options={{title:'Houses'}}/>
-      <MaterialTobTabs.Screen name='hotels' options={{title:'Hotels / Shorlets'}}/>
-      <MaterialTobTabs.Screen name='propertysale' options={{title:'Property Sale'}}/>
-      <MaterialTobTabs.Screen name='officespace' options={{title:'Office Space'}}/>
+      <MaterialTobTabs.Screen name='[id]' options={{title:'House'}}/>
+      <MaterialTobTabs.Screen name='map' options={{title:'Map'}}/>
     </MaterialTobTabs>
   )
 }
 
-export default HomeLayout;
+export default PropSaleInfoLayout;

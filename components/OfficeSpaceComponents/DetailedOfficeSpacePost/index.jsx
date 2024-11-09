@@ -1,18 +1,20 @@
 import { View, Text, Image,ScrollView, TouchableOpacity, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'expo-router'
 import ReviewProperty from '../ReviewOfficeSpace'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { router } from 'expo-router'
+import { router } from 'expo-router';
+import { getUrl } from 'aws-amplify/storage';
 
 const DetailedOfficeSpacePost = ({post, realtor}) => {
 
   const [readMore, setReadMore] = useState(false)
-  const [readMoreLux, setReadMoreLux] = useState(false)
-  const [readMorePol, setReadMorePol] = useState(false)
-  const [userRating, setUserRating] = useState(0)
+  const [readMoreLux, setReadMoreLux] = useState(false);
+  const [readMorePol, setReadMorePol] = useState(false);
+  const [userRating, setUserRating] = useState(0);
+  const [imageUris, setImageUris] = useState([]);
 
   const formattedPrice = Number(post.price).toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice).toLocaleString();
@@ -30,6 +32,38 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
     setUserRating(rating)
   }
 
+  // Fetch signed URLs for each image in post.media
+  const fetchImageUrls = async () => {
+    try {
+      const urls = await Promise.all(
+        post.media.map(async (path) => {
+          const result = await getUrl({
+            path,
+            options: {
+              validateObjectExistence: true, 
+              expiresIn: null, // No expiration limit
+            },
+          });
+  
+          // Use `result.url` 
+          return result.url.toString(); 
+
+        })
+      );
+  
+      const validUrls = urls.filter(url => url !== null);
+      setImageUris(validUrls);
+    } catch (error) {
+      console.error('Error fetching image URLs:', error);
+    }
+  };
+
+  useEffect(()=>{
+    if (post.media?.length > 0) {
+      fetchImageUrls();
+    }
+  }, [post.media])
+
   return (
       <View style={styles.container}>
 
@@ -44,7 +78,7 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}
-                <Image source={{uri: post.media[0]}} style={styles.image}/>
+                <Image source={{uri: imageUris[0]}} style={styles.image}/>
               </View>
             </TouchableOpacity>
           </Link>
