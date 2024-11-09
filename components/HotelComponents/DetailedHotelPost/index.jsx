@@ -1,7 +1,8 @@
-import { View, Text, Image ,ScrollView, TouchableOpacity, Pressable} from 'react-native'
-import React, { useState, useEffect } from 'react'
-import ReviewHotel from '../ReviewHotel'
-import styles from './styles'
+import { View, Text, Image ,ScrollView, TouchableOpacity, Pressable} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import ReviewHotel from '../ReviewHotel';
+import styles from './styles';
+import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useBookingContext } from '../../../providers/BookingProvider';
@@ -104,7 +105,11 @@ const DetailedHotelPost = ({post, realtor}) => {
           <TouchableOpacity onPress={()=>router.push(`/gallery/hotelgallery/${post.id}`)}>
             <View style={styles.imageContainer}>
               {/* Image */}
+              {imageUris[0] ? ( 
               <Image source={{uri: imageUris[0]}} style={styles.image}/>
+              ) : (
+                <Image source={DefaultImage} style={styles.image} />
+              )}
             </View>
           </TouchableOpacity>
         

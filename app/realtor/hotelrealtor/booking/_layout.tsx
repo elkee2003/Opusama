@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { Stack } from 'expo-router'
 
-const DetailsLayout = () => {
+const BookingLayout = () => {
   return (
     <Stack screenOptions={{
         headerShown:false
@@ -10,4 +10,4 @@ const DetailsLayout = () => {
   )
 }
 
-export default DetailsLayout
+export default BookingLayout

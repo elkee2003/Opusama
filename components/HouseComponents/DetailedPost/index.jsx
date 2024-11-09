@@ -1,8 +1,9 @@
-import { View, Text, Image,ScrollView, TouchableOpacity, Pressable } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { Link } from 'expo-router'
-import ReviewProperty from '../ReviewProperty'
-import styles from './styles'
+import { View, Text, Image,ScrollView, TouchableOpacity, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'expo-router';
+import ReviewProperty from '../ReviewProperty';
+import styles from './styles';
+import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router'
@@ -78,7 +79,11 @@ const DetailedPost = ({post, realtor}) => {
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}
-                <Image source={{uri: imageUris[0]}} style={styles.image}/>
+                {imageUris[0] ? ( 
+                  <Image source={{uri: imageUris[0]}} style={styles.image}/>
+                ) : (
+                  <Image source={DefaultImage} style={styles.image} />
+                )}
               </View>
             </TouchableOpacity>
           </Link>
@@ -234,7 +239,7 @@ const DetailedPost = ({post, realtor}) => {
           }
           
         </ScrollView>
-        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/houserealtor/houserealtorcontact/${realtor.id}`)}>
+        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/houserealtor/clientinfo`)}>
             <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
         </TouchableOpacity>
       </View>

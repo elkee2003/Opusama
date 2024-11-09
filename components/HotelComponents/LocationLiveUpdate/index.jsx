@@ -86,7 +86,7 @@ const BookingLiveUpdate = ({post}) => {
           <Ionicons name="arrow-back" style={styles.bckBtnIcon} />
         </Pressable>
         <MapView
-        style={{width, height: height - 120}}
+        style={{width, height: height - 50}}
         ref={mapRef}
         provider={PROVIDER_GOOGLE}
         initialRegion={{
@@ -134,12 +134,12 @@ const BookingLiveUpdate = ({post}) => {
             handleIndicatorStyle={{backgroundColor:'#666768', width:80}}
         >
             <BottomSheetView style={styles.contentContainer}>
-                {courier.profilePic && (
+                {/* {courier.profilePic && (
                     <View style={styles.imageContainer}>
                         <Image source={{ uri:  courier?.profilePic }} style={styles.img} />
                     </View>
                 )}
-                <Text style={styles.courierName}>{courier.firstName}</Text>
+                <Text style={styles.courierName}>{courier.firstName}</Text> */}
             </BottomSheetView>
         </BottomSheet>
     </GestureHandlerRootView>

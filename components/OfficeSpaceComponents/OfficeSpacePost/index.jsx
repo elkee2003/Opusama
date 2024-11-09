@@ -1,7 +1,8 @@
-import { View, Text, Image, SafeAreaView, Pressable } from 'react-native'
-import { Link } from 'expo-router'
-import React, {useState, useEffect} from 'react'
-import styles from './styles'
+import { View, Text, Image, SafeAreaView, Pressable } from 'react-native';
+import { Link } from 'expo-router';
+import React, {useState, useEffect} from 'react';
+import styles from './styles';
+import DefaultImage from '../../../assets/images/defaultImage.png';
 import { MaterialIcons } from '@expo/vector-icons';
 import { getUrl } from 'aws-amplify/storage';
 
@@ -48,7 +49,11 @@ const OfficeSpacePost = ({post}) => {
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}
-              <Image source={{uri: imageUris[0]}} style={styles.image}/>
+              {imageUris[0] ? ( 
+                <Image source={{uri: imageUris[0]}} style={styles.image}/>
+              ) : (
+                <Image source={DefaultImage} style={styles.image} />
+              )}
             </View>
           </Pressable>
         </Link>

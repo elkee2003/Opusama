@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 import styles from './styles'
 import { router } from 'expo-router';
 import {useAuthContext} from '@/providers/AuthProvider';
 import { useBookingContext } from '@/providers/BookingProvider';
 import { DataStore } from 'aws-amplify/datastore';
-import {Booking} from '../../../src/models';
+import {Booking} from '@/src/models';
 
 const ReviewGuestInfo = () => {
 
@@ -13,13 +13,18 @@ const ReviewGuestInfo = () => {
 
   const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useBookingContext();
   
-  setPropertyType(propertyDetails.propertyType);
-  setAccommodationType(propertyDetails.type);
-  setNameOfType(propertyDetails.nameOfType);
-  setBookingLat(propertyDetails.lat);
-  setBookingLng(propertyDetails.lng);
-  setRealtorPrice(overAllPrice * 0.85)
-
+  // Use useEffect to set the initial property details only once on mount
+  useEffect(() => {
+    if (propertyDetails) {
+      setPropertyType(propertyDetails.propertyType);
+      setAccommodationType(propertyDetails.type);
+      setNameOfType(propertyDetails.nameOfType);
+      setBookingLat(propertyDetails.lat);
+      setBookingLng(propertyDetails.lng);
+      setRealtorPrice(overAllPrice * 0.85);
+    }
+  }, [propertyDetails, overAllPrice]);
+  
   const handleBooking = async () =>{
     try{
       const booking = await DataStore.save (new Booking({

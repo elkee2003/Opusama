@@ -1,11 +1,11 @@
 import { View, Text, Image, Pressable } from 'react-native'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styles from './styles'
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
 
-const PostGallery = ({photo}) => {
+const PostGallery = ({media}) => {
 
   const [mediaUri, setMediaUri] = useState();
 

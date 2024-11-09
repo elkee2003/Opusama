@@ -17,6 +17,9 @@
       },
       "api": {
         "OpusamaRealtor": {}
+      },
+      "storage": {
+        "s3opusamastoragef8b382aa": {}
       }
     }
   }

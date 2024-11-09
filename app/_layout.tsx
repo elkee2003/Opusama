@@ -2,6 +2,7 @@ import { Stack } from "expo-router";
 import AuthProvider from "@/providers/AuthProvider";
 import ProfileProvider from '@/providers/ProfileProvider';
 import BookingProvider from "@/providers/BookingProvider";
+import ShowingProvider from "@/providers/ShowingProvider";
 import {
   withAuthenticator,
   useAuthenticator
@@ -16,11 +17,13 @@ const RootLayout = () => {
     <AuthProvider>
       <ProfileProvider>
         <BookingProvider>
-          <Stack screenOptions={{
-            headerShown:false
-          }}>
-            <Stack.Screen name="(tabs)" />
-          </Stack>
+          <ShowingProvider>
+            <Stack screenOptions={{
+              headerShown:false
+            }}>
+              <Stack.Screen name="(tabs)" />
+            </Stack>
+          </ShowingProvider>
         </BookingProvider>
       </ProfileProvider>
     </AuthProvider>

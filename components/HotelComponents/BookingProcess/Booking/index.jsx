@@ -1,10 +1,10 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import DateTimePicker from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 import styles from './styles';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useBookingContext } from '../../../providers/BookingProvider';
+import { useBookingContext } from '../../../../providers/BookingProvider';
 import { router } from 'expo-router';
 
 const Booking = ({ postPrice }) => {
@@ -44,6 +44,20 @@ const Booking = ({ postPrice }) => {
       setOverAllPrice(totalPrice)
     }
   }, [totalPrice])
+
+  const checkDatesSelected = () => {
+    if (!range.startDate || !range.endDate) {
+      Alert.alert('Error', 'Please select both check-in and check-out dates.');
+      return false;
+    }
+    return true;
+  };
+
+  const handleProceed = () => {
+    if (checkDatesSelected()) {
+      router.push(`/realtor/hotelrealtor/reviewinfo`);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -94,7 +108,7 @@ const Booking = ({ postPrice }) => {
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={styles.nxtBtn} onPress={() => router.push(`/realtor/hotelrealtor/reviewinfo`)}>
+      <TouchableOpacity style={styles.nxtBtn} onPress={handleProceed}>
         <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
       </TouchableOpacity>
     </View>

@@ -12,8 +12,9 @@ const GuestDetails = () => {
     const {adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, errorMessage, onValidateInput,} = useBookingContext();
 
     const handleProceedToBooking = () => {
-            router.push(`/realtor/hotelrealtor/booking`); // Navigate to the profile screen upon successful validation
-        
+        if(onValidateInput()){
+            router.push(`/realtor/hotelrealtor/booking`); 
+        }
     };
 
   return (
@@ -130,9 +131,9 @@ const GuestDetails = () => {
                     placeholder='Purpose of stay(Optional)'
                 />
             </View>
-            {/* Error Message */}
-            <Text style={styles.error}>{errorMessage}</Text>
         </ScrollView>
+        {/* Error Message */}
+        <Text style={styles.error}>{errorMessage}</Text>
         <TouchableOpacity style={styles.nxtBtn} onPress={handleProceedToBooking}>
             <MaterialIcons name="navigate-next" style={styles.nxtIcon}/>
         </TouchableOpacity>

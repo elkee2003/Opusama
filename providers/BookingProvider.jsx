@@ -31,6 +31,11 @@ const BookingContextProvider = ({children}) => {
 
         const validateInput = () => {
             setErrorMessage(''); // Clear previous errors
+
+            if (adults === 0 && kids === 0 && infants === 0) {
+                setErrorMessage('Please add the number of guests');
+                return false;
+            }
         
             if (!guestFirstName) {
                 setErrorMessage('First Name is Required');

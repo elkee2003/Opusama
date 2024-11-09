@@ -59,9 +59,12 @@ const styles = StyleSheet.create({
         borderRadius:20,
         padding:10,
     },
-    errorText: {
-        color: 'red',
-        marginBottom: 10,
+    error:{
+        color:'#d80b0b',
+        fontSize:13,
+        marginTop:5,
+        marginHorizontal:15,
+        marginBottom:5,
     },
     nxtBtn:{
         backgroundColor:'#23a508',

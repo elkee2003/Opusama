@@ -1,4 +1,4 @@
-import { StyleSheet,} from 'react-native'
+import { StyleSheet, } from 'react-native'
 
 const styles = StyleSheet.create({
     container:{
@@ -11,46 +11,50 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         textAlign:'center'
     },
-    guestUnit:{
-        flexDirection:'row',
-        justifyContent:'space-between'
-    },
-    unitTxt:{
-        textAlign:'center',
-        borderRadius:20,
+    card:{
         padding:10,
-        color:'white',
-        backgroundColor:'#272727',
+        marginBottom:15,
+        backgroundColor:'#e2e2e2',
+        borderRadius:20,
     },
     txtInputHeader:{
         fontSize:18,
         fontWeight:'bold',
-        marginTop:10,
+        marginTop:20,
     },
     txtInput:{
         fontSize:16,
         borderWidth:1,
         borderRadius:20,
         padding:10,
-        color:'white',
-        backgroundColor:'#08021f',
-        marginBottom:10,
     },
-    paymentBtn:{
-        backgroundColor:'#23a508',
+    txtInputNote:{
+        fontSize:16,
+        borderWidth:1,
+        borderRadius:20,
+        padding:25,
+    },
+    error:{
+        color:'#d80b0b',
+        fontSize:13,
+        marginTop:5,
+        marginHorizontal:15,
+        marginBottom:5,
+    },
+    nxtBtn:{
+        backgroundColor:'#060220',
         justifyContent:'center',
         alignItems:'center',
-        padding:5,
-        marginHorizontal:40,
+        padding:2,
+        marginHorizontal:80,
         marginVertical:20,
         borderRadius:20,
     },
-    paymentTxt:{
-        fontSize:25,
+    nxtIcon:{
+        fontSize:50,
         fontWeight:'bold',
         color:'white'
     }
-
 })
 
-export default styles
+export default styles;

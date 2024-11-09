@@ -1,0 +1,72 @@
+import { StyleSheet, } from 'react-native'
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        marginTop:40,
+        marginHorizontal:10,
+    },
+    header:{
+        fontSize:30,
+        fontWeight:'bold',
+        textAlign:'center'
+    },
+    card:{
+        padding:10,
+        marginBottom:15,
+        backgroundColor:'#e2e2e2',
+        borderRadius:20,
+    },
+    txtInputHeader:{
+        fontSize:18,
+        fontWeight:'bold',
+        marginTop:20,
+    },
+    txtInput:{
+        fontSize:16,
+        borderWidth:1,
+        borderRadius:20,
+        padding:10,
+    },
+    txtInput:{
+        fontSize:16,
+        borderWidth:1,
+        borderRadius:20,
+        padding:10,
+        color:'white',
+        backgroundColor:'#08021f',
+        marginBottom:10,
+    },
+    txtInputNote:{
+        fontSize:16,
+        borderWidth:1,
+        borderRadius:20,
+        padding:25,
+        color:'white',
+        backgroundColor:'#08021f',
+        marginBottom:10,
+    },
+    error:{
+        color:'#d80b0b',
+        fontSize:13,
+        marginTop:5,
+        marginHorizontal:15,
+        marginBottom:5,
+    },
+    nxtBtn:{
+        backgroundColor:'#060220',
+        justifyContent:'center',
+        alignItems:'center',
+        padding:2,
+        marginHorizontal:80,
+        marginVertical:20,
+        borderRadius:20,
+    },
+    nxtIcon:{
+        fontSize:50,
+        fontWeight:'bold',
+        color:'white'
+    }
+})
+
+export default styles;
