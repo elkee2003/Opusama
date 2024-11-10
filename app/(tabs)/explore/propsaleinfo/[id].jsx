@@ -4,9 +4,11 @@ import DetailedPropSalePost from '../../../../components/PropertySaleComponents/
 import { DataStore } from 'aws-amplify/datastore';
 import { Post, Realtor } from '../../../../src/models';
 import { useLocalSearchParams } from 'expo-router';
+import { useShowingContext } from '@/providers/ShowingProvider';
 
 const PropSaleInfo = () => {
   const { id } = useLocalSearchParams();
+  const {setRealtorContext, setPropertyDetails} = useShowingContext();
   const [post, setPost] = useState(null);
   const [realtor, setRealtor] = useState(null);  
   const [loading, setLoading] = useState(true);
@@ -36,6 +38,11 @@ const PropSaleInfo = () => {
   useEffect(() => {
     fetchPost();
   }, [id]);
+
+  useEffect(()=>{
+    setRealtorContext(realtor)
+    setPropertyDetails(post)
+  }, [realtor, post])
 
   if (loading) {
     return (

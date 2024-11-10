@@ -45,7 +45,7 @@ const OfficeSpacePost = ({post}) => {
 
   return (
       <View style={styles.container}>
-        <Link href={`/explore/houseinfo/${post.id}`} asChild>
+        <Link href={`/explore/officespaceinfo/${post.id}`} asChild>
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}
@@ -59,7 +59,7 @@ const OfficeSpacePost = ({post}) => {
         </Link>
 
         {/* Username */}
-        <Link href={`/realtor/houserealtorprofilepage/${post.realtorId}`} asChild>
+        <Link href={`/realtor/officespacerealtor/officespacerealtorprofilepage/${post.realtorId}`} asChild>
           <Pressable style={styles.contact}>
             <Text style={styles.name}>{post.firstName}</Text>
           </Pressable>

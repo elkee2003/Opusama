@@ -63,7 +63,7 @@ const PostList = () => {
             p.realtorID.eq(realtor.id),
             p.available.eq(true)
           ]));
-          const filteredPosts = posts.filter((post) => post.propertyType === 'Store');
+          const filteredPosts = posts.filter((post) => post.propertyType === 'Office Space');
 
           // Map the realtor details to each post
           return filteredPosts.map((post) => ({
@@ -134,4 +134,4 @@ const PostList = () => {
   )
 }
 
-export default PostList
+export default PostList;

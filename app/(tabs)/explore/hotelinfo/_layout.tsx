@@ -15,7 +15,7 @@ const HotelInfoLayout = () => {
     <MaterialTobTabs screenOptions={{
       tabBarLabelStyle:{fontWeight:'bold', textTransform:'capitalize', marginTop:40,}
     }}>
-      <MaterialTobTabs.Screen name='[id]' options={{title:'Hotel'}}/>
+      <MaterialTobTabs.Screen name='[id]' options={{title:'Hotel / Shortlet'}}/>
       <MaterialTobTabs.Screen name='map' options={{title:'Map'}}/>
     </MaterialTobTabs>
   )

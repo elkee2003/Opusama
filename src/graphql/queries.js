@@ -256,9 +256,9 @@ export const getBooking = /* GraphQL */ `
       adults
       kids
       infants
-      guestFirstName
-      guestLastName
-      guestPhoneNumber
+      clientFirstName
+      clientLastName
+      clientPhoneNumber
       purpose
       duration
       checkInDate
@@ -315,9 +315,9 @@ export const listBookings = /* GraphQL */ `
         adults
         kids
         infants
-        guestFirstName
-        guestLastName
-        guestPhoneNumber
+        clientFirstName
+        clientLastName
+        clientPhoneNumber
         purpose
         duration
         checkInDate
@@ -363,9 +363,9 @@ export const syncBookings = /* GraphQL */ `
         adults
         kids
         infants
-        guestFirstName
-        guestLastName
-        guestPhoneNumber
+        clientFirstName
+        clientLastName
+        clientPhoneNumber
         purpose
         duration
         checkInDate
@@ -413,9 +413,9 @@ export const bookingsByUserID = /* GraphQL */ `
         adults
         kids
         infants
-        guestFirstName
-        guestLastName
-        guestPhoneNumber
+        clientFirstName
+        clientLastName
+        clientPhoneNumber
         purpose
         duration
         checkInDate

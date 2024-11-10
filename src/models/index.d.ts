@@ -4,7 +4,6 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@a
 
 export enum BookingStatus {
   PENDING = "PENDING",
-  REQUESTED = "REQUESTED",
   ACCEPTED = "ACCEPTED",
   VIEWING = "VIEWING",
   VIEWED = "VIEWED",
@@ -90,9 +89,9 @@ type EagerBooking = {
   readonly adults?: string | null;
   readonly kids?: string | null;
   readonly infants?: string | null;
-  readonly guestFirstName?: string | null;
-  readonly guestLastName?: string | null;
-  readonly guestPhoneNumber?: string | null;
+  readonly clientFirstName?: string | null;
+  readonly clientLastName?: string | null;
+  readonly clientPhoneNumber?: string | null;
   readonly purpose?: string | null;
   readonly duration?: string | null;
   readonly checkInDate?: string | null;
@@ -121,9 +120,9 @@ type LazyBooking = {
   readonly adults?: string | null;
   readonly kids?: string | null;
   readonly infants?: string | null;
-  readonly guestFirstName?: string | null;
-  readonly guestLastName?: string | null;
-  readonly guestPhoneNumber?: string | null;
+  readonly clientFirstName?: string | null;
+  readonly clientLastName?: string | null;
+  readonly clientPhoneNumber?: string | null;
   readonly purpose?: string | null;
   readonly duration?: string | null;
   readonly checkInDate?: string | null;

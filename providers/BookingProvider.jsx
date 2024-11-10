@@ -17,8 +17,8 @@ const BookingContextProvider = ({children}) => {
     const [nameOfType, setNameOfType] = useState('');
     const [accommodationType, setAccommodationType] = useState('');
     const [purpose, setPurpose] = useState('');
-    const [bookingLat, setBookingLat] = useState(null);
-    const [bookingLng, setBookingLng] = useState(null);
+    const [bookingLat, setBookingLat] = useState(0);
+    const [bookingLng, setBookingLng] = useState(0);
     const [realtorContext, setRealtorContext] = useState(null);
     const [duration, setDuration] = useState('');
     const [checkInDate, setCheckInDate] = useState('')

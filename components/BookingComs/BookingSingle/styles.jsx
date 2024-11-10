@@ -40,19 +40,19 @@ const styles = StyleSheet.create({
         borderRadius:5,
         backgroundColor:'#eb1e03',
     },
-    // deleteButtonCon:{
-    //     padding:10,
-    //     marginTop:10,
-    //     alignSelf:'center',
-    //     alignItems:'center',
-    //     justifyContent:'center',
-    //     borderRadius:15,
-    //     backgroundColor:'#f31d1d',
-    // },
-    // deleteButtonTxt:{
-    //     fontSize:15,
-    //     fontWeight:'bold',
-    // },
+    deleteButtonCon:{
+        padding:10,
+        marginTop:10,
+        alignSelf:'center',
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:15,
+        backgroundColor:'#f31d1d',
+    },
+    deleteButtonTxt:{
+        fontSize:15,
+        fontWeight:'bold',
+    },
     // cancelButtonCon:{
     //     padding:10,
     //     marginTop:10,

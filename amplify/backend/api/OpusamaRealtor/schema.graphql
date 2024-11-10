@@ -1,6 +1,5 @@
 enum BookingStatus {
   PENDING
-  REQUESTED
   ACCEPTED
   VIEWING
   VIEWED
@@ -29,9 +28,9 @@ type Booking @model @auth(rules: [{allow: public}]) {
   adults: String
   kids: String
   infants: String
-  guestFirstName: String
-  guestLastName: String
-  guestPhoneNumber: String
+  clientFirstName: String
+  clientLastName: String
+  clientPhoneNumber: String
   purpose: String
   duration: String
   checkInDate: String

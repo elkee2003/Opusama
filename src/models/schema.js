@@ -211,22 +211,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "guestFirstName": {
-                    "name": "guestFirstName",
+                "clientFirstName": {
+                    "name": "clientFirstName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "guestLastName": {
-                    "name": "guestLastName",
+                "clientLastName": {
+                    "name": "clientLastName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "guestPhoneNumber": {
-                    "name": "guestPhoneNumber",
+                "clientPhoneNumber": {
+                    "name": "clientPhoneNumber",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -933,7 +933,6 @@ export const schema = {
             "name": "BookingStatus",
             "values": [
                 "PENDING",
-                "REQUESTED",
                 "ACCEPTED",
                 "VIEWING",
                 "VIEWED",
@@ -945,5 +944,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "21b2040a4a6bc5fedd9b9a3318d060c4"
+    "version": "c4857a88e6b832570c79ef344b6815ba"
 };

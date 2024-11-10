@@ -60,7 +60,7 @@ const PropSalePost = ({post}) => {
         </Link>
 
         {/* Username */}
-        <Link href={`/realtor/houserealtorprofilepage/${post.realtorId}`} asChild>
+        <Link href={`/realtor/propertysalerealtor/propertysalerealtorprofilepage/${post.realtorId}`} asChild>
           <Pressable style={styles.contact}>
             <Text style={styles.name}>{post.firstName}</Text>
           </Pressable>

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles'
 import { router } from 'expo-router';
@@ -9,7 +9,55 @@ import {Booking} from '@/src/models';
 
 const ReviewShowingInfo = () => {
 
-    const {setBookings, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, propertyType, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, realtorContext, setRealtorContext, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useShowingContext()
+    const {dbUser} = useAuthContext();
+
+    const {setShowing, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, propertyType, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, realtorContext, setRealtorContext} = useShowingContext()
+
+    const [loading, setLoading] = useState(false);
+
+    const resetFormFields = () => {
+      setClientFirstName('') 
+      setClientLastName('') 
+      setClientPhoneNumber('') 
+      setNote('')
+      setPropertyDetails(null) 
+      setPropertyType({})  
+      setAccommodationType({}) 
+      setBookingLat(null) 
+      setBookingLng(null) 
+      setRealtorContext('') 
+    }
+
+    const handleGetInTouch = async () =>{
+      if(loading) return;
+      setLoading(true)
+      try{
+        const getInTouch = await DataStore.save(new Booking({
+          clientFirstName,
+          clientLastName,
+          clientPhoneNumber,
+          purpose: note,
+          propertyType,
+          accommodationType,
+          bookingLat,
+          bookingLng,
+          userID: dbUser.id,
+          bookingRealtorId: realtorContext.id,
+          status:'PENDING'
+        }))
+        setShowing(getInTouch);
+        Alert.alert('Successful', "Booking was a success");
+  
+        resetFormFields();
+  
+        router.push('/home')
+  
+      }catch(e){
+        Alert.alert('Error', e.message);
+      }finally{
+        setLoading(false);
+      }
+    };
 
     useEffect(() => {
     if (propertyDetails) {
@@ -19,7 +67,9 @@ const ReviewShowingInfo = () => {
       setBookingLng(propertyDetails.lng);
     //   setRealtorPrice(overAllPrice * 0.85);
     }
-  }, [propertyDetails, overAllPrice]);
+  }, [propertyDetails]);
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Review Showing Info</Text>
@@ -35,7 +85,23 @@ const ReviewShowingInfo = () => {
 
             <Text style={styles.txtInputHeader}>Short Note:</Text>
             <Text style={styles.txtInputNote}>{note}</Text>
+
+            <Text style={styles.txtInputHeader}>Property Type:</Text>
+            <Text style={styles.txtInput}>{propertyDetails?.propertyType}</Text>
+
+
+            <Text style={styles.txtInputHeader}>Accommodation Type:</Text>
+            <Text style={styles.txtInput}>{propertyDetails?.type}</Text>
         </ScrollView>
+
+        {/* Button */}
+        <TouchableOpacity 
+          style={styles.getInTouchBtn} 
+          onPress={handleGetInTouch}
+          disabled={loading}
+        >
+          <Text style={styles.getInTouchTxt}>Get In Touch</Text>
+        </TouchableOpacity>
     </View>
   )
 }

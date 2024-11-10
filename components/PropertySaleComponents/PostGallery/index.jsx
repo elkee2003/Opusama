@@ -1,6 +1,7 @@
-import { View, Text, Image, Pressable } from 'react-native'
-import React, {useState, useEffect}from 'react'
-import styles from './styles'
+import { View, Text, Image, Pressable } from 'react-native';
+import React, {useState, useEffect}from 'react';
+import styles from './styles';
+import DefaultImage from '../../../assets/images/defaultImage.png';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
@@ -38,7 +39,9 @@ const PostGallery = ({media}) => {
       <Pressable onPress={()=>router.back()} style={styles.backIconContainer}>
         <Ionicons style={styles.backIcon} name="arrow-back-sharp" size={24} color="black" />
       </Pressable>
-      <Image source={{uri: mediaUri}} style={styles.image}/>
+      {mediaUri && (
+        <Image source={{uri: mediaUri}} style={styles.image}/>
+      )}
     </View>
   )
 }

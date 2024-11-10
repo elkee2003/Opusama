@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from './styles'
 import { router } from 'expo-router';
 import {useAuthContext} from '@/providers/AuthProvider';
@@ -12,6 +12,8 @@ const ReviewGuestInfo = () => {
   const {dbUser} = useAuthContext();
 
   const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useBookingContext();
+
+  const [loading, setLoading] = useState(false);
   
   // Use useEffect to set the initial property details only once on mount
   useEffect(() => {
@@ -26,14 +28,17 @@ const ReviewGuestInfo = () => {
   }, [propertyDetails, overAllPrice]);
   
   const handleBooking = async () =>{
+    if(loading) return;
+    setLoading(true);
+
     try{
       const booking = await DataStore.save (new Booking({
         adults: String(adults),
         kids: String(kids),
         infants: String(infants),
-        guestFirstName,
-        guestLastName,
-        guestPhoneNumber,
+        clientFirstName: guestFirstName,
+        clientLastName: guestLastName,
+        clientPhoneNumber: guestPhoneNumber,
         purpose,
         duration: String(duration),
         checkInDate: String(checkInDate),
@@ -51,7 +56,7 @@ const ReviewGuestInfo = () => {
         status:'PENDING'
       }))
       setBookings(booking);
-      Alert.alert('Successful', "Booking was a success")
+      Alert.alert('Successful', "Booking was a success");
 
       setAdults('')
       setKids('')
@@ -76,6 +81,8 @@ const ReviewGuestInfo = () => {
       router.push('/home/hotels')
     }catch(e){
       Alert.alert('Error', e.message)
+    }finally{
+      setLoading(false);
     }
   }
 
@@ -134,6 +141,7 @@ const ReviewGuestInfo = () => {
         <TouchableOpacity 
           style={styles.paymentBtn} 
           onPress={handleBooking}
+          disabled={loading}
           // onPress={()=>router.push(`/realtor/hotelrealtor/payment`)}
         >
           <Text style={styles.paymentTxt}>Book</Text>

@@ -128,7 +128,7 @@ const PropSalePostList = () => {
             renderItem={({item})=> <PropSalePostFeed post={item}/>}
         />
         :
-        <Text style={styles.noListings}>No Land listings</Text>
+        <Text style={styles.noListings}>No Property Sale listings</Text>
       }
     </View>
   )

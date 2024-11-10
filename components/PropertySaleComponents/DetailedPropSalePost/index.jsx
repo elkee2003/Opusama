@@ -89,7 +89,7 @@ const DetailedPropertySalePost = ({post, realtor}) => {
           </Link>
         
           {/* User */}
-          <Link href={`/realtor/houserealtorprofilepage/${realtor.id}`} asChild>
+          <Link href={`/realtor/propertysalerealtor/propertysalerealtorprofilepage/${realtor.id}`} asChild>
             <Pressable style={styles.user}>
               <Text style={styles.name}>{realtor.firstName}</Text>
             </Pressable>
@@ -239,7 +239,7 @@ const DetailedPropertySalePost = ({post, realtor}) => {
           }
           
         </ScrollView>
-        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/houserealtorcontact/${realtor.id}`)}>
+        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/propertysalerealtor/clientinfo`)}>
             <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
         </TouchableOpacity>
       </View>

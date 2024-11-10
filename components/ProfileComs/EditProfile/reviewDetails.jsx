@@ -87,10 +87,18 @@ const ReviewDetails = () => {
     const handleSave = async () => {
         if(dbUser){
             await updateUser()
-            router.push('/home')
+            router.push('/profile');
+
+            setTimeout(() => {
+                router.push('/home');
+            }, 1000);
         }else {
             await createUser ()
-            router.push('/home')
+            router.push('/profile');
+
+            setTimeout(() => {
+                router.push('/home');
+            }, 1000);
         }
     }
 

@@ -5,7 +5,7 @@ const ShowingContext = createContext({})
 
 const ShowingContextProvider = ({children}) => {
 
-    const [bookings, setBookings] = useState('');
+    const [showing, setShowing] = useState('');
     const [clientFirstName, setClientFirstName] = useState('');
     const [clientLastName, setClientLastName] = useState('');
     const [clientPhoneNumber, setClientPhoneNumber]= useState('');
@@ -13,8 +13,8 @@ const ShowingContextProvider = ({children}) => {
     const [propertyDetails, setPropertyDetails] = useState('')
     const [propertyType, setPropertyType] = useState('');
     const [accommodationType, setAccommodationType] = useState('');
-    const [bookingLat, setBookingLat] = useState(null);
-    const [bookingLng, setBookingLng] = useState(null);
+    const [bookingLat, setBookingLat] = useState(0);
+    const [bookingLng, setBookingLng] = useState(0);
     const [realtorContext, setRealtorContext] = useState(null);
     const [postPrice, setPostPrice] = useState(null);
     const [postTotalPrice, setPostTotalPrice] = useState(null);
@@ -53,7 +53,7 @@ const ShowingContextProvider = ({children}) => {
 
 
   return (
-    <ShowingContext.Provider value={{bookings, setBookings, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, propertyType, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice}}>
+    <ShowingContext.Provider value={{showing, setShowing, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, propertyType, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice}}>
         {children}
     </ShowingContext.Provider>
   )

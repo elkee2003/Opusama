@@ -15,7 +15,7 @@ const PropSaleInfoLayout = () => {
     <MaterialTobTabs screenOptions={{
       tabBarLabelStyle:{fontWeight:'bold', textTransform:'capitalize', marginTop:40,}
     }}>
-      <MaterialTobTabs.Screen name='[id]' options={{title:'House'}}/>
+      <MaterialTobTabs.Screen name='[id]' options={{title:'Property'}}/>
       <MaterialTobTabs.Screen name='map' options={{title:'Map'}}/>
     </MaterialTobTabs>
   )

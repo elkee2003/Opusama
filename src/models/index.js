@@ -4,7 +4,6 @@ import { schema } from './schema';
 
 const BookingStatus = {
   "PENDING": "PENDING",
-  "REQUESTED": "REQUESTED",
   "ACCEPTED": "ACCEPTED",
   "VIEWING": "VIEWING",
   "VIEWED": "VIEWED",
