@@ -122,13 +122,13 @@ const ReviewDetails = () => {
             }
 
             <Text style={styles.subHeader}>First Name:</Text>
-            <Text style={styles.inputReview}>{firstName}</Text>
+            <Text style={styles.inputReview}>{firstName?.trim()}</Text>
 
             <Text style={styles.subHeader}>Last Name:</Text>
-            <Text style={styles.inputReview}>{lastName}</Text>
+            <Text style={styles.inputReview}>{lastName?.trim()}</Text>
 
             <Text style={styles.subHeader}>Address:</Text>
-            <Text style={styles.inputReview}>{address}</Text>
+            <Text style={styles.inputReview}>{address?.trim()}</Text>
 
             <Text style={styles.subHeader}>Phone Number:</Text>
             <Text style={styles.inputReviewLast}>{phoneNumber}</Text>

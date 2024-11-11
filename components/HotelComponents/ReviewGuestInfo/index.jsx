@@ -116,16 +116,16 @@ const ReviewGuestInfo = () => {
           </View>
 
           <Text style={styles.txtInputHeader}>First Name(s):</Text>
-          <Text style={styles.txtInput}>{guestFirstName}</Text>
+          <Text style={styles.txtInput}>{guestFirstName?.trim()}</Text>
 
           <Text style={styles.txtInputHeader}>Last Name(s):</Text>
-          <Text style={styles.txtInput}>{guestLastName}</Text>
+          <Text style={styles.txtInput}>{guestLastName?.trim()}</Text>
 
           <Text style={styles.txtInputHeader}>Phone Number(s):</Text>
           <Text style={styles.txtInput}>{guestPhoneNumber}</Text>
 
           <Text style={styles.txtInputHeader}>Purpose of stay:</Text>
-          <Text style={styles.txtInput}>{purpose}</Text>
+          <Text style={styles.txtInput}>{purpose?.trim()}</Text>
 
           <Text style={styles.txtInputHeader}>Sub Total:</Text>
           <Text style={styles.txtInput}>₦{postTotalPrice.toLocaleString()}</Text>

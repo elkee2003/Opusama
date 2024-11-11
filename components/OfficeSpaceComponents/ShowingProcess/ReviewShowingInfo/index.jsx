@@ -66,16 +66,16 @@ const ReviewShowingInfo = () => {
       <Text style={styles.header}>Review Showing Info</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.txtInputHeader}>First Name:</Text>
-            <Text style={styles.txtInput}>{clientFirstName}</Text>
+            <Text style={styles.txtInput}>{clientFirstName?.trim()}</Text>
 
             <Text style={styles.txtInputHeader}>Last Name:</Text>
-            <Text style={styles.txtInput}>{clientLastName}</Text>
+            <Text style={styles.txtInput}>{clientLastName?.trim()}</Text>
 
             <Text style={styles.txtInputHeader}>Phone Number:</Text>
             <Text style={styles.txtInput}>{clientPhoneNumber}</Text>
 
             <Text style={styles.txtInputHeader}>Short Note:</Text>
-            <Text style={styles.txtInputNote}>{note}</Text>
+            <Text style={styles.txtInputNote}>{note?.trim()}</Text>
 
             <Text style={styles.txtInputHeader}>Property Type:</Text>
             <Text style={styles.txtInput}>{propertyDetails?.propertyType}</Text>

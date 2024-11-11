@@ -127,7 +127,7 @@ const DetailedStudentAccPost = ({post, realtor}) => {
 
           {/* Rent */}
           <View style={styles.priceRow}>
-            <Text style={styles.sub}>Rent: </Text>
+            <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
               ₦{formattedPrice} / year
             </Text>
@@ -135,7 +135,7 @@ const DetailedStudentAccPost = ({post, realtor}) => {
 
           {/* Total Price */}
           <View style={styles.priceRowTotal}>
-            <Text style={styles.sub}>Total:</Text>
+            <Text style={styles.sub}>Total Price:</Text>
             <Text style={styles.totalPrice}>
               {''}₦{formattedTotalPrice}
             </Text>

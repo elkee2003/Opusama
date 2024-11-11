@@ -16,7 +16,7 @@ const HomeLayout = () => {
       tabBarScrollEnabled: true,
     }}>
       <MaterialTobTabs.Screen name='index' options={{title:'Houses'}}/>
-      <MaterialTobTabs.Screen name='hotels' options={{title:'Hotels / Shorlets'}}/>
+      <MaterialTobTabs.Screen name='hotels' options={{title:'Hotels / Shortlets'}}/>
       <MaterialTobTabs.Screen name='studentaccommodation' options={{title:'Student Accommodation'}}/>
       <MaterialTobTabs.Screen name='propertysale' options={{title:'Property Sale'}}/>
       <MaterialTobTabs.Screen name='officespace' options={{title:'Office Space'}}/>

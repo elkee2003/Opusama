@@ -36,6 +36,21 @@ const BookingList = () => {
         }
     }
 
+    const updateBookingStatus = async (bookingId, newStatus) => {
+      try {
+        const bookingToUpdate = await DataStore.query(Booking, bookingId);
+        if (bookingToUpdate) {
+          await DataStore.save(
+            Booking.copyOf(bookingToUpdate, updated => {
+              updated.status = newStatus;
+            })
+          );
+        }
+      } catch (e) {
+        console.error('Error updating booking status:', e);
+      }
+    };
+
     // Delete Booking
     const deleteBooking = async (bookingId) =>{
       try {
@@ -79,6 +94,7 @@ const BookingList = () => {
                 <BookingSingle
                     booking={item}
                     onDelete={()=>deleteBooking(item.id)}
+                    onUpdateStatus={updateBookingStatus} 
                 />
             )}
         />

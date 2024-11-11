@@ -4,18 +4,41 @@ import styles from './styles';
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
 
-const BookingSingle = ({booking, onDelete}) => {
+const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
+
+  // Handle Viewing button click
+  const handleViewingClick = () => {
+    onUpdateStatus(booking.id, 'VIEWING');
+  };
+
+  // Handle Viewed button click
+  const handleViewedClick = () => {
+    onUpdateStatus(booking.id, 'VIEWED');
+  };
 
   const handleCopyPhoneNumber = async () => {
-    if (booking.realtor.phoneNumber) {
-      await Clipboard.setStringAsync(booking.phoneNumber);
-      Alert.alert('Phone Number Copied', 'You can paste it into the dialer to make a call.');
+    const phoneNumber = booking?.realtor?.phoneNumber;
+    
+    if (phoneNumber) {
+      try {
+        await Clipboard.setStringAsync(phoneNumber);
+        Alert.alert('Phone Number Copied', 'You can paste it into the dialer to make a call.');
+      } catch (error) {
+        console.error("Error copying phone number:", error);
+        Alert.alert('Error', 'Failed to copy the phone number.');
+      }
+    } else {
+      Alert.alert('Error', 'Phone number is not available.');
     }
   };
 
   const getStatusText = (status) => {
     if (status === 'PENDING') return 'Pending';
     if (status === 'ACCEPTED') return 'Accepted';
+    if (status === 'VIEWING') return 'Viewing';
+    if (status === 'VIEWED') return 'Viewed';
+    if(status === 'SOLD') return 'Sold';
+    if(status === 'CANCELLED') return 'Cancelled';
     if (status === 'DENIED') return 'Denied';
     return 'Pending';
   };
@@ -68,28 +91,70 @@ const BookingSingle = ({booking, onDelete}) => {
 
         <Text style={styles.subHeading}>Status:</Text>
         <View style={styles.statusRow}>
-          <Text style={styles.detail}>{getStatusText(booking.status)}</Text>
-          {(booking.status === 'ACCEPTED') ? (
+          <Text style={styles.detail}>
+            {getStatusText(booking.status)}
+          </Text>
+          {(booking.status === 'ACCEPTED' || booking.status === 'VIEWING' || booking.status === 'VIEWED') ? (
               <View style={styles.greenIcon}/>
             ):(
               <View style={styles.redIcon}/>
           )}
         </View>
 
+        {/* If booking status is PENDING */}
         {booking.status === 'PENDING' && (
           <TouchableOpacity style={styles.deleteButtonCon} onPress={()=>{
             Alert.alert(
               'Delete Order',
-              'Are you sure you want to delete this order',
+              'Are you sure you want to delete this booking?',
               [
                 {text:'Cancel', style:'cancel'},
                 {text: 'Delete', style:'destructive', onPress:onDelete}
               ]
             );
           }} >
-            <Text style={styles.deleteButtonTxt} >{booking.propertyType === 'Hotel / Shorlet' ? 'Delete Booking' : 'Delete Showing'}</Text>
+            <Text style={styles.deleteButtonTxt} >{booking.propertyType === 'Hotel / ' ? 'Delete Booking' : 'Delete Showing'}</Text>
           </TouchableOpacity>
         )}
+
+        {/* If booking status is ACCEPTED */}
+        {(booking.status === 'ACCEPTED'  && booking.propertyType !== 'Hotel / Shortlet') && (
+          <TouchableOpacity 
+            style={styles.viewCon}
+            onPress={handleViewingClick}
+          >
+            <Text style={styles.viewTxt}>Viewing</Text>
+          </TouchableOpacity>
+        )}
+
+        {/* If booking status is VIEWING */}
+        {(booking.status === 'VIEWING' && booking.propertyType !== 'Hotel / Shortlet') &&  (
+          <TouchableOpacity 
+            style={styles.viewCon}
+            onPress={handleViewedClick}
+          >
+            <Text style={styles.viewTxt}>Viewed</Text>
+          </TouchableOpacity> 
+        )}
+
+        {/* If booking status is VIEWED */}
+        {/* {(booking.status === 'VIEWED' && booking.propertyType !== 'Hotel / Shortlet') &&  (
+          <TouchableOpacity 
+            style={styles.delCon}
+            onPress={()=>{
+              Alert.alert(
+                'Delete Order',
+                'Are you sure you want to delete this booking?',
+                [
+                  {text:'Cancel', style:'cancel'},
+                  {text: 'Delete', style:'destructive', onPress:onDelete}
+                ]
+              );
+            }} 
+          >
+            <Text style={styles.delTxt}>Delete</Text>
+          </TouchableOpacity> 
+        )} */}
 
       </TouchableOpacity>
     </View>

@@ -74,7 +74,7 @@ const HotelPostList = () => {
             p.realtorID.eq(realtor.id),
             p.available.eq(true)
           ]));
-          const filteredPosts = posts.filter((post) => post.propertyType === "Hotel / Shorlet");
+          const filteredPosts = posts.filter((post) => post.propertyType === "Hotel / Shortlet");
 
           // Map the realtor details to each post
           return filteredPosts.map((post) => ({
