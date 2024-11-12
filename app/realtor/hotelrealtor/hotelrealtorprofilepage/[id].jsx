@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
 import React, {useState, useEffect} from 'react'
-import RealtorProfile from '../../../../components/RealtorProfile'
+import ProfileComplete from '../../../../components/RealtorProfile/ProfileComplete'
 import { useLocalSearchParams } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
-import {Realtor, Post} from '../../../../src/models'
+import {Realtor, Post} from '@/src/models'
 
 const RealtorProfilePageScreen = () => {
     
@@ -34,7 +34,7 @@ const RealtorProfilePageScreen = () => {
 
   return (
     <View>
-      <RealtorProfile realtor={realtor} posts={posts}/>
+      <ProfileComplete realtor={realtor} posts={posts}/>
     </View>
   )
 }

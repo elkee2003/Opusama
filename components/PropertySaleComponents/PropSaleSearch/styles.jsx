@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     },
     locationRow:{
         flexDirection:'row',
-        alignItems:'center',
         paddingVertical:10,
         borderBottomWidth:1,
         borderColor:'lightgrey',
@@ -52,8 +51,7 @@ const styles = StyleSheet.create({
     },
     subContainer:{
         marginTop:2,
-        flexDirection:'row',
-        gap:10,
+        gap:5,
         alignItems:'center'
     },
     subLocation:{

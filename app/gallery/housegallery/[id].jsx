@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import PostGallery from '../../../components/HouseComponents/PostGallery/index.jsx'
 import { useLocalSearchParams } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
-import { Post } from '../../../src/models'
+import { Post } from '@/src/models'
 
 
 

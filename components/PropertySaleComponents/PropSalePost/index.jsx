@@ -45,7 +45,7 @@ const PropSalePost = ({post}) => {
 
   return (
       <View style={styles.container}>
-        <Link href={`/explore/propertysaleinfo/${post.id}`} asChild>
+        <Link href={`/search/propertysalesearch/propertysaleinfo/${post.id}`} asChild>
           <Pressable>
             <View style={styles.imageContainer}>
               {/* Image */}
@@ -66,11 +66,25 @@ const PropSalePost = ({post}) => {
           </Pressable>
         </Link>
 
+        {post.type && (
+          <Text style={styles.bedroom}>{post.type}</Text>
+        )}
+
         {/* Bed & Bedrooms */}
-        <Text style={styles.bedroom}>{post.bedrooms} Bedroom Apartment</Text>
+        {post.bed && (
+            <Text style={styles.bedroom}>Beds: {post.bed} </Text>
+        )}
+
+        {post.bedrooms && (
+          <Text style={styles.bedroom}>Bedroom(s):{post.bedrooms} </Text>
+        )}
 
         {/* Location */}
-        <Text style={styles.location}>{post.address}</Text>
+        {post.address && (
+          <Text style={styles.location}>
+            {`...${post.address.substring(8, 17)}...`}
+          </Text>
+        )}
 
 
         {/* Type & Description */}

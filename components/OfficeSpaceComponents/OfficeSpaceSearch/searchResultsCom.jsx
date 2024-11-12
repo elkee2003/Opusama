@@ -10,7 +10,7 @@ const SearchResultCom = ({post}) => {
   const formattedPrice = Number(post.price).toLocaleString();
   
   return (
-    <TouchableOpacity onPress={() => router.push(`/search/housesearch/${post.id}`)} style={styles.locationRow}>
+    <TouchableOpacity onPress={() => router.push(`/search/officespacesearch/officespaceinfo/${post.id}`)} style={styles.locationRow}>
 
       {/* Icon Container */}
       <View style={styles.iconContainer}>
@@ -18,9 +18,9 @@ const SearchResultCom = ({post}) => {
       </View>
 
       {/* Image */}
-      <View style={styles.imgContainer}>
+      {/* <View style={styles.imgContainer}>
         <Image source={{uri:post?.media[0]}} style={styles.img}/>
-      </View>
+      </View> */}
 
       {/* Info */}
       <View>
@@ -29,7 +29,7 @@ const SearchResultCom = ({post}) => {
         </Text>
 
         <View style={styles.subContainer}>
-          <Text style={styles.subLocation}>{post.address}</Text>
+          <Text style={styles.subLocation}>{`...${post.address.substring(8,17)}...`}</Text>
           <Text style={styles.subPrice}>
           ₦{formattedPrice}
           </Text>

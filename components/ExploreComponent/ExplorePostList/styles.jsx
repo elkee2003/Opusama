@@ -23,12 +23,6 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         margin:15,
     },
-    bannerAds:{
-      height:'10%',
-      backgroundColor:'#cfcbcb',
-      marginVertical:10,
-      justifyContent:'center'
-    },
     noListings:{
         textAlign:'center',
         fontWeight:'bold',

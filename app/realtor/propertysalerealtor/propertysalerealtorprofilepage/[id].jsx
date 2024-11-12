@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, {useState, useEffect} from 'react'
-import RealtorProfile from '../../../../components/RealtorProfile'
+import RealtorProfile from '../../../../components/RealtorProfile/ProfileComplete'
 import { useLocalSearchParams } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
 import {Realtor, Post} from '../../../../src/models'

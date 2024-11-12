@@ -46,7 +46,7 @@ const HotelPost = ({post}) => {
 
   return (
       <View style={styles.container}>
-        <Pressable onPress={()=> router.push(`/explore/hotelinfo/${post.id}`)}>
+        <Pressable onPress={()=> router.push(`/search/hotelsearch/hotelinfo/${post.id}`)}>
           <View style={styles.imageContainer}>
             {/* Image */}
             {imageUris[0] ? ( 
@@ -64,27 +64,43 @@ const HotelPost = ({post}) => {
           <Text style={styles.name}>{post.firstName}</Text>
         </Pressable>
 
+        {post.type && (
+          <Text style={styles.bedroom}>{post.type}</Text>
+        )}
+
         <View style={styles.room}>
           {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>Beds: {post.bed} </Text>
+          {post.bed && (
+            <Text style={styles.bedroom}>Beds: {post.bed} </Text>
+          )}
 
-          <Text style={styles.bedroom}>Bedrooms:{post.bedrooms} </Text>
+          {post.bedrooms && (
+            <Text style={styles.bedroom}>Bedroom(s):{post.bedrooms} </Text>
+          )}
         </View>
 
         {/* Location */}
-        <Text style={styles.location}>{post.address}</Text>
+        {post.address && (
+          <Text style={styles.location}>
+            {`...${post.address.substring(8, 17)}...`}
+          </Text>
+        )}
 
         {/* Type & Description */}
-        <Text style={styles.description} numberOfLines={2}>{post.description}</Text>
+        {post.description && (
+          <Text style={styles.description} numberOfLines={2}>{post.description}</Text>
+        )}
 
         {/* Old Price & New Price */}
-        {/* Rent */}
-        <View style={styles.priceRow}>
-          <Text style={styles.sub}></Text>
-          <Text style={styles.price}> 
-            ₦{formattedPrice} / Night
-          </Text>
-        </View>
+        {/* Price */}
+        {post.price && (
+          <View style={styles.priceRow}>
+            <Text style={styles.sub}></Text>
+            <Text style={styles.price}> 
+              ₦{formattedPrice} / Night
+            </Text>
+          </View>
+        )}
 
       </View>
       

@@ -2,7 +2,6 @@ import { View, Text, FlatList, Pressable } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import OfficeSpaceFeed from '../OfficeSpacePost'
 import styles from './styles'
-import BannerAds from '../../../components/BannerAds'
 import { FontAwesome } from '@expo/vector-icons';
 import {Colors} from '../../../constants/Colors'
 import { Link } from 'expo-router'
@@ -105,7 +104,7 @@ const PostList = () => {
     <View style={styles.container}>
       <View>
         {/* Search Bar */}
-        <Link href={'search/housesearch/searchhouse'} asChild>
+        <Link href={'search/officespacesearch'} asChild>
           <Pressable style={styles.searchBtn}>
               <FontAwesome name="search" size={24} color="black" />
               <Text style= {styles.searchBtnTxt}>
@@ -115,9 +114,6 @@ const PostList = () => {
         </Link>
       </View>
 
-      <View style={styles.bannerAds}>
-        <BannerAds/>
-      </View>
       {
         realtorPosts && realtorPosts.length > 0 ?
         <FlatList 

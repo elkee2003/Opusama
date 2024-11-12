@@ -27,11 +27,21 @@ const HouseSearch = () => {
         const filtered = housePosts.filter(item => {
           const matchesRealtorName = item?.firstName?.toLowerCase().includes(lowercasedQuery);
 
-          const matchesLocation = item.address?.toLowerCase().includes(lowercasedQuery);
+          const matchesType = item?.type?.toLowerCase().includes(lowercasedQuery);
 
-          const matchesPrice = item.price?.toString(). includes(lowercasedQuery);
+          const matchesLocation = item?.address?.toLowerCase().includes(lowercasedQuery);
 
-          return matchesRealtorName || matchesLocation || matchesPrice;
+          const matchesCity = item?.city?.toLowerCase().includes(lowercasedQuery);
+
+          const matchesState = item?.state?.toLowerCase().includes(lowercasedQuery);
+
+          const matchesCountry = item?.country?.toLowerCase().includes(lowercasedQuery);
+
+          const matchesPrice = item?.price?.toString(). includes(lowercasedQuery);
+
+          const matchesTotalPrice = item?.totalPrice?.toString(). includes(lowercasedQuery);
+
+          return matchesRealtorName || matchesType || matchesLocation || matchesCity || matchesState || matchesCountry || matchesPrice || matchesTotalPrice;
         });
         setFilteredData(filtered)
       }
@@ -42,7 +52,12 @@ const HouseSearch = () => {
         const realtors = await DataStore.query(Realtor);
         const posts = await DataStore.query(Post);
 
-        const housePostData = posts.map(post =>{
+        // Filter posts with propertyType "hotel" or "shortlet" only
+        const filteredPosts = posts.filter(
+          (post) => post.propertyType === 'House'
+        )
+
+        const housePostData = filteredPosts.map(post =>{
           const realtor = realtors.find(r => r.id === post.realtorID);
           return {
             ...post,

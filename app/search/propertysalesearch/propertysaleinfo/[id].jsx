@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import DetailedPropSalePost from '../../../../components/PropertySaleComponents/DetailedPropSalePost';
 import { DataStore } from 'aws-amplify/datastore';
-import { Post, Realtor } from '../../../../src/models';
+import { Post, Realtor } from '@/src/models';
 import { useLocalSearchParams } from 'expo-router';
 import { useShowingContext } from '@/providers/ShowingProvider';
 

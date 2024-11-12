@@ -42,7 +42,9 @@ const styles = StyleSheet.create({
         fontSize:17,
         color:Colors.COMMENTS,
     },
-    
+    locationRow:{
+        flexDirection:'row',
+    },
     location:{
         fontSize:17,
         fontWeight:'bold',
@@ -64,13 +66,26 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     description:{
-        marginTop:10,
+        // marginTop:10,
         fontSize:19,
         lineHeight:25,
         color:Colors.TEXTCOLOUR,
     },
     readMoreLess:{
         color:'#009b0f',
+    },
+    propertyType:{
+        fontSize:18,
+        fontWeight:'bold',
+        lineHeight:25,
+        justifyContent:'center',
+    },
+    subheader:{
+        fontSize:19,
+        fontWeight:'bold',
+        color: Colors.HEADING,
+        lineHeight:25,
+        justifyContent:'center',
     },
     price:{
         fontSize:18,
@@ -91,6 +106,11 @@ const styles = StyleSheet.create({
     priceRowTotal:{
         marginTop:4,
         flexDirection:'row',
+    },
+    topBorderLine:{
+        marginVertical:5,
+        borderBottomWidth:1,
+        borderColor:'#c4c4c4',
     },
     borderLine:{
         marginVertical:20,

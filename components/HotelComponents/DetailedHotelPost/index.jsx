@@ -8,10 +8,15 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useBookingContext } from '../../../providers/BookingProvider';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
+import { useAuthContext } from '@/providers/AuthProvider';
+import { DataStore } from 'aws-amplify';
+import { PostReview, Post } from '@/src/models';
 
 const DetailedHotelPost = ({post, realtor}) => {
 
   const {setPostPrice, setPostTotalPrice} = useBookingContext();
+
+  const {dbUser} = useAuthContext()
 
   const [readMore, setReadMore] = useState(false);
   const [readMoreLux, setReadMoreLux] = useState(false);
@@ -114,43 +119,136 @@ const DetailedHotelPost = ({post, realtor}) => {
           </TouchableOpacity>
         
           {/* User */}
-          <Pressable style={styles.user} onPress={()=> router.push(`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`)}>
-            <Text style={styles.name}>{realtor.firstName}</Text>
-          </Pressable>
+          {realtor.firstName && (
+            <Pressable style={styles.user} onPress={()=> router.push(`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`)}>
+              <Text style={styles.name}>{realtor.firstName}</Text>
+            </Pressable>
+          )}
+
+          {/* Property Type */}
+          {post.propertyType && (
+            <Text style={styles.propertyType}>
+              {post.propertyType}
+            </Text>
+          )}
 
           {/* Type */}
-          <Text style={styles.bedroom}>{post.type}</Text>
+          {post.type && (
+            <Text style={styles.bedroom}>{post.type}</Text>
+          )}
+
+          {/* Name of Type */}
+          {post.nameOfType && (
+            <Text style={styles.bedroom}>
+              Name: {post.nameOfType}
+            </Text>
+          )}
+
+          {/* Available Documents */}
+          {post.availableDocs && (
+            <>
+              <Text style={styles.subheader}>Available Documents:</Text>
+              <Text style={styles.bedroom}>
+                {post.availableDocs}
+              </Text>
+            </>
+          )}
+
+          <View style={styles.topBorderLine}/>
+
+          {/* Accommodation Parts */}
+          {post.accommodationParts && (
+            <>
+              <Text style={styles.subheader}>Accommodation Parts</Text>
+              <Text style={styles.bedroom}>
+                {post.accommodationParts}
+              </Text>
+            </>
+          )}
           
           {/* Bed & Bedrooms */}
-          <Text style={styles.bedroom}>Beds: {post.bed} </Text>
-          <Text style={styles.bedroom}>Bedrooms: {post.bedrooms} </Text>
+          {post.bed && (
+            <Text style={styles.bedroom}>Beds: {post.bed} </Text>
+          )}
+
+
+          {post.bedrooms && (
+            <Text style={styles.bedroom}>Bedrooms: {post.bedrooms} </Text>
+          )}
+
+          <View style={styles.topBorderLine}/>
 
           {/* Location */}
-          <Text style={styles.location}>{post.address}</Text>
+          {/* {post.address && (
+            <Text style={styles.location}>{`${post.address.substring(0,17)}...`}</Text>
+          )} */}
+
+          {/* City, State, Country, */}
+          <View>
+            <Text style={styles.subheader}>Location</Text>
+            {post.city && (
+              <View style={styles.locationRow}>
+                <Text style={styles.location}>
+                  City:
+                </Text>
+                <Text style={styles.bedroom}>
+                  {' '}{post.city}
+                </Text>
+              </View>
+            )}
+
+            {post.state && (
+              <View style={styles.locationRow}>
+                <Text style={styles.location}>
+                  State:
+                </Text>
+                <Text style={styles.bedroom}>
+                  {' '}{post.state}
+                </Text>
+              </View>
+            )}
+            {post.country && (
+              <View style={styles.locationRow}>
+                <Text style={styles.location}>
+                  Country:
+                </Text>
+                <Text style={styles.bedroom}>
+                  {' '}{post.country}
+                </Text>
+              </View>
+            )}
+          </View>
+
+          <View style={styles.topBorderLine}/>
 
           {/* Medium of Review Star */}
-          <View style={styles.reviewIconRow}>
+          {/* <View style={styles.reviewIconRow}>
             <FontAwesome name="star" style={styles.star} />
             <Text style={styles.starTxt}>4.7</Text>
-          </View>
+          </View> */}
 
           {/* Type & Description */}
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.description}>
-              {readMore || post.description.length <= 150 ? post.description : `${post.description.substring(0, 150)}...`}
+          {post.description && (
+            <>
+              <Text style={styles.luxPolHeadTxt}>Description</Text>
+              <View style={styles.descriptionContainer}>
+                <Text style={styles.description}>
+                  {readMore || post.description.length <= 150 ? post.description : `${post.description.substring(0, 150)}...`}
 
-              {/* Button to toggle */}
-              { post.description.length > 150 &&(readMore ?
-                <Text onPress={()=>setReadMore(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
-                  {' '}show less
+                  {/* Button to toggle */}
+                  { post.description.length > 150 &&(readMore ?
+                    <Text onPress={()=>setReadMore(false)} style={[{...styles.readMoreLess, color:"#c2021b"}]}>
+                      {' '}show less
+                    </Text>
+                    :
+                    <Text style={styles.readMoreLess} onPress={()=>setReadMore(true)}>
+                      {' '}read more
+                    </Text>)
+                  }
                 </Text>
-                :
-                <Text style={styles.readMoreLess} onPress={()=>setReadMore(true)}>
-                  {' '}read more
-                </Text>)
-              }
-            </Text>
-          </View>
+              </View>
+            </>
+          )}
 
           {/* Price */}
           <View style={styles.priceRow}>
@@ -213,10 +311,10 @@ const DetailedHotelPost = ({post, realtor}) => {
           </View>
 
           {/* Border Line */}
-          <View style={styles.borderLine}/>
+          {/* <View style={styles.borderLine}/> */}
           
           {/* Rate */}
-          <View style={styles.rateContainer}>
+          {/* <View style={styles.rateContainer}>
             <Text style={styles.rateTxt}>Rate</Text>
             <View style={styles.starContainer}>
               {[1,2,3,4,5].map((index)=>(
@@ -235,13 +333,13 @@ const DetailedHotelPost = ({post, realtor}) => {
                 Write a review
               </Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           
           {/* Border Line */}
-          <View style={styles.borderLine}/>
+          {/* <View style={styles.borderLine}/> */}
 
           {/* Rating and Reviews of People */}
-            {
+            {/* {
               post. reviews && post.reviews.length > 0 ? (
               <View>
                 <Text style={styles.rateTxt}>
@@ -253,17 +351,17 @@ const DetailedHotelPost = ({post, realtor}) => {
                   </View>
                 ))}
               </View>): null
-            }
+            } */}
 
           {/* See all reviews */}
-          {post.reviews && post.reviews.length > 0 ? (
+          {/* {post.reviews && post.reviews.length > 0 ? (
                 <TouchableOpacity style={styles.seeReviewsBtn} onPress={goToAllReviews}>
                   <Text style={styles.seeReviewsBtnTxt}>
                     See all reviews
                   </Text>
                 </TouchableOpacity>
               ): null
-          }
+          } */}
           
         </ScrollView>
         <TouchableOpacity style={styles.bookContainer} onPress={handleNavigate}>

@@ -7,14 +7,14 @@ import { Realtor, Post } from '../../../src/models';
 
 const OfficeSpaceSearch = () => {
     const [searchQuery, setSearchQuery] = useState('')
-    const [housePosts, setHousePosts] = useState([]);
+    const [officePosts, setOfficePosts] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
 
     const handleSearch = (query) => {
       setSearchQuery(query);
 
       // Wait until housePosts is populated before attempting to filter
-      if (housePosts.length === 0) {
+      if (officePosts.length === 0) {
         return; // Exit if housePosts is not yet populated
       }
 
@@ -24,14 +24,24 @@ const OfficeSpaceSearch = () => {
       }else{
         const lowercasedQuery = query.toLowerCase();
 
-        const filtered = housePosts.filter(item => {
+        const filtered = officePosts.filter(item => {
           const matchesRealtorName = item?.firstName?.toLowerCase().includes(lowercasedQuery);
 
-          const matchesLocation = item.address?.toLowerCase().includes(lowercasedQuery);
+          const matchesType = item?.type?.toLowerCase().includes(lowercasedQuery);
 
-          const matchesPrice = item.price?.toString(). includes(lowercasedQuery);
+          const matchesLocation = item?.address?.toLowerCase().includes(lowercasedQuery);
 
-          return matchesRealtorName || matchesLocation || matchesPrice;
+          const matchesCity = item?.city?.toLowerCase().includes(lowercasedQuery);
+
+          const matchesState = item?.state?.toLowerCase().includes(lowercasedQuery);
+
+          const matchesCountry = item?.country?.toLowerCase().includes(lowercasedQuery);
+
+          const matchesPrice = item?.price?.toString(). includes(lowercasedQuery);
+
+          const matchesTotalPrice = item?.totalPrice?.toString(). includes(lowercasedQuery);
+
+          return matchesRealtorName || matchesType || matchesLocation || matchesCity || matchesState || matchesCountry || matchesPrice || matchesTotalPrice;
         });
         setFilteredData(filtered)
       }
@@ -42,7 +52,12 @@ const OfficeSpaceSearch = () => {
         const realtors = await DataStore.query(Realtor);
         const posts = await DataStore.query(Post);
 
-        const housePostData = posts.map(post =>{
+        // Filter posts with propertyType "hotel" or "shortlet" only
+        const filteredPosts = posts.filter(
+          (post) => post.propertyType === 'Office Space'
+        )
+
+        const officePostData = filteredPosts.map(post =>{
           const realtor = realtors.find(r => r.id === post.realtorID);
           return {
             ...post,
@@ -50,7 +65,7 @@ const OfficeSpaceSearch = () => {
           };
         });
 
-        setHousePosts(housePostData);
+        setOfficePosts(officePostData);
       }catch(error){
         console.error('This is the error from searchbar:', error)
       }

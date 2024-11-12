@@ -13,4 +13,4 @@ const ExploreLayout = () => {
   )
 }
 
-export default ExploreLayout
+export default ExploreLayout;

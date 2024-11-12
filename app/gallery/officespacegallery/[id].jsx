@@ -5,7 +5,7 @@ import { useLocalSearchParams } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
-import { Post } from '../../../src/models'
+import { Post } from '@/src/models'
 
 
 

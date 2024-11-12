@@ -1,12 +1,12 @@
 import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import DetailedOfficeSpacePost from '../../../../components/OfficeSpaceComponents/DetailedOfficeSpacePost'
+import DetailedPost from '../../../../components/HouseComponents/DetailedPost'
 import { DataStore } from 'aws-amplify/datastore';
-import { Post, Realtor } from '../../../../src/models';
+import { Post, Realtor } from '@/src/models';
 import { useLocalSearchParams } from 'expo-router';
 import { useShowingContext } from '@/providers/ShowingProvider';
 
-const OfficeSpaceInfo = () => {
+const HouseAccommodation = () => {
   const { id } = useLocalSearchParams();
   const {setRealtorContext, setPropertyDetails} = useShowingContext();
   const [post, setPost] = useState(null);
@@ -63,10 +63,10 @@ const OfficeSpaceInfo = () => {
   return (
     <SafeAreaView>
       <View>
-        <DetailedOfficeSpacePost post={post} realtor={realtor}/>
+        <DetailedPost post={post} realtor={realtor}/>
       </View>
     </SafeAreaView>
   );
 };
 
-export default OfficeSpaceInfo;
+export default HouseAccommodation;

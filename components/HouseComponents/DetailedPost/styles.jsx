@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     container:{
         marginTop:10,
         marginHorizontal:10,
-        position:'relative',
+        position:'relative'
     },
     bckContainer:{
         position:'absolute',
@@ -42,11 +42,13 @@ const styles = StyleSheet.create({
         fontSize:17,
         color:Colors.COMMENTS,
     },
-    
+    locationRow:{
+        flexDirection:'row',
+    },
     location:{
         fontSize:17,
         fontWeight:'bold',
-        color: Colors.COMMENTS,
+        color:Colors.COMMENTS,
     },
     reviewIconRow:{
         flexDirection:'row',
@@ -64,13 +66,26 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     description:{
-        marginTop:10,
+        // marginTop:10,
         fontSize:19,
         lineHeight:25,
-        color: Colors.TEXTCOLOUR,
+        color:Colors.TEXTCOLOUR,
     },
     readMoreLess:{
         color:'#009b0f',
+    },
+    propertyType:{
+        fontSize:18,
+        fontWeight:'bold',
+        lineHeight:25,
+        justifyContent:'center',
+    },
+    subheader:{
+        fontSize:19,
+        fontWeight:'bold',
+        color: Colors.HEADING,
+        lineHeight:25,
+        justifyContent:'center',
     },
     price:{
         fontSize:18,
@@ -92,6 +107,11 @@ const styles = StyleSheet.create({
         marginTop:4,
         flexDirection:'row',
     },
+    topBorderLine:{
+        marginVertical:5,
+        borderBottomWidth:1,
+        borderColor:'#c4c4c4',
+    },
     borderLine:{
         marginVertical:20,
         borderBottomWidth:1,
@@ -108,7 +128,6 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         marginBottom:10,
         color:Colors.HEADING,
-        
     },
     luxPolTxt:{
         fontSize:16,
@@ -132,16 +151,17 @@ const styles = StyleSheet.create({
         alignSelf:'center',
     },
     // writeReviewCon:{
-    //     borderWidth:1.5,
+    //     borderBottomWidth:1.5,
     //     marginRight:'auto',
     //     borderColor:'#19ad25',
     //     borderRadius:20,
-    //     padding:4,
+       
     // },
     writeReview:{
         fontSize:16,
         color:'#07630e',
         textDecorationLine:'underline'
+
     },
     seeReviewsBtn:{
         marginVertical:10,
@@ -158,7 +178,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         color: Colors.HEADING,
     },
-    getinTouchContainer:{
+    bookContainer:{
         position:'absolute',
         justifyContent:'center',
         alignItems:'center',
@@ -166,10 +186,10 @@ const styles = StyleSheet.create({
         left:10,
         height:60,
         bottom:20,
-        backgroundColor:'#0b021f',
-        borderRadius:30,
+        backgroundColor:'#19ad25',
+        borderRadius:30
     },
-    getInTouchTxt:{
+    bookTxt:{
         color:'#dddcdc',
         fontSize:25,
         fontWeight:"bold",
