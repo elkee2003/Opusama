@@ -1,10 +1,13 @@
-import { View, Text, Image, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
 import DefaultImage from '../../../assets/images/defaultImage.png';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
+import SmartImage from '../../SmartImage/SmartImage';
+
+const Image = SmartImage;
 
 const PostGallery = ({media}) => {
 
@@ -40,7 +43,12 @@ const PostGallery = ({media}) => {
         <Ionicons style={styles.backIcon} name="arrow-back-sharp" size={24} color="black" />
       </Pressable>
       {mediaUri && (
-        <Image source={{uri: mediaUri}} style={styles.image}/>
+        <Image 
+          source={{uri: mediaUri}} 
+          style={styles.image}
+          width={50}
+          height={50}
+        />
       )}
     </View>
   )

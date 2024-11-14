@@ -485,17 +485,18 @@ export const onCreatePost = /* GraphQL */ `
       lat
       lng
       price
+      cautionFee
       totalPrice
       bed
       bedrooms
       amenities
       policies
-      country
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      country
       state
       city
       realtorID
@@ -524,17 +525,18 @@ export const onUpdatePost = /* GraphQL */ `
       lat
       lng
       price
+      cautionFee
       totalPrice
       bed
       bedrooms
       amenities
       policies
-      country
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      country
       state
       city
       realtorID
@@ -563,17 +565,18 @@ export const onDeletePost = /* GraphQL */ `
       lat
       lng
       price
+      cautionFee
       totalPrice
       bed
       bedrooms
       amenities
       policies
-      country
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      country
       state
       city
       realtorID

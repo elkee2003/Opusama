@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         color:'#07a830',
     },
     doneBtn:{
-        backgroundColor:'#1a1b1a',
+        backgroundColor:'#0e0530',
         marginTop:10,
         padding:2,
         marginHorizontal:80,

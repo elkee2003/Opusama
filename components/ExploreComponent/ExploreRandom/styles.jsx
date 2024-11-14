@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
         fontWeight:'400',
         color:Colors.TEXTCOLOUR,
     },
+    cautionFeeRow:{
+        flexDirection:'row',
+        marginBottom:10,
+    },
     sub:{
         fontStyle:'italic',
         fontSize:18,

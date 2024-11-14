@@ -10,6 +10,12 @@ const RealtorProfilePage = ({realtor}) => {
 
     const [loading, setLoading]= useState(true);
     const [realtorProfilePic, setRealtorProfilePic] = useState(null);
+    const [readMoreDescription, setReadMoreDescription] = useState(false);
+
+    const descriptionMaxLength = 80; 
+    const truncatedDescription = realtor.myDescription?.length > descriptionMaxLength 
+        ? `${realtor.myDescription.substring(0, descriptionMaxLength)}...` 
+        : realtor.myDescription;
 
     // Fetch signed URL for profile picture
     const fetchImageUrl = async () => {
@@ -59,7 +65,15 @@ const RealtorProfilePage = ({realtor}) => {
             </View>
             <View style={styles.descriptionCon}>
                 <Text style={styles.txtDesc}>
-                    {realtor.myDescription}
+                    {readMoreDescription || realtor?.myDescription?.length <= descriptionMaxLength ? realtor?.myDescription : truncatedDescription}
+                    {realtor.myDescription?.length > descriptionMaxLength && (
+                        <Text 
+                        onPress={() => setReadMoreDescription(!readMoreDescription)} 
+                        style={readMoreDescription ? [styles.readMoreLess, { color: "#c2021b" }] : styles.readMoreLess}
+                        >
+                        {readMoreDescription ? ' show less' : ' read more'}
+                        </Text>
+                    )} 
                 </Text>
             </View>
 

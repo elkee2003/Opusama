@@ -11,7 +11,7 @@ const ReviewGuestInfo = () => {
 
   const {dbUser} = useAuthContext();
 
-  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useBookingContext();
+  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postCautionFee, setPostCautionFee, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useBookingContext();
 
   const [loading, setLoading] = useState(false);
   
@@ -58,9 +58,9 @@ const ReviewGuestInfo = () => {
       setBookings(booking);
       Alert.alert('Successful', "Booking was a success");
 
-      setAdults('')
-      setKids('')
-      setInfants('')
+      setAdults(0)
+      setKids(0)
+      setInfants(0)
       setGuestFirstName('')
       setGuestLastName('')
       setGuestPhoneNumber('')
@@ -69,6 +69,7 @@ const ReviewGuestInfo = () => {
       setCheckInDate('')
       setCheckOutDate('')
       setPostTotalPrice('')
+      setPostCautionFee('')
       setOverAllPrice('')
       setRealtorPrice(null)
       setPropertyDetails('')
@@ -127,14 +128,19 @@ const ReviewGuestInfo = () => {
           <Text style={styles.txtInputHeader}>Purpose of stay:</Text>
           <Text style={styles.txtInput}>{purpose?.trim()}</Text>
 
+          <Text style={styles.txtInputHeader}>Caution Fee:</Text>
+          <Text style={styles.txtInput}>₦{postCautionFee?.toLocaleString()}{" "} 
+            <Text style={styles.addedAlready}>(already added)</Text>
+          </Text>
+
           <Text style={styles.txtInputHeader}>Sub Total:</Text>
-          <Text style={styles.txtInput}>₦{postTotalPrice.toLocaleString()}</Text>
+          <Text style={styles.txtInput}>₦{postTotalPrice?.toLocaleString()}</Text>
 
           {/* <Text style={styles.txtInputHeader}>Caution fee:</Text>
           <Text style={styles.txtInput}>{cautionFee}</Text> */}
 
           <Text style={styles.txtInputHeader}>Total:</Text>
-          <Text style={styles.txtInput}>₦{overAllPrice.toLocaleString()}</Text>
+          <Text style={styles.txtInput}>₦{overAllPrice?.toLocaleString()}</Text>
         </ScrollView>
 
         {/* Button */}

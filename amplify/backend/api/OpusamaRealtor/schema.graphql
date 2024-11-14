@@ -92,13 +92,14 @@ type Post @model @auth(rules: [{allow: public}]) {
   lat: Float
   lng: Float
   price: Float!
+  cautionFee: Float
   totalPrice: Float!
   bed: String
   bedrooms: String
   amenities: String
   policies: String
-  country: String!
   PostReviews: [PostReview] @hasMany(indexName: "byPost", fields: ["id"])
+  country: String!
   state: String
   city: String
   realtorID: ID! @index(name: "byRealtor")

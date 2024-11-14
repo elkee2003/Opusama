@@ -1,16 +1,18 @@
-import { View, Text, Image, SafeAreaView, Pressable } from 'react-native'
+import { View, Text, SafeAreaView, Pressable } from 'react-native'
 import { router } from 'expo-router'
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
 import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { getUrl } from 'aws-amplify/storage';
+import SmartImage from '../../SmartImage/SmartImage';
 
+const Image = SmartImage;
 
 const HotelPost = ({post}) => {
 
   const [imageUris, setImageUris] = useState([]);
-  const formattedPrice = Number(post.price).toLocaleString();
+  const formattedPrice = Number(post.price)?.toLocaleString();
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -50,7 +52,12 @@ const HotelPost = ({post}) => {
           <View style={styles.imageContainer}>
             {/* Image */}
             {imageUris[0] ? ( 
-              <Image source={{uri: imageUris[0]}} style={styles.image}/>
+              <Image 
+                source={{uri: imageUris[0]}} 
+                style={styles.image}
+                width={50}
+                height={50}
+              />
             ) : (
               <Image source={DefaultImage} style={styles.image} />
             )}

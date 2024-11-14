@@ -17,8 +17,8 @@ const DetailedPropertySalePost = ({post, realtor}) => {
   const [userRating, setUserRating] = useState(0);
   const [imageUris, setImageUris] = useState([]);
 
-  const formattedPrice = Number(post.price).toLocaleString();
-  const formattedTotalPrice = Number(post.totalPrice).toLocaleString();
+  const formattedPrice = Number(post.price)?.toLocaleString();
+  const formattedTotalPrice = Number(post.totalPrice)?.toLocaleString();
 
   const goToAllReviews = ()=>{
     router.push(`/allReviews/${post.id}`)
@@ -147,9 +147,9 @@ const DetailedPropertySalePost = ({post, realtor}) => {
           )}
 
           {/* Location */}
-          {/* {post.address && (
-            <Text style={styles.location}>{`${post.address.substring(0,17)}...`}</Text>
-          )} */}
+          {post.address && (
+            <Text style={styles.location}>{`${post.address.substring(8,17)}...`}</Text>
+          )}
 
           {/* City, State, Country, */}
           <View>
@@ -222,7 +222,7 @@ const DetailedPropertySalePost = ({post, realtor}) => {
           <View style={styles.priceRow}>
             <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice} / year
+              ₦{formattedPrice}
             </Text>
           </View>
 

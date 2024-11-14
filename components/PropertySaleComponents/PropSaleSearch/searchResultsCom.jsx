@@ -7,7 +7,7 @@ import { router } from 'expo-router';
 const SearchResultCom = ({post}) => {
 
   // Format the price with commas
-  const formattedPrice = Number(post.price).toLocaleString();
+  const formattedPrice = Number(post.price)?.toLocaleString();
   
   return (
     <TouchableOpacity onPress={() => router.push(`/search/propertysalesearch/propertysaleinfo/${post.id}`)} style={styles.locationRow}>

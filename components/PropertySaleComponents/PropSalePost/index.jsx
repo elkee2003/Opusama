@@ -9,7 +9,7 @@ import { getUrl } from 'aws-amplify/storage';
 const PropSalePost = ({post}) => {
 
   const [imageUris, setImageUris] = useState([]);
-  const formattedPrice = Number(post.price).toLocaleString();
+  const formattedPrice = Number(post.price)?.toLocaleString();
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -94,7 +94,7 @@ const PropSalePost = ({post}) => {
         {/* Rent */}
         <View style={styles.priceRow}>
           <Text style={styles.price}> 
-            ₦{formattedPrice} / year
+            ₦{formattedPrice}
           </Text>
         </View>
 

@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         backgroundColor:'#08021f',
         marginBottom:10,
     },
+    addedAlready:{
+        color:'grey',
+        fontStyle:'italic'
+    },
     paymentBtn:{
         backgroundColor:'#23a508',
         justifyContent:'center',

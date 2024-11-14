@@ -104,7 +104,7 @@ const Booking = ({ postPrice }) => {
         {/* Total Price */}
         <View style={styles.priceContainer}>
           <Text style={styles.priceLabel}>Total Price:</Text>
-          <Text style={styles.priceValue}>₦{totalPrice.toLocaleString()}</Text>
+          <Text style={styles.priceValue}>₦{totalPrice?.toLocaleString()}</Text>
         </View>
       </ScrollView>
 

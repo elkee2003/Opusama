@@ -1,4 +1,4 @@
-import { View, Text, Image ,ScrollView, TouchableOpacity, Pressable} from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Pressable} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import ReviewHotel from '../ReviewHotel';
 import styles from './styles';
@@ -9,12 +9,15 @@ import { useBookingContext } from '../../../providers/BookingProvider';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
 import { useAuthContext } from '@/providers/AuthProvider';
+import SmartImage from '../../SmartImage/SmartImage';
 import { DataStore } from 'aws-amplify';
 import { PostReview, Post } from '@/src/models';
 
+const Image = SmartImage;
+
 const DetailedHotelPost = ({post, realtor}) => {
 
-  const {setPostPrice, setPostTotalPrice} = useBookingContext();
+  const {setPostPrice, setPostCautionFee, setPostTotalPrice} = useBookingContext();
 
   const {dbUser} = useAuthContext()
 
@@ -24,8 +27,9 @@ const DetailedHotelPost = ({post, realtor}) => {
   const [userRating, setUserRating] = useState(0);
   const [imageUris, setImageUris] = useState([]);
 
-  const formattedPrice = Number(post.price).toLocaleString();
-  const formattedTotalPrice = Number(post.totalPrice).toLocaleString();
+  const formattedCautionFee = Number(post?.cautionFee)?.toLocaleString();
+  const formattedPrice = Number(post?.price)?.toLocaleString();
+  const formattedTotalPrice = Number(post?.totalPrice)?.toLocaleString();
 
   if (!post) {
     return (
@@ -64,6 +68,7 @@ const DetailedHotelPost = ({post, realtor}) => {
   useEffect(() => {
     setPostTotalPrice(post.totalPrice);
     setPostPrice(post.price);
+    setPostCautionFee(post.cautionFee);
   }, [formattedTotalPrice, realtor.id]); // Run this effect when these values change
 
   // Fetch signed URLs for each image in post.media
@@ -111,7 +116,12 @@ const DetailedHotelPost = ({post, realtor}) => {
             <View style={styles.imageContainer}>
               {/* Image */}
               {imageUris[0] ? ( 
-              <Image source={{uri: imageUris[0]}} style={styles.image}/>
+              <Image 
+                source={{uri: imageUris[0]}} 
+                style={styles.image}
+                width={50}
+                height={50}
+              />
               ) : (
                 <Image source={DefaultImage} style={styles.image} />
               )}
@@ -179,9 +189,9 @@ const DetailedHotelPost = ({post, realtor}) => {
           <View style={styles.topBorderLine}/>
 
           {/* Location */}
-          {/* {post.address && (
-            <Text style={styles.location}>{`${post.address.substring(0,17)}...`}</Text>
-          )} */}
+          {post.address && (
+            <Text style={styles.location}>{`${post.address.substring(8,17)}...`}</Text>
+          )}
 
           {/* City, State, Country, */}
           <View>
@@ -255,6 +265,13 @@ const DetailedHotelPost = ({post, realtor}) => {
             <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
               ₦{formattedPrice} / Night
+            </Text>
+          </View>
+
+          <View style={styles.cautionFeeRow}>
+            <Text style={styles.sub}>Caution Fee: </Text>
+            <Text style={styles.price}> 
+              ₦{formattedCautionFee}
             </Text>
           </View>
 

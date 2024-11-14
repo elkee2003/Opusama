@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
         color:'#484849',
         marginBottom:20,
     },
+    readMoreLess:{
+        color:'#009b0f',
+    },
 })
 
 export default styles

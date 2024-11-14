@@ -797,6 +797,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "cautionFee": {
+                    "name": "cautionFee",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "totalPrice": {
                     "name": "totalPrice",
                     "isArray": false,
@@ -832,13 +839,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "country": {
-                    "name": "country",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "PostReviews": {
                     "name": "PostReviews",
                     "isArray": true,
@@ -854,6 +854,13 @@ export const schema = {
                             "postID"
                         ]
                     }
+                },
+                "country": {
+                    "name": "country",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "state": {
                     "name": "state",
@@ -944,5 +951,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "c4857a88e6b832570c79ef344b6815ba"
+    "version": "b94a05a1674c10e8f80d257f6f6547f4"
 };

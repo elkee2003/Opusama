@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Pressable, Alert } from 'react-native';
 import React from 'react';
 import styles from './styles';
 import * as Clipboard from 'expo-clipboard';
@@ -51,7 +51,10 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={goToBookingLiveUpdate}>
+      
+      {/* will delete the pressable when I want to update the app */}
+      <Pressable>
+      {/* <TouchableOpacity onPress={goToBookingLiveUpdate}> */}
         <Text style={styles.subHeading}>Realtor:</Text>
         <Text style={styles.detail}>{booking?.realtor?.firstName}</Text>
 
@@ -113,7 +116,7 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
               ]
             );
           }} >
-            <Text style={styles.deleteButtonTxt} >{booking.propertyType === 'Hotel / ' ? 'Delete Booking' : 'Delete Showing'}</Text>
+            <Text style={styles.deleteButtonTxt} >{booking.propertyType === 'Hotel / Shortlet' ? 'Delete Booking' : 'Delete Showing'}</Text>
           </TouchableOpacity>
         )}
 
@@ -156,7 +159,8 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
           </TouchableOpacity> 
         )} */}
 
-      </TouchableOpacity>
+      {/* </TouchableOpacity> */}
+      </Pressable>
     </View>
   )
 }

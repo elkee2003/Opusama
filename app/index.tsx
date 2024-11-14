@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { getCurrentUser, AuthUser } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 
+// Suppress console warnings and errors in production
+if (!__DEV__) {
+  console.warn = () => {};
+  console.error = () => {};
+}
+
 export default function Index() {
 
   const [user, setUser] = useState(null)

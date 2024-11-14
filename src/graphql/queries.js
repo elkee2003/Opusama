@@ -662,17 +662,18 @@ export const getPost = /* GraphQL */ `
       lat
       lng
       price
+      cautionFee
       totalPrice
       bed
       bedrooms
       amenities
       policies
-      country
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      country
       state
       city
       realtorID
@@ -706,6 +707,7 @@ export const listPosts = /* GraphQL */ `
         lat
         lng
         price
+        cautionFee
         totalPrice
         bed
         bedrooms
@@ -755,6 +757,7 @@ export const syncPosts = /* GraphQL */ `
         lat
         lng
         price
+        cautionFee
         totalPrice
         bed
         bedrooms
@@ -806,6 +809,7 @@ export const postsByRealtorID = /* GraphQL */ `
         lat
         lng
         price
+        cautionFee
         totalPrice
         bed
         bedrooms

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity, } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import styles from './styles'
 import { FontAwesome } from '@expo/vector-icons';
@@ -8,7 +8,11 @@ import Placeholder from '../../../assets/images/placeholder.png';
 import { router } from 'expo-router';
 import {useProfileContext} from '@/providers/ProfileProvider';
 import {useAuthContext} from '@/providers/AuthProvider';
+import { DataStore } from 'aws-amplify/datastore';
+import {User} from '@/src/models';
 import { getUrl } from 'aws-amplify/storage';
+import SmartImage from '../../SmartImage/SmartImage';
+
 
 const ProfilePage = () => {
 
@@ -46,6 +50,14 @@ const ProfilePage = () => {
     if (dbUser.profilePic) {
       fetchImageUrl();
     }
+
+    const subscription = DataStore.observe(User).subscribe(({opType})=>{
+      if(opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE'){
+        fetchImageUrl();
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, [dbUser.profilePic]);
 
   return (
@@ -53,32 +65,47 @@ const ProfilePage = () => {
       <View>
         {/* Profile Picture */}
         {
-          <View style={styles.profilePicContainer}>
+          <TouchableOpacity 
+            style={styles.profilePicContainer}
+            onPress={()=>router.push('/profile/editprofile')}
+          >
           {loading ? (
-            <Image source={Placeholder} style={styles.img} /> // Show placeholder while loading
+            <Image 
+              source={Placeholder} 
+              style={styles.img}
+            /> // Show placeholder while loading
           ) : (
-            <Image source={{ uri: profilePic }} style={styles.img} onError={() => setProfilePic(null)} />
+            <SmartImage 
+              source={{ uri: profilePic }} 
+              style={styles.img} 
+              onError={() => setProfilePic(null)}
+              width={50}
+              height={50} 
+            />
           )}
-        </View>
+        </TouchableOpacity>
         }
 
-        {/* Name and Surname */}
-        <View style={styles.row}>
-          <Ionicons name="person" size={24} color="black" />
-          <Text style={styles.name}>{firstName}</Text>
-        </View>
+        {/* Ill delete this view when I have things to populate the profile page with */}
+        <View style={styles.centerDetails}>
+          {/* Name and Surname */}
+          <View style={styles.row}>
+            <Ionicons name="person" size={24} color="black" />
+            <Text style={styles.name}>{firstName}</Text>
+          </View>
 
-        {/* PhoneNumber */}
-        <View style={styles.row}>
-          <FontAwesome name="phone" size={24} color="black" />
-          <Text style={styles.txt}>{phoneNumber}</Text>
-        </View>
-        
+          {/* PhoneNumber */}
+          <View style={styles.row}>
+            <FontAwesome name="phone" size={24} color="black" />
+            <Text style={styles.txt}>{phoneNumber}</Text>
+          </View>
+          
 
-        {/* Address */}
-        <View style={styles.row}>
-          <Entypo name="location" size={24} color="black" />
-          <Text style={styles.txt}>{address}</Text>
+          {/* Address */}
+          <View style={styles.row}>
+            <Entypo name="location" size={24} color="black" />
+            <Text style={styles.txt}>{address}</Text>
+          </View>
         </View>
 
         <View style={styles.profileSubrow}>

@@ -16,8 +16,9 @@ const ExploreDetailedPost = ({post, realtor}) => {
   const [userRating, setUserRating] = useState(0)
   const [imageUris, setImageUris] = useState([]);
 
-  const formattedPrice = Number(post.price).toLocaleString();
-  const formattedTotalPrice = Number(post.totalPrice).toLocaleString();
+  const formattedPrice = Number(post?.price)?.toLocaleString();
+  const formattedCautionFee = Number(post?.cautionFee)?.toLocaleString();
+  const formattedTotalPrice = Number(post?.totalPrice)?.toLocaleString();
 
   const goToAllReviews = ()=>{
     router.push(`/allReviews/${post.id}`)
@@ -221,11 +222,21 @@ const ExploreDetailedPost = ({post, realtor}) => {
 
           {/* Rent */}
           <View style={styles.priceRow}>
-            <Text style={styles.sub}>Rent: </Text>
+            <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice} / year
+              ₦{formattedPrice}
             </Text>
           </View>
+
+          {/* Caution fee */}
+          {post.cautionFee && (
+            <View style={styles.cautionFeeRow}>
+              <Text style={styles.sub}>Caution Fee: </Text>
+              <Text style={styles.price}> 
+                ₦{formattedCautionFee}
+              </Text>
+            </View>
+          )}
 
           {/* Total Price */}
           <View style={styles.priceRowTotal}>

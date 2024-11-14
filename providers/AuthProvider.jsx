@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native'
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import { getCurrentUser } from 'aws-amplify/auth';
+import { Hub } from 'aws-amplify/utils';
 import { DataStore, Predicates } from 'aws-amplify/datastore'
 import { User } from '@/src/models'
 
@@ -47,6 +48,34 @@ const AuthProvider = ({children}) => {
         }
     }
 
+    useEffect(()=>{
+        currentAuthenticatedUser()
+    },[sub]);
+
+    useEffect(()=>{
+
+      const listener = data =>{
+        const { event } = data.payload;
+        if (event === 'signedIn' || event === 'signedOut'){
+          currentAuthenticatedUser();
+        }
+      }
+  
+      // Start listening for authentication events
+      const hubListener = Hub.listen('auth', listener);
+  
+      // Cleanup the listener when the component unmounts
+      return () => hubListener(); // Stop listening for the events
+    },[currentAuthenticatedUser]);
+
+    useEffect(()=>{
+        if(!sub){
+          return;
+        }
+
+        dbCurrentUser()
+    }, [sub]);
+
     // Set up a subscription to listen to changes on the current user's Courier instance
     useEffect(() => {
       if (!dbUser) return;
@@ -76,18 +105,6 @@ const AuthProvider = ({children}) => {
     
       return () => deleteSubscription.unsubscribe();
     }, [dbUser]);
-
-    useEffect(()=>{
-        currentAuthenticatedUser()
-    },[sub])
-
-    useEffect(()=>{
-        if(!sub){
-          return;
-        }
-
-        dbCurrentUser()
-    }, [sub])
 
   return (
     <AuthContext.Provider value={{

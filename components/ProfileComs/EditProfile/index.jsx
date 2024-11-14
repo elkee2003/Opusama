@@ -11,6 +11,7 @@ import {useProfileContext} from '@/providers/ProfileProvider';
 const EditProfile = () => {
     const {firstName,setFirstName, lastName, setLastName, profilePic, address, setAddress, setProfilePic, phoneNumber, setPhoneNumber, errorMessage, onValidateInput,} = useProfileContext()
 
+    // Pick Image function
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -30,6 +31,7 @@ const EditProfile = () => {
         }
     };
 
+    // Signout function
     async function handleSignOut() {
         try {
           const res = await signOut();
@@ -39,6 +41,7 @@ const EditProfile = () => {
         }
     }
 
+    // Signout function from amplify
     const onSignout = ()=>{
         Alert.alert(
           'Sign Out',

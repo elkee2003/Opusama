@@ -24,6 +24,7 @@ const BookingContextProvider = ({children}) => {
     const [checkInDate, setCheckInDate] = useState('')
     const [checkOutDate, setCheckOutDate] = useState('')
     const [postPrice, setPostPrice] = useState(null);
+    const [postCautionFee, setPostCautionFee] = useState(null);
     const [postTotalPrice, setPostTotalPrice] = useState(null);
     const [overAllPrice, setOverAllPrice] = useState(null);
     const [realtorPrice, setRealtorPrice] = useState(null);
@@ -65,7 +66,7 @@ const BookingContextProvider = ({children}) => {
 
 
   return (
-    <BookingContext.Provider value={{bookings, setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, setGuestPhoneNumber, purpose, setPurpose, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate, duration, setDuration, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice}}>
+    <BookingContext.Provider value={{bookings, setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, setGuestPhoneNumber, purpose, setPurpose, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate, duration, setDuration, postPrice, setPostPrice, postCautionFee, setPostCautionFee, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice}}>
         {children}
     </BookingContext.Provider>
   )

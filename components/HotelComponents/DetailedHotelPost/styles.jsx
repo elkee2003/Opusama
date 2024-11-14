@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         marginTop:10,
     },
+    cautionFeeRow:{
+        flexDirection:'row',
+        marginBottom:10,
+    },
     priceRowTotal:{
         marginTop:4,
         flexDirection:'row',

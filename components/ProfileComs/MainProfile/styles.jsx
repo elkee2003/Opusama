@@ -3,6 +3,7 @@ import { StyleSheet, } from 'react-native'
 const styles = StyleSheet.create({
     container:{
         flex:1,
+        justifyContent:'center',
         marginTop:30,
         marginHorizontal:20,
     },
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#a2a2a8',
         justifyContent:'center',
         marginVertical:8,
+        alignSelf:'center',
     },
     img:{
         width:'100%',
@@ -21,10 +23,11 @@ const styles = StyleSheet.create({
         borderRadius:75,
     },
     row:{
+        left:'100%', //will delete this when I have something to populate the profile page with
         flexDirection:'row',
         gap:10,
         marginBottom:3,
-        alignItems:'center'
+        alignItems:'center',
     },
     name:{
         flex:1,
@@ -49,12 +52,13 @@ const styles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'rgba(0,0,0,0.1)',
         borderRadius:20,
-        padding:5,
+        padding:8,
     },
 
     subHeader:{
-      fontSize:16,  
-      fontWeight:'bold'
+        color:'#0e0530',
+        fontSize:18,  
+        fontWeight:'bold'
     },
 })
 

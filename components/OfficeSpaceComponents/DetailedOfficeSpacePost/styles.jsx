@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         marginTop:10,
     },
+    cautionFeeRow:{
+        flexDirection:'row',
+        marginBottom:10,
+    },
     priceRowTotal:{
         marginTop:4,
         flexDirection:'row',
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         color: Colors.HEADING,
     },
-    bookContainer:{
+    getinTouchContainer:{
         position:'absolute',
         justifyContent:'center',
         alignItems:'center',
@@ -186,10 +190,10 @@ const styles = StyleSheet.create({
         left:10,
         height:60,
         bottom:20,
-        backgroundColor:'#19ad25',
+        backgroundColor:'#020425',
         borderRadius:30
     },
-    bookTxt:{
+    getInTouchTxt:{
         color:'#dddcdc',
         fontSize:25,
         fontWeight:"bold",
