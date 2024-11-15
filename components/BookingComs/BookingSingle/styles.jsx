@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         gap:10,
     },
+    wait:{
+        fontStyle:'italic',
+        color:'#797777'
+    },
     greenIcon:{
         width:10,
         height:10,
@@ -64,11 +68,24 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontWeight:'bold',
     },
+    viewConInfoRow:{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        gap:5,
+    },
+    infoIconCon:{
+        justifyContent:'center',
+        alignItems:'center',
+        padding:5,
+    },
+    infoIcon:{
+        fontSize:20,
+    },
     viewCon:{
         padding:10,
         width:150,
         marginTop:10,
-        alignSelf:'center',
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'#0ac00a',

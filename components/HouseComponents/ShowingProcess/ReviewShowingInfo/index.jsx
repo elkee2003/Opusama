@@ -68,10 +68,6 @@ const ReviewShowingInfo = () => {
     }
   }, [propertyDetails]);
 
-  console.log('postid:',PostID)
-    console.log('acc:',propertyType)
-
-
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Review Showing Info</Text>

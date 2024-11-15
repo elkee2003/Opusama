@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Pressable, Alert } from 'react-native';
 import React from 'react';
 import styles from './styles';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import AntDesign from '@expo/vector-icons/AntDesign';
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
 
@@ -98,6 +99,7 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
           </>
         )}
 
+        {/* Status */}
         <Text style={styles.subHeading}>Status:</Text>
         <View style={styles.statusRow}>
           <Text style={styles.detail}>
@@ -109,6 +111,13 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
               <View style={styles.redIcon}/>
           )}
         </View>
+
+        {/* if status is PENDING */}
+        {booking.status === 'PENDING' && (
+          <Text style={styles.wait}>Kindly wait for response of Realtor to get contact</Text>
+        )}
+
+        {/* Button Section */}
 
         {/* If booking status is PENDING */}
         {booking.status === 'PENDING' && (
@@ -128,22 +137,42 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
 
         {/* If booking status is ACCEPTED */}
         {(booking.status === 'ACCEPTED'  && booking.propertyType !== 'Hotel / Shortlet') && (
-          <TouchableOpacity 
-            style={styles.viewCon}
-            onPress={handleViewingClick}
-          >
-            <Text style={styles.viewTxt}>Viewing</Text>
-          </TouchableOpacity>
+          <View style={styles.viewConInfoRow}>
+            <TouchableOpacity 
+              style={styles.viewCon}
+              onPress={handleViewingClick}
+            >
+              <Text style={styles.viewTxt}>Viewing</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Viewing Info', 'Click on "Viewing" once you are viewing the property.')}
+            >
+            <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
         )}
 
         {/* If booking status is VIEWING */}
         {(booking.status === 'VIEWING' && booking.propertyType !== 'Hotel / Shortlet') &&  (
-          <TouchableOpacity 
-            style={styles.viewCon}
-            onPress={handleViewedClick}
-          >
-            <Text style={styles.viewTxt}>Viewed</Text>
-          </TouchableOpacity> 
+            <View style={styles.viewConInfoRow}>
+              <TouchableOpacity 
+                style={styles.viewCon}
+                onPress={handleViewedClick}
+              >
+                <Text style={styles.viewTxt}>Viewed</Text>
+              </TouchableOpacity>
+
+              {/* Info Icon */}
+              <TouchableOpacity 
+                style={styles.infoIconCon}
+                onPress={() => Alert.alert('Viewing Info', 'Click on "Viewed" once you are done viewing the property.')}
+              >
+                <AntDesign name="infocirlceo" style={styles.infoIcon} />
+              </TouchableOpacity> 
+            </View>
         )}
 
         {/* If booking status is VIEWED */}
