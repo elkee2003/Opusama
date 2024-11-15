@@ -21,8 +21,8 @@ const BookingList = () => {
 
             const bookingsWithRealtors = await Promise.all(
                 sortedBookings.map(async(booking)=>{
-                    if(booking.bookingRealtorId){
-                        const realtor = await DataStore.query(Realtor, (r)=>r.id.eq(booking.bookingRealtorId));
+                    if(booking.realtorID){
+                        const realtor = await DataStore.query(Realtor, (r)=>r.id.eq(booking.realtorID));
                         return {...booking, realtor: realtor[0] || null};
                     }
                     return {...booking, realtor:null};

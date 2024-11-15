@@ -26,6 +26,12 @@ const ProfilePage = () => {
 
   // Fetch signed URL for profile picture
   const fetchImageUrl = async () => {
+    if (!dbUser.profilePic) {
+      setProfilePic(null); // No image set, so reset profilePic
+      setLoading(false);
+      return;
+    }
+    
     setLoading(true);
     try {
       const result = await getUrl({
@@ -75,7 +81,7 @@ const ProfilePage = () => {
               style={styles.img}
             /> // Show placeholder while loading
           ) : (
-            <SmartImage 
+            <Image 
               source={{ uri: profilePic }} 
               style={styles.img} 
               onError={() => setProfilePic(null)}

@@ -264,27 +264,6 @@ export const getBooking = /* GraphQL */ `
       checkInDate
       checkOutDate
       propertyType
-      Realtor {
-        id
-        sub
-        firstName
-        lastName
-        myDescription
-        profilePic
-        email
-        address
-        phoneNumber
-        bankname
-        accountName
-        accountNumber
-        push_token
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
       accommodationType
       nameOfType
       totalPrice
@@ -293,12 +272,12 @@ export const getBooking = /* GraphQL */ `
       bookingLng
       status
       userID
+      realtorID
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      bookingRealtorId
       __typename
     }
   }
@@ -331,12 +310,12 @@ export const listBookings = /* GraphQL */ `
         bookingLng
         status
         userID
+        realtorID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        bookingRealtorId
         __typename
       }
       nextToken
@@ -379,12 +358,12 @@ export const syncBookings = /* GraphQL */ `
         bookingLng
         status
         userID
+        realtorID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        bookingRealtorId
         __typename
       }
       nextToken
@@ -429,12 +408,62 @@ export const bookingsByUserID = /* GraphQL */ `
         bookingLng
         status
         userID
+        realtorID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        bookingRealtorId
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const bookingsByRealtorID = /* GraphQL */ `
+  query BookingsByRealtorID(
+    $realtorID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelBookingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bookingsByRealtorID(
+      realtorID: $realtorID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        adults
+        kids
+        infants
+        clientFirstName
+        clientLastName
+        clientPhoneNumber
+        purpose
+        duration
+        checkInDate
+        checkOutDate
+        propertyType
+        accommodationType
+        nameOfType
+        totalPrice
+        realtorPrice
+        bookingLat
+        bookingLng
+        status
+        userID
+        realtorID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
@@ -452,11 +481,6 @@ export const getUser = /* GraphQL */ `
       lastName
       profilePic
       phoneNumber
-      Bookings {
-        nextToken
-        startedAt
-        __typename
-      }
       address
       PostReviews {
         nextToken
@@ -469,6 +493,11 @@ export const getUser = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -563,6 +592,11 @@ export const getRealtor = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version

@@ -21,8 +21,8 @@ const ReviewShowingInfo = () => {
       setClientPhoneNumber('') 
       setNote('')
       setPropertyDetails(null) 
-      setPropertyType({})  
-      setAccommodationType({}) 
+      setPropertyType('')  
+      setAccommodationType('') 
       setBookingLat(null) 
       setBookingLng(null) 
       setRealtorContext('') 
@@ -42,7 +42,7 @@ const ReviewShowingInfo = () => {
           bookingLat,
           bookingLng,
           userID: dbUser.id,
-          bookingRealtorId: realtorContext.id,
+          realtorID: realtorContext.id,
           status:'PENDING'
         }))
         setShowing(getInTouch);

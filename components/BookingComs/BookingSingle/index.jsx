@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Pressable, Alert } from 'react-native';
 import React from 'react';
 import styles from './styles';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
 
@@ -51,6 +52,16 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
 
   return (
     <View style={styles.container}>
+
+      {/* Remove Btn */}
+      {(booking.status === 'DENIED') && (
+        <TouchableOpacity 
+          style={styles.removeButtonContainer}
+          onPress={onDelete}
+        >
+          <FontAwesome name="remove" style={styles.removebtn} />
+        </TouchableOpacity>
+      )}
       
       {/* will delete the pressable when I want to update the app */}
       <Pressable>

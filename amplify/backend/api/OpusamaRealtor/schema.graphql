@@ -36,7 +36,6 @@ type Booking @model @auth(rules: [{allow: public}]) {
   checkInDate: String
   checkOutDate: String
   propertyType: String
-  Realtor: Realtor @hasOne
   accommodationType: String
   nameOfType: String
   totalPrice: Float
@@ -45,6 +44,7 @@ type Booking @model @auth(rules: [{allow: public}]) {
   bookingLng: Float
   status: BookingStatus
   userID: ID! @index(name: "byUser")
+  realtorID: ID! @index(name: "byRealtor")
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -54,11 +54,11 @@ type User @model @auth(rules: [{allow: public}]) {
   lastName: String
   profilePic: String
   phoneNumber: String
-  Bookings: [Booking] @hasMany(indexName: "byUser", fields: ["id"])
   address: String
   PostReviews: [PostReview] @hasMany(indexName: "byUser", fields: ["id"])
   RealtorReviews: [RealtorReview] @hasMany(indexName: "byUser", fields: ["id"])
   push_token: String
+  Bookings: [Booking] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
 type Realtor @model @auth(rules: [{allow: public}]) {
@@ -76,6 +76,7 @@ type Realtor @model @auth(rules: [{allow: public}]) {
   accountNumber: String
   Post: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
   push_token: String
+  Bookings: [Booking] @hasMany(indexName: "byRealtor", fields: ["id"])
 }
 
 type Post @model @auth(rules: [{allow: public}]) {

@@ -1,6 +1,6 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
 
 export enum BookingStatus {
   PENDING = "PENDING",
@@ -97,7 +97,6 @@ type EagerBooking = {
   readonly checkInDate?: string | null;
   readonly checkOutDate?: string | null;
   readonly propertyType?: string | null;
-  readonly Realtor?: Realtor | null;
   readonly accommodationType?: string | null;
   readonly nameOfType?: string | null;
   readonly totalPrice?: number | null;
@@ -106,9 +105,9 @@ type EagerBooking = {
   readonly bookingLng?: number | null;
   readonly status?: BookingStatus | keyof typeof BookingStatus | null;
   readonly userID: string;
+  readonly realtorID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly bookingRealtorId?: string | null;
 }
 
 type LazyBooking = {
@@ -128,7 +127,6 @@ type LazyBooking = {
   readonly checkInDate?: string | null;
   readonly checkOutDate?: string | null;
   readonly propertyType?: string | null;
-  readonly Realtor: AsyncItem<Realtor | undefined>;
   readonly accommodationType?: string | null;
   readonly nameOfType?: string | null;
   readonly totalPrice?: number | null;
@@ -137,9 +135,9 @@ type LazyBooking = {
   readonly bookingLng?: number | null;
   readonly status?: BookingStatus | keyof typeof BookingStatus | null;
   readonly userID: string;
+  readonly realtorID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly bookingRealtorId?: string | null;
 }
 
 export declare type Booking = LazyLoading extends LazyLoadingDisabled ? EagerBooking : LazyBooking
@@ -159,11 +157,11 @@ type EagerUser = {
   readonly lastName?: string | null;
   readonly profilePic?: string | null;
   readonly phoneNumber?: string | null;
-  readonly Bookings?: (Booking | null)[] | null;
   readonly address?: string | null;
   readonly PostReviews?: (PostReview | null)[] | null;
   readonly RealtorReviews?: (RealtorReview | null)[] | null;
   readonly push_token?: string | null;
+  readonly Bookings?: (Booking | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -179,11 +177,11 @@ type LazyUser = {
   readonly lastName?: string | null;
   readonly profilePic?: string | null;
   readonly phoneNumber?: string | null;
-  readonly Bookings: AsyncCollection<Booking>;
   readonly address?: string | null;
   readonly PostReviews: AsyncCollection<PostReview>;
   readonly RealtorReviews: AsyncCollection<RealtorReview>;
   readonly push_token?: string | null;
+  readonly Bookings: AsyncCollection<Booking>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -213,6 +211,7 @@ type EagerRealtor = {
   readonly accountNumber?: string | null;
   readonly Post?: (Post | null)[] | null;
   readonly push_token?: string | null;
+  readonly Bookings?: (Booking | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -236,6 +235,7 @@ type LazyRealtor = {
   readonly accountNumber?: string | null;
   readonly Post: AsyncCollection<Post>;
   readonly push_token?: string | null;
+  readonly Bookings: AsyncCollection<Booking>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

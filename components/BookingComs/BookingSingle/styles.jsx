@@ -2,10 +2,21 @@ import { StyleSheet,} from 'react-native'
 
 const styles = StyleSheet.create({
     container:{
+        position:'relative',
         padding:10,
         backgroundColor:'#dddbdb',
         borderRadius:20,
         marginBottom:15,
+    },
+    removeButtonContainer: {
+        position: 'absolute',
+        top:5,
+        right:10, 
+        zIndex: 1,
+      },
+    removebtn:{
+        color: '#c70f0f',
+        fontSize:25,
     },
     subHeading:{
         fontSize:16,

@@ -16,7 +16,7 @@ const ReviewShowingInfo = () => {
     const [loading, setLoading] = useState(false);
 
     const resetFormFields = () => {
-      setClientFirstName(''); setClientLastName(''); setClientPhoneNumber(''); setNote(''); setPropertyDetails(null); setPropertyType({});  setAccommodationType({}); setBookingLat(null); setBookingLng(null); setRealtorContext(''); 
+      setClientFirstName(''); setClientLastName(''); setClientPhoneNumber(''); setNote(''); setPropertyDetails(null); setPropertyType('');  setAccommodationType(''); setBookingLat(null); setBookingLng(null); setRealtorContext(''); 
     }
 
     const handleGetInTouch = async () =>{
@@ -33,7 +33,7 @@ const ReviewShowingInfo = () => {
           bookingLat,
           bookingLng,
           userID: dbUser.id,
-          bookingRealtorId: realtorContext.id,
+          realtorID: realtorContext.id,
           status:'PENDING'
         }))
         setShowing(getInTouch);

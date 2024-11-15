@@ -267,24 +267,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Realtor": {
-                    "name": "Realtor",
-                    "isArray": false,
-                    "type": {
-                        "model": "Realtor"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": [
-                            "id"
-                        ],
-                        "targetNames": [
-                            "bookingRealtorId"
-                        ]
-                    }
-                },
                 "accommodationType": {
                     "name": "accommodationType",
                     "isArray": false,
@@ -343,6 +325,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "realtorID": {
+                    "name": "realtorID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -358,13 +347,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "bookingRealtorId": {
-                    "name": "bookingRealtorId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -380,6 +362,15 @@ export const schema = {
                         "name": "byUser",
                         "fields": [
                             "userID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byRealtor",
+                        "fields": [
+                            "realtorID"
                         ]
                     }
                 },
@@ -446,22 +437,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Bookings": {
-                    "name": "Bookings",
-                    "isArray": true,
-                    "type": {
-                        "model": "Booking"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "userID"
-                        ]
-                    }
-                },
                 "address": {
                     "name": "address",
                     "isArray": false,
@@ -507,6 +482,22 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "Bookings": {
+                    "name": "Bookings",
+                    "isArray": true,
+                    "type": {
+                        "model": "Booking"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "userID"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -659,6 +650,22 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "Bookings": {
+                    "name": "Bookings",
+                    "isArray": true,
+                    "type": {
+                        "model": "Booking"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "realtorID"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -951,5 +958,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "b94a05a1674c10e8f80d257f6f6547f4"
+    "version": "00ce0346f8c5ff71dad610218a91c7a4"
 };

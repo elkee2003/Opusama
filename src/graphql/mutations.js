@@ -136,27 +136,6 @@ export const createBooking = /* GraphQL */ `
       checkInDate
       checkOutDate
       propertyType
-      Realtor {
-        id
-        sub
-        firstName
-        lastName
-        myDescription
-        profilePic
-        email
-        address
-        phoneNumber
-        bankname
-        accountName
-        accountNumber
-        push_token
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
       accommodationType
       nameOfType
       totalPrice
@@ -165,12 +144,12 @@ export const createBooking = /* GraphQL */ `
       bookingLng
       status
       userID
+      realtorID
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      bookingRealtorId
       __typename
     }
   }
@@ -193,27 +172,6 @@ export const updateBooking = /* GraphQL */ `
       checkInDate
       checkOutDate
       propertyType
-      Realtor {
-        id
-        sub
-        firstName
-        lastName
-        myDescription
-        profilePic
-        email
-        address
-        phoneNumber
-        bankname
-        accountName
-        accountNumber
-        push_token
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
       accommodationType
       nameOfType
       totalPrice
@@ -222,12 +180,12 @@ export const updateBooking = /* GraphQL */ `
       bookingLng
       status
       userID
+      realtorID
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      bookingRealtorId
       __typename
     }
   }
@@ -250,27 +208,6 @@ export const deleteBooking = /* GraphQL */ `
       checkInDate
       checkOutDate
       propertyType
-      Realtor {
-        id
-        sub
-        firstName
-        lastName
-        myDescription
-        profilePic
-        email
-        address
-        phoneNumber
-        bankname
-        accountName
-        accountNumber
-        push_token
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
       accommodationType
       nameOfType
       totalPrice
@@ -279,12 +216,12 @@ export const deleteBooking = /* GraphQL */ `
       bookingLng
       status
       userID
+      realtorID
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      bookingRealtorId
       __typename
     }
   }
@@ -301,11 +238,6 @@ export const createUser = /* GraphQL */ `
       lastName
       profilePic
       phoneNumber
-      Bookings {
-        nextToken
-        startedAt
-        __typename
-      }
       address
       PostReviews {
         nextToken
@@ -318,6 +250,11 @@ export const createUser = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -339,11 +276,6 @@ export const updateUser = /* GraphQL */ `
       lastName
       profilePic
       phoneNumber
-      Bookings {
-        nextToken
-        startedAt
-        __typename
-      }
       address
       PostReviews {
         nextToken
@@ -356,6 +288,11 @@ export const updateUser = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -377,11 +314,6 @@ export const deleteUser = /* GraphQL */ `
       lastName
       profilePic
       phoneNumber
-      Bookings {
-        nextToken
-        startedAt
-        __typename
-      }
       address
       PostReviews {
         nextToken
@@ -394,6 +326,11 @@ export const deleteUser = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -427,6 +364,11 @@ export const createRealtor = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -460,6 +402,11 @@ export const updateRealtor = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -493,6 +440,11 @@ export const deleteRealtor = /* GraphQL */ `
         __typename
       }
       push_token
+      Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version

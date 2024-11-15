@@ -52,7 +52,7 @@ const ReviewGuestInfo = () => {
         realtorPrice,
         // overAllPrice: parseFloat(overAllPrice),
         userID: dbUser.id,
-        bookingRealtorId: realtorContext.id,
+        realtorID: realtorContext.id,
         status:'PENDING'
       }))
       setBookings(booking);
