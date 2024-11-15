@@ -11,14 +11,15 @@ const ReviewGuestInfo = () => {
 
   const {dbUser} = useAuthContext();
 
-  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postCautionFee, setPostCautionFee, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useBookingContext();
+  const { setBookings, adults, setAdults, kids, setKids, infants, setInfants, guestFirstName, setGuestFirstName, guestLastName, setGuestLastName, guestPhoneNumber, setGuestPhoneNumber, purpose, setPurpose, propertyDetails, PostID, setPostID, setPropertyDetails, propertyType, setPropertyType, nameOfType, setNameOfType, accommodationType, setAccommodationType, realtorContext, bookingLat, setBookingLat, bookingLng, setBookingLng, setRealtorContext, checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,  duration, setDuration, postPrice, setPostPrice, postCautionFee, setPostCautionFee, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice} = useBookingContext();
 
   const [loading, setLoading] = useState(false);
-  
+
   // Use useEffect to set the initial property details only once on mount
   useEffect(() => {
     if (propertyDetails) {
       setPropertyType(propertyDetails.propertyType);
+      setPostID(propertyDetails.id);
       setAccommodationType(propertyDetails.type);
       setNameOfType(propertyDetails.nameOfType);
       setBookingLat(propertyDetails.lat);
@@ -53,6 +54,7 @@ const ReviewGuestInfo = () => {
         // overAllPrice: parseFloat(overAllPrice),
         userID: dbUser.id,
         realtorID: realtorContext.id,
+        PostID,
         status:'PENDING'
       }))
       setBookings(booking);
@@ -72,6 +74,7 @@ const ReviewGuestInfo = () => {
       setPostCautionFee('')
       setOverAllPrice('')
       setRealtorPrice(null)
+      setPostID('')
       setPropertyDetails('')
       setPropertyType('')
       setNameOfType('')

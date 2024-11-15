@@ -44,14 +44,11 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
     return 'Pending';
   };
 
-  const goToBookingLiveUpdate = () =>{
-    // router.push(`realtor/hotelrealtor/bookingliveupdates/${booking.id}`)
-    Alert.alert('Patience', 'Kindly wait for Realtor to accepts')
-    // This is meant to show the map of the location of booking
-  }
 
   return (
-    <View style={styles.container}>
+    <View 
+      style={styles.container}
+    >
 
       {/* Remove Btn */}
       {(booking.status === 'DENIED') && (
@@ -63,9 +60,7 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         </TouchableOpacity>
       )}
       
-      {/* will delete the pressable when I want to update the app */}
-      <Pressable>
-      {/* <TouchableOpacity onPress={goToBookingLiveUpdate}> */}
+      <TouchableOpacity onPress={()=> router.push(`/bookings/${booking.PostID}`)}>
         <Text style={styles.subHeading}>Realtor:</Text>
         <Text style={styles.detail}>{booking?.realtor?.firstName}</Text>
 
@@ -152,26 +147,25 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         )}
 
         {/* If booking status is VIEWED */}
-        {/* {(booking.status === 'VIEWED' && booking.propertyType !== 'Hotel / Shortlet') &&  (
+        {(booking.status === 'VIEWED' && booking.propertyType !== 'Hotel / Shortlet') &&  (
           <TouchableOpacity 
             style={styles.delCon}
             onPress={()=>{
               Alert.alert(
                 'Delete Order',
-                'Are you sure you want to delete this booking?',
+                'Are you sure you want to remove this booking?',
                 [
                   {text:'Cancel', style:'cancel'},
-                  {text: 'Delete', style:'destructive', onPress:onDelete}
+                  {text: 'Remove', style:'destructive', onPress:onDelete}
                 ]
               );
             }} 
           >
-            <Text style={styles.delTxt}>Delete</Text>
+            <Text style={styles.removeTxt}>Remove</Text>
           </TouchableOpacity> 
-        )} */}
+        )}
 
-      {/* </TouchableOpacity> */}
-      </Pressable>
+      </TouchableOpacity>
     </View>
   )
 }

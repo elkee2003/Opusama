@@ -106,6 +106,7 @@ type EagerBooking = {
   readonly status?: BookingStatus | keyof typeof BookingStatus | null;
   readonly userID: string;
   readonly realtorID: string;
+  readonly PostID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -136,6 +137,7 @@ type LazyBooking = {
   readonly status?: BookingStatus | keyof typeof BookingStatus | null;
   readonly userID: string;
   readonly realtorID: string;
+  readonly PostID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

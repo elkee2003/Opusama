@@ -332,6 +332,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "PostID": {
+                    "name": "PostID",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -958,5 +965,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "00ce0346f8c5ff71dad610218a91c7a4"
+    "version": "0084051c6196544c65162178ae0dce84"
 };

@@ -78,6 +78,21 @@ const styles = StyleSheet.create({
         fontSize:18,
         fontWeight:'bold',
     },
+    removeCon:{
+        padding:10,
+        width:150,
+        marginTop:10,
+        alignSelf:'center',
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'#970303',
+        borderRadius:15,
+    },
+    removeTxt:{
+        color:'#f7f4f4',
+        fontSize:18,
+        fontWeight:'bold',
+    },
     delCon:{
         padding:10,
         width:150,

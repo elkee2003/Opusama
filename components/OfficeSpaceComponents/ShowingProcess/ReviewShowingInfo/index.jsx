@@ -11,13 +11,9 @@ const ReviewShowingInfo = () => {
 
     const {dbUser} = useAuthContext();
 
-    const {setShowing, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, propertyType, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, realtorContext, setRealtorContext} = useShowingContext()
+    const {setShowing, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, PostID, setPostID, propertyType, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, realtorContext, setRealtorContext} = useShowingContext()
 
     const [loading, setLoading] = useState(false);
-
-    const resetFormFields = () => {
-      setClientFirstName(''); setClientLastName(''); setClientPhoneNumber(''); setNote(''); setPropertyDetails(null); setPropertyType('');  setAccommodationType(''); setBookingLat(null); setBookingLng(null); setRealtorContext(''); 
-    }
 
     const handleGetInTouch = async () =>{
       if(loading) return;
@@ -34,12 +30,22 @@ const ReviewShowingInfo = () => {
           bookingLng,
           userID: dbUser.id,
           realtorID: realtorContext.id,
+          PostID,
           status:'PENDING'
         }))
         setShowing(getInTouch);
         Alert.alert('Successful', "Booking was a success");
   
-        resetFormFields();
+        setClientFirstName('');
+        setClientLastName('');
+        setClientPhoneNumber('');
+        setNote(''); 
+        setPropertyDetails(null); 
+        setPostID(''); 
+        setPropertyType('');  setAccommodationType(''); 
+        setBookingLat(null); 
+        setBookingLng(null); 
+        setRealtorContext(''); 
   
         router.push('/home')
   
@@ -53,6 +59,7 @@ const ReviewShowingInfo = () => {
     useEffect(() => {
     if (propertyDetails) {
       setPropertyType(propertyDetails.propertyType);
+      setPostID(propertyDetails.id);
       setAccommodationType(propertyDetails.type);
       setBookingLat(propertyDetails.lat);
       setBookingLng(propertyDetails.lng);

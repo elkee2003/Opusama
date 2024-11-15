@@ -136,6 +136,7 @@ export const onCreateBooking = /* GraphQL */ `
       status
       userID
       realtorID
+      PostID
       createdAt
       updatedAt
       _version
@@ -169,6 +170,7 @@ export const onUpdateBooking = /* GraphQL */ `
       status
       userID
       realtorID
+      PostID
       createdAt
       updatedAt
       _version
@@ -202,6 +204,7 @@ export const onDeleteBooking = /* GraphQL */ `
       status
       userID
       realtorID
+      PostID
       createdAt
       updatedAt
       _version

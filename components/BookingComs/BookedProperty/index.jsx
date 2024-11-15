@@ -8,7 +8,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router'
 import { getUrl } from 'aws-amplify/storage';
 
-const ExploreDetailedPost = ({post, realtor}) => {
+const BookedPropertyDetailedPost = ({post, realtor}) => {
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false)
@@ -75,7 +75,7 @@ const ExploreDetailedPost = ({post, realtor}) => {
 
         {/* ScrollView */}
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/explore/gallery/${post.id}`} asChild>
+          <Link href={`/bookings/gallery/${post.id}`} asChild>
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}
@@ -348,4 +348,4 @@ const ExploreDetailedPost = ({post, realtor}) => {
   )
 }
 
-export default ExploreDetailedPost;
+export default BookedPropertyDetailedPost;

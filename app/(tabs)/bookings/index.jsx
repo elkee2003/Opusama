@@ -1,6 +1,6 @@
 import { View, Text,} from 'react-native';
 import React, {useEffect} from 'react';
-import BookingCom from '../../../components/BookingComs/BookingList';
+import BookingList from '../../../components/BookingComs/BookingList';
 import { router } from 'expo-router';
 import { useAuthContext } from '@/providers/AuthProvider';
 
@@ -24,7 +24,7 @@ const Bookings = () => {
 
   return (
     <View style={{flex:1}} >
-     <BookingCom/>
+     <BookingList/>
     </View>
   )
 }

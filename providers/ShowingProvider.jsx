@@ -11,6 +11,7 @@ const ShowingContextProvider = ({children}) => {
     const [clientPhoneNumber, setClientPhoneNumber]= useState('');
     const [note, setNote] = useState('');
     const [propertyDetails, setPropertyDetails] = useState('')
+    const [PostID, setPostID] = useState('');
     const [propertyType, setPropertyType] = useState('');
     const [accommodationType, setAccommodationType] = useState('');
     const [bookingLat, setBookingLat] = useState(0);
@@ -53,7 +54,7 @@ const ShowingContextProvider = ({children}) => {
 
 
   return (
-    <ShowingContext.Provider value={{showing, setShowing, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, propertyType, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice}}>
+    <ShowingContext.Provider value={{showing, setShowing, clientFirstName, setClientFirstName, clientLastName, setClientLastName, clientPhoneNumber, note, setNote, propertyDetails, setPropertyDetails, propertyType, PostID, setPostID, setPropertyType, accommodationType, setAccommodationType, setClientPhoneNumber, bookingLat, setBookingLat, bookingLng, setBookingLng, errorMessage, setErrorMessage, onValidateInput, realtorContext, setRealtorContext, postPrice, setPostPrice, postTotalPrice, setPostTotalPrice, overAllPrice, setOverAllPrice, realtorPrice, setRealtorPrice}}>
         {children}
     </ShowingContext.Provider>
   )
