@@ -4,7 +4,8 @@ enum BookingStatus {
   VIEWING
   VIEWED
   SOLD
-  CANCELLED
+  PAID
+  RECEIVED
   DENIED
 }
 

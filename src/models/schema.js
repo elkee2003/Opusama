@@ -958,7 +958,8 @@ export const schema = {
                 "VIEWING",
                 "VIEWED",
                 "SOLD",
-                "CANCELLED",
+                "PAID",
+                "RECEIVED",
                 "DENIED"
             ]
         }

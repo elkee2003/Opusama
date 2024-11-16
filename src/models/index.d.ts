@@ -8,7 +8,8 @@ export enum BookingStatus {
   VIEWING = "VIEWING",
   VIEWED = "VIEWED",
   SOLD = "SOLD",
-  CANCELLED = "CANCELLED",
+  PAID = "PAID",
+  RECEIVED = "RECEIVED",
   DENIED = "DENIED"
 }
 

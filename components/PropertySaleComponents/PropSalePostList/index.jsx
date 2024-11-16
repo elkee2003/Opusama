@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Pressable } from 'react-native'
+import { View, Text, FlatList, Pressable, RefreshControl } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import PropSalePostFeed from '../PropSalePost'
 import styles from './styles'
@@ -12,6 +12,7 @@ const PropSalePostList = () => {
 
   const [realtorPosts, setRealtorPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   // const fetchRealtorsAndPosts = async () => {
   //   try {
@@ -85,6 +86,7 @@ const PropSalePostList = () => {
       console.error('Error fetching realtors and posts', error);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
@@ -99,6 +101,11 @@ const PropSalePostList = () => {
 
     return () => subscription.unsubscribe();
   },[])
+
+  const handleRefresh = () => {
+    setRefreshing(true); // Start the refreshing spinner
+    fetchRealtorsAndPosts();
+  };
 
   return (
     <View style={styles.container}>
@@ -122,6 +129,13 @@ const PropSalePostList = () => {
             initialNumToRender={10} // Load fewer items initially
             maxToRenderPerBatch={10} // Load a small batch of items
             renderItem={({item})=> <PropSalePostFeed post={item}/>}
+            refreshControl={
+              <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={handleRefresh}
+                  colors={['#11032b']} // Spinner color
+              />
+            }
         />
         :
         <Text style={styles.noListings}>No Property Sale listings</Text>

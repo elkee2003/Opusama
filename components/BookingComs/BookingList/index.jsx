@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Alert, ActivityIndicator, RefreshControl } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import BookingSingle from '../BookingSingle';
 import { useAuthContext } from '@/providers/AuthProvider';
@@ -11,6 +11,7 @@ const BookingList = () => {
     const {dbUser} = useAuthContext()
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
 
     const fetchBookings = async () =>{
         setLoading(true);
@@ -33,6 +34,7 @@ const BookingList = () => {
             Alert.alert('Error fetching bookings', e.message)
         }finally{
             setLoading(false);
+            setRefreshing(false);
         }
     }
 
@@ -75,6 +77,11 @@ const BookingList = () => {
         return () => subscription.unsubscribe();
       }, [])
 
+      const handleRefresh = () => {
+        setRefreshing(true); // Start the refreshing spinner
+        fetchBookings();
+      };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Bookings</Text>
@@ -97,6 +104,13 @@ const BookingList = () => {
                     onUpdateStatus={updateBookingStatus} 
                 />
             )}
+            refreshControl={
+              <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={handleRefresh}
+                  colors={['#11032b']} // Spinner color
+              />
+            }
         />
       )}
     </View>

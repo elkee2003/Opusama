@@ -29,9 +29,13 @@ const Booking = ({ postPrice }) => {
       daysDifference = daysDifference === 0 ? 1 : daysDifference;
       console.log('Number of Days:', daysDifference);
 
+      // Format and set the dates
+      const formattedCheckInDate = dayjs(range.startDate).format('DD MMMM, YYYY');
+      const formattedCheckOutDate = dayjs(range.endDate).format('DD MMMM, YYYY');
+
       setDuration(daysDifference);
-      setCheckInDate(range.startDate);
-      setCheckOutDate(range.endDate);
+      setCheckInDate(formattedCheckInDate);
+      setCheckOutDate(formattedCheckOutDate);
 
       if (postTotalPrice) {
         setTotalPrice(daysDifference * postTotalPrice); // Calculate the total price based on the daysDifference and price
@@ -71,7 +75,7 @@ const Booking = ({ postPrice }) => {
           <>
             {range.startDate ? (
               <Text style={styles.range}>
-                <Text style={styles.rangeBold}>From:</Text> {dayjs(range.startDate).format('MMMM DD, YYYY')}
+                <Text style={styles.rangeBold}>From:</Text> {dayjs(range.startDate).format('DD MMMM, YYYY')}
               </Text>
             ) : (
               <Text style={styles.selectCheck}>Select Check-in date</Text>

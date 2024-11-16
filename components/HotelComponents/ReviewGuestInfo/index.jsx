@@ -24,7 +24,8 @@ const ReviewGuestInfo = () => {
       setNameOfType(propertyDetails.nameOfType);
       setBookingLat(propertyDetails.lat);
       setBookingLng(propertyDetails.lng);
-      setRealtorPrice(overAllPrice * 0.85);
+      setRealtorPrice(overAllPrice);
+      // setRealtorPrice(overAllPrice * 0.85); //will use this when I fix payment with flutterwave
     }
   }, [propertyDetails, overAllPrice]);
   
@@ -127,6 +128,13 @@ const ReviewGuestInfo = () => {
 
           <Text style={styles.txtInputHeader}>Phone Number(s):</Text>
           <Text style={styles.txtInput}>{guestPhoneNumber}</Text>
+
+          {/* Not showing because I haven't figured out how to show */}
+          {/* <Text style={styles.txtInputHeader}>Check-in:</Text>
+          <Text style={styles.txtInput}>{String({checkInDate})}</Text>
+
+          <Text style={styles.txtInputHeader}>Check-out:</Text>
+          <Text style={styles.txtInput}>{String({checkOutDate})}</Text> */}
 
           <Text style={styles.txtInputHeader}>Purpose of stay:</Text>
           <Text style={styles.txtInput}>{purpose?.trim()}</Text>

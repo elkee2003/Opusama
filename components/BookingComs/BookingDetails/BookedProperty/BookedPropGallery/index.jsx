@@ -1,11 +1,11 @@
 import { View, Text, Pressable } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import styles from './styles'
-import DefaultImage from '../../../../assets/images/defaultImage.png';
+import DefaultImage from '../../../../../assets/images/defaultImage.png';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
-import SmartImage from '../../../SmartImage/SmartImage';
+import SmartImage from '../../../../SmartImage/SmartImage';
 
 const Image = SmartImage;
 

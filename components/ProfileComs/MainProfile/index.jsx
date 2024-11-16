@@ -26,13 +26,15 @@ const ProfilePage = () => {
 
   // Fetch signed URL for profile picture
   const fetchImageUrl = async () => {
-    if (!dbUser.profilePic) {
-      setProfilePic(null); // No image set, so reset profilePic
+    setLoading(true);
+
+    if (!dbUser?.profilePic) {
+      // If profilePic is not available, use the placeholder
+      setProfilePic(null);
       setLoading(false);
       return;
     }
     
-    setLoading(true);
     try {
       const result = await getUrl({
         path: dbUser.profilePic,
@@ -43,17 +45,20 @@ const ProfilePage = () => {
       });
 
       if (result.url) {
-        setProfilePic(result.url.toString());
+        setProfilePic(result?.url.toString());
+      }else {
+        setProfilePic(null); // Fallback to null if no URL is returned
       }
     } catch (error) {
       console.error('Error fetching profile pic URL:', error);
     }finally {
       setLoading(false);
+      setProfilePic(null);
     }
   };
 
   useEffect(() => {
-    if (dbUser.profilePic) {
+    if (dbUser?.profilePic) {
       fetchImageUrl();
     }
 
@@ -75,7 +80,7 @@ const ProfilePage = () => {
             style={styles.profilePicContainer}
             onPress={()=>router.push('/profile/editprofile')}
           >
-          {loading ? (
+          {loading || !profilePic  ? (
             <Image 
               source={Placeholder} 
               style={styles.img}

@@ -1,6 +1,6 @@
 import { View, FlatList,} from 'react-native'
 import React, {useState, useEffect} from 'react'
-import BookedPropGallery from '../../../../components/BookingComs/BookedProperty/BookedPropGallery';
+import BookedPropGallery from '../../../../../../components/BookingComs/BookingDetails/BookedProperty/BookedPropGallery';
 import { useLocalSearchParams } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
 import { Post } from '@/src/models'

@@ -134,9 +134,9 @@ const ReviewDetails = () => {
             await createUser ()
             router.push('/profile');
 
-            setTimeout(() => {
-                router.push('/home');
-            }, 1000);
+            // setTimeout(() => {
+            //     router.push('/home');
+            // }, 1000);
         }
     }
 

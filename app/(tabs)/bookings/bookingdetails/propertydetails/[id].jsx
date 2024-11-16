@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import BookedPropertyDetailedPost from '../../../components/BookingComs/BookedProperty';
+import BookedPropertyDetailedPost from '../../../../../components/BookingComs/BookingDetails/BookedProperty';
 import { useLocalSearchParams } from 'expo-router';
 import { useBookingContext } from '@/providers/BookingProvider';
 import { DataStore } from 'aws-amplify/datastore';

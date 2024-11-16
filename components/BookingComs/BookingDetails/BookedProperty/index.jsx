@@ -2,7 +2,7 @@ import { View, Text, Image,ScrollView, TouchableOpacity, Pressable } from 'react
 import React, { useState, useEffect } from 'react';
 import { Link } from 'expo-router';
 import styles from './styles';
-import DefaultImage from '../../../assets/images/defaultImage.png';
+import DefaultImage from '../../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router'
@@ -75,7 +75,7 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
 
         {/* ScrollView */}
         <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-          <Link href={`/bookings/gallery/${post.id}`} asChild>
+          <Link href={`/bookings/bookingdetails/propertydetails/gallery/${post.id}`} asChild>
             <TouchableOpacity>
               <View style={styles.imageContainer}>
                 {/* Image */}

@@ -18,29 +18,14 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
     onUpdateStatus(booking.id, 'VIEWED');
   };
 
-  const handleCopyPhoneNumber = async () => {
-    const phoneNumber = booking?.realtor?.phoneNumber;
-    
-    if (phoneNumber) {
-      try {
-        await Clipboard.setStringAsync(phoneNumber);
-        Alert.alert('Phone Number Copied', 'You can paste it into the dialer to make a call.');
-      } catch (error) {
-        console.error("Error copying phone number:", error);
-        Alert.alert('Error', 'Failed to copy the phone number.');
-      }
-    } else {
-      Alert.alert('Error', 'Phone number is not available.');
-    }
-  };
-
   const getStatusText = (status) => {
     if (status === 'PENDING') return 'Pending';
     if (status === 'ACCEPTED') return 'Accepted';
     if (status === 'VIEWING') return 'Viewing';
     if (status === 'VIEWED') return 'Viewed';
     if(status === 'SOLD') return 'Sold';
-    if(status === 'CANCELLED') return 'Cancelled';
+    if(status === 'PAID') return 'Paid';
+    if(status === 'RECEIVED') return 'Received';
     if (status === 'DENIED') return 'Denied';
     return 'Pending';
   };
@@ -61,12 +46,18 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         </TouchableOpacity>
       )}
       
-      <TouchableOpacity onPress={()=> router.push(`/bookings/${booking.PostID}`)}>
+      <TouchableOpacity onPress={()=> router.push(`/bookings/bookingdetails/fulldetails/${booking.id}`)}>
         <Text style={styles.subHeading}>Realtor:</Text>
         <Text style={styles.detail}>{booking?.realtor?.firstName}</Text>
 
-        <Text style={styles.subHeading}>Accomodation Type:</Text>
-        <Text style={styles.detail}>{booking?.propertyType}</Text>
+        <TouchableOpacity onPress={()=> router.push(`/bookings/bookingdetails/propertydetails/${booking.PostID}`)}>
+          <Text style={styles.subHeading}>
+            Accomodation Type:
+          </Text>
+          <Text style={styles.detail}>
+            {booking?.propertyType}
+          </Text>
+        </TouchableOpacity>
 
         {booking.nameOfType && (
           <>
@@ -89,23 +80,13 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
           </>
         )}
 
-        {(booking.status === 'ACCEPTED') && (
-          <>
-            
-            <Text style={styles.subHeading}>Realtor Phone Number:</Text>
-            <TouchableOpacity onPress={handleCopyPhoneNumber}>
-              <Text style={styles.detail}>{booking?.realtor?.phoneNumber}</Text>
-            </TouchableOpacity>
-          </>
-        )}
-
         {/* Status */}
         <Text style={styles.subHeading}>Status:</Text>
         <View style={styles.statusRow}>
           <Text style={styles.detail}>
             {getStatusText(booking.status)}
           </Text>
-          {(booking.status === 'ACCEPTED' || booking.status === 'VIEWING' || booking.status === 'VIEWED') ? (
+          {(booking.status === 'ACCEPTED' || booking.status === 'VIEWING' || booking.status === 'VIEWED' || booking.status === 'PAID' || booking.status === 'RECEIVED') ? (
               <View style={styles.greenIcon}/>
             ):(
               <View style={styles.redIcon}/>
@@ -115,6 +96,11 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         {/* if status is PENDING */}
         {booking.status === 'PENDING' && (
           <Text style={styles.wait}>Kindly wait for response of Realtor to get contact</Text>
+        )}
+
+        {/* if status is ACCEPTED */}
+        {booking.status === 'ACCEPTED' && (
+          <Text style={styles.wait}>Kindly click on card to get Realtor's contact</Text>
         )}
 
         {/* Button Section */}
@@ -176,7 +162,7 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         )}
 
         {/* If booking status is VIEWED */}
-        {(booking.status === 'VIEWED' && booking.propertyType !== 'Hotel / Shortlet') &&  (
+        {(booking.status === 'VIEWED' || booking.status === 'SOLD' || booking.status === 'RECEIVED') &&  (
           <TouchableOpacity 
             style={styles.delCon}
             onPress={()=>{

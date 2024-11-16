@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Pressable } from 'react-native'
+import { View, Text, FlatList, RefreshControl } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { Link } from 'expo-router'
 import ExplorePost from '../ExplorePost'
@@ -11,6 +11,7 @@ const ExplorePostList = () => {
 
   const [realtorPosts, setRealtorPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchRealtorsAndPosts = async () => {
     try {
@@ -44,6 +45,7 @@ const ExplorePostList = () => {
       console.error('Error fetching realtors and posts', error);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
@@ -59,6 +61,12 @@ const ExplorePostList = () => {
     return () => subscription.unsubscribe();
   },[])
 
+  // Refreshing function
+  const handleRefresh = () => {
+    setRefreshing(true); // Start the refreshing spinner
+    fetchRealtorsAndPosts();
+  };
+
   return (
     <View style={styles.container}>
       
@@ -67,6 +75,13 @@ const ExplorePostList = () => {
         <FlatList 
           data={realtorPosts}
           renderItem={({item})=> <ExplorePost post={item}/>}
+          refreshControl={
+            <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                colors={['#11032b']} // Spinner color
+            />
+          }
         />
       :
           <Text style={styles.noListings}>No listings</Text>
