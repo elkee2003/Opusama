@@ -124,7 +124,9 @@ const ExploreDetailedPost = ({post, realtor}) => {
             </>
           )}
 
-          <View style={styles.topBorderLine}/>
+          {post.availableDocs && (
+            <View style={styles.topBorderLine}/>
+          )}
 
           {/* Accommodation Parts */}
           {post.accommodationParts && (
