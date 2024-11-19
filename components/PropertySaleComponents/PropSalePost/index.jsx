@@ -82,7 +82,7 @@ const PropSalePost = ({post}) => {
         {/* Location */}
         {post.address && (
           <Text style={styles.location}>
-            {`${post.address.substring(8, 23)}...`}
+            {`...${post.address.substring(5)}`}
           </Text>
         )}
 

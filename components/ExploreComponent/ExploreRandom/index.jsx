@@ -151,9 +151,9 @@ const ExploreDetailedPost = ({post, realtor}) => {
           <View style={styles.topBorderLine}/>
 
           {/* Location */}
-          {/* {post.address && (
-            <Text style={styles.location}>{`${post.address.substring(0,17)}...`}</Text>
-          )} */}
+          {post.address && (
+            <Text style={styles.location}>{`...${post.address.substring(5)}`}</Text>
+          )}
 
           {/* City, State, Country, */}
           <View>

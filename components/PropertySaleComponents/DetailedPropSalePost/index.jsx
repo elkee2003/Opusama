@@ -148,7 +148,7 @@ const DetailedPropertySalePost = ({post, realtor}) => {
 
           {/* Location */}
           {post.address && (
-            <Text style={styles.location}>{`${post.address.substring(8,17)}...`}</Text>
+            <Text style={styles.location}>{`...${post.address.substring(5)}`}</Text>
           )}
 
           {/* City, State, Country, */}
