@@ -1,4 +1,4 @@
-import { View, Text, Image, Alert, ScrollView} from 'react-native'
+import { View, Text, Image, Alert, ScrollView, Linking} from 'react-native'
 import React, {useState} from 'react'
 // import Logo from '../../assets/images/Atua.png'
 import CustomInput from './customInput'
@@ -46,6 +46,13 @@ const index = () => {
     const onForgotPassword = () =>{
         router.push('/login/forgotpassword')
     }
+
+    // Testing to see how redirecting to a site works
+    // const openPrivacyPolicy = () => {
+    //     Linking.openURL('https://sites.google.com/view/opusama/home').catch((err) =>
+    //     console.error('Failed to open URL:', err)
+    //     );
+    // };
 
   return (
     <View style={styles.container}>
@@ -106,7 +113,7 @@ const index = () => {
 
             {/* Policy */}
             <View style={styles.policyContainer}>
-                <Text style={styles.policyTxt}>Kindly review the <Text style={styles.policyLink}onPress={()=>router.push('/policies')}>Terms of Use </Text>and <Text style={styles.policyLink}onPress={()=>router.push('/policies')}>Privacy Policy</Text> before going further.</Text>
+                <Text style={styles.policyTxt}>Kindly review the <Text style={styles.policyLink}onPress={()=>router.push('/termsandconditions')}>Terms of Use </Text>and <Text style={styles.policyLink}onPress={()=>router.push('/privacypolicy')}>Privacy Policy</Text> before going further.</Text>
             </View>
 
             {/* Buttons */}

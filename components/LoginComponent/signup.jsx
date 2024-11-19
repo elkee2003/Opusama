@@ -212,11 +212,11 @@ const SignupCom = () => {
                 />
                 <Text style={styles.policyTxt}>
                     I agree to the{' '}
-                    <Text style={styles.policyLink} onPress={() => router.push('/screens/termsandconditions')}>
+                    <Text style={styles.policyLink} onPress={() => router.push('/termsandconditions')}>
                         Terms of Service
                     </Text>{' '}
                     and{' '}
-                    <Text style={styles.policyLink} onPress={() => router.push('/screens/privacypolicy')}>
+                    <Text style={styles.policyLink} onPress={() => router.push('/privacypolicy')}>
                         Privacy Policy
                     </Text>
                 </Text>

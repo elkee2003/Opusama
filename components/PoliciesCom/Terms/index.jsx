@@ -1,6 +1,8 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
+import * as Clipboard from 'expo-clipboard';
 import styles from './styles';
+import Feather from '@expo/vector-icons/Feather';
 
 const TermAndConditions = () => {
   return (
@@ -75,8 +77,36 @@ const TermAndConditions = () => {
         
         <Text style={styles.subHeader}>9. Contact</Text>
         <Text style={styles.txt}>
-          If you have questions regarding these Terms, please contact us at <Text style={styles.support}>support@opusama.com</Text>.
+          If you have questions regarding these Terms, please contact us at:
         </Text>
+        
+        {/* Email Support */}
+        <TouchableOpacity
+            style={styles.supportConEmail}
+            onPress={() => {
+              Clipboard.setStringAsync('support@opusama.com');
+              alert('Email address copied to clipboard!');
+            }}
+          >
+            <Feather name="mail" style={styles.emailIcon} />
+            <Text style={styles.supportEmail}>
+              support@opusama.com
+            </Text>
+        </TouchableOpacity>
+
+        {/* Phone Support */}
+        <TouchableOpacity
+          style={styles.supportConPhone}
+          onPress={() => {
+            Clipboard.setStringAsync('+234 902 252 2504');
+            alert('Phone Number copied to clipboard!');
+          }}
+        >
+          <Feather name="phone" style={styles.phoneIcon} />
+          <Text style={styles.supportPhone}>
+            +234 902 252 2504
+          </Text>
+        </TouchableOpacity>
     </ScrollView>
   )
 }

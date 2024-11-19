@@ -23,6 +23,14 @@ const ReviewDetails = () => {
 
     async function uploadImage() {
         try {
+
+            // Step 1: Delete the previous profile photo if it exists
+            if (dbUser?.profilePic) {
+                console.log("Deleting previous profile photo:", dbUser.profilePic);
+                await remove({ path: dbUser.profilePic });
+            }
+
+            // Step 2: Process and upload the new profile photo
             const manipulatedImage = await ImageManipulator.manipulateAsync(
                 profilePic,
                 [{ resize: { width: 800 } }],  // Adjust width as needed
@@ -31,8 +39,10 @@ const ReviewDetails = () => {
             const response = await fetch(manipulatedImage.uri);
             const blob = await response.blob();
 
-            const fileKey = `public/profilePhoto/${Crypto.randomUUID()}.jpg`; // New path format
+            // Generate a unique file key
+            const fileKey = `public/profilePhoto/${sub}/${Crypto.randomUUID()}.jpg`; // New path format
 
+            // Upload the new image to S3
             const result = await uploadData({
                 path: fileKey,
                 data: blob,

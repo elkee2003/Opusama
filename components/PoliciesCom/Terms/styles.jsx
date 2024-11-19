@@ -29,9 +29,36 @@ const styles = StyleSheet.create({
         fontSize:17,
         lineHeight:20,
     },
-    support:{
+    supportConEmail:{
+        flexDirection:'row',
+        alignItems:'center',
+        gap:10,
+    },
+    emailIcon:{
+        fontSize:20,
+        color:'black',
+    },
+    supportEmail:{
+        fontSize:17,
         fontStyle:'italic',
         fontWeight:'bold',
+        color:'#1743d3'
+    },
+    supportConPhone:{
+        marginTop:10,
+        flexDirection:'row',
+        alignItems:'center',
+        gap:10,
+    },
+    phoneIcon:{
+        fontSize:20,
+        color:"black",
+    },
+    supportPhone:{
+        fontSize:17,
+        fontStyle:'italic',
+        fontWeight:'bold',
+        color:'#02091f'
     }
 })
 

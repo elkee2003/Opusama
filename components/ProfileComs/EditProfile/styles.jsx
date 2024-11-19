@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     error:{
         color:'#d80b0b',
         fontSize:13,
-        marginTop:-5,
+        marginTop:5,
         marginHorizontal:15,
         marginBottom:5,
     },
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     //     gap:15
     // },
     nxtBtn:{
-        backgroundColor:'#1a1b1a',
+        backgroundColor:'#0c052e',
         marginTop:10,
         padding:2,
         marginHorizontal:80,

@@ -1,8 +1,12 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
+import * as Clipboard from 'expo-clipboard';
 import styles from './styles';
+import Fontisto from '@expo/vector-icons/Fontisto';
+import Feather from '@expo/vector-icons/Feather';
 
 const PrivacyPolicy = () => {
+
   return (
     <ScrollView 
         style={styles.container}
@@ -28,6 +32,10 @@ const PrivacyPolicy = () => {
       </Text>
       <Text style={styles.txt}>
         <Text style={styles.pointer}>•</Text>	Property Listing Details: Realtors may upload property-related data, including images, location, property type, and price.
+      </Text>
+
+      <Text style={styles.txt}>
+        <Text style={styles.pointer}>•</Text> Banking Information: We collect full names and bank account details to facilitate money transfers.
       </Text>
       
       <Text style={styles.txtSub}>
@@ -102,8 +110,36 @@ const PrivacyPolicy = () => {
       
       <Text style={styles.subHeader}>9. Contact Us</Text>
       <Text style={styles.txt}>
-        If you have any questions about this Privacy Policy or your personal data, please contact us at <Text style={styles.support}>support@opusama.com</Text>.
+        If you have any questions about this Privacy Policy or your personal data, please contact us at:
       </Text>
+
+      {/* Email Support */}
+      <TouchableOpacity
+          style={styles.supportConEmail}
+          onPress={() => {
+            Clipboard.setStringAsync('support@opusama.com');
+            alert('Email address copied to clipboard!');
+          }}
+        >
+          <Fontisto style={styles.emailIcon} name="email" />
+          <Text style={styles.supportEmail}>
+            support@opusama.com
+          </Text>
+        </TouchableOpacity>
+
+        {/* Phone Support */}
+        <TouchableOpacity
+          style={styles.supportConPhone}
+          onPress={() => {
+            Clipboard.setStringAsync('+234 902 252 2504');
+            alert('Phone Number copied to clipboard!');
+          }}
+        >
+          <Feather name="phone" style={styles.phoneIcon} />
+          <Text style={styles.supportPhone}>
+            +234 902 252 2504
+          </Text>
+        </TouchableOpacity>
     </ScrollView>
   )
 }

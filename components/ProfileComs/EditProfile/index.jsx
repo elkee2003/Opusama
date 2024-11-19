@@ -63,7 +63,7 @@ const EditProfile = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>EditProfile</Text>
+      <Text style={styles.title}>Edit Profile</Text>
 
       {/* Upload Profile Picture */}
       <View style={styles.profilePicContainer}>
@@ -111,10 +111,10 @@ const EditProfile = () => {
           placeholder='Input Address'
           style={styles.input}
         />
-
-        {/* Error Message */}
-        <Text style={styles.error}>{errorMessage}</Text>
       </ScrollView>
+      
+      {/* Error Message */}
+      <Text style={styles.error}>{errorMessage}</Text>
 
       <TouchableOpacity onPress={goToNxtPage} style={styles.nxtBtn}>
         <MaterialIcons name="navigate-next" style={styles.nxtBtnIcon} />

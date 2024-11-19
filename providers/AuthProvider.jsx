@@ -13,6 +13,7 @@ const AuthProvider = ({children}) => {
     const [authUser, setAuthUser] = useState(null);
     const [dbUser, setDbUser] = useState(null);
     const [sub, setSub] = useState(null);
+    console.log(sub, dbUser)
 
     // Functions for useEffect
     const currentAuthenticatedUser = async () =>{
@@ -27,6 +28,8 @@ const AuthProvider = ({children}) => {
     }
 
     const dbCurrentUser = async () =>{
+        if(!sub) return; // Ensure sub is available before querying DataStore
+
         try{
           const dbusercurrent = await DataStore.query(User, (user)=>user.sub.eq(sub))
           // DataStore.delete(User, Predicates.ALL)
