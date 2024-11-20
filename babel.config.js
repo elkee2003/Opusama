@@ -3,9 +3,9 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     env: {
-      production: {
-        plugins: ['transform-remove-console'],
-      },
-    },
+    production: {
+      plugins: ['transform-remove-console']
+    }
+  }
   };
 };
