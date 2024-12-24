@@ -43,7 +43,7 @@ const OrderLiveUpdate = () => {
         }
       });
 
-      return () => subscription.unsubscribe;
+      return () => subscription.unsubscribe();
     },[post])
 
 

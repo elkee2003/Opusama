@@ -7,6 +7,7 @@ export const getRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      realtorID
       userID
       createdAt
       updatedAt
@@ -28,6 +29,7 @@ export const listRealtorReviews = /* GraphQL */ `
         id
         rating
         review
+        realtorID
         userID
         createdAt
         updatedAt
@@ -59,6 +61,41 @@ export const syncRealtorReviews = /* GraphQL */ `
         id
         rating
         review
+        realtorID
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const realtorReviewsByRealtorID = /* GraphQL */ `
+  query RealtorReviewsByRealtorID(
+    $realtorID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelRealtorReviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    realtorReviewsByRealtorID(
+      realtorID: $realtorID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        rating
+        review
+        realtorID
         userID
         createdAt
         updatedAt
@@ -92,6 +129,7 @@ export const realtorReviewsByUserID = /* GraphQL */ `
         id
         rating
         review
+        realtorID
         userID
         createdAt
         updatedAt
@@ -602,6 +640,11 @@ export const getRealtor = /* GraphQL */ `
         startedAt
         __typename
       }
+      RealtorReview {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -703,15 +746,16 @@ export const getPost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      timeFrame
       bed
       bedrooms
       amenities
-      policies
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      policies
       country
       state
       city
@@ -748,6 +792,7 @@ export const listPosts = /* GraphQL */ `
         price
         cautionFee
         totalPrice
+        timeFrame
         bed
         bedrooms
         amenities
@@ -798,6 +843,7 @@ export const syncPosts = /* GraphQL */ `
         price
         cautionFee
         totalPrice
+        timeFrame
         bed
         bedrooms
         amenities
@@ -850,6 +896,7 @@ export const postsByRealtorID = /* GraphQL */ `
         price
         cautionFee
         totalPrice
+        timeFrame
         bed
         bedrooms
         amenities

@@ -23,7 +23,7 @@ const PropSalePostList = () => {
 
   //       const posts = await DataStore.query(Post, (p) => p.realtorID.eq(realtor.id));
 
-  //       // Filter the posts by propertyType = "House"
+  //       // Filter the posts by propertyType = "House Rent"
   //       const filteredPosts = posts.filter(post => post.propertyType === 'Land')
 
   //       const realtorWithPosts = filteredPosts.map((post) => ({

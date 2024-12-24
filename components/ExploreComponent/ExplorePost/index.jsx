@@ -96,7 +96,7 @@ const ExplorePost = ({post}) => {
           <View style={styles.priceRow}>
             <Text style={styles.sub}></Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice} / Night
+              ₦{formattedPrice} {post.timeFrame && `/ ${post.timeFrame}`}
             </Text>
           </View>
         )}

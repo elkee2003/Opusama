@@ -1,38 +1,39 @@
 import { View, Text, Image,ScrollView, TouchableOpacity, Pressable } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'expo-router';
-import ReviewProperty from '../ReviewOfficeSpace';
 import styles from './styles';
 import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import BottomSheet, { BottomSheetView, BottomSheetFlatList, BottomSheetScrollView,} from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import DbUserReviewSection from './dbUserReview';
+import UserReviews from './usersReviews';
+import LastReview from './lastReview';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
+import { useAuthContext } from '@/providers/AuthProvider';
+import { DataStore } from 'aws-amplify/datastore';
+import { PostReview } from '@/src/models';
 
 const DetailedOfficeSpacePost = ({post, realtor}) => {
 
+  const {dbUser} = useAuthContext()
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false);
   const [readMorePol, setReadMorePol] = useState(false);
-  const [userRating, setUserRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
+
   const [imageUris, setImageUris] = useState([]);
+  const bottomSheetRef = useRef(null)
+  const snapPoints = useMemo(()=>['1%', '30%', '35%'], [])
+  const handleOpenBottomSheet = () => {
+    bottomSheetRef.current?.expand();
+  };
 
   const formattedPrice = Number(post.price)?.toLocaleString();
   const formattedCautionFee = Number(post.cautionFee)?.toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice)?.toLocaleString();
-
-  const goToAllReviews = ()=>{
-    router.push(`/allReviews/${post.id}`)
-  }
-
-  const goToWriteReview = ()=>{
-    router.push(`/writeReview/${post.id}`)
-  }
-
-  // funciton to handle ratin click
-  const handleRating = (rating)=>{
-    setUserRating(rating)
-  }
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -60,14 +61,55 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
     }
   };
 
+  // Function to calculate average ratings
+  const calculateAverageRating = async () => {
+    try {
+      const allReviews = await DataStore.query(PostReview, (c) =>
+        c.postID.eq(post.id)
+      );
+
+      if (allReviews.length > 0) {
+        const totalRating = allReviews.reduce((sum, review) => sum + review.rating, 0);
+        const average = totalRating / allReviews.length;
+        setAverageRating(average.toFixed(1)); // Round to one decimal place
+      }else {
+        setAverageRating(0); // Handle no reviews case
+      }
+    } catch (e) {
+      console.log('Error calculating average rating', e);
+    }
+  };
+  
+  // useEffect to calculate average ratings
+  useEffect(() => {
+    calculateAverageRating();
+  }, [post.id]);
+  
+
+  // useEffect for Images
   useEffect(()=>{
     if (post.media?.length > 0) {
       fetchImageUrls();
     }
   }, [post.media])
 
+  // useEffect for realtime update
+  useEffect(()=>{
+    if(!post) return;
+
+    const subscription = DataStore.observe(PostReview).subscribe(({ opType, element }) => {
+      if (element.postID === post.id) { // Ensure it's for the current post
+        if (opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE') {
+          calculateAverageRating();
+        }
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  },[post.id])
+
   return (
-      <View style={styles.container}>
+      <GestureHandlerRootView style={styles.container}>
 
         {/* Back Button */}
         <TouchableOpacity style={styles.bckContainer} onPress={()=>router.back()}>
@@ -191,10 +233,10 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
           <View style={styles.topBorderLine}/>
 
           {/* Medium of Review Star */}
-          {/* <View style={styles.reviewIconRow}>
+          <View style={styles.reviewIconRow}>
             <FontAwesome name="star" style={styles.star} />
-            <Text style={styles.starTxt}>4.7</Text>
-          </View> */}
+            <Text style={styles.starTxt}>{averageRating}</Text>
+          </View>
 
           {/* Type & Description */}
           {post.description && (
@@ -287,63 +329,34 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
           </View>
 
           {/* Border Line */}
-          {/* <View style={styles.borderLine}/> */}
+          <View style={styles.borderLine}/>
 
-          {/* Rate */}
-          {/* <View style={styles.rateContainer}>
-            <Text style={styles.rateTxt}>Rate</Text>
-            <View style={styles.starContainer}>
-              {[1,2,3,4,5].map((index)=>(
-                <TouchableOpacity 
-                key={index} 
-                onPress={()=>handleRating(index)}>
-                  <FontAwesome 
-                  name={index <= userRating ? 'star': 'star-o'} 
-                  size={24} 
-                  color="#07021f" />
-                </TouchableOpacity>
-              ))}
-            </View>
-            <TouchableOpacity style={styles.writeReviewCon} onPress={goToWriteReview}>
-              <Text style={styles.writeReview}>
-                Write a review
-              </Text>
-            </TouchableOpacity>
-          </View> */}
-          
-          {/* Border Line */}
-          {/* <View style={styles.borderLine}/> */}
+          {/* DbUser Rating & Review */}
+          <DbUserReviewSection post={post} dbUser={dbUser} />
 
-          {/* Ratings and Reviews of People */}
-            {/* {
-              post. reviews && post.reviews.length > 0 ? (
-              <View>
-                <Text style={styles.rateTxt}>
-                  Ratings and reviews
-                </Text>
-                {post.reviews.slice(0,2).map(item=>(
-                  <View key={item?.userId}>
-                    <ReviewProperty review={item}/>
-                  </View>
-                ))}
-              </View>): null
-            } */}
+          {/* Last Review */}
+          <Text style={styles.lastRatingReviewTxt}>Ratings and Reviews:</Text>
+          <TouchableOpacity onPress={handleOpenBottomSheet}>
+            <LastReview post={post} dbUser={dbUser}/>
+            <Text style={styles.seeAllReviews}>See all reviews</Text>
+          </TouchableOpacity>
 
-          {/* See all reviews */}
-          {/* {post.reviews && post.reviews.length > 0 ? (
-                <TouchableOpacity style={styles.seeReviewsBtn} onPress={goToAllReviews}>
-                  <Text style={styles.seeReviewsBtnTxt}>
-                    See all reviews
-                  </Text>
-                </TouchableOpacity>
-              ): null
-          } */}
+          {/* Users' Ratings & Reviews */}
+          <BottomSheet
+            ref={bottomSheetRef}
+            snapPoints={snapPoints}
+            topInset={0}
+          >
+            <BottomSheetScrollView>
+              <UserReviews post={post} dbUser={dbUser} />
+            </BottomSheetScrollView>
+          </BottomSheet>
           
         </ScrollView>
         <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/officespacerealtor/clientinfo`)}>
             <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
         </TouchableOpacity>
-      </View>
+      </GestureHandlerRootView>
   )
 }
 

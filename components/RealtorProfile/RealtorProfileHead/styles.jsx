@@ -1,4 +1,5 @@
-import { StyleSheet, } from 'react-native'
+import { StyleSheet, } from 'react-native';
+import {Colors} from '../../../constants/Colors';
 
 const styles = StyleSheet.create({
     container:{
@@ -27,11 +28,6 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         color:'#01011b',
     },
-    // txt:{
-    //     flex:1,
-    //     fontSize:15,
-    //     color:'#01011b'
-    // },
     txtDesc:{
         fontSize:15,
         fontWeight:'bold',
@@ -40,6 +36,20 @@ const styles = StyleSheet.create({
     },
     readMoreLess:{
         color:'#009b0f',
+    },
+    rateReviewBtn:{
+        padding:10,
+        marginHorizontal:50,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:30,
+        backgroundColor:'#020425',
+        marginBottom:10,
+    },
+    rateReviewBtnTxt:{
+        color:'#ededee',
+        fontSize:20,
+        fontWeight:"bold",
     },
 })
 

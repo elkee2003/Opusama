@@ -33,7 +33,7 @@ const ReviewDetails = () => {
             // Step 2: Process and upload the new profile photo
             const manipulatedImage = await ImageManipulator.manipulateAsync(
                 profilePic,
-                [{ resize: { width: 800 } }],  // Adjust width as needed
+                [{ resize: { width: 600 } }],  // Adjust width as needed
                 { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG } // Compress quality between 0 and 1
             );
             const response = await fetch(manipulatedImage.uri);
@@ -144,9 +144,9 @@ const ReviewDetails = () => {
             await createUser ()
             router.push('/profile');
 
-            // setTimeout(() => {
-            //     router.push('/home');
-            // }, 1000);
+            setTimeout(() => {
+                router.push('/home');
+            }, 1000);
         }
     }
 
@@ -192,7 +192,11 @@ const ReviewDetails = () => {
         </ScrollView>
 
         {/* Button */}
-        <TouchableOpacity style={styles.saveBtn} disabled={uploading} onPress={handleSave}>
+        <TouchableOpacity 
+            style={styles.saveBtn} 
+            disabled={uploading} 
+            onPress={handleSave}
+        >
             <Text style={styles.saveBtnTxt}>{uploading ? `Saving... ${uploadProgress}%` : 'Save'}</Text>
         </TouchableOpacity>
     </View>

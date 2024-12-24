@@ -64,7 +64,7 @@ const DetailedBooking = () => {
       }
     });
 
-    return () => subscription.unsubscribe;
+    return () => subscription.unsubscribe();
   },[booking])
   
   if (!booking) {

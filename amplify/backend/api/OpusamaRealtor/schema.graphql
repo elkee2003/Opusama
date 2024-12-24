@@ -2,17 +2,23 @@ enum BookingStatus {
   PENDING
   ACCEPTED
   VIEWING
+  CHECKED_IN
+  VISITING
   VIEWED
+  CHECKED_OUT
+  VISITED
   SOLD
   PAID
   RECEIVED
   DENIED
+  REMOVED
 }
 
 type RealtorReview @model @auth(rules: [{allow: public}]) {
   id: ID!
   rating: Float
   review: String
+  realtorID: ID! @index(name: "byRealtor")
   userID: ID! @index(name: "byUser")
 }
 
@@ -79,6 +85,7 @@ type Realtor @model @auth(rules: [{allow: public}]) {
   Post: [Post] @hasMany(indexName: "byRealtor", fields: ["id"])
   push_token: String
   Bookings: [Booking] @hasMany(indexName: "byRealtor", fields: ["id"])
+  RealtorReview: [RealtorReview] @hasMany(indexName: "byRealtor", fields: ["id"])
 }
 
 type Post @model @auth(rules: [{allow: public}]) {
@@ -97,11 +104,12 @@ type Post @model @auth(rules: [{allow: public}]) {
   price: Float!
   cautionFee: Float
   totalPrice: Float!
+  timeFrame: String
   bed: String
   bedrooms: String
   amenities: String
-  policies: String
   PostReviews: [PostReview] @hasMany(indexName: "byPost", fields: ["id"])
+  policies: String
   country: String!
   state: String
   city: String

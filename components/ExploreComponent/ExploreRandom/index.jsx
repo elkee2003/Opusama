@@ -275,7 +275,7 @@ const ExploreDetailedPost = ({post, realtor}) => {
 
           {/* Policies */}
           <View>
-            <Text style={styles.luxPolHeadTxt}>Stay Policies</Text>
+            <Text style={styles.luxPolHeadTxt}>Policies</Text>
             <Text style={styles.luxPolTxt}>
               {readMorePol || post.policies.length <= 100 ? post.policies : `${post.policies.substring(0,100)}...`}
 

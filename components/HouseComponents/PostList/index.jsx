@@ -31,7 +31,7 @@ const PostList = () => {
             p.realtorID.eq(realtor.id),
             p.available.eq(true)
           ]));
-          const filteredPosts = posts.filter((post) => post.propertyType === 'House');
+          const filteredPosts = posts.filter((post) => post.propertyType === 'House Rent');
 
           // Map the realtor details to each post
           return filteredPosts.map((post) => ({

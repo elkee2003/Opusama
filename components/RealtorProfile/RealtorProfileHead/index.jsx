@@ -5,6 +5,8 @@ import Placeholder from '../../../assets/images/placeholder.png';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
+import { DataStore } from 'aws-amplify/datastore';
+import { RealtorReview } from '@/src/models';
 
 const RealtorProfilePage = ({realtor}) => {
 
@@ -83,11 +85,11 @@ const RealtorProfilePage = ({realtor}) => {
         <View style={styles.profileBtnCon}>
 
             {/* ratings and review */}
-            {/* <TouchableOpacity style={styles.rateReviewBtn}>
+            <TouchableOpacity style={styles.rateReviewBtn}>
                 <Text style={styles.rateReviewBtnTxt}>
                     Ratings & Review
                 </Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
         </View>
 
     </View>

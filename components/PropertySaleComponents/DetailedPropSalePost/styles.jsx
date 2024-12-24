@@ -150,34 +150,88 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignSelf:'center',
     },
-    // writeReviewCon:{
-    //     borderBottomWidth:1.5,
-    //     marginRight:'auto',
-    //     borderColor:'#19ad25',
-    //     borderRadius:20,
-       
-    // },
-    writeReview:{
-        fontSize:16,
-        color:'#07630e',
-        textDecorationLine:'underline'
-
+    
+    usersStarContainer:{
+        flex:1,
+        flexDirection:'row',
+        gap:10,
     },
-    seeReviewsBtn:{
-        marginVertical:10,
-        padding:5,
+
+    reviewInput:{
+        fontSize:16,
         borderWidth:1,
+        borderRadius:20,
+        padding:10,
+    },
+
+    submitReviewBtn:{
+        marginTop:10,
+        padding:5,
+        marginHorizontal:90,
         justifyContent:'center',
         alignItems:'center',
-        marginHorizontal:70,
-        backgroundColor:'transparent',
-        borderRadius:10,
+        borderWidth:1,
+        borderColor:'#020425',
+        borderRadius:30
     },
-    seeReviewsBtnTxt:{
-        fontSize:17,
+
+    submitReviewTxt:{
+        color:'#05072b',
+        fontSize:20,
+        fontWeight:"bold",
+    },
+
+    lastRatingReviewTxt:{
+        marginTop: 15,
+        fontSize:25.888,
         fontWeight:'bold',
-        color: Colors.HEADING,
+        color:Colors.HEADING,
     },
+
+    lastReviewsContainer: {
+        padding: 7,
+        borderRadius:20,
+        backgroundColor: '#e4dfdf',
+    },
+
+    reviewsContainer: {
+        marginTop: 20,
+        padding: 10,
+        backgroundColor: '#f9f9f9',
+    },
+
+    seeAllReviews:{
+        fontSize:16,
+        color:'#07630e',
+        textDecorationLine:'underline',
+        marginBottom:50,
+    },
+
+    reviewItem: {
+        borderBottomWidth:1,
+        borderColor:'#dbd9d9',
+        marginBottom: 15,
+    },
+
+    reviewerName: {
+        fontWeight: 'bold',
+        fontSize:17,
+    },
+
+    reviewText: {
+        color: '#0e0d0d',
+        fontSize:15,
+        marginBottom:10,
+    },
+
+    noReviews:{
+        marginTop:60,
+        fontSize:30,
+        fontWeight:'bold',
+        color:'#b6b3b3',
+        textAlign:'center',
+    },
+
     getinTouchContainer:{
         position:'absolute',
         justifyContent:'center',

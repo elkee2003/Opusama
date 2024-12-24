@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
+import { router } from 'expo-router';
 import { DataStore, Predicates } from 'aws-amplify/datastore'
 import { User } from '@/src/models'
 
@@ -57,19 +58,23 @@ const AuthProvider = ({children}) => {
 
     useEffect(()=>{
 
-      const listener = data =>{
+      const listener = (data) => {
         const { event } = data.payload;
-        if (event === 'signedIn' || event === 'signedOut'){
+        if (event === 'signedIn') {
           currentAuthenticatedUser();
+        } else if (event === 'signedOut') {
+          setAuthUser(null); // Clear the authUser state
+          setSub(null); // Clear the sub state
+          router.push('/login'); // Navigate to the sign-in page
         }
-      }
+      };
   
       // Start listening for authentication events
       const hubListener = Hub.listen('auth', listener);
   
       // Cleanup the listener when the component unmounts
       return () => hubListener(); // Stop listening for the events
-    },[currentAuthenticatedUser]);
+    },[]);
 
     useEffect(()=>{
         if(!sub){

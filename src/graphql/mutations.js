@@ -10,6 +10,7 @@ export const createRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      realtorID
       userID
       createdAt
       updatedAt
@@ -29,6 +30,7 @@ export const updateRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      realtorID
       userID
       createdAt
       updatedAt
@@ -48,6 +50,7 @@ export const deleteRealtorReview = /* GraphQL */ `
       id
       rating
       review
+      realtorID
       userID
       createdAt
       updatedAt
@@ -372,6 +375,11 @@ export const createRealtor = /* GraphQL */ `
         startedAt
         __typename
       }
+      RealtorReview {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -406,6 +414,11 @@ export const updateRealtor = /* GraphQL */ `
       }
       push_token
       Bookings {
+        nextToken
+        startedAt
+        __typename
+      }
+      RealtorReview {
         nextToken
         startedAt
         __typename
@@ -448,6 +461,11 @@ export const deleteRealtor = /* GraphQL */ `
         startedAt
         __typename
       }
+      RealtorReview {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -478,15 +496,16 @@ export const createPost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      timeFrame
       bed
       bedrooms
       amenities
-      policies
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      policies
       country
       state
       city
@@ -521,15 +540,16 @@ export const updatePost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      timeFrame
       bed
       bedrooms
       amenities
-      policies
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      policies
       country
       state
       city
@@ -564,15 +584,16 @@ export const deletePost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      timeFrame
       bed
       bedrooms
       amenities
-      policies
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      policies
       country
       state
       city

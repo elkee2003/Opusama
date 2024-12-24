@@ -54,7 +54,7 @@ const HouseSearch = () => {
 
         // Filter posts with propertyType "hotel" or "shortlet" only
         const filteredPosts = posts.filter(
-          (post) => post.propertyType === 'House'
+          (post) => post.propertyType === 'House Rent'
         )
 
         const housePostData = filteredPosts.map(post =>{
