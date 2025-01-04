@@ -1,23 +1,14 @@
 import { View, Text, Image, ScrollView, Alert, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './styles';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import * as Clipboard from 'expo-clipboard';
 import { router } from 'expo-router';
+import {useProfileContext} from '@/providers/ProfileProvider';
 
 const BookingFullDetails = ({notification, onStatusChange}) => {
 
-  const getStatusText = (status) =>{
-    if (status === 'PENDING') return 'Pending';
-    if (status === 'ACCEPTED') return 'Accepted';
-    if (status === 'VIEWING') return 'Viewing';
-    if (status === 'VIEWED') return 'Viewed';
-    if(status === 'SOLD') return 'Sold';
-    if(status === 'PAID') return 'Paid';
-    if(status === 'RECEIVED') return 'Received';
-    if (status === 'DENIED') return 'Denied';
-    return 'Pending';
-  }
+  const {isPaymentSuccessful, setIsPaymentSuccessful, setPaymentPrice} = useProfileContext();
 
   // Function to copy realtor's phone number
   const handleCopyPhoneNumber = async () => {
@@ -52,6 +43,218 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
     }
   };
 
+  const getStatusText = (status) =>{
+    if (status === 'PENDING') return 'Pending';
+    if (status === 'ACCEPTED') return 'Accepted';
+    if (status === 'VIEWING') return 'Viewing';
+    if (status === 'CHECKED_IN') return 'Checked In';
+    if (status === 'VISITING') return 'Visting';
+    if (status === 'VIEWED') return 'Viewed';
+    if (status === 'CHECKED_OUT') return 'Checked Out';
+    if (status === 'VISITED') return 'Visited';
+    if(status === 'SOLD') return 'Sold';
+    if(status === 'PAID') return 'Paid';
+    if(status === 'RECEIVED') return 'Received';
+    if (status === 'DENIED') return 'Denied';
+    if (status === 'REMOVED_CLIENT') return 'Removed';
+    return 'Pending';
+  };
+
+  // Handle Viewing button click
+  const handleViewingClick = () => {
+    onStatusChange('VIEWING');
+    router.back();
+  };
+
+  // Handle Viewed button click
+  const handleViewedClick = () => {
+    onStatusChange('VIEWED');
+    router.back();
+  };
+
+  // Handle Check-in button click
+  const handleCheckedInClick = () => {
+    onStatusChange('CHECKED_IN');
+    router.back();
+  };
+
+  // Handle Check-out button click
+  const handleCheckedOutClick = () => {
+    onStatusChange('CHECKED_OUT');
+    router.back();
+  };
+
+  // Handle Visiting button click
+  const handleVisitingClick = () => {
+    onStatusChange('VISITING');
+    router.back();
+  };
+
+  // Handle Visited button click
+  const handleVisitedClick = () => {
+    onStatusChange('VISITED');
+    router.back();
+  };
+
+  // Handle Payment
+  const handlePayment = () =>{
+    router.push({
+      pathname: '/payment',
+    });
+  };
+
+
+  useEffect(()=>{
+    if (isPaymentSuccessful) {
+      onStatusChange('PAID');
+      setIsPaymentSuccessful(false); 
+    }
+  }, [isPaymentSuccessful]);
+
+  const renderButton = () => {
+    if (notification.status === 'ACCEPTED') {
+      if (['House Rent', 'Student Accommodation', 'Property Sale', 'Office Space'].includes(notification.propertyType)) {
+        return (
+          <View style={styles.viewConInfoRow}>
+            {/* Button */}
+            <TouchableOpacity style={styles.view} onPress={handleViewingClick}>
+              <Text style={styles.btnTxt}>Viewing</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Viewing Info', 'Click on "Viewing" once you are viewing the property.')}
+            >
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
+        );
+      } else if (notification.propertyType === 'Hotel / Shortlet') {
+        return (
+          <View style={styles.viewConInfoRow}>
+            {/* Button */}
+
+            <TouchableOpacity style={styles.view} onPress={handlePayment}>
+              <Text style={styles.btnTxt}>Make Payment</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Make Payment', 'Click on "Make Payment" to pay for your booked accommodation.')}
+            >
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
+        );
+      } else {
+        return (
+          <View style={styles.viewConInfoRow}>
+            {/* Button */}
+            <TouchableOpacity style={styles.view} onPress={handleVisitingClick}>
+              <Text style={styles.btnTxt}>Visiting</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Visiting Info', 'Click on "Visiting" once you are on the property.')}
+            >
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    }
+
+    if (notification.status === 'VIEWING') {
+      if (['House Rent', 'Student Accommodation', 'Property Sale', 'Office Space'].includes(notification.propertyType)) {
+        return (
+          <View style={styles.viewConInfoRow}>
+            {/* Button */}
+            <TouchableOpacity style={styles.view} onPress={handleViewedClick}>
+              <Text style={styles.btnTxt}>Viewed</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Viewed Info', 'Click on "Viewed" once you are done viewing the property.')}
+            >
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    }
+
+    if (notification.status === 'PAID'){
+      if (notification.propertyType === 'Hotel / Shortlet') {
+        return (
+          <View style={styles.viewConInfoRow}>
+            {/* Button */}
+            <TouchableOpacity style={styles.view} onPress={handleCheckedInClick}>
+              <Text style={styles.btnTxt}>Checked In</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Checked In Info', 'Click on "Checked In" once you are Checked into the hotel/shortlet.')}
+            >
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
+        )
+      }
+    }
+
+    if (notification.status === 'CHECKED_IN') {
+      if (notification.propertyType === 'Hotel / Shortlet') {
+        return (
+          <View style={styles.viewConInfoRow}>
+            {/* Button */}
+            <TouchableOpacity style={styles.view} onPress={handleCheckedOutClick}>
+              <Text style={styles.btnTxt}>Checked Out</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Checked Out Info', 'Click on "Checked Out" once you are out of the hotel/shortlet.')}
+            >
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
+        );
+      } else {
+        return (
+          <View style={styles.viewConInfoRow}>
+            {/* Button */}
+            <TouchableOpacity style={styles.view} onPress={handleVisitedClick}>
+              <Text style={styles.btnTxt}>Visited</Text>
+            </TouchableOpacity>
+
+            {/* Info Icon */}
+            <TouchableOpacity 
+              style={styles.infoIconCon}
+              onPress={() => Alert.alert('Visited Info', 'Click on "Visited" once you are off the property.')}
+            >
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    }
+
+    return null;
+  };
+
+  useEffect(()=>{
+    setPaymentPrice(notification.totalPrice)
+  }, [notification])
+
   return (
     <View style={styles.container}>
         {/* Details */}
@@ -63,14 +266,26 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
               <Text style={styles.header}>Realtor's Details</Text>
               {notification?.realtor?.phoneNumber && (
                 <>
+                  {/* Realtor's name */}
+                  <Text style={styles.subHeader}>
+                    Realtor Name:
+                  </Text>
+
+                  <Text style={styles.detailsRealtor}>
+                    {notification?.realtor?.firstName}
+                  </Text>
+
+                  
+                  {/* Realtor's phone number */}
                   <Text style={styles.subHeader}>
                     Realtor Phone Number:
                   </Text>
+
                   <TouchableOpacity onPress={handleCopyPhoneNumber}>
                     <Text style={styles.detailsRealtor}>
                       {notification?.realtor?.phoneNumber}
                     </Text>
-                  </TouchableOpacity> 
+                  </TouchableOpacity>
                 </>
               )}
 
@@ -267,92 +482,16 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
           <Text style={styles.status}>
           {getStatusText(notification.status)}
           </Text>
-          {(notification.status === 'ACCEPTED'  || notification.status === 'VIEWING' || notification.status === 'VIEWED' || notification.status === 'PAID' || notification.status === 'RECEIVED') ? (
+
+          {(notification.status === 'ACCEPTED'  || notification.status === 'VIEWING' || notification.status === 'CHECKED_IN' || notification.status === 'VISITING' || notification.status === 'VIEWED' || notification.status === 'CHECKED_OUT' || notification.status === 'VISITED' || notification.status === 'PAID' || notification.status === 'RECEIVED') ? (
               <View style={styles.greenIcon}/>
           ):(
               <View style={styles.redIcon}/>
           )}
         </View>
 
-        {/* Buttons - Only show if propertyType is not 'Hotel / Shortlet' */}
-
-        { notification.propertyType !== 'Hotel / Shortlet' && (
-          <>
-            {/* Viewing */}
-            {notification.status === 'ACCEPTED' && (
-              <View style={styles.viewConInfoRow}>
-                <TouchableOpacity 
-                  style={styles.view}
-                  onPress={() => {
-                    onStatusChange('VIEWING');
-                    router.back();
-                  }}
-                >
-                  <Text style={styles.btnTxt}>Viewing</Text>
-                </TouchableOpacity>
-
-                {/* Info Icon */}
-                <TouchableOpacity 
-                  style={styles.infoIconCon}
-                  onPress={() => Alert.alert('Viewing Info', 'Click on "Viewing" once you are viewing the property.')}
-                >
-                  <AntDesign name="infocirlceo" style={styles.infoIcon} />
-                </TouchableOpacity>
-              </View>
-            )}
-
-            {/* Viewed */}
-            {notification.status === 'VIEWING' && (
-              <View style={styles.viewConInfoRow}>
-                <TouchableOpacity 
-                  style={styles.view}
-                  onPress={() => {
-                    onStatusChange('VIEWED');
-                    router.back();
-                  }}
-                >
-                  <Text style={styles.btnTxt}>Viewed</Text>
-                </TouchableOpacity>
-
-                {/* Info Icon */}
-                <TouchableOpacity 
-                style={styles.infoIconCon}
-                onPress={() => Alert.alert('Viewing Info', 'Click on "Viewed" once you are viewing the property.')}
-                >
-                  <AntDesign name="infocirlceo" style={styles.infoIcon} />
-                </TouchableOpacity>
-              </View>
-            )}
-
-          </>
-        )}
-
-        {/* Buttons - Only show if propertyType is 'Hotel / Shortlet' */}
-        {notification.propertyType === 'Hotel / Shortlet' && (
-          <>
-            {notification.status === 'ACCEPTED' && (
-              <View style={styles.viewConInfoRow}>
-                <TouchableOpacity 
-                  style={styles.view}
-                  onPress={() => {
-                    onStatusChange('PAID');
-                    router.back();
-                  }}
-                >
-                  <Text style={styles.btnTxt}>Paid</Text>
-                </TouchableOpacity>
-
-                {/* Info Icon */}
-                <TouchableOpacity 
-                  style={styles.infoIconCon}
-                  onPress={() => Alert.alert('Booking Info', 'Click on "Paid" once you have paid for booking.')}
-                >
-                  <AntDesign name="infocirlceo" style={styles.infoIcon} />
-                </TouchableOpacity>
-              </View>
-            )}
-          </>
-        )}
+        {/* Show Button */}
+        {renderButton()}
     </View>
   )
 }

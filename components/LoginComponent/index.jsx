@@ -18,7 +18,8 @@ const index = () => {
     const [loading, setLoading] = useState(false);
 
     const onSignInPressed = async (data) =>{
-        const { email, password } = data;
+        const email = data.email.trim(); 
+        const password = data.password;
 
         if(loading){
             return;

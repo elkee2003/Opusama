@@ -460,15 +460,16 @@ export const onCreatePost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      inspectionFee
       timeFrame
       bed
       bedrooms
-      amenities
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      amenities
       policies
       country
       state
@@ -501,15 +502,16 @@ export const onUpdatePost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      inspectionFee
       timeFrame
       bed
       bedrooms
-      amenities
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      amenities
       policies
       country
       state
@@ -542,15 +544,16 @@ export const onDeletePost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      inspectionFee
       timeFrame
       bed
       bedrooms
-      amenities
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      amenities
       policies
       country
       state

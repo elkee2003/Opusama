@@ -14,6 +14,7 @@ const AuthProvider = ({children}) => {
     const [authUser, setAuthUser] = useState(null);
     const [dbUser, setDbUser] = useState(null);
     const [sub, setSub] = useState(null);
+    const [userMail, setUserMail] = useState(null);
     console.log(sub, dbUser)
 
     // Functions for useEffect
@@ -23,6 +24,8 @@ const AuthProvider = ({children}) => {
           setAuthUser(user)
           const subId = authUser?.userId;
           setSub(subId);
+          const email = authUser?.signInDetails?.loginId;
+          setUserMail(email);
         } catch (err) {
           console.log(err);
         }
@@ -116,7 +119,7 @@ const AuthProvider = ({children}) => {
 
   return (
     <AuthContext.Provider value={{
-        authUser, dbUser, setDbUser, sub
+        authUser, dbUser, setDbUser, sub, userMail
     }}>
         {children}
     </AuthContext.Provider>

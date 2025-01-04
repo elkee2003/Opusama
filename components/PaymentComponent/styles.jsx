@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
         marginTop:40,
         marginHorizontal:10,
     },
-    bckContainer:{
-        position:'absolute',
-    },
     bckIcon:{
         fontSize:30,
         color:'black',

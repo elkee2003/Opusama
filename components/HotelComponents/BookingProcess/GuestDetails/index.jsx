@@ -30,7 +30,7 @@ const GuestDetails = () => {
                 <View style={styles.row}>
                     <View>
                         <Text style={styles.guest}>Adults</Text>
-                        <Text style={styles.age}>Ages 14 or above</Text>
+                        <Text style={styles.age}>Ages 16 or above</Text>
                     </View>
 
                     {/* Buttons */}
@@ -52,7 +52,7 @@ const GuestDetails = () => {
                 <View style={styles.row}>
                     <View>
                         <Text style={styles.guest}>Children</Text>
-                        <Text style={styles.age}>Ages 2 - 13</Text>
+                        <Text style={styles.age}>Ages 2 - 15</Text>
                     </View>
 
                     {/* Buttons */}

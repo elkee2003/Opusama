@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import DetailedHotelPost from '../../../../components/HotelComponents/DetailedHotelPost';
 import { useLocalSearchParams } from 'expo-router';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import { useBookingContext } from '@/providers/BookingProvider';
 import { DataStore } from 'aws-amplify/datastore';
 import {Realtor, Post} from '@/src/models';
@@ -9,6 +10,7 @@ import {Realtor, Post} from '@/src/models';
 const HotelAccommodation = () => {
 
     const {id} = useLocalSearchParams();
+    const {setPostData} = useProfileContext();
     const {setRealtorContext, setPropertyDetails} = useBookingContext();
     const [realtor, setRealtor] = useState(null);
     const [post, setPost] = useState(null);
@@ -20,6 +22,8 @@ const HotelAccommodation = () => {
         try{
             if(id){
                 const foundPost = await DataStore.query(Post, id)
+
+                setPostData(foundPost);
                 
                 if (foundPost){
                     setPost(foundPost);
@@ -47,7 +51,7 @@ const HotelAccommodation = () => {
 
     if (isloading) {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{marginTop:30}}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </SafeAreaView>
         );

@@ -18,17 +18,34 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
     onUpdateStatus(booking.id, 'VIEWED');
   };
 
+
+  // Handle Remove function
+  const handleRemove = () => {
+    if (['VIEWED', 'CHECKED_OUT', 'VISITED', 'SOLD'].includes(booking.status)) {
+      onUpdateStatus(booking.id, 'REMOVED'); 
+    } else {
+      Alert.alert('Action Not Allowed', 'You can only remove bookings with statuses VIEWED, CHECKED_OUT, VISITED, or SOLD.');
+    }
+  };
+
   const getStatusText = (status) => {
     if (status === 'PENDING') return 'Pending';
     if (status === 'ACCEPTED') return 'Accepted';
     if (status === 'VIEWING') return 'Viewing';
+    if (status === 'CHECKED_IN') return 'Checked In';
+    if (status === 'VISITING') return 'Visting';
     if (status === 'VIEWED') return 'Viewed';
+    if (status === 'CHECKED_OUT') return 'Checked Out';
+    if (status === 'VISITED') return 'Visited';
     if(status === 'SOLD') return 'Sold';
     if(status === 'PAID') return 'Paid';
     if(status === 'RECEIVED') return 'Received';
     if (status === 'DENIED') return 'Denied';
+    if (status === 'REMOVED_CLIENT') return 'Removed';
     return 'Pending';
   };
+
+  const validPropertyTypes = ['House Rent', 'Student Accommodation', 'Property Sale', 'Office Space'];
 
 
   return (
@@ -46,19 +63,27 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         </TouchableOpacity>
       )}
       
-      <TouchableOpacity onPress={()=> router.push(`/bookings/bookingdetails/fulldetails/${booking.id}`)}>
+      {/* Button for the whole card to go to the next screen */}
+      <TouchableOpacity onPress={()=> router.push(`/bookings/bookingdetail/fulldetails/${booking.id}`)}>
         <Text style={styles.subHeading}>Realtor:</Text>
         <Text style={styles.detail}>{booking?.realtor?.firstName}</Text>
 
-        <TouchableOpacity onPress={()=> router.push(`/bookings/bookingdetails/propertydetails/${booking.PostID}`)}>
-          <Text style={styles.subHeading}>
-            Accomodation Type:
-          </Text>
+        {/* Button to see the property booked */}
+        <TouchableOpacity onPress={()=> router.push(`/bookings/bookedproperty/propertydetails/${booking.PostID}`)}>
+          <View style={styles.subHeadingContainer}>
+            <Text style={styles.subHeading}>
+              Accomodation Type
+            </Text>
+            <Text style={styles.subHeadingView}>
+              {' '}(Click to view):
+            </Text>
+          </View>
           <Text style={styles.detail}>
-            {booking?.propertyType}
+            {booking?.propertyType} 
           </Text>
         </TouchableOpacity>
 
+        {/* Conditions to show if it is hotels/shortlets */}
         {booking.nameOfType && (
           <>
             <Text style={styles.subHeading}>Accomodation Name:</Text>
@@ -86,7 +111,7 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
           <Text style={styles.detail}>
             {getStatusText(booking.status)}
           </Text>
-          {(booking.status === 'ACCEPTED' || booking.status === 'VIEWING' || booking.status === 'VIEWED' || booking.status === 'PAID' || booking.status === 'RECEIVED') ? (
+          {(booking.status === 'ACCEPTED' || booking.status === 'VIEWING' || booking.status === 'CHECKED_IN' || booking.status === 'VISITING' || booking.status === 'VIEWED' || booking.status === 'CHECKED_OUT' || booking.status === 'VISITED' || booking.status === 'PAID' || booking.status === 'RECEIVED') ? (
               <View style={styles.greenIcon}/>
             ):(
               <View style={styles.redIcon}/>
@@ -122,7 +147,7 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         )}
 
         {/* If booking status is ACCEPTED */}
-        {(booking.status === 'ACCEPTED'  && booking.propertyType !== 'Hotel / Shortlet') && (
+        {(booking.status === 'ACCEPTED' && validPropertyTypes.includes(booking.propertyType)) ? (
           <View style={styles.viewConInfoRow}>
             <TouchableOpacity 
               style={styles.viewCon}
@@ -139,10 +164,10 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
             <AntDesign name="infocirlceo" style={styles.infoIcon} />
             </TouchableOpacity>
           </View>
-        )}
+        ): null}
 
         {/* If booking status is VIEWING */}
-        {(booking.status === 'VIEWING' && booking.propertyType !== 'Hotel / Shortlet') &&  (
+        {(booking.status === 'VIEWING' && validPropertyTypes.includes(booking.propertyType)) ? (
             <View style={styles.viewConInfoRow}>
               <TouchableOpacity 
                 style={styles.viewCon}
@@ -159,19 +184,19 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
                 <AntDesign name="infocirlceo" style={styles.infoIcon} />
               </TouchableOpacity> 
             </View>
-        )}
+        ): null}
 
         {/* If booking status is VIEWED */}
-        {(booking.status === 'VIEWED' || booking.status === 'SOLD' || booking.status === 'RECEIVED') &&  (
+        {(booking.status === 'VIEWED' || booking.status === 'CHECKED_OUT' || booking.status === 'VISITED' || booking.status === 'SOLD' || booking.status === 'RECEIVED') &&  (
           <TouchableOpacity 
             style={styles.delCon}
             onPress={()=>{
               Alert.alert(
-                'Delete Order',
+                'Remove Order',
                 'Are you sure you want to remove this booking?',
                 [
                   {text:'Cancel', style:'cancel'},
-                  {text: 'Remove', style:'destructive', onPress:onDelete}
+                  {text: 'Remove', style:'destructive', onPress:handleRemove}
                 ]
               );
             }} 

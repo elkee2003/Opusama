@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import RealtorProfile from '../../../../components/RealtorProfile/ProfileComplete'
 import { useLocalSearchParams } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore'
-import {Realtor, Post} from '../../../../src/models'
+import {Realtor, Post} from '@/src/models'
 
 const StudentRealtorProfilePageScreen = () => {
     

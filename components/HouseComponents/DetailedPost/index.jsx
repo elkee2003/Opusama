@@ -268,7 +268,7 @@ const DetailedPost = ({post, realtor}) => {
           <View style={styles.priceRow}>
             <Text style={styles.sub}>Rent: </Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice} / year
+              ₦{formattedPrice} {post.timeFrame && `/ ${post.timeFrame}`}
             </Text>
           </View>
 
@@ -351,7 +351,7 @@ const DetailedPost = ({post, realtor}) => {
             topInset={0}
           >
             <BottomSheetScrollView>
-              <UserReviews post={post} dbUser={dbUser} />
+              <UserReviews post={post} dbUser={dbUser} realtor={realtor}/>
             </BottomSheetScrollView>
           </BottomSheet>
           

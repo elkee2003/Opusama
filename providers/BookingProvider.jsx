@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native'
-import React, {useState, useContext, createContext} from 'react'
+import React, {useState, useEffect, useContext, createContext} from 'react';
+import {useAuthContext} from '@/providers/AuthProvider';
 
 const BookingContext = createContext({})
 
@@ -30,6 +31,7 @@ const BookingContextProvider = ({children}) => {
     const [overAllPrice, setOverAllPrice] = useState(null);
     const [realtorPrice, setRealtorPrice] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const {dbUser} = useAuthContext();
 
         const validateInput = () => {
             setErrorMessage(''); // Clear previous errors
@@ -64,6 +66,14 @@ const BookingContextProvider = ({children}) => {
             return false;
             }
         }
+
+        useEffect(() => {
+            if (dbUser?.firstName) {
+                setGuestFirstName(dbUser.firstName);
+                setGuestLastName(dbUser.lastName);
+                setGuestPhoneNumber(dbUser.phoneNumber);
+            }
+        }, [dbUser]);
 
 
   return (

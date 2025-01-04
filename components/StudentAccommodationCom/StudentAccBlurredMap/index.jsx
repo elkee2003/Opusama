@@ -6,12 +6,16 @@ import MapViewDirections from 'react-native-maps-directions';
 import * as Location from 'expo-location';
 import styles from './styles'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-
+import {useProfileContext} from '@/providers/ProfileProvider';
 
 const StudentAccBlurredMap = () => {
-    const {width, height} = useWindowDimensions()
+    const {width, height} = useWindowDimensions();
     const [location, setLocation] = useState(null);
+    const {postData} = useProfileContext();
     const [errorMsg, setErrorMsg] = useState(null);
+
+    const postLat = postData?.lat || 0; 
+    const postLng = postData?.lng || 0;
 
 
     useEffect(() => {
@@ -68,7 +72,7 @@ const StudentAccBlurredMap = () => {
         }}
       >
         <Marker
-          coordinate={{latitude:4.8055 + 0.007, longitude:7.0281 + 0.007}}
+          coordinate={{latitude:postLat + 0.010, longitude:postLng + 0.010}}
         >
             <FontAwesome6 name="house" style={styles.marker}/>
         </Marker>

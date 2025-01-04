@@ -90,4 +90,4 @@ const ExplorePostList = () => {
   )
 }
 
-export default ExplorePostList
+export default ExplorePostList;

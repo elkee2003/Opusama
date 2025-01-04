@@ -94,7 +94,7 @@ const PropSalePost = ({post}) => {
         {/* Rent */}
         <View style={styles.priceRow}>
           <Text style={styles.price}> 
-            ₦{formattedPrice}
+            ₦{formattedPrice} {post.timeFrame && `/ ${post.timeFrame}`}
           </Text>
         </View>
 

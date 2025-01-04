@@ -11,7 +11,8 @@ enum BookingStatus {
   PAID
   RECEIVED
   DENIED
-  REMOVED
+  REMOVED_CLIENT
+  REMOVED_REALTOR
 }
 
 type RealtorReview @model @auth(rules: [{allow: public}]) {
@@ -104,11 +105,12 @@ type Post @model @auth(rules: [{allow: public}]) {
   price: Float!
   cautionFee: Float
   totalPrice: Float!
+  inspectionFee: Float
   timeFrame: String
   bed: String
   bedrooms: String
-  amenities: String
   PostReviews: [PostReview] @hasMany(indexName: "byPost", fields: ["id"])
+  amenities: String
   policies: String
   country: String!
   state: String

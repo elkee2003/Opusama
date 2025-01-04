@@ -266,7 +266,7 @@ const DetailedStudentAccPost = ({post, realtor}) => {
           <View style={styles.priceRow}>
             <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice} / year
+              ₦{formattedPrice} {post.timeFrame && `/ ${post.timeFrame}`}
             </Text>
           </View>
 

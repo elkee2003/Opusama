@@ -1,14 +1,89 @@
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
+import { useAuthContext } from '@/providers/AuthProvider';
 import { DataStore } from 'aws-amplify/datastore'
 import { RealtorReview, User } from '@/src/models';
 import styles from './styles';
 
-const UserReviews = ({realtor, dbUser}) => {
+const UserReviews = ({realtor}) => {
 
+    const {dbUser} = useAuthContext();
+
+    const [userRating, setUserRating] = useState(0);
+    const [review, setReview] = useState('');
+    const [loading, setLoading] = useState(false);
     const [usersReviews, setUsersReviews] = useState([]);
     const [users, setUsers] = useState([]);
+
+    // Function for rating 
+    const handleRating = (rating) => setUserRating(rating);
+
+    // Save or update review of dbUser
+    const saveReview = async () => {
+        if (!review || userRating === 0) {
+          Alert.alert("Incomplete", "Please provide a rating and review.");
+          return;
+        }
+    
+        setLoading(true);
+        try {
+          const existingReview = await DataStore.query(RealtorReview, (c) =>
+            c.and((c) => [
+              c.realtorID.eq(realtor.id),
+              c.userID.eq(dbUser.id),
+            ])
+          );
+    
+          if (existingReview.length > 0) {
+            await DataStore.save(
+              RealtorReview.copyOf(existingReview[0], (updated) => {
+                updated.rating = userRating;
+                updated.review = review;
+              })
+            );
+            Alert.alert("Updated", "Your review has been updated.");
+          } else {
+            await DataStore.save(
+              new RealtorReview({
+                realtorID: realtor.id,
+                userID: dbUser.id,
+                rating: userRating,
+                review: review,
+              })
+            );
+            Alert.alert("Submitted", "Your review has been submitted.");
+          }
+    
+          setUserRating(0);
+          setReview("");
+        } catch (e) {
+          console.error("Error saving review", e);
+          Alert.alert("Error", e.message);
+        } finally {
+          setLoading(false);
+        }
+    };
+
+    // Fetch dbUser's review
+    const fetchUserReview = async () => {
+        try {
+        const userReview = await DataStore.query(RealtorReview, (c) =>
+            c.and((c) => [c.realtorID.eq(realtor.id), c.userID.eq(dbUser.id)])
+        );
+        if (userReview.length > 0) {
+            setUserRating(userReview[0].rating);
+            setReview(userReview[0].review);
+        }
+        } catch (e) {
+        console.error("Error fetching user review", e);
+        }
+    };
+
+    // useEffect for Dbuser already existing review
+    useEffect(() => {
+        fetchUserReview();
+    }, [realtor.id, dbUser.id]);
 
     // Fetch all reviews
     const fetchReviews = async () => {
@@ -56,7 +131,7 @@ const UserReviews = ({realtor, dbUser}) => {
         if (users.length > 0) {
         fetchReviews();
         }
-    }, [users]);
+    }, [users, realtor]);
 
     // useEffect for realtime update
     useEffect(()=>{
@@ -67,6 +142,7 @@ const UserReviews = ({realtor, dbUser}) => {
             if (opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE') {
                 fetchReviews();
                 fetchUsers();
+                fetchUserReview()
             }
             }
         });
@@ -75,34 +151,75 @@ const UserReviews = ({realtor, dbUser}) => {
     },[realtor.id])
     
   return (
-    <ScrollView>
-       {/* User Reviews */}
-       { usersReviews.length > 0 ? (
-            <View style={styles.reviewsContainer}>
-                <Text style={styles.rateTxt}>Ratings and Reviews:</Text>
-                {usersReviews.map((item) => (
-                <View key={item.id} style={styles.reviewItem}>
-                    <Text style={styles.reviewerName}>{item.userName}</Text>
-                    <View style={styles.usersStarContainer}>
-                    {[1, 2, 3, 4, 5].map((index) => (
-                        <FontAwesome
-                        key={index}
-                        name={index <= item.rating ? "star" : "star-o"}
-                        size={18}
-                        color="#07021f"
-                        />
-                    ))}
+    <View 
+    style={styles.container}
+    >
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.scrollContainer}
+        >
+        {/* User Reviews */}
+        { usersReviews.length > 0 ? (
+                <View style={styles.reviewsContainer}>
+                    <Text style={styles.rateTxt}>Ratings and Reviews:</Text>
+                    {usersReviews.map((item) => (
+                    <View key={item.id} style={styles.reviewItem}>
+                        <Text style={styles.reviewerName}>{item.userName}</Text>
+                        <View style={styles.usersStarContainer}>
+                        {[1, 2, 3, 4, 5].map((index) => (
+                            <FontAwesome
+                            key={index}
+                            name={index <= item.rating ? "star" : "star-o"}
+                            size={18}
+                            color="#07021f"
+                            />
+                        ))}
+                        </View>
+                        <Text style={styles.reviewText}>{item.review}</Text>
                     </View>
-                    <Text style={styles.reviewText}>{item.review}</Text>
+                    ))}
                 </View>
+            ) : 
+            <Text style={styles.noReviews}>
+                No Reviews Yet
+            </Text>
+            }
+        </ScrollView>
+        
+        {/* Section to rate and review */}
+        <View style={styles.reviewSection}>
+            <View style={styles.rateContainer}>
+                <View style={styles.starContainer}>
+                {[1, 2, 3, 4, 5].map((index) => (
+                    <TouchableOpacity key={index} onPress={() => handleRating(index)}>
+                    <FontAwesome
+                        name={index <= userRating ? "star" : "star-o"}
+                        size={24}
+                        color="#07021f"
+                    />
+                    </TouchableOpacity>
                 ))}
+                </View>
+                <TextInput
+                style={styles.reviewInput}
+                value={review}
+                onChangeText={setReview}
+                placeholder="Write Review"
+                multiline
+                />
             </View>
-        ) : 
-        <Text style={styles.noReviews}>
-            No Reviews Yet
-        </Text>
-        }
-    </ScrollView>
+
+            <TouchableOpacity
+            style={styles.submitReviewBtn}
+            onPress={saveReview}
+            disabled={loading}
+            >
+                <Text style={styles.submitReviewTxt}>
+                {loading ? "Submitting..." : "Submit Review"}
+                </Text>
+            </TouchableOpacity>
+        </View>
+    </View>
   )
 }
 

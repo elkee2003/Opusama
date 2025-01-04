@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native'
-import React, {useState, useContext, createContext} from 'react'
+import React, {useState, useEffect, useContext, createContext} from 'react'
+import {useAuthContext} from '@/providers/AuthProvider';
 
 const ShowingContext = createContext({})
 
@@ -22,6 +23,7 @@ const ShowingContextProvider = ({children}) => {
     const [overAllPrice, setOverAllPrice] = useState(null);
     const [realtorPrice, setRealtorPrice] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const {dbUser} = useAuthContext();
 
         const validateInput = () => {
             setErrorMessage(''); // Clear previous errors
@@ -51,6 +53,14 @@ const ShowingContextProvider = ({children}) => {
             return false;
             }
         }
+
+        useEffect(() => {
+            if (dbUser?.firstName) {
+                setClientFirstName(dbUser.firstName);
+                setClientLastName(dbUser.lastName);
+                setClientPhoneNumber(dbUser.phoneNumber);
+            }
+        }, [dbUser]);
 
 
   return (

@@ -857,6 +857,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "inspectionFee": {
+                    "name": "inspectionFee",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "timeFrame": {
                     "name": "timeFrame",
                     "isArray": false,
@@ -878,13 +885,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "amenities": {
-                    "name": "amenities",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "PostReviews": {
                     "name": "PostReviews",
                     "isArray": true,
@@ -900,6 +900,13 @@ export const schema = {
                             "postID"
                         ]
                     }
+                },
+                "amenities": {
+                    "name": "amenities",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "policies": {
                     "name": "policies",
@@ -1004,11 +1011,12 @@ export const schema = {
                 "PAID",
                 "RECEIVED",
                 "DENIED",
-                "REMOVED"
+                "REMOVED_CLIENT",
+                "REMOVED_REALTOR"
             ]
         }
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "21995aa24c079f76091a2204c089cdf2"
+    "version": "2a7c89edf806141462187448c2303b49"
 };

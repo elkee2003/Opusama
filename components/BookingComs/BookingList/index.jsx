@@ -16,10 +16,17 @@ const BookingList = () => {
     const fetchBookings = async () =>{
         setLoading(true);
         try{
+
+            // Fetch bookings for the current user
             const userBookings = await DataStore.query(Booking, (booking)=> booking.userID.eq(dbUser.id));
 
-            const sortedBookings = userBookings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            // Filter out bookings with the "REMOVED" status
+            const filteredBookings = userBookings.filter((booking) => booking.status !== 'REMOVED_CLIENT');
 
+            // Sort bookings by creation date in descending order
+            const sortedBookings = filteredBookings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            // Add realtor details to each booking
             const bookingsWithRealtors = await Promise.all(
                 sortedBookings.map(async(booking)=>{
                     if(booking.realtorID){

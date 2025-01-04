@@ -18,9 +18,18 @@ const styles = StyleSheet.create({
         color: '#c70f0f',
         fontSize:25,
     },
+    subHeadingContainer:{
+        flexDirection:'row',
+    },
     subHeading:{
         fontSize:16,
         fontWeight:'bold'
+    },
+    subHeadingView:{
+        fontSize:16,
+        fontWeight:'bold',
+        fontStyle:'italic',
+        color:'#575656',
     },
     detail:{
         fontSize:15,

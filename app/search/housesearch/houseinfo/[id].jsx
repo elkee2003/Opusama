@@ -4,10 +4,12 @@ import DetailedPost from '../../../../components/HouseComponents/DetailedPost'
 import { DataStore } from 'aws-amplify/datastore';
 import { Post, Realtor } from '@/src/models';
 import { useLocalSearchParams } from 'expo-router';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import { useShowingContext } from '@/providers/ShowingProvider';
 
 const HouseAccommodation = () => {
   const { id } = useLocalSearchParams();
+  const {setPostData} = useProfileContext();
   const {setRealtorContext, setPropertyDetails} = useShowingContext();
   const [post, setPost] = useState(null);
   const [realtor, setRealtor] = useState(null);  
@@ -19,6 +21,8 @@ const HouseAccommodation = () => {
       if (id) {
         // Query DataStore for the specific post with the given ID
         const foundPost = await DataStore.query(Post, id);
+
+        setPostData(foundPost);
         
         if (foundPost) {
           setPost(foundPost);

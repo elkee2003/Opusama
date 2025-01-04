@@ -304,7 +304,7 @@ const DetailedHotelPost = ({post, realtor}) => {
           <View style={styles.priceRow}>
             <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice} / Night
+              ₦{formattedPrice} {post.timeFrame && `/ ${post.timeFrame}`}
             </Text>
           </View>
 

@@ -2,11 +2,11 @@ import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
 import Placeholder from '../../../assets/images/placeholder.png';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
 import { DataStore } from 'aws-amplify/datastore';
-import { RealtorReview } from '@/src/models';
+import {RealtorReview} from '@/src/models';
 
 const RealtorProfilePage = ({realtor}) => {
 
@@ -18,6 +18,51 @@ const RealtorProfilePage = ({realtor}) => {
     const truncatedDescription = realtor.myDescription?.length > descriptionMaxLength 
         ? `${realtor.myDescription.substring(0, descriptionMaxLength)}...` 
         : realtor.myDescription;
+    const [averageRating, setAverageRating] = useState(0);
+
+    // Navigate to Rating & Review
+    const handleNavigate = () =>{
+        router.push(`/realtor/realtorratings/${realtor.id}`)
+    }
+
+    // Function to calculate average ratings
+    const calculateAverageRating = async () => {
+        try {
+        const allReviews = await DataStore.query(RealtorReview, (c) =>
+            c.realtorID.eq(realtor.id)
+        );
+
+        if (allReviews.length > 0) {
+            const totalRating = allReviews.reduce((sum, review) => sum + review.rating, 0);
+            const average = totalRating / allReviews.length;
+            setAverageRating(average.toFixed(1)); // Round to one decimal place
+        }else {
+            setAverageRating(0); // Handle no reviews case
+        }
+        } catch (e) {
+        console.log('Error calculating average rating', e);
+        }
+    };
+
+    // useEffect to calculate average ratings
+    useEffect(() => {
+        calculateAverageRating();
+    }, [realtor.id]);
+
+    // useEffect for realtime update
+    useEffect(()=>{
+        if(!realtor) return;
+
+        const subscription = DataStore.observe(RealtorReview).subscribe(({ opType, element }) => {
+        if (element.realtorID === realtor.id) { // Ensure it's for the current post
+            if (opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE') {
+            calculateAverageRating();
+            }
+        }
+        });
+
+        return () => subscription.unsubscribe();
+    },[realtor.id])
 
     // Fetch signed URL for profile picture
     const fetchImageUrl = async () => {
@@ -63,7 +108,15 @@ const RealtorProfilePage = ({realtor}) => {
         <View style={styles.details}>
             {/* Name */}
             <View style={styles.row}>
-                <Text style={styles.name}>{realtor.firstName}</Text>
+                <Text style={styles.name}>
+                    {realtor.firstName}
+                </Text>
+
+                {/* Medium of Review Star */}
+                <View style={styles.reviewIconRow}>
+                    <FontAwesome name="star" style={styles.star} />
+                    <Text style={styles.starTxt}>{averageRating}</Text>
+                </View>
             </View>
             <View style={styles.descriptionCon}>
                 <Text style={styles.txtDesc}>
@@ -85,7 +138,10 @@ const RealtorProfilePage = ({realtor}) => {
         <View style={styles.profileBtnCon}>
 
             {/* ratings and review */}
-            <TouchableOpacity style={styles.rateReviewBtn}>
+            <TouchableOpacity 
+                style={styles.rateReviewBtn}
+                onPress={handleNavigate}
+            >
                 <Text style={styles.rateReviewBtnTxt}>
                     Ratings & Review
                 </Text>

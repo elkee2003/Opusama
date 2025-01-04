@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignSelf:'center',
     },
+    
     usersStarContainer:{
         flex:1,
         flexDirection:'row',

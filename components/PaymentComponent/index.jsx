@@ -3,12 +3,16 @@ import React, {useState, useEffect} from 'react'
 import styles from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
+import {useProfileContext} from '@/providers/ProfileProvider';
+import { useAuthContext } from '@/providers/AuthProvider';
 import {PayWithFlutterwave} from 'flutterwave-react-native';
 import { FLUTTER_WAVE_KEY } from '../../keys';
 
 const PaymentComponent = () => {
 
-    const [amount, setAmount] = useState('')
+    const {firstName, phoneNumber, setIsPaymentSuccessful, paymentPrice, setPaymentPrice} = useProfileContext();
+
+    const {userMail} = useAuthContext();
 
     // Function to handle the redirect after payment
     const handleOnRedirect = (data) => {
@@ -17,21 +21,25 @@ const PaymentComponent = () => {
       if (data.status === 'successful') {
         // Perform actions after successful payment
         console.log('Transaction ID:', data.transaction_id);
-        alert('Payment Successful!');
+        Alert.alert('Payment Successful!', `Transaction ID: ${data.transaction_id}`);
+        setIsPaymentSuccessful(true);
+        router.back();
       } else if (data.status === 'cancelled') {
         // Perform actions if payment is cancelled
-        alert('Payment Cancelled.');
+        Alert.alert('Payment Cancelled.');
+      }else {
+        Alert.alert('Payment Failed.', 'Please try again.');
       }
     };
 
 
     // Function to generate a random transaction reference
     const generateTransactionRef = (length) => {
-      var result = '';
-      var characters =
+      let result = '';
+      const characters =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      var charactersLength = characters.length;
-      for (var i = 0; i < length; i++) {
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
       return `flw_tx_ref_${result}`;
@@ -43,47 +51,46 @@ const PaymentComponent = () => {
         <TouchableOpacity style={styles.bckContainer} onPress={()=>router.back()}>
           <Ionicons name="arrow-back" style={styles.bckIcon}/>
         </TouchableOpacity>
+
+        {/* Payment Form */}
         <View style={styles.sub}>
             <TextInput
                 style={styles.input}
                 placeholder='Input amount eg: 100'
                 keyboardType='numeric'
-                value={amount}
-                onChangeText={setAmount}
+                value={String(paymentPrice)}
+                editable={false}
             />
-            <TouchableOpacity style={styles.btnContainer} onPress={()=>console.warn('Making Payments...')}>
-                <Text style={styles.btnTxt}>Pay Now</Text>
-            </TouchableOpacity>
+
+            {/* Flutterwave Payment Button */}
+            <PayWithFlutterwave
+              onRedirect={handleOnRedirect}
+              options={{
+                tx_ref: generateTransactionRef(10),  // Generate a unique transaction reference
+                authorization: FLUTTER_WAVE_KEY,  // Replace with your Flutterwave public key
+                customer: {
+                  email: userMail,
+                  phone_number: phoneNumber,
+                  name:firstName
+                },
+                amount: parseFloat(paymentPrice),  // Payment amount
+                currency: 'NGN',  // Currency (e.g., NGN for Nigerian Naira)
+                payment_options: 'card,ussd, banktransfer',  // Payment options (e.g., card, mobilemoney, etc.)
+              }}
+              customButton={(props) => (
+                <TouchableOpacity
+                  style={styles.btnContainer}
+                  onPress={props.onPress}  // Trigger payment on button press
+                  disabled={props.disabled}
+                >
+                  <Text style={styles.btnTxt}>Pay Now</Text>
+                </TouchableOpacity>
+              )}
+            />
         </View>
-
-        {/* Flutter wave */}
-        <Text style={styles.flutterwaveTxt}>Flutterwave Payment</Text>
-
-      {/* Flutterwave Payment Button */}
-      <PayWithFlutterwave
-        onRedirect={handleOnRedirect}
-        options={{
-          tx_ref: generateTransactionRef(10),  // Generate a unique transaction reference
-          authorization: FLUTTER_WAVE_KEY,  // Replace with your Flutterwave public key
-          customer: {
-            email: 'customer-email@example.com',  // Customer's email
-          },
-          amount: 2000,  // Payment amount
-          currency: 'NGN',  // Currency (e.g., NGN for Nigerian Naira)
-          payment_options: 'card, ussd, mobilemoney',  // Payment options (e.g., card, mobilemoney, etc.)
-        }}
-        customButton={(props) => (
-          <TouchableOpacity
-            style={styles.btnContainer}
-            onPress={props.onPress}  // Trigger payment on button press
-            disabled={props.disabled}
-          >
-            <Text style={styles.btnTxt}>Pay Now</Text>
-          </TouchableOpacity>
-        )}
-      />
+      
     </View>
   )
 }
 
-export default PaymentComponent
+export default PaymentComponent;

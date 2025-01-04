@@ -5,8 +5,6 @@ import BottomSheet, { BottomSheetView, BottomSheetFlatList, BottomSheetScrollVie
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MediaGrid from '../MediaGrid';
 import RealtorProfileHead from '../RealtorProfileHead';
-import UserReviews from '../usersReviews';
-
 const RealtorProfileComplete = ({realtor, posts}) => {
 
   const bottomSheetRef = useRef(null)
@@ -16,7 +14,6 @@ const RealtorProfileComplete = ({realtor, posts}) => {
     <GestureHandlerRootView style={styles.container} >
       <ScrollView>
         <RealtorProfileHead realtor={realtor}/>
-        <UserReviews  realtor={realtor}/>
         <MediaGrid posts={posts}/>
       </ScrollView>
 

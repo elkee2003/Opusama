@@ -15,6 +15,13 @@ const ProfileContextProvider = ({children}) => {
     const [phoneNumber, setPhoneNumber]= useState("")
     const [errorMessage, setErrorMessage] = useState('')
 
+    // For map
+    const [postData, setPostData] = useState(null);
+
+    // For payment
+    const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
+    const [paymentPrice, setPaymentPrice] = useState(null);
+
     const validateInput = () =>{
       setErrorMessage('')
       if(!firstName){
@@ -52,7 +59,7 @@ const ProfileContextProvider = ({children}) => {
 
 
   return (
-    <ProfileContext.Provider value={{firstName,setFirstName, lastName, setLastName, address, setAddress, phoneNumber, setPhoneNumber, errorMessage, setErrorMessage, profilePic, setProfilePic, onValidateInput}}>
+    <ProfileContext.Provider value={{firstName,setFirstName, lastName, setLastName, address, setAddress, phoneNumber, setPhoneNumber, errorMessage, setErrorMessage, profilePic, setProfilePic, onValidateInput, postData, setPostData, isPaymentSuccessful, setIsPaymentSuccessful, paymentPrice, setPaymentPrice}}>
         {children}
     </ProfileContext.Provider>
   )

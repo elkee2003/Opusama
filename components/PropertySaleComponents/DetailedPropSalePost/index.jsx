@@ -265,7 +265,7 @@ const DetailedPropertySalePost = ({post, realtor}) => {
           <View style={styles.priceRow}>
             <Text style={styles.sub}>Price: </Text>
             <Text style={styles.price}> 
-              ₦{formattedPrice}
+              ₦{formattedPrice} {post.timeFrame && `/ ${post.timeFrame}`}
             </Text>
           </View>
 

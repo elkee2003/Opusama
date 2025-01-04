@@ -2,14 +2,14 @@ import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import ExploreDetailedPost from '../../../components/ExploreComponent/ExploreRandom';
 import { useLocalSearchParams } from 'expo-router';
-import { useBookingContext } from '@/providers/BookingProvider';
+import {useBookingShowingContext} from '@/providers/BookingShowingProvider';
 import { DataStore } from 'aws-amplify/datastore';
 import {Realtor, Post} from '@/src/models';
 
 const ExploreRandom = () => {
 
     const {id} = useLocalSearchParams();
-    const {setRealtorContext, setPropertyDetails} = useBookingContext();
+    const {setRealtorContext, setPropertyDetails} = useBookingShowingContext();
     const [realtor, setRealtor] = useState(null);
     const [post, setPost] = useState(null);
     const [isloading, setIsLoading] = useState(true);
@@ -63,7 +63,7 @@ const ExploreRandom = () => {
 
   return (
     <SafeAreaView>
-      <View>
+      <View styl={{flex:1}}>
         <ExploreDetailedPost post={post} realtor={realtor}/>
       </View>
     </SafeAreaView>

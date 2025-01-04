@@ -5,7 +5,7 @@ import { DataStore } from 'aws-amplify/datastore'
 import { PostReview, User } from '@/src/models';
 import styles from './styles';
 
-const ReviewSection = ({post, dbUser}) => {
+const ReviewSection = ({post, dbUser, realtor}) => {
 
     const [userRating, setUserRating] = useState(0);
     const [review, setReview] = useState('');
@@ -43,6 +43,7 @@ const ReviewSection = ({post, dbUser}) => {
               new PostReview({
                 postID: post.id,
                 userID: dbUser.id,
+                realtorID: realtor.id,
                 rating: userRating,
                 review: review,
               })

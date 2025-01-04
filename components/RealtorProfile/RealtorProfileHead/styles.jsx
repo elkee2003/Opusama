@@ -28,6 +28,22 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         color:'#01011b',
     },
+    row:{
+        flexDirection:'row',
+        gap:10
+    },
+    reviewIconRow:{
+        flexDirection:'row',
+        alignItems:'center',
+        gap:2
+    },
+    star:{
+        color:'#07021f',
+        fontSize:18,
+    },
+    starTxt:{
+        fontSize:18,
+    },
     txtDesc:{
         fontSize:15,
         fontWeight:'bold',

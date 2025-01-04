@@ -7,7 +7,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useBookingContext } from '../../../../providers/BookingProvider';
 import { router } from 'expo-router';
 
-const Booking = ({ postPrice }) => {
+const Booking = () => {
   const [range, setRange] = useState({
     startDate: undefined,
     endDate: undefined,

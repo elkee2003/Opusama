@@ -15,7 +15,8 @@ const BookingStatus = {
   "PAID": "PAID",
   "RECEIVED": "RECEIVED",
   "DENIED": "DENIED",
-  "REMOVED": "REMOVED"
+  "REMOVED_CLIENT": "REMOVED_CLIENT",
+  "REMOVED_REALTOR": "REMOVED_REALTOR"
 };
 
 const { RealtorReview, PostReview, Booking, User, Realtor, Post } = initSchema(schema);

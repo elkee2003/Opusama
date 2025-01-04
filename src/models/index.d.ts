@@ -15,7 +15,8 @@ export enum BookingStatus {
   PAID = "PAID",
   RECEIVED = "RECEIVED",
   DENIED = "DENIED",
-  REMOVED = "REMOVED"
+  REMOVED_CLIENT = "REMOVED_CLIENT",
+  REMOVED_REALTOR = "REMOVED_REALTOR"
 }
 
 
@@ -278,11 +279,12 @@ type EagerPost = {
   readonly price: number;
   readonly cautionFee?: number | null;
   readonly totalPrice: number;
+  readonly inspectionFee?: number | null;
   readonly timeFrame?: string | null;
   readonly bed?: string | null;
   readonly bedrooms?: string | null;
-  readonly amenities?: string | null;
   readonly PostReviews?: (PostReview | null)[] | null;
+  readonly amenities?: string | null;
   readonly policies?: string | null;
   readonly country: string;
   readonly state?: string | null;
@@ -312,11 +314,12 @@ type LazyPost = {
   readonly price: number;
   readonly cautionFee?: number | null;
   readonly totalPrice: number;
+  readonly inspectionFee?: number | null;
   readonly timeFrame?: string | null;
   readonly bed?: string | null;
   readonly bedrooms?: string | null;
-  readonly amenities?: string | null;
   readonly PostReviews: AsyncCollection<PostReview>;
+  readonly amenities?: string | null;
   readonly policies?: string | null;
   readonly country: string;
   readonly state?: string | null;

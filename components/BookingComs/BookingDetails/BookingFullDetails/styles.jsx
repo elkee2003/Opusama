@@ -3,7 +3,7 @@ import { StyleSheet, } from 'react-native'
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        marginTop:10,
+        marginTop:35,
         marginHorizontal:10,
     },
     header:{
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     // Buttons
     view:{
         padding:10,
-        width:150,
+        width:200,
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'#0ac00a',
@@ -93,7 +93,8 @@ const styles = StyleSheet.create({
         marginBottom:25,
         alignSelf:'center',
     },
-    sold:{padding:10,
+    sold:{
+        padding:10,
         width:150,
         justifyContent:'center',
         alignItems:'center',

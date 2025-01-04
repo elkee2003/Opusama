@@ -86,7 +86,7 @@ const EditProfile = () => {
         <TextInput 
             value={firstName}
             onChangeText={setFirstName}
-            placeholder='Name / Company name'
+            placeholder='First Name / Company name'
             style={styles.input}
         />
 

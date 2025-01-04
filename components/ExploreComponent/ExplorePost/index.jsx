@@ -59,7 +59,7 @@ const ExplorePost = ({post}) => {
 
         {/* Username */}
 
-        <Pressable style={styles.contact} onPress={()=>router.push(`/realtor/hotelrealtor/hotelrealtorprofilepage/${post.realtorId}`)}>
+        <Pressable style={styles.contact} onPress={()=>router.push(`/realtor/${post.realtorId}`)}>
           <Text style={styles.name}>{post.firstName}</Text>
         </Pressable>
 

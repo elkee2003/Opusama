@@ -746,15 +746,16 @@ export const getPost = /* GraphQL */ `
       price
       cautionFee
       totalPrice
+      inspectionFee
       timeFrame
       bed
       bedrooms
-      amenities
       PostReviews {
         nextToken
         startedAt
         __typename
       }
+      amenities
       policies
       country
       state
@@ -792,6 +793,7 @@ export const listPosts = /* GraphQL */ `
         price
         cautionFee
         totalPrice
+        inspectionFee
         timeFrame
         bed
         bedrooms
@@ -843,6 +845,7 @@ export const syncPosts = /* GraphQL */ `
         price
         cautionFee
         totalPrice
+        inspectionFee
         timeFrame
         bed
         bedrooms
@@ -896,6 +899,7 @@ export const postsByRealtorID = /* GraphQL */ `
         price
         cautionFee
         totalPrice
+        inspectionFee
         timeFrame
         bed
         bedrooms

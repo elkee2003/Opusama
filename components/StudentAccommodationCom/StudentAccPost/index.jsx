@@ -93,7 +93,7 @@ const StudentAccPost = ({post}) => {
         {/* Rent */}
         <View style={styles.priceRow}>
           <Text style={styles.price}> 
-            ₦{formattedPrice} / year
+            ₦{formattedPrice} {post.timeFrame && `/ ${post.timeFrame}`}
           </Text>
         </View>
 

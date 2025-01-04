@@ -3,6 +3,8 @@ import AuthProvider from "@/providers/AuthProvider";
 import ProfileProvider from '@/providers/ProfileProvider';
 import BookingProvider from "@/providers/BookingProvider";
 import ShowingProvider from "@/providers/ShowingProvider";
+import BookingShowingProvider from "@/providers/BookingShowingProvider";
+
 import {
   withAuthenticator,
   useAuthenticator
@@ -18,11 +20,13 @@ const RootLayout = () => {
       <ProfileProvider>
         <BookingProvider>
           <ShowingProvider>
-            <Stack screenOptions={{
-              headerShown:false
-            }}>
-              <Stack.Screen name="(tabs)" />
-            </Stack>
+            <BookingShowingProvider>
+              <Stack screenOptions={{
+                headerShown:false
+              }}>
+                <Stack.Screen name="(tabs)" />
+              </Stack>
+            </BookingShowingProvider>
           </ShowingProvider>
         </BookingProvider>
       </ProfileProvider>
