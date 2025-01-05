@@ -5,6 +5,7 @@ import styles from './styles';
 import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import BottomSheet, { BottomSheetView, BottomSheetFlatList, BottomSheetScrollView,} from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DbUserReviewSection from './dbUserReview';
@@ -19,6 +20,7 @@ import { PostReview } from '@/src/models';
 const DetailedPropertySalePost = ({post, realtor}) => {
 
   const {dbUser} = useAuthContext()
+  const {setRealtorID} = useProfileContext();
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false);
@@ -34,6 +36,13 @@ const DetailedPropertySalePost = ({post, realtor}) => {
 
   const formattedPrice = Number(post.price)?.toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice)?.toLocaleString();
+
+  // useEffect to store realtorid for review
+  useEffect(() => {
+      if (realtor?.id) {
+        setRealtorID(realtor.id);
+      }
+  }, [realtor?.id, setRealtorID]);
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -325,7 +334,7 @@ const DetailedPropertySalePost = ({post, realtor}) => {
           <View style={styles.borderLine}/>
 
           {/* DbUser Rating & Review */}
-          <DbUserReviewSection post={post} dbUser={dbUser} />
+          <DbUserReviewSection post={post} dbUser={dbUser} realtor={realtor}/>
 
           {/* Last Review */}
           <Text style={styles.lastRatingReviewTxt}>Ratings and Reviews:</Text>

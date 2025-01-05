@@ -1,5 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, Alert  } from 'react-native'
 import React, { useState, useEffect } from 'react';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import { FontAwesome } from '@expo/vector-icons';
 import { DataStore } from 'aws-amplify/datastore'
 import { PostReview, User } from '@/src/models';
@@ -10,6 +11,7 @@ const ReviewSection = ({post, dbUser}) => {
     const [userRating, setUserRating] = useState(0);
     const [review, setReview] = useState('');
     const [loading, setLoading] = useState(false);
+    const {realtorID} = useProfileContext();
 
     // Function to handle rating click
     const handleRating = (rating) => setUserRating(rating);
@@ -43,6 +45,7 @@ const ReviewSection = ({post, dbUser}) => {
               new PostReview({
                 postID: post.id,
                 userID: dbUser.id,
+                realtorID,
                 rating: userRating,
                 review: review,
               })

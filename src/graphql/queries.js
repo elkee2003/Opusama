@@ -152,6 +152,7 @@ export const getPostReview = /* GraphQL */ `
       review
       postID
       userID
+      realtorID
       createdAt
       updatedAt
       _version
@@ -174,6 +175,7 @@ export const listPostReviews = /* GraphQL */ `
         review
         postID
         userID
+        realtorID
         createdAt
         updatedAt
         _version
@@ -206,6 +208,7 @@ export const syncPostReviews = /* GraphQL */ `
         review
         postID
         userID
+        realtorID
         createdAt
         updatedAt
         _version
@@ -240,6 +243,7 @@ export const postReviewsByPostID = /* GraphQL */ `
         review
         postID
         userID
+        realtorID
         createdAt
         updatedAt
         _version
@@ -274,6 +278,7 @@ export const postReviewsByUserID = /* GraphQL */ `
         review
         postID
         userID
+        realtorID
         createdAt
         updatedAt
         _version

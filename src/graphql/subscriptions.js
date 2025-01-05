@@ -68,6 +68,7 @@ export const onCreatePostReview = /* GraphQL */ `
       review
       postID
       userID
+      realtorID
       createdAt
       updatedAt
       _version
@@ -87,6 +88,7 @@ export const onUpdatePostReview = /* GraphQL */ `
       review
       postID
       userID
+      realtorID
       createdAt
       updatedAt
       _version
@@ -106,6 +108,7 @@ export const onDeletePostReview = /* GraphQL */ `
       review
       postID
       userID
+      realtorID
       createdAt
       updatedAt
       _version

@@ -29,6 +29,7 @@ type PostReview @model @auth(rules: [{allow: public}]) {
   review: String
   postID: ID! @index(name: "byPost")
   userID: ID! @index(name: "byUser")
+  realtorID: String
 }
 
 type Booking @model @auth(rules: [{allow: public}]) {

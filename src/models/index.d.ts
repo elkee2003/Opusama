@@ -65,6 +65,7 @@ type EagerPostReview = {
   readonly review?: string | null;
   readonly postID: string;
   readonly userID: string;
+  readonly realtorID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -79,6 +80,7 @@ type LazyPostReview = {
   readonly review?: string | null;
   readonly postID: string;
   readonly userID: string;
+  readonly realtorID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

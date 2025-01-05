@@ -38,11 +38,12 @@ const styles = StyleSheet.create({
         gap:2
     },
     star:{
-        color:'#07021f',
+        color:'#333236',
         fontSize:18,
     },
     starTxt:{
         fontSize:18,
+        color:'#383737',
     },
     txtDesc:{
         fontSize:15,

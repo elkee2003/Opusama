@@ -12,13 +12,15 @@ import UserReviews from './usersReviews';
 import LastReview from './lastReview';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import { useAuthContext } from '@/providers/AuthProvider';
 import { DataStore } from 'aws-amplify/datastore';
 import { PostReview } from '@/src/models';
 
 const DetailedStudentAccPost = ({post, realtor}) => {
 
-  const {dbUser} = useAuthContext()
+  const {dbUser} = useAuthContext();
+  const {setRealtorID} = useProfileContext();
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false);
@@ -35,6 +37,13 @@ const DetailedStudentAccPost = ({post, realtor}) => {
   const formattedPrice = Number(post.price)?.toLocaleString();
   const formattedCautionFee = Number(post.cautionFee)?.toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice)?.toLocaleString();
+
+  // useEffect to store realtorid for review
+  useEffect(() => {
+      if (realtor?.id) {
+        setRealtorID(realtor.id);
+      }
+  }, [realtor?.id, setRealtorID]);
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -333,7 +342,7 @@ const DetailedStudentAccPost = ({post, realtor}) => {
           <View style={styles.borderLine}/>
 
           {/* DbUser Rating & Review */}
-          <DbUserReviewSection post={post} dbUser={dbUser} />
+          <DbUserReviewSection post={post} dbUser={dbUser} realtor={realtor}/>
 
           {/* Last Review */}
           <Text style={styles.lastRatingReviewTxt}>Ratings and Reviews:</Text>

@@ -11,6 +11,7 @@ import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {useAuthContext} from '@/providers/AuthProvider';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
 import { DataStore } from 'aws-amplify/datastore';
@@ -25,6 +26,8 @@ const DetailedPost = ({post, realtor}) => {
  
   const [imageUris, setImageUris] = useState([]);
   const {dbUser} = useAuthContext();
+  const {setRealtorID} = useProfileContext();
+
   const bottomSheetRef = useRef(null)
   const snapPoints = useMemo(()=>['1%', '30%', '35%'], [])
   const handleOpenBottomSheet = () => {
@@ -34,6 +37,13 @@ const DetailedPost = ({post, realtor}) => {
   const formattedPrice = Number(post.price)?.toLocaleString();
   const formattedCautionFee = Number(post.cautionFee)?.toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice)?.toLocaleString();
+
+  // useEffect to store realtorid for review
+  useEffect(() => {
+    if (realtor?.id) {
+      setRealtorID(realtor.id);
+    }
+  }, [realtor?.id, setRealtorID]);
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -351,7 +361,7 @@ const DetailedPost = ({post, realtor}) => {
             topInset={0}
           >
             <BottomSheetScrollView>
-              <UserReviews post={post} dbUser={dbUser} realtor={realtor}/>
+              <UserReviews post={post} dbUser={dbUser} />
             </BottomSheetScrollView>
           </BottomSheet>
           

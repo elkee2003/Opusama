@@ -136,6 +136,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "realtorID": {
+                    "name": "realtorID",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -1018,5 +1025,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "2a7c89edf806141462187448c2303b49"
+    "version": "4e77fc982bd6a965b1eb71a4fe9f91ef"
 };

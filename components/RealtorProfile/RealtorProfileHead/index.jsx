@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
 import { DataStore } from 'aws-amplify/datastore';
-import {RealtorReview} from '@/src/models';
+import {RealtorReview, PostReview} from '@/src/models';
 
 const RealtorProfilePage = ({realtor}) => {
 
@@ -28,13 +28,26 @@ const RealtorProfilePage = ({realtor}) => {
     // Function to calculate average ratings
     const calculateAverageRating = async () => {
         try {
-        const allReviews = await DataStore.query(RealtorReview, (c) =>
+        // Fetch all RealtorReview entries for the realtor
+        const realtorReviews = await DataStore.query(RealtorReview, (c) =>
             c.realtorID.eq(realtor.id)
         );
 
+        // Fetch all PostReview entries related to the realtor
+        const postReviews = await DataStore.query(PostReview, (p) =>
+            p.realtorID.eq(realtor.id)
+        );
+
+        // Combine both arrays of reviews
+        const allReviews = [...realtorReviews, ...postReviews];
+
         if (allReviews.length > 0) {
+            // Calculate the total rating
             const totalRating = allReviews.reduce((sum, review) => sum + review.rating, 0);
+
+            // Calculate the average rating
             const average = totalRating / allReviews.length;
+
             setAverageRating(average.toFixed(1)); // Round to one decimal place
         }else {
             setAverageRating(0); // Handle no reviews case
@@ -53,7 +66,7 @@ const RealtorProfilePage = ({realtor}) => {
     useEffect(()=>{
         if(!realtor) return;
 
-        const subscription = DataStore.observe(RealtorReview).subscribe(({ opType, element }) => {
+        const realtorReviewSubscription = DataStore.observe(RealtorReview).subscribe(({ opType, element }) => {
         if (element.realtorID === realtor.id) { // Ensure it's for the current post
             if (opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE') {
             calculateAverageRating();
@@ -61,7 +74,18 @@ const RealtorProfilePage = ({realtor}) => {
         }
         });
 
-        return () => subscription.unsubscribe();
+        const postReviewSubscription = DataStore.observe(PostReview).subscribe(({ opType, element }) => {
+            if (element.realtorID === realtor.id) { // Ensure it's for the current post
+                if (opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE') {
+                calculateAverageRating();
+                }
+            }
+            });
+
+        return () => {
+            realtorReviewSubscription.unsubscribe();
+            postReviewSubscription.unsubscribe();
+        };
     },[realtor.id])
 
     // Fetch signed URL for profile picture
@@ -113,10 +137,13 @@ const RealtorProfilePage = ({realtor}) => {
                 </Text>
 
                 {/* Medium of Review Star */}
-                <View style={styles.reviewIconRow}>
+                <TouchableOpacity 
+                    style={styles.reviewIconRow}
+                    onPress={() => alert('A combination of ratings of properties under the realtor and realtor rating ')}
+                >
                     <FontAwesome name="star" style={styles.star} />
                     <Text style={styles.starTxt}>{averageRating}</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.descriptionCon}>
                 <Text style={styles.txtDesc}>

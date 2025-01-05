@@ -4,6 +4,7 @@ import styles from './styles';
 import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import {useBookingShowingContext} from '@/providers/BookingShowingProvider';
 import BottomSheet, { BottomSheetView, BottomSheetFlatList, BottomSheetScrollView,} from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -21,6 +22,7 @@ const ExploreDetailedPost = ({post, realtor}) => {
   const {setPostPrice, setPostCautionFee, setPostTotalPrice} = useBookingShowingContext();
 
   const {dbUser} = useAuthContext()
+  const {setRealtorID} = useProfileContext();
 
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false);
@@ -37,6 +39,13 @@ const ExploreDetailedPost = ({post, realtor}) => {
   const formattedPrice = Number(post?.price)?.toLocaleString();
   const formattedCautionFee = Number(post?.cautionFee)?.toLocaleString();
   const formattedTotalPrice = Number(post.totalPrice)?.toLocaleString();
+
+  // useEffect to store realtorid for review
+  useEffect(() => {
+      if (realtor?.id) {
+        setRealtorID(realtor.id);
+      }
+  }, [realtor?.id, setRealtorID]);
 
   if (!post) {
     return (
@@ -386,7 +395,7 @@ const ExploreDetailedPost = ({post, realtor}) => {
             topInset={0}
           >
             <BottomSheetScrollView>
-              <UserReviews post={post} dbUser={dbUser} />
+              <UserReviews post={post} dbUser={dbUser} realtor={realtor}/>
             </BottomSheetScrollView>
           </BottomSheet>
           

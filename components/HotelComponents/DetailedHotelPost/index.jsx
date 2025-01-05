@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DbUserReviewSection from './dbUserReview';
 import UserReviews from './usersReviews';
 import LastReview from './lastReview';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
 import { useAuthContext } from '@/providers/AuthProvider';
@@ -24,6 +25,7 @@ const DetailedHotelPost = ({post, realtor}) => {
   const {setPostPrice, setPostCautionFee, setPostTotalPrice} = useBookingContext();
 
   const {dbUser} = useAuthContext()
+  const {setRealtorID} = useProfileContext();
 
   const [readMore, setReadMore] = useState(false);
   const [readMoreLux, setReadMoreLux] = useState(false);
@@ -31,6 +33,7 @@ const DetailedHotelPost = ({post, realtor}) => {
   const [averageRating, setAverageRating] = useState(0);
 
   const [imageUris, setImageUris] = useState([]);
+  
   const bottomSheetRef = useRef(null)
   const snapPoints = useMemo(()=>['1%', '30%', '35%'], [])
   const handleOpenBottomSheet = () => {
@@ -40,6 +43,13 @@ const DetailedHotelPost = ({post, realtor}) => {
   const formattedCautionFee = Number(post?.cautionFee)?.toLocaleString();
   const formattedPrice = Number(post?.price)?.toLocaleString();
   const formattedTotalPrice = Number(post?.totalPrice)?.toLocaleString();
+
+  // useEffect to store realtorid for review
+  useEffect(() => {
+      if (realtor?.id) {
+        setRealtorID(realtor.id);
+      }
+  }, [realtor?.id, setRealtorID]);
 
   if (!post) {
     return (
@@ -371,7 +381,7 @@ const DetailedHotelPost = ({post, realtor}) => {
           <View style={styles.borderLine}/>
           
           {/* DbUser Rating & Review */}
-          <DbUserReviewSection post={post} dbUser={dbUser} />
+          <DbUserReviewSection post={post} dbUser={dbUser} realtor={realtor}/>
 
           {/* Last Review */}
           <Text style={styles.lastRatingReviewTxt}>Ratings and Reviews:</Text>
