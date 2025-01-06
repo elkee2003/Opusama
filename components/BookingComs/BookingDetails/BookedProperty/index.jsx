@@ -6,12 +6,14 @@ import { Link } from 'expo-router';
 import DbUserReviewSection from './dbUserReview';
 import UserReviews from './usersReviews';
 import LastReview from './lastReview';
+import RealtorNameRating from './realtorNameRating';
 import styles from './styles';
 import DefaultImage from '../../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router'
 import { getUrl } from 'aws-amplify/storage';
+import {useProfileContext} from '@/providers/ProfileProvider';
 import {useAuthContext} from '@/providers/AuthProvider';
 import { DataStore } from 'aws-amplify/datastore';
 import {PostReview} from '@/src/models';
@@ -25,6 +27,7 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
 
   const [imageUris, setImageUris] = useState([]);
   const {dbUser} = useAuthContext();
+  const {setRealtorID} = useProfileContext();
   const bottomSheetRef = useRef(null)
   const snapPoints = useMemo(()=>['1%', '30%', '40%'], [])
   const handleOpenBottomSheet = () => {
@@ -34,6 +37,13 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
   const formattedPrice = Number(post?.price)?.toLocaleString();
   const formattedCautionFee = Number(post?.cautionFee)?.toLocaleString();
   const formattedTotalPrice = Number(post?.totalPrice)?.toLocaleString();
+
+  // useEffect to store realtorid for review
+  useEffect(() => {
+      if (realtor?.id) {
+        setRealtorID(realtor.id);
+      }
+  }, [realtor?.id, setRealtorID]);
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -119,7 +129,7 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
 
           {/* ScrollView */}
           <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-            <Link href={`/bookings/bookingdetails/propertydetails/gallery/${post.id}`} asChild>
+            <Link href={`/bookings/bookedproperty/propertydetails/gallery/${post.id}`} asChild>
               <TouchableOpacity>
                 <View style={styles.imageContainer}>
                   {/* Image */}
@@ -133,11 +143,7 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
             </Link>
           
             {/* User */}
-            {realtor.firstName && (
-              <Pressable style={styles.user}>
-                <Text style={styles.name}>{realtor.firstName}</Text>
-              </Pressable>
-            )}
+            <RealtorNameRating realtor={realtor}/>
 
             {/* Property Type */}
             {post.propertyType && (
@@ -273,14 +279,16 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
             </View>
 
             {/* Caution fee */}
-            {post.cautionFee && (
+            {post.cautionFee ? 
               <View style={styles.cautionFeeRow}>
                 <Text style={styles.sub}>Caution Fee: </Text>
                 <Text style={styles.price}> 
                   ₦{formattedCautionFee}
                 </Text>
               </View>
-            )}
+              :
+              ''
+            }
 
             {/* Total Price */}
             <View style={styles.priceRowTotal}>

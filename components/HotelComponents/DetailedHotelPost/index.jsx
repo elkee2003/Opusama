@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DbUserReviewSection from './dbUserReview';
 import UserReviews from './usersReviews';
 import LastReview from './lastReview';
+import RealtorNameRating from './realtorNameRating';
 import {useProfileContext} from '@/providers/ProfileProvider';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
@@ -24,7 +25,7 @@ const DetailedHotelPost = ({post, realtor}) => {
 
   const {setPostPrice, setPostCautionFee, setPostTotalPrice} = useBookingContext();
 
-  const {dbUser} = useAuthContext()
+  const {dbUser, authUser} = useAuthContext()
   const {setRealtorID} = useProfileContext();
 
   const [readMore, setReadMore] = useState(false);
@@ -70,7 +71,11 @@ const DetailedHotelPost = ({post, realtor}) => {
 
   // Function to navigate
   const handleNavigate = () => {
-    router.push(`/realtor/hotelrealtor/accommodationguestinfo`);
+    if(authUser){
+      router.push(`/realtor/hotelrealtor/accommodationguestinfo`);
+    }else{
+      router.push('/login');
+    }
   };
 
   // Fetch signed URLs for each image in post.media
@@ -179,11 +184,7 @@ const DetailedHotelPost = ({post, realtor}) => {
           </TouchableOpacity>
         
           {/* User */}
-          {realtor.firstName && (
-            <Pressable style={styles.user} onPress={()=> router.push(`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`)}>
-              <Text style={styles.name}>{realtor.firstName}</Text>
-            </Pressable>
-          )}
+          <RealtorNameRating realtor={realtor}/>
 
           {/* Property Type */}
           {post.propertyType && (

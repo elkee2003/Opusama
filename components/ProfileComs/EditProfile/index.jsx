@@ -4,12 +4,16 @@ import * as ImagePicker from 'expo-image-picker';
 import styles from './styles';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { AntDesign } from '@expo/vector-icons';
-import { router } from 'expo-router'
-import { signOut } from 'aws-amplify/auth'
+import { router } from 'expo-router';
+import { signOut } from 'aws-amplify/auth';
+import { useAuthContext } from '@/providers/AuthProvider';
 import {useProfileContext} from '@/providers/ProfileProvider';
 
 const EditProfile = () => {
-    const {firstName,setFirstName, lastName, setLastName, profilePic, address, setAddress, setProfilePic, phoneNumber, setPhoneNumber, errorMessage, onValidateInput,} = useProfileContext()
+
+    const {authUser} = useAuthContext();
+
+    const {firstName,setFirstName, lastName, setLastName, profilePic, address, setAddress, setProfilePic, phoneNumber, setPhoneNumber, errorMessage, onValidateInput,} = useProfileContext();
 
     // Pick Image function
     const pickImage = async () => {
@@ -30,6 +34,10 @@ const EditProfile = () => {
             router.push('/profile/reviewprofile'); // 
         }
     };
+
+    const onSignIn = () =>{
+      router.push('/login')
+    }
 
     // Signout function
     async function handleSignOut() {
@@ -61,6 +69,14 @@ const EditProfile = () => {
         )
     };
 
+    const handleAuthAction = () => {
+      if (authUser) {
+        onSignout(); // Call the sign-out function if the user is authenticated
+      } else {
+        onSignIn(); 
+      }
+    };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Edit Profile</Text>
@@ -78,8 +94,8 @@ const EditProfile = () => {
       </View>
 
       {/* Sign out button */}
-      <TouchableOpacity style={styles.signoutBtn} onPress={onSignout}>
-        <Text style={styles.signoutTxt}>Sign Out</Text>
+      <TouchableOpacity style={styles.signoutBtn} onPress={handleAuthAction}>
+        <Text style={styles.signoutTxt}>{authUser ? 'Sign Out' : 'Sign In'}</Text>
       </TouchableOpacity>
 
       <ScrollView showsVerticalScrollIndicator={false}>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import {useProfileContext} from '@/providers/ProfileProvider';
 import { DataStore } from 'aws-amplify/datastore'
-import { PostReview, User } from '@/src/models';
+import { PostReview, Booking } from '@/src/models';
 import styles from './styles';
 
 const ReviewSection = ({post, dbUser}) => {
@@ -12,6 +12,7 @@ const ReviewSection = ({post, dbUser}) => {
     const [review, setReview] = useState('');
     const [loading, setLoading] = useState(false);
     const {realtorID} = useProfileContext();
+    const [bookings, setBookings] = useState([]);
 
     // Function to handle rating click
     const handleRating = (rating) => setUserRating(rating);
@@ -28,7 +29,7 @@ const ReviewSection = ({post, dbUser}) => {
           const existingReview = await DataStore.query(PostReview, (c) =>
             c.and((c) => [
               c.postID.eq(post.id),
-              c.userID.eq(dbUser.id),
+              c.userID.eq(dbUser?.id),
             ])
           );
     
@@ -44,7 +45,7 @@ const ReviewSection = ({post, dbUser}) => {
             await DataStore.save(
               new PostReview({
                 postID: post.id,
-                userID: dbUser.id,
+                userID: dbUser?.id,
                 realtorID,
                 rating: userRating,
                 review: review,
@@ -67,7 +68,7 @@ const ReviewSection = ({post, dbUser}) => {
     const fetchUserReview = async () => {
         try {
         const userReview = await DataStore.query(PostReview, (c) =>
-            c.and((c) => [c.postID.eq(post.id), c.userID.eq(dbUser.id)])
+            c.and((c) => [c.postID.eq(post.id), c.userID.eq(dbUser?.id)])
         );
         if (userReview.length > 0) {
             setUserRating(userReview[0].rating);
@@ -81,7 +82,28 @@ const ReviewSection = ({post, dbUser}) => {
     // useEffect for Dbuser already existing review
     useEffect(() => {
       fetchUserReview();
-    }, [post.id, dbUser.id]);
+    }, [post.id, dbUser?.id]);
+
+    const fetchBookings = async () =>{
+      setLoading(true);
+      try{
+
+          // Fetch bookings for the current user
+          const userBookings = await DataStore.query(Booking, (booking) =>
+            booking.and((b) => [b.PostID.eq(post?.id), b.userID.eq(dbUser?.id)])
+          );
+
+          setBookings(userBookings)
+      }catch(e){
+          Alert.alert('Error fetching bookings', e.message)
+      }finally{
+          setLoading(false);
+      }
+    };
+
+    useEffect(()=>{
+      fetchBookings();
+    },[post?.id, dbUser?.id])
     
     // useEffect for realtime update
     useEffect(()=>{
@@ -90,48 +112,56 @@ const ReviewSection = ({post, dbUser}) => {
         const subscription = DataStore.observe(PostReview).subscribe(({ opType, element }) => {
           if (element.postID === post.id) { // Ensure it's for the current post
             if (opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE') {
-              fetchUserReview()
+              fetchUserReview();
+              fetchBookings();
             }
           }
         });
     
         return () => subscription.unsubscribe();
-    },[post.id])
+    },[post.id]);
+
+    const allowedStatuses = ['VIEWING', 'CHECKED_IN', 'VISITING', 'VIEWED', 'CHECKED_OUT', 'VISITED', 'SOLD', 'REMOVED_CLIENT', 'REMOVED_REALTOR'];
+    const canReview = bookings.some((booking) => allowedStatuses.includes(booking.status));
 
   return (
     <View>
-        {/* dbUser Rating */}
-        <View style={styles.rateContainer}>
-            <Text style={styles.rateTxt}>Rate</Text>
-            <View style={styles.starContainer}>
-            {[1, 2, 3, 4, 5].map((index) => (
-                <TouchableOpacity key={index} onPress={() => handleRating(index)}>
-                <FontAwesome
-                    name={index <= userRating ? "star" : "star-o"}
-                    size={24}
-                    color="#07021f"
-                />
-                </TouchableOpacity>
-            ))}
-            </View>
-            <TextInput
-            style={styles.reviewInput}
-            value={review}
-            onChangeText={setReview}
-            placeholder="Write Review"
-            multiline
-            />
-        </View>
+      {canReview && (
+        <View>
+          {/* dbUser Rating */}
+          <View style={styles.rateContainer}>
+              <Text style={styles.rateTxt}>Rate</Text>
+              <View style={styles.starContainer}>
+              {[1, 2, 3, 4, 5].map((index) => (
+                  <TouchableOpacity key={index} onPress={() => handleRating(index)}>
+                  <FontAwesome
+                      name={index <= userRating ? "star" : "star-o"}
+                      size={24}
+                      color="#07021f"
+                  />
+                  </TouchableOpacity>
+              ))}
+              </View>
+              <TextInput
+              style={styles.reviewInput}
+              value={review}
+              onChangeText={setReview}
+              placeholder="Write Review"
+              multiline
+              />
+          </View>
 
-        <TouchableOpacity
-        style={styles.submitReviewBtn}
-        onPress={saveReview}
-        disabled={loading}
-        >
-            <Text style={styles.submitReviewTxt}>
-            {loading ? "Submitting..." : "Submit Review"}
-            </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+          style={styles.submitReviewBtn}
+          onPress={saveReview}
+          disabled={loading}
+          >
+              <Text style={styles.submitReviewTxt}>
+              {loading ? "Submitting..." : "Submit Review"}
+              </Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   )
 }

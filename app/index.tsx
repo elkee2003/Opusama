@@ -55,5 +55,5 @@ export default function Index() {
     );
   }
 
-  return user ? <Redirect href="/profile" /> :  <Redirect href="/login" />;
+  return user ? <Redirect href="/profile" /> :  <Redirect href="/home" />;
 }

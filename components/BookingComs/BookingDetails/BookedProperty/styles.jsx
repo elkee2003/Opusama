@@ -29,14 +29,25 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
-    user:{
-        flex:1
+    realtorNameRow:{
+        flex:1,
+        flexDirection:'row',
+        gap:10,
+        alignItems:'center',
     },
     name:{
         fontSize:30,
         fontWeight:'bold',
         color: Colors.HEADING,
         letterSpacing:0.8,
+    },
+    realtorStar:{
+        color:'#333236',
+        fontSize:22,
+    },
+    realtorStarTxt:{
+        fontSize:22,
+        color:'#383737',
     },
     bedroom:{
         fontSize:17,

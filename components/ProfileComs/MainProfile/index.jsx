@@ -22,7 +22,7 @@ const ProfilePage = () => {
     firstName, lastName, profilePic, setProfilePic, address, phoneNumber, 
   } = useProfileContext();
 
-  const {dbUser} = useAuthContext();
+  const {dbUser, authUser} = useAuthContext();
 
   const [loading, setLoading]= useState(true);
 
@@ -193,7 +193,20 @@ const ProfilePage = () => {
           <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
         </TouchableOpacity>
 
-        {/* Support */}
+        {/* Sign In */}
+        {!authUser && (
+          <TouchableOpacity 
+          style={styles.btnCard}
+          onPress={()=> router.push('/login')}
+          >
+            <Text style={styles.btnTxt}>
+              Sign In
+            </Text>
+            <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+          </TouchableOpacity>
+        )}
+
+        {/* Sing out */}
         <TouchableOpacity 
           style={styles.btnCard}
           onPress={onSignout}

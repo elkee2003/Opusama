@@ -6,46 +6,40 @@ import { DataStore } from 'aws-amplify/datastore';
 import { Realtor, Post } from '../../../src/models';
 
 const PropSaleSearch = () => {
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState('');
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
     const [propertySalePosts, setPropertySalePosts] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
 
-    const handleSearch = (query) => {
-      setSearchQuery(query);
+    const handleSearch = () => {
 
       // Wait until housePosts is populated before attempting to filter
       if (propertySalePosts.length === 0) {
         return; // Exit if housePosts is not yet populated
       }
 
-      // if query is empty, show all data
-      if(!query){
-        setFilteredData([])
-      }else{
-        const lowercasedQuery = query.toLowerCase();
+      // Parse user inputs for price
+      const minPriceParsed = parseFloat(minPrice) || 0; 
+      const maxPriceParsed = parseFloat(maxPrice) || Infinity;
 
-        const filtered = propertySalePosts.filter(item => {
-          const matchesRealtorName = item?.firstName?.toLowerCase().includes(lowercasedQuery);
+      const lowercasedQuery = searchQuery.toLowerCase();
 
-          const matchesType = item?.type?.toLowerCase().includes(lowercasedQuery);
+      const filtered = propertySalePosts.filter(item => {
+        const matchesQuery = 
+        item?.realtorFirstName?.toLowerCase().includes(lowercasedQuery) ||
+        item?.type?.toLowerCase().includes(lowercasedQuery) ||
+        item?.address?.toLowerCase().includes(lowercasedQuery) ||
+        item?.city?.toLowerCase().includes(lowercasedQuery) ||
+        item?.state?.toLowerCase().includes(lowercasedQuery) ||
+        item?.country?.toLowerCase().includes(lowercasedQuery);
 
-          const matchesLocation = item?.address?.toLowerCase().includes(lowercasedQuery);
+        const matchesPrice = item?.price >= minPriceParsed && item?.price <= maxPriceParsed;
 
-          const matchesCity = item?.city?.toLowerCase().includes(lowercasedQuery);
-
-          const matchesState = item?.state?.toLowerCase().includes(lowercasedQuery);
-
-          const matchesCountry = item?.country?.toLowerCase().includes(lowercasedQuery);
-
-          const matchesPrice = item?.price?.toString(). includes(lowercasedQuery);
-
-          const matchesTotalPrice = item?.totalPrice?.toString(). includes(lowercasedQuery);
-
-          return matchesRealtorName || matchesType || matchesLocation || matchesCity || matchesState || matchesCountry || matchesPrice || matchesTotalPrice;
-        });
-        setFilteredData(filtered)
-      }
-    }
+        return matchesQuery && matchesPrice;
+      });
+      setFilteredData(filtered)
+    };
 
     const fetchRealtorsAndPosts = async () => {
       try{
@@ -61,15 +55,21 @@ const PropSaleSearch = () => {
           const realtor = realtors.find(r => r.id === post.realtorID);
           return {
             ...post,
-            realtorFirstName: realtor?.firstName
+            realtorFirstName: realtor?.firstName,
+            price: parseFloat(post.price) || 0,
           };
         });
 
         setPropertySalePosts(propertySalePostData);
+        setFilteredData(propertySalePostData);
       }catch(error){
         console.error('This is the error from searchbar:', error)
       }
     };
+
+    useEffect(() => {
+      handleSearch();
+    }, [searchQuery, minPrice, maxPrice, propertySalePosts]);
 
     useEffect(() => {
      fetchRealtorsAndPosts()
@@ -81,20 +81,38 @@ const PropSaleSearch = () => {
         style={styles.searchInput}
         placeholder='Search Property'
         value={searchQuery}
-        onChangeText={handleSearch}
+        onChangeText={setSearchQuery}
       />
-      {searchQuery && (
-        filteredData.length > 0 ? (
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={filteredData}  // Use filtered data for FlatList
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <SearchResults post={item} />}
-          />
-        ) : (
-          <Text style={styles.noResultText}>No result found</Text>  // Display when no result matches
-        )
-      )}
+
+      <View style={styles.priceInputRow}>
+        <TextInput
+          style={styles.priceInput}
+          placeholder="Min Price"
+          multiline
+          value={minPrice}
+          keyboardType="numeric"
+          onChangeText={setMinPrice}
+        />
+
+        <TextInput
+          style={styles.priceInput}
+          placeholder="Max Price"
+          multiline
+          value={maxPrice}
+          keyboardType="numeric"
+          onChangeText={setMaxPrice}
+        />
+      </View>
+      
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={filteredData}  // Use filtered data for FlatList
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <SearchResults post={item} />}
+        ListEmptyComponent={
+          <Text style={styles.noResultText}>No results found</Text> // Message for no matches
+        }
+      />
     </View>
   )
 }

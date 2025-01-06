@@ -68,7 +68,7 @@ const AuthProvider = ({children}) => {
         } else if (event === 'signedOut') {
           setAuthUser(null); // Clear the authUser state
           setSub(null); // Clear the sub state
-          router.push('/login'); // Navigate to the sign-in page
+          router.push('/home'); // Navigate to the home page
         }
       };
   

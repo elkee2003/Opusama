@@ -36,9 +36,9 @@ const ReviewShowingInfo = () => {
         setShowing(getInTouch);
         Alert.alert('Successful', "Booking was a success");
   
-        setClientFirstName('');
-        setClientLastName('');
-        setClientPhoneNumber('');
+        setClientFirstName(dbUser?.firstName); 
+        setClientLastName(dbUser?.lastName); 
+        setClientPhoneNumber(dbUser?.phoneNumber);
         setNote(''); 
         setPropertyDetails(null); 
         setPostID(''); 

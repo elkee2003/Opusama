@@ -21,8 +21,8 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
 
   // Handle Remove function
   const handleRemove = () => {
-    if (['VIEWED', 'CHECKED_OUT', 'VISITED', 'SOLD'].includes(booking.status)) {
-      onUpdateStatus(booking.id, 'REMOVED'); 
+    if (['VIEWED', 'CHECKED_OUT', 'VISITED', 'PAID', 'SOLD'].includes(booking.status)) {
+      onUpdateStatus(booking.id, 'REMOVED_CLIENT'); 
     } else {
       Alert.alert('Action Not Allowed', 'You can only remove bookings with statuses VIEWED, CHECKED_OUT, VISITED, or SOLD.');
     }
@@ -45,7 +45,7 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
     return 'Pending';
   };
 
-  const validPropertyTypes = ['House Rent', 'Student Accommodation', 'Property Sale', 'Office Space'];
+  const validPropertyTypes = ['House Rent', 'Student Accommodation', 'House Sale', 'Land Sale', 'Office Space'];
 
 
   return (

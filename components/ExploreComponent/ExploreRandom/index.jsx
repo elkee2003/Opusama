@@ -11,6 +11,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DbUserReviewSection from './dbUserReview';
 import UserReviews from './usersReviews';
 import LastReview from './lastReview';
+import RealtorNameRating from './realtorNameRating';
 import { router, Link } from 'expo-router'
 import { getUrl } from 'aws-amplify/storage';
 import { useAuthContext } from '@/providers/AuthProvider';
@@ -21,7 +22,7 @@ const ExploreDetailedPost = ({post, realtor}) => {
 
   const {setPostPrice, setPostCautionFee, setPostTotalPrice} = useBookingShowingContext();
 
-  const {dbUser} = useAuthContext()
+  const {dbUser, authUser} = useAuthContext()
   const {setRealtorID} = useProfileContext();
 
   const [readMore, setReadMore] = useState(false)
@@ -55,10 +56,14 @@ const ExploreDetailedPost = ({post, realtor}) => {
     );
   }
 
-  // Navigate to ClientInfo
+  // Navigate to ClientInfo Or Login
   const handleNavigate = () =>{
-    router.push(`/explore/clientinfo/${post.id}`)
-  }
+    if(authUser){
+      router.push(`/explore/clientinfo/${post.id}`);
+    }else{
+      router.push('/login');
+    }
+  };
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -162,16 +167,7 @@ const ExploreDetailedPost = ({post, realtor}) => {
           </Link>
         
           {/* User */}
-          {realtor.firstName && (
-            <Pressable 
-              style={styles.user}
-              onPress={()=>router.push(`/realtor/${realtor.id}`)}
-            >
-              <Text style={styles.name}>
-                {realtor.firstName}
-              </Text>
-            </Pressable>
-          )}
+          <RealtorNameRating realtor={realtor}/>
 
           {/* Property Type */}
           {post.propertyType && (

@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DbUserReviewSection from './dbUserReview';
 import UserReviews from './usersReviews';
 import LastReview from './lastReview';
+import RealtorNameRating from './realtorNameRating';
 import {useProfileContext} from '@/providers/ProfileProvider';
 import { router } from 'expo-router';
 import { getUrl } from 'aws-amplify/storage';
@@ -19,7 +20,7 @@ import { PostReview } from '@/src/models';
 
 const DetailedOfficeSpacePost = ({post, realtor}) => {
 
-  const {dbUser} = useAuthContext()
+  const {dbUser, authUser} = useAuthContext()
   const {setRealtorID} = useProfileContext();
   const [readMore, setReadMore] = useState(false)
   const [readMoreLux, setReadMoreLux] = useState(false);
@@ -43,6 +44,15 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
         setRealtorID(realtor.id);
       }
   }, [realtor?.id, setRealtorID]);
+
+  // Function to navigate
+  const handleNavigate = () => {
+    if(authUser){
+      router.push(`/realtor/officespacerealtor/clientinfo`);
+    }else{
+      router.push('/login');
+    }
+  };
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -141,11 +151,7 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
           </Link>
         
           {/* User */}
-          {realtor.firstName && (
-            <Pressable style={styles.user} onPress={()=> router.push(`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`)}>
-              <Text style={styles.name}>{realtor.firstName}</Text>
-            </Pressable>
-          )}
+          <RealtorNameRating realtor={realtor}/>
 
           {/* Property Type */}
           {post.propertyType && (
@@ -362,7 +368,7 @@ const DetailedOfficeSpacePost = ({post, realtor}) => {
           </BottomSheet>
           
         </ScrollView>
-        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/officespacerealtor/clientinfo`)}>
+        <TouchableOpacity style={styles.getinTouchContainer} onPress={handleNavigate}>
             <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
         </TouchableOpacity>
       </GestureHandlerRootView>

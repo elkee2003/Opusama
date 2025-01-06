@@ -61,29 +61,29 @@ const ReviewGuestInfo = () => {
       setBookings(booking);
       Alert.alert('Successful', "Booking was a success");
 
-      setAdults(0)
-      setKids(0)
-      setInfants(0)
-      setGuestFirstName('')
-      setGuestLastName('')
-      setGuestPhoneNumber('')
-      setPurpose('')
-      setDuration('')
-      setCheckInDate('')
-      setCheckOutDate('')
-      setPostTotalPrice('')
-      setPostCautionFee('')
-      setOverAllPrice('')
-      setRealtorPrice(null)
-      setPostID('')
-      setPropertyDetails('')
-      setPropertyType('')
-      setNameOfType('')
-      setAccommodationType('')
-      setBookingLat('')
-      setBookingLng('')
-      setRealtorContext('')
-      router.push('/home/hotels')
+      setAdults(0);
+      setKids(0);
+      setInfants(0);
+      setGuestFirstName(dbUser?.firstName);
+      setGuestLastName(dbUser?.lastName);
+      setGuestPhoneNumber(dbUser?.phoneNumber);
+      setPurpose('');
+      setDuration('');
+      setCheckInDate('');
+      setCheckOutDate('');
+      setPostTotalPrice('');
+      setPostCautionFee('');
+      setOverAllPrice('');
+      setRealtorPrice(null);
+      setPostID('');
+      setPropertyDetails('');
+      setPropertyType('');
+      setNameOfType('');
+      setAccommodationType('');
+      setBookingLat('');
+      setBookingLng('');
+      setRealtorContext('');
+      router.push('/home/hotels');
     }catch(e){
       Alert.alert('Error', e.message)
     }finally{

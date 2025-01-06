@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { useAuthContext } from '@/providers/AuthProvider';
 import { DataStore } from 'aws-amplify/datastore'
-import { RealtorReview, User } from '@/src/models';
+import { RealtorReview, User, Booking } from '@/src/models';
 import styles from './styles';
 
 const UserReviews = ({realtor}) => {
@@ -15,6 +15,28 @@ const UserReviews = ({realtor}) => {
     const [loading, setLoading] = useState(false);
     const [usersReviews, setUsersReviews] = useState([]);
     const [users, setUsers] = useState([]);
+    const [bookings, setBookings] = useState([]);
+
+    const fetchBookings = async () =>{
+        setLoading(true);
+        try{
+  
+            // Fetch bookings for the current user
+            const userBookings = await DataStore.query(Booking, (booking) =>
+              booking.and((b) => [b.realtorID.eq(realtor?.id), b.userID.eq(dbUser?.id)])
+            );
+  
+            setBookings(userBookings)
+        }catch(e){
+            Alert.alert('Error fetching bookings', e.message)
+        }finally{
+            setLoading(false);
+        }
+    };
+
+    useEffect(()=>{
+        fetchBookings();
+    },[realtor?.id, dbUser?.id])
 
     // Function for rating 
     const handleRating = (rating) => setUserRating(rating);
@@ -142,13 +164,17 @@ const UserReviews = ({realtor}) => {
             if (opType === 'INSERT' || opType === 'UPDATE' || opType === 'DELETE') {
                 fetchReviews();
                 fetchUsers();
-                fetchUserReview()
+                fetchUserReview();
+                fetchBookings();
             }
             }
         });
     
         return () => subscription.unsubscribe();
-    },[realtor.id])
+    },[realtor.id]);
+
+    const allowedStatuses = ['VIEWING', 'CHECKED_IN', 'VISITING', 'VIEWED', 'CHECKED_OUT', 'VISITED', 'SOLD', 'REMOVED_CLIENT', 'REMOVED_REALTOR'];
+    const canReview = bookings.some((booking) => allowedStatuses.includes(booking.status));
     
   return (
     <View 
@@ -187,38 +213,40 @@ const UserReviews = ({realtor}) => {
         </ScrollView>
         
         {/* Section to rate and review */}
-        <View style={styles.reviewSection}>
-            <View style={styles.rateContainer}>
-                <View style={styles.starContainer}>
-                {[1, 2, 3, 4, 5].map((index) => (
-                    <TouchableOpacity key={index} onPress={() => handleRating(index)}>
-                    <FontAwesome
-                        name={index <= userRating ? "star" : "star-o"}
-                        size={24}
-                        color="#07021f"
+        {canReview && (
+            <View style={styles.reviewSection}>
+                <View style={styles.rateContainer}>
+                    <View style={styles.starContainer}>
+                    {[1, 2, 3, 4, 5].map((index) => (
+                        <TouchableOpacity key={index} onPress={() => handleRating(index)}>
+                        <FontAwesome
+                            name={index <= userRating ? "star" : "star-o"}
+                            size={24}
+                            color="#07021f"
+                        />
+                        </TouchableOpacity>
+                    ))}
+                    </View>
+                    <TextInput
+                    style={styles.reviewInput}
+                    value={review}
+                    onChangeText={setReview}
+                    placeholder="Write Review"
+                    multiline
                     />
-                    </TouchableOpacity>
-                ))}
                 </View>
-                <TextInput
-                style={styles.reviewInput}
-                value={review}
-                onChangeText={setReview}
-                placeholder="Write Review"
-                multiline
-                />
-            </View>
 
-            <TouchableOpacity
-            style={styles.submitReviewBtn}
-            onPress={saveReview}
-            disabled={loading}
-            >
-                <Text style={styles.submitReviewTxt}>
-                {loading ? "Submitting..." : "Submit Review"}
-                </Text>
-            </TouchableOpacity>
-        </View>
+                <TouchableOpacity
+                style={styles.submitReviewBtn}
+                onPress={saveReview}
+                disabled={loading}
+                >
+                    <Text style={styles.submitReviewTxt}>
+                    {loading ? "Submitting..." : "Submit Review"}
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        )}
     </View>
   )
 }

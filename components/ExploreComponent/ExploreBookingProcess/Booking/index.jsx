@@ -7,7 +7,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {useBookingShowingContext} from '@/providers/BookingShowingProvider';
 import { router } from 'expo-router';
 
-const ExpoloreBooking = ({ post }) => {
+const ExpoloreBooking = () => {
   const [range, setRange] = useState({
     startDate: undefined,
     endDate: undefined,

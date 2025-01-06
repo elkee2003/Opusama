@@ -3,13 +3,14 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import BottomSheet, { BottomSheetView, BottomSheetFlatList, BottomSheetScrollView,} from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Link } from 'expo-router';
-import DbUserReviewSection from './dbUserReview';
-import UserReviews from './usersReviews';
-import LastReview from './lastReview';
 import styles from './styles';
 import DefaultImage from '../../../assets/images/defaultImage.png';
 import { FontAwesome } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import DbUserReviewSection from './dbUserReview';
+import UserReviews from './usersReviews';
+import LastReview from './lastReview';
+import RealtorNameRating from './realtorNameRating';
 import {useAuthContext} from '@/providers/AuthProvider';
 import {useProfileContext} from '@/providers/ProfileProvider';
 import { router } from 'expo-router';
@@ -25,7 +26,7 @@ const DetailedPost = ({post, realtor}) => {
   const [averageRating, setAverageRating] = useState(0);
  
   const [imageUris, setImageUris] = useState([]);
-  const {dbUser} = useAuthContext();
+  const {dbUser, authUser} = useAuthContext();
   const {setRealtorID} = useProfileContext();
 
   const bottomSheetRef = useRef(null)
@@ -44,6 +45,15 @@ const DetailedPost = ({post, realtor}) => {
       setRealtorID(realtor.id);
     }
   }, [realtor?.id, setRealtorID]);
+
+  // Function to navigate
+  const handleNavigate = () => {
+    if(authUser){
+      router.push(`/realtor/houserealtor/clientinfo`);
+    }else{
+      router.push('/login');
+    }
+  };
 
   // Fetch signed URLs for each image in post.media
   const fetchImageUrls = async () => {
@@ -143,11 +153,7 @@ const DetailedPost = ({post, realtor}) => {
           </Link>
         
           {/* User */}
-          {realtor.firstName && (
-            <Pressable style={styles.user} onPress={()=> router.push(`/realtor/hotelrealtor/hotelrealtorprofilepage/${realtor.id}`)}>
-              <Text style={styles.name}>{realtor.firstName}</Text>
-            </Pressable>
-          )}
+          <RealtorNameRating realtor={realtor}/>
 
           {/* Property Type */}
           {post.propertyType && (
@@ -366,7 +372,7 @@ const DetailedPost = ({post, realtor}) => {
           </BottomSheet>
           
         </ScrollView>
-        <TouchableOpacity style={styles.getinTouchContainer} onPress={()=>router.push(`/realtor/houserealtor/clientinfo`)}>
+        <TouchableOpacity style={styles.getinTouchContainer} onPress={handleNavigate}>
             <Text style={styles.getInTouchTxt}>Get in Touch!</Text>
         </TouchableOpacity>
       </GestureHandlerRootView>

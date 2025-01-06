@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     },
     backIconContainer:{
         position:'absolute',
-        top:70,
+        top:20,
         left:15,
     },
     backIcon:{

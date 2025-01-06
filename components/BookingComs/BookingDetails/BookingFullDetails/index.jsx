@@ -113,7 +113,7 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
 
   const renderButton = () => {
     if (notification.status === 'ACCEPTED') {
-      if (['House Rent', 'Student Accommodation', 'Property Sale', 'Office Space'].includes(notification.propertyType)) {
+      if (['House Rent', 'Student Accommodation', 'House Sale', 'Land Sale', 'Office Space'].includes(notification.propertyType)) {
         return (
           <View style={styles.viewConInfoRow}>
             {/* Button */}
@@ -169,7 +169,7 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
     }
 
     if (notification.status === 'VIEWING') {
-      if (['House Rent', 'Student Accommodation', 'Property Sale', 'Office Space'].includes(notification.propertyType)) {
+      if (['House Rent', 'Student Accommodation', 'House Sale', 'Land Sale', 'Office Space'].includes(notification.propertyType)) {
         return (
           <View style={styles.viewConInfoRow}>
             {/* Button */}

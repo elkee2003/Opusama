@@ -7,7 +7,7 @@ import {useBookingShowingContext} from '@/providers/BookingShowingProvider'
 import { DataStore } from 'aws-amplify/datastore';
 import {Booking} from '@/src/models';
 
-const ReviewClientDetails = (post) => {
+const ReviewClientDetails = () => {
 
   const {dbUser} = useAuthContext();
 
@@ -51,8 +51,7 @@ const ReviewClientDetails = (post) => {
         bookingLat,
         bookingLng,
         totalPrice: parseFloat(overAllPrice),
-        realtorPrice,
-        // overAllPrice: parseFloat(overAllPrice),
+        realtorPrice: parseFloat(realtorPrice),
         userID: dbUser.id,
         realtorID: realtorContext.id,
         PostID,
@@ -64,9 +63,9 @@ const ReviewClientDetails = (post) => {
       setAdults(0)
       setKids(0)
       setInfants(0)
-      setGuestFirstName('')
-      setGuestLastName('')
-      setGuestPhoneNumber('')
+      setGuestFirstName(dbUser?.firstName);
+      setGuestLastName(dbUser?.lastName);
+      setGuestPhoneNumber(dbUser?.phoneNumber);
       setNote('')
       setDuration('')
       setCheckInDate('')
@@ -74,7 +73,7 @@ const ReviewClientDetails = (post) => {
       setPostTotalPrice('')
       setPostCautionFee('')
       setOverAllPrice('')
-      setRealtorPrice(null)
+      setRealtorPrice('')
       setPostID('')
       setPropertyDetails('')
       setPropertyType('')
@@ -135,12 +134,24 @@ const ReviewClientDetails = (post) => {
           <Text style={styles.txtInputHeader}>Phone Number(s):</Text>
           <Text style={styles.txtInput}>{guestPhoneNumber}</Text>
 
-          {/* Not showing because I haven't figured out how to show */}
-          {/* <Text style={styles.txtInputHeader}>Check-in:</Text>
-          <Text style={styles.txtInput}>{String({checkInDate})}</Text>
+          {/* Check-in & Check-out */}
+          {/* {propertyDetails?.propertyType === 'Hotel / Shortlet' && (
+            <>
+              <Text style={styles.txtInputHeader}>
+                Check-in:
+              </Text>
+              <Text style={styles.txtInput}>
+                {String({checkInDate})}
+              </Text>
 
-          <Text style={styles.txtInputHeader}>Check-out:</Text>
-          <Text style={styles.txtInput}>{String({checkOutDate})}</Text> */}
+              <Text style={styles.txtInputHeader}>
+                Check-out:
+              </Text>
+              <Text style={styles.txtInput}>
+                {String({checkOutDate})}
+              </Text>
+            </>
+          )} */}
 
           <Text style={styles.txtInputHeader}>Purpose of stay:</Text>
           <Text style={styles.txtInput}>{note?.trim()}</Text>
@@ -158,17 +169,16 @@ const ReviewClientDetails = (post) => {
 
           {postTotalPrice ? (
             <>
-              <Text style={styles.txtInputHeader}>Sub Total:</Text>
+              <Text style={styles.txtInputHeader}>
+                {propertyDetails?.propertyType === 'Hotel / Shortlet' ? 'Sub Total:' : 'Price:'}
+              </Text>
               <Text style={styles.txtInput}>
                 ₦{postTotalPrice?.toLocaleString()}
               </Text>
             </>
           ) : ''}
 
-          {/* <Text style={styles.txtInputHeader}>Caution fee:</Text>
-          <Text style={styles.txtInput}>{cautionFee}</Text> */}
-
-          {overAllPrice ? (
+          {overAllPrice && propertyDetails?.propertyType === 'Hotel / Shortlet' ? (
             <>
               <Text style={styles.txtInputHeader}>Total:</Text>
               <Text style={styles.txtInput}>
@@ -186,7 +196,7 @@ const ReviewClientDetails = (post) => {
           // onPress={()=>router.push(`/realtor/hotelrealtor/payment`)}
         >
           <Text style={styles.paymentTxt}>
-            {post?.propertyType === 'Hotel / Shortlet' ? 'Book' : 'Get In Touch'}
+            {propertyDetails?.propertyType === 'Hotel / Shortlet' ? 'Book' : 'Get In Touch'}
           </Text>
         </TouchableOpacity>
     </View>

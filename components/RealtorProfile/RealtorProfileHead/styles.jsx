@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     row:{
         flexDirection:'row',
-        gap:10
+        gap:10,
     },
     reviewIconRow:{
         flexDirection:'row',

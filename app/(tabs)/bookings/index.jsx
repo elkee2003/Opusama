@@ -1,4 +1,4 @@
-import { View, Text,} from 'react-native';
+import { View, Text, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
 import BookingList from '../../../components/BookingComs/BookingList';
 import { router } from 'expo-router';
@@ -6,7 +6,7 @@ import { useAuthContext } from '@/providers/AuthProvider';
 
 const Bookings = () => {
 
-  const {dbUser} = useAuthContext()
+  const {dbUser, authUser} = useAuthContext()
 
   useEffect(()=>{
     if(!dbUser){
@@ -14,13 +14,27 @@ const Bookings = () => {
     }
   },[dbUser])
 
+  if(!authUser){
+    return (
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <Text style={{fontSize:25, fontWeight:'bold', color:'#afadad'}}>Sign-In to access Bookings</Text>
+
+        <TouchableOpacity onPress={()=>{router.push('/login')}}>
+          <Text style={{fontSize:20, marginTop:10,textDecorationLine:'underline',fontWeight:'bold', color:'#b42626'}}>
+            Sign In
+          </Text>
+        </TouchableOpacity>
+      </View>
+    )
+  };
+
   if(!dbUser){
     return (
       <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-        <Text style={{fontSize:20, fontWeight:'bold', color:'#afadad'}}>Kindly Fill in Your Data in Proile screen</Text>
+        <Text style={{fontSize:20, fontWeight:'bold', color:'#afadad'}}>Kindly Fill in Your Data in Profile screen</Text>
       </View>
     )
-  }
+  };
 
   return (
     <View style={{flex:1}} >

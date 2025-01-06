@@ -15,7 +15,7 @@ const HouseSearch = () => {
     const handleSearch = () => {
 
       // Wait until housePosts is populated before attempting to filter
-      if (housePosts.length === 0) {
+      if (!housePosts || housePosts.length === 0) {
         return; // Exit if housePosts is not yet populated
       }
 

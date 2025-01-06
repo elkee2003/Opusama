@@ -1,4 +1,5 @@
-import { StyleSheet, } from 'react-native'
+import { StyleSheet, } from 'react-native';
+import {Colors} from '../../../constants/Colors'
 
 const styles = StyleSheet.create({
     container:{
@@ -13,54 +14,78 @@ const styles = StyleSheet.create({
         fontSize:16,
         backgroundColor:'white'
     },
+    priceInputRow:{
+        flexDirection:'row',
+        justifyContent:'center',
+        gap:5,
+        marginBottom:15,
+    },
+    priceInput:{
+        marginTop:5,
+        padding:5,
+        borderRadius:15,
+        width:150,
+        textAlign:'center',
+        fontSize:16,
+        backgroundColor:'white',
+    },
     activityIndicator:{
         flex:1,
         justifyContent:'center',
         alignItems:'center'
     },
-    locationRow:{
+    propertyContainer:{
+        marginHorizontal:10,
+    },
+    imageContainer:{
+        aspectRatio: 3/2, 
+        width: '100%',
+        borderRadius: 20,
+        overflow: 'hidden',
+        backgroundColor:'#15141A'
+    },
+    image:{
+        flex: 1,
+        width: '100%',
+        objectFit:'contain'
+    },
+    bedroom:{
+        fontSize:15.5,
+        color: Colors.COMMENTS,
+    },
+
+    room:{
         flexDirection:'row',
-        paddingVertical:10,
-        borderBottomWidth:1,
-        borderColor:'lightgrey',
-        gap:10
-    },
-    icon:{
-        fontSize:25,
-        color:'#01012c',
-    },
-    iconContainer:{
-        padding:5,
-        // backgroundColor:'#bbbbbb',
-        // borderRadius:20,
-    },
-    imgContainer:{
-        height:40,
-        width:40,
-        borderRadius:10,
-        overflow:'hidden'
-    },
-    img:{
-        flex:1,
-        resizeMode:'cover'
-    },
-    realtorName:{
-        fontSize:18,
-        fontWeight:'bold',
-        flex:1,
-    },
-    subContainer:{
-        marginTop:2,
-        gap:5,
+        justifyContent:'space-between',
         alignItems:'center'
     },
-    subLocation:{
-        color:'#525151',
-        letterSpacing:0.5,
+    
+    location:{
+        fontSize:15.5,
+        color: Colors.COMMENTS,
     },
-    subPrice:{
-        color:'#525151',
-        letterSpacing:0.5,
+    contact:{
+        flexDirection:'row',
+    },
+    name:{
+        fontSize:17,
+        fontWeight:'bold',
+        letterSpacing:0.7,
+        color:'#141414',
+    },
+    description:{
+        fontSize:17,
+        lineHeight:22,
+        color: Colors.PRIMARY,
+    },
+    price:{
+        fontSize:17,
+        fontWeight:'bold',
+    },
+    priceRow:{
+        flexDirection:'row',
+        marginTop:5,
+        marginBottom:15,
     },
     noResultText:{
         marginTop:10,
@@ -70,6 +95,7 @@ const styles = StyleSheet.create({
         letterSpacing:0.7,
         color:'#9b9999',
     },
+    
 })
 
-export default styles
+export default styles;
