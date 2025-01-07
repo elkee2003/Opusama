@@ -117,14 +117,26 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
         return (
           <View style={styles.viewConInfoRow}>
             {/* Button */}
-            <TouchableOpacity style={styles.view} onPress={handleViewingClick}>
-              <Text style={styles.btnTxt}>Viewing</Text>
-            </TouchableOpacity>
+            {notification?.post?.inspectionFee ? (
+              <TouchableOpacity 
+                style={styles.view} 
+                onPress={()=>router.push('/payment')}
+              >
+                <Text style={styles.btnTxt}>
+                  Make Payment
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.view} onPress={handleViewingClick}>
+                <Text style={styles.btnTxt}>Viewing</Text>
+              </TouchableOpacity>
+            )}
 
             {/* Info Icon */}
             <TouchableOpacity 
               style={styles.infoIconCon}
-              onPress={() => Alert.alert('Viewing Info', 'Click on "Viewing" once you are viewing the property.')}
+              onPress={() => Alert.alert(notification?.post?.inspectionFee ? 'Payment Info' : 'Viewing Info', 
+                notification?.post?.inspectionFee ? 'Click on "Make Payment" to proceed with the payment for the inspection fee.' : 'Click on "Viewing" once you are viewing the property.')}
             >
               <AntDesign name="infocirlceo" style={styles.infoIcon} />
             </TouchableOpacity>
@@ -252,7 +264,11 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
   };
 
   useEffect(()=>{
-    setPaymentPrice(notification.totalPrice)
+    if(notification?.post?.inspectionFee){
+      setPaymentPrice(notification?.post?.inspectionFee)
+    }else{
+      setPaymentPrice(notification?.totalPrice)
+    }
   }, [notification])
 
   return (
@@ -475,6 +491,18 @@ const BookingFullDetails = ({notification, onStatusChange}) => {
               </Text>
             </>
           )}
+
+          {/* Inspection Fee */}
+          {notification?.post?.inspectionFee ?(
+            <>
+              <Text style={styles.subHeader}>
+              Inspection Fee:
+              </Text>
+              <Text style={styles.details}> 
+                ₦{Number(notification?.post?.inspectionFee)?.toLocaleString()}
+              </Text>
+            </>
+          ) : ''}
         </ScrollView>
 
         {/* Status */}

@@ -138,6 +138,19 @@ const styles = StyleSheet.create({
         textDecorationLine:'underline',
         color:Colors.TEXTCOLOUR,
     },
+    // For inspection fee
+    subInspectionFee:{
+        fontStyle:'italic',
+        fontSize:18,
+        fontWeight:'bold',
+        marginRight:7,
+        color:'grey',
+    },
+    inspectionFee:{
+        fontWeight:'bold',
+        fontSize:19,
+        color:'grey',
+    },
     luxPolHeadTxt:{
         fontSize:25.888,
         fontWeight:'bold',

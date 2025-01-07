@@ -35,9 +35,10 @@ const DetailedPost = ({post, realtor}) => {
     bottomSheetRef.current?.expand(); 
   };
 
-  const formattedPrice = Number(post.price)?.toLocaleString();
-  const formattedCautionFee = Number(post.cautionFee)?.toLocaleString();
-  const formattedTotalPrice = Number(post.totalPrice)?.toLocaleString();
+  const formattedPrice = Number(post?.price)?.toLocaleString();
+  const formattedCautionFee = Number(post?.cautionFee)?.toLocaleString();
+  const formattedTotalPrice = Number(post?.totalPrice)?.toLocaleString();
+  const formattedInspectionFee = Number(post?.inspectionFee)?.toLocaleString();
 
   // useEffect to store realtorid for review
   useEffect(() => {
@@ -209,8 +210,12 @@ const DetailedPost = ({post, realtor}) => {
           <View style={styles.topBorderLine}/>
 
           {/* Location */}
-          {post.address && (
+          {/* {post.address && (
             <Text style={styles.location}>{`...${post.address.substring(5)}`}</Text>
+          )} */}
+
+          {post.address && (
+            <Text style={styles.location}>{post.address}</Text>
           )}
 
           {/* City, State, Country, */}
@@ -301,6 +306,19 @@ const DetailedPost = ({post, realtor}) => {
             <Text style={styles.totalPrice}>
               {''}₦{formattedTotalPrice}
             </Text>
+          </View>
+
+          {/* Inspection Fee */}
+          <View style={styles.priceRowTotal}>
+            {post?.inspectionFee ? (
+              <>
+                <Text style={styles.subInspectionFee}>Inspection Fee:</Text>
+                <Text style={styles.inspectionFee}>
+                  {''}₦{formattedInspectionFee}
+                </Text>
+              </>
+              ) : ''
+            }
           </View>
 
           {/* Border Line */}

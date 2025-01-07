@@ -105,129 +105,174 @@ const ProfilePage = () => {
       )
     };
 
+    // If not authUser
+    if(!authUser){
+      return (
+        <View style={styles.container}>
+          <TouchableOpacity 
+              style={styles.profilePicContainer}
+          >
+            <Image 
+              source={Placeholder} 
+              style={styles.img}
+            /> 
+          </TouchableOpacity>
+
+          <Text style={styles.emptyText}>Sign In</Text>
+
+          <View style={styles.emptyBtnCardCon}>
+            <TouchableOpacity 
+              style={styles.emptyBtnCard}
+            />
+            <TouchableOpacity 
+              style={styles.emptyBtnCard}
+            />
+            <TouchableOpacity 
+              style={styles.emptyBtnCard}
+            />
+            {/* Sign In */}
+            <TouchableOpacity 
+            style={styles.btnCard}
+            onPress={()=> router.push('/login')}
+            >
+              <Text style={styles.btnTxt}>
+                Sign In
+              </Text>
+              <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+            </TouchableOpacity>
+          </View>
+          
+        </View>
+      )
+    }
+
   return (
     <View style={styles.container}>
-      {/* Profile Picture */}
-      {
-        <TouchableOpacity 
-          style={styles.profilePicContainer}
-          onPress={()=>router.push('/profile/editprofile')}
-        >
-        {loading || !profilePic  ? (
-          <Image 
-            source={Placeholder} 
-            style={styles.img}
-          /> // Show placeholder while loading
-        ) : (
-          <Image 
-            source={{ uri: profilePic }} 
-            style={styles.img} 
-            onError={() => setProfilePic(null)}
-            width={50}
-            height={50} 
-          />
-        )}
-      </TouchableOpacity>
-      }
-
-      {/* Name and Surname */}
-      <View style={styles.row}>
-        <Ionicons name="person" size={24} color="black" />
-        <Text style={styles.name}>{firstName}</Text>
-      </View>
-
-      {/* PhoneNumber */}
-      <View style={styles.row}>
-        <FontAwesome name="phone" size={24} color="black" />
-        <Text style={styles.txt}>{phoneNumber}</Text>
-      </View>
-      
-
-      {/* Address */}
-      <View style={styles.row}>
-        <Entypo name="location" size={24} color="black" />
-        <Text style={styles.txt}>{address}</Text>
-      </View>
-
-      <View style={styles.profileSubrow}>
-        <TouchableOpacity onPress={()=>router.push('/profile/editprofile')} style={styles.subHeaderContainer}>
-          <Text style={styles.subHeader}>Edit Profile</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={()=> router.push('/profile/reviewinfo')} style={styles.subHeaderContainer}>
-          <Text style={styles.subHeader}>
-            View Info
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Buttons */}
-      <ScrollView showsVerticalScrollIndicator={false}>
-
-        {/* Terms & Conditions */}
-        <TouchableOpacity 
-          style={styles.btnCard}
-          onPress={()=>{router.push('/termsandconditions')}}
-        >
-          <Text style={styles.btnTxt}>Terms and Conditons</Text>
-          <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
-        </TouchableOpacity>
-
-        {/* Privacy Policy */}
-        <TouchableOpacity 
-          style={styles.btnCard}
-          onPress={()=> router.push('/privacypolicy')}
-        >
-          <Text style={styles.btnTxt}>Privacy Policy</Text>
-          <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
-        </TouchableOpacity>
-
-        {/* Support */}
-        <TouchableOpacity 
-          style={styles.btnCard}
-          onPress={()=> router.push('/profilebuttons/support')}
-        >
-          <Text style={styles.btnTxt}>
-            Support
-          </Text>
-          <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
-        </TouchableOpacity>
-
-        {/* Sign In */}
-        {!authUser && (
-          <TouchableOpacity 
-          style={styles.btnCard}
-          onPress={()=> router.push('/login')}
-          >
-            <Text style={styles.btnTxt}>
-              Sign In
-            </Text>
-            <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+      {authUser && (
+        <View>
+          {/* Profile Picture */}
+          {
+            <TouchableOpacity 
+              style={styles.profilePicContainer}
+              onPress={()=>router.push('/profile/editprofile')}
+            >
+            {loading || !profilePic  ? (
+              <Image 
+                source={Placeholder} 
+                style={styles.img}
+              /> // Show placeholder while loading
+            ) : (
+              <Image 
+                source={{ uri: profilePic }} 
+                style={styles.img} 
+                onError={() => setProfilePic(null)}
+                width={50}
+                height={50} 
+              />
+            )}
           </TouchableOpacity>
-        )}
+          }
 
-        {/* Sing out */}
-        <TouchableOpacity 
-          style={styles.btnCard}
-          onPress={onSignout}
-        >
-          <Text style={styles.btnTxt}>
-            Sign Out
-          </Text>
-          <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
-        </TouchableOpacity>
+          {/* Name and Surname */}
+          <View style={styles.row}>
+            <Ionicons name="person" size={24} color="black" />
+            <Text style={styles.name}>{firstName}</Text>
+          </View>
 
-        {/* Delete Account */}
-        <TouchableOpacity 
-          style={styles.btnCard}
-          onPress={()=> router.push('/profilebuttons/deleteaccount')}
-        >
-          <Text style={styles.btnTxt}>
-            Delete Account
-          </Text>
-          <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
-        </TouchableOpacity>
-      </ScrollView>
+          {/* PhoneNumber */}
+          <View style={styles.row}>
+            <FontAwesome name="phone" size={24} color="black" />
+            <Text style={styles.txt}>{phoneNumber}</Text>
+          </View>
+          
+
+          {/* Address */}
+          <View style={styles.row}>
+            <Entypo name="location" size={24} color="black" />
+            <Text style={styles.txt}>{address}</Text>
+          </View>
+
+          <View style={styles.profileSubrow}>
+            <TouchableOpacity onPress={()=>router.push('/profile/editprofile')} style={styles.subHeaderContainer}>
+              <Text style={styles.subHeader}>Edit Profile</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={()=> router.push('/profile/reviewinfo')} style={styles.subHeaderContainer}>
+              <Text style={styles.subHeader}>
+                View Info
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Buttons */}
+          <ScrollView showsVerticalScrollIndicator={false}>
+
+            {/* Terms & Conditions */}
+            <TouchableOpacity 
+              style={styles.btnCard}
+              onPress={()=>{router.push('/termsandconditions')}}
+            >
+              <Text style={styles.btnTxt}>Terms and Conditons</Text>
+              <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+            </TouchableOpacity>
+
+            {/* Privacy Policy */}
+            <TouchableOpacity 
+              style={styles.btnCard}
+              onPress={()=> router.push('/privacypolicy')}
+            >
+              <Text style={styles.btnTxt}>Privacy Policy</Text>
+              <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+            </TouchableOpacity>
+
+            {/* Support */}
+            <TouchableOpacity 
+              style={styles.btnCard}
+              onPress={()=> router.push('/profilebuttons/support')}
+            >
+              <Text style={styles.btnTxt}>
+                Support
+              </Text>
+              <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+            </TouchableOpacity>
+
+            {/* Sign In */}
+            {!authUser && (
+              <TouchableOpacity 
+              style={styles.btnCard}
+              onPress={()=> router.push('/login')}
+              >
+                <Text style={styles.btnTxt}>
+                  Sign In
+                </Text>
+                <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+              </TouchableOpacity>
+            )}
+
+            {/* Sing out */}
+            <TouchableOpacity 
+              style={styles.btnCard}
+              onPress={onSignout}
+            >
+              <Text style={styles.btnTxt}>
+                Sign Out
+              </Text>
+              <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+            </TouchableOpacity>
+
+            {/* Delete Account */}
+            <TouchableOpacity 
+              style={styles.btnCard}
+              onPress={()=> router.push('/profilebuttons/deleteaccount')}
+            >
+              <Text style={styles.btnTxt}>
+                Delete Account
+              </Text>
+              <MaterialIcons name="navigate-next" style={styles.nxtIcon} />
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+      )}
     </View>
   )
 }

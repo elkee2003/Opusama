@@ -11,14 +11,25 @@ const styles = StyleSheet.create({
         color:'black',
         zIndex:3,
     },
+    logoCon:{
+        marginTop:150,
+        marginBottom:20,
+        height:100,
+        width:100,
+        alignSelf:'center',
+    },
+    logo:{
+        flex: 1,
+        width: '100%',
+    },
     flutterwaveTxt:{
         fontsize:19,
         fontWeight:'bold',
         textAlign:'center',
     },
     sub:{
-        marginTop:60,
-        top:'30%'
+        // marginTop:150,
+        // top:'30%'
     },
     input:{
         padding:10,

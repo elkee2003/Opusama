@@ -74,6 +74,26 @@ const styles = StyleSheet.create({
     nxtIcon:{
         fontSize:25,
     },
+
+    // Empty items for users not signed in
+    emptyText:{
+        marginTop:40,
+        fontSize:40,
+        textAlign:'center',
+        fontWeight:'bold',
+    },
+    emptyBtnCardCon:{
+        marginTop:10,
+    },
+    emptyBtnCard:{
+        padding:27,
+        marginVertical:10,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        backgroundColor:"#cac9c9",
+        borderRadius:15,
+    },
 })
 
 export default styles

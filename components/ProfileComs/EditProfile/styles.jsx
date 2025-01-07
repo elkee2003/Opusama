@@ -75,16 +75,6 @@ const styles = StyleSheet.create({
         marginHorizontal:15,
         marginBottom:5,
     },
-    // saveBackground:{
-    //     alignItems:'center',
-    //     backgroundColor:'#18b403',
-    //     padding: 15,
-    // },
-    // scrnBtns:{
-    //     marginTop:30,
-    //     marginBottom:10,
-    //     gap:15
-    // },
     nxtBtn:{
         backgroundColor:'#0c052e',
         marginTop:10,
@@ -143,6 +133,31 @@ const styles = StyleSheet.create({
         borderRadius:30,
     },
     saveBtnTxt:{
+        fontSize:30,
+        fontWeight:'bold',
+        color:'#e9e6e6'
+    },
+
+    // Empty items for users not signed in
+    emptyInputCon:{
+        marginTop:30,
+    },
+    emptyInput: {
+        marginVertical: 10,
+        backgroundColor: "white",
+        padding: 25,
+        borderRadius: 5,
+    },
+    emptyBtnCon:{
+        backgroundColor:'#0c052e',
+        marginTop:10,
+        padding:2,
+        marginHorizontal:80,
+        marginBottom:10,
+        alignItems:'center',
+        borderRadius:30,
+    },
+    emptyBtnTxt:{
         fontSize:30,
         fontWeight:'bold',
         color:'#e9e6e6'

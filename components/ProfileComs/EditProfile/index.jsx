@@ -77,65 +77,98 @@ const EditProfile = () => {
       }
     };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Edit Profile</Text>
+    if(!authUser){
+      return (
+        <View style={styles.container}>
+          <Text style={styles.title}>Sign In</Text>
 
-      {/* Upload Profile Picture */}
-      <View style={styles.profilePicContainer}>
-        {
-          profilePic && <Image source={{ uri: profilePic }} style={styles.img} />
-        }
-        <View style={styles.plusIconContainer}>
-          <TouchableOpacity onPress={pickImage}>
-            <AntDesign style={styles.plusIcon} name="pluscircle"  />
+          {/* Sign In */}
+          <TouchableOpacity style={styles.signoutBtn} onPress={handleAuthAction}>
+            <Text style={styles.signoutTxt}>{authUser ? 'Sign Out' : 'Sign In'}</Text>
+          </TouchableOpacity>
+
+          {/* Circle for image */}
+          <View style={styles.profilePicContainer} />
+
+          {/* Empty inputs */}
+          <View style={styles.emptyInputCon}>
+            <View style={styles.emptyInput}/>
+            <View style={styles.emptyInput}/>
+            <View style={styles.emptyInput}/>
+          </View>
+          <TouchableOpacity 
+            style={styles.emptyBtnCon}
+            onPress={()=>router.push('/login')}
+          >
+            <Text style={styles.emptyBtnTxt}>Sign In</Text>
           </TouchableOpacity>
         </View>
+      )
+    }
+
+  return (
+      <View style={styles.container}>
+        {authUser && (
+          <View>
+            <Text style={styles.title}>Edit Profile</Text>
+
+            {/* Upload Profile Picture */}
+            <View style={styles.profilePicContainer}>
+              {
+                profilePic && <Image source={{ uri: profilePic }} style={styles.img} />
+              }
+              <View style={styles.plusIconContainer}>
+                <TouchableOpacity onPress={pickImage}>
+                  <AntDesign style={styles.plusIcon} name="pluscircle"  />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            {/* Sign out button */}
+            <TouchableOpacity style={styles.signoutBtn} onPress={handleAuthAction}>
+              <Text style={styles.signoutTxt}>{authUser ? 'Sign Out' : 'Sign In'}</Text>
+            </TouchableOpacity>
+
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <TextInput 
+                  value={firstName}
+                  onChangeText={setFirstName}
+                  placeholder='First Name / Company name'
+                  style={styles.input}
+              />
+
+              <TextInput 
+                value={lastName}
+                onChangeText={setLastName}
+                placeholder='Surname (Optional)'
+                style={styles.input}
+              />
+
+              <TextInput
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
+                placeholder='Phone Number'
+                style={styles.input}
+                keyboardType='numeric'
+              />
+
+              <TextInput 
+                value={address}
+                onChangeText={setAddress}
+                placeholder='Input Address'
+                style={styles.input}
+              />
+            </ScrollView>
+            
+            {/* Error Message */}
+            <Text style={styles.error}>{errorMessage}</Text>
+
+            <TouchableOpacity onPress={goToNxtPage} style={styles.nxtBtn}>
+              <MaterialIcons name="navigate-next" style={styles.nxtBtnIcon} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
-
-      {/* Sign out button */}
-      <TouchableOpacity style={styles.signoutBtn} onPress={handleAuthAction}>
-        <Text style={styles.signoutTxt}>{authUser ? 'Sign Out' : 'Sign In'}</Text>
-      </TouchableOpacity>
-
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <TextInput 
-            value={firstName}
-            onChangeText={setFirstName}
-            placeholder='First Name / Company name'
-            style={styles.input}
-        />
-
-        <TextInput 
-          value={lastName}
-          onChangeText={setLastName}
-          placeholder='Surname (Optional)'
-          style={styles.input}
-        />
-
-        <TextInput
-          value={phoneNumber}
-          onChangeText={setPhoneNumber}
-          placeholder='Phone Number'
-          style={styles.input}
-          keyboardType='numeric'
-        />
-
-        <TextInput 
-          value={address}
-          onChangeText={setAddress}
-          placeholder='Input Address'
-          style={styles.input}
-        />
-      </ScrollView>
-      
-      {/* Error Message */}
-      <Text style={styles.error}>{errorMessage}</Text>
-
-      <TouchableOpacity onPress={goToNxtPage} style={styles.nxtBtn}>
-        <MaterialIcons name="navigate-next" style={styles.nxtBtnIcon} />
-      </TouchableOpacity>
-    </View>
   )
 }
 

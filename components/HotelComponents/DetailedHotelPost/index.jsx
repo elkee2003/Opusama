@@ -240,8 +240,12 @@ const DetailedHotelPost = ({post, realtor}) => {
           <View style={styles.topBorderLine}/>
 
           {/* Location */}
-          {post.address && (
+          {/* {post.address && (
             <Text style={styles.location}>{`...${post.address.substring(5)}`}</Text>
+          )} */}
+          
+          {post.address && (
+            <Text style={styles.location}>{post.address}</Text>
           )}
 
           {/* City, State, Country, */}

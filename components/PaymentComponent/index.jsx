@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Alert, Image } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import styles from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
+import Logo from '../../assets/data/images/Opusama3.png'
 import {useProfileContext} from '@/providers/ProfileProvider';
 import { useAuthContext } from '@/providers/AuthProvider';
 import {PayWithFlutterwave} from 'flutterwave-react-native';
@@ -50,6 +51,13 @@ const PaymentComponent = () => {
         {/* Back Button */}
         <TouchableOpacity style={styles.bckContainer} onPress={()=>router.back()}>
           <Ionicons name="arrow-back" style={styles.bckIcon}/>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.logoCon}>
+          <Image 
+            style={styles.logo}
+            source={Logo}
+          />
         </TouchableOpacity>
 
         {/* Payment Form */}

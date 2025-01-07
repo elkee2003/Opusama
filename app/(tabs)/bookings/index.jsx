@@ -17,10 +17,13 @@ const Bookings = () => {
   if(!authUser){
     return (
       <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-        <Text style={{fontSize:25, fontWeight:'bold', color:'#afadad'}}>Sign-In to access Bookings</Text>
+        <Text style={{fontSize:25, fontWeight:'bold', color:'#afadad'}}>Sign In to access Bookings</Text>
 
-        <TouchableOpacity onPress={()=>{router.push('/login')}}>
-          <Text style={{fontSize:20, marginTop:10,textDecorationLine:'underline',fontWeight:'bold', color:'#b42626'}}>
+        <TouchableOpacity
+          style={{width:100,marginTop:10,  padding:10, alignItems:'center', justifyContent:'center', borderRadius:10, backgroundColor:"#060b38"}} 
+          onPress={()=>{router.push('/login')}}
+        >
+          <Text style={{fontSize:20,  fontWeight:'bold', color:'white', textAlign:'center'}}>
             Sign In
           </Text>
         </TouchableOpacity>

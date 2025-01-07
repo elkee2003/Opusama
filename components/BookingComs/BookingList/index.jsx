@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import BookingSingle from '../BookingSingle';
 import { useAuthContext } from '@/providers/AuthProvider';
 import { DataStore } from 'aws-amplify/datastore';
-import {Booking, Realtor } from '@/src/models';
+import {Booking, Realtor, Post } from '@/src/models';
 import styles from './styles'
 
 const BookingList = () => {
@@ -26,17 +26,27 @@ const BookingList = () => {
             // Sort bookings by creation date in descending order
             const sortedBookings = filteredBookings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-            // Add realtor details to each booking
-            const bookingsWithRealtors = await Promise.all(
-                sortedBookings.map(async(booking)=>{
-                    if(booking.realtorID){
-                        const realtor = await DataStore.query(Realtor, (r)=>r.id.eq(booking.realtorID));
-                        return {...booking, realtor: realtor[0] || null};
-                    }
-                    return {...booking, realtor:null};
+            // Add realtor and post details to each booking
+            const bookingsWithDetails = await Promise.all(
+                sortedBookings.map(async(booking) => {
+                  // Fetch associated realtor
+                  const realtor = booking.realtorID
+                  ? await DataStore.query(Realtor, (r) => r.id.eq(booking.realtorID))
+                  : null;
+
+                  // Fetch associated post
+                  const post = booking.PostID
+                  ? await DataStore.query(Post, (p) => p.id.eq(booking.PostID))
+                  : null;
+
+                  return {
+                    ...booking,
+                    realtor: realtor ? realtor[0] : null,
+                    post: post ? post[0] : null,
+                  };
                 })
-            )
-            setBookings(bookingsWithRealtors)
+            );
+            setBookings(bookingsWithDetails);
         }catch(e){
             Alert.alert('Error fetching bookings', e.message)
         }finally{

@@ -37,6 +37,7 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
   const formattedPrice = Number(post?.price)?.toLocaleString();
   const formattedCautionFee = Number(post?.cautionFee)?.toLocaleString();
   const formattedTotalPrice = Number(post?.totalPrice)?.toLocaleString();
+  const formattedInspectionFee = Number(post?.inspectionFee)?.toLocaleString();
 
   // useEffect to store realtorid for review
   useEffect(() => {
@@ -199,9 +200,9 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
             <View style={styles.topBorderLine}/>
 
             {/* Location */}
-            {/* {post.address && (
-              <Text style={styles.location}>{`${post.address.substring(0,17)}...`}</Text>
-            )} */}
+            {post?.address && (
+              <Text style={styles.location}>{post?.address}</Text>
+            )}
 
             {/* City, State, Country, */}
             <View>
@@ -296,6 +297,19 @@ const BookedPropertyDetailedPost = ({post, realtor}) => {
               <Text style={styles.totalPrice}>
                 {''}₦{formattedTotalPrice}
               </Text>
+            </View>
+
+            {/* Inspection Fee */}
+          <View style={styles.priceRowTotal}>
+              {post?.inspectionFee ? (
+                <>
+                  <Text style={styles.subInspectionFee}>Inspection Fee:</Text>
+                  <Text style={styles.inspectionFee}>
+                    {''}₦{formattedInspectionFee}
+                  </Text>
+                </>
+                ) : ''
+              }
             </View>
 
             {/* Border Line */}

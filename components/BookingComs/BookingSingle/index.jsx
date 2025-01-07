@@ -8,6 +8,8 @@ import { router } from 'expo-router';
 
 const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
 
+  console.log('booking inspection fee:',booking.post?.inspectionFee)
+
   // Handle Viewing button click
   const handleViewingClick = () => {
     onUpdateStatus(booking.id, 'VIEWING');
@@ -147,24 +149,52 @@ const BookingSingle = ({booking, onDelete, onUpdateStatus}) => {
         )}
 
         {/* If booking status is ACCEPTED */}
-        {(booking.status === 'ACCEPTED' && validPropertyTypes.includes(booking.propertyType)) ? (
+        {(booking.status === 'ACCEPTED' && validPropertyTypes.includes(booking.propertyType)) && (
           <View style={styles.viewConInfoRow}>
-            <TouchableOpacity 
+            {booking.post?.inspectionFee ? (
+              // Show "Make Payment" button if inspectionFee is filled
+              <TouchableOpacity
+                style={styles.viewCon}
+                onPress={()=> router.push(`/bookings/bookingdetail/fulldetails/${booking.id}`)} // Pass bookingId to the fulldetails route
+              >
+                <Text style={styles.viewTxt}>Make Payment</Text>
+              </TouchableOpacity>
+            ) : (
+              // Show "Viewing" button if inspectionFee is empty
+              <TouchableOpacity
+                style={styles.viewCon}
+                onPress={handleViewingClick}
+              >
+                <Text style={styles.viewTxt}>Viewing</Text>
+              </TouchableOpacity>
+            )}
+
+            
+            {/* <TouchableOpacity 
               style={styles.viewCon}
               onPress={handleViewingClick}
             >
               <Text style={styles.viewTxt}>Viewing</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             {/* Info Icon */}
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.infoIconCon}
-              onPress={() => Alert.alert('Viewing Info', 'Click on "Viewing" once you are viewing the property.')}
+              onPress={() =>
+                Alert.alert(
+                  booking.post?.inspectionFee
+                    ? 'Payment Info'
+                    : 'Viewing Info',
+                  booking.post?.inspectionFee
+                    ? 'Click on "Make Payment" to proceed with the payment for the inspection fee.'
+                    : 'Click on "Viewing" once you are viewing the property.'
+                )
+              }
             >
-            <AntDesign name="infocirlceo" style={styles.infoIcon} />
+              <AntDesign name="infocirlceo" style={styles.infoIcon} />
             </TouchableOpacity>
           </View>
-        ): null}
+        )}
 
         {/* If booking status is VIEWING */}
         {(booking.status === 'VIEWING' && validPropertyTypes.includes(booking.propertyType)) ? (

@@ -3,13 +3,14 @@ import React, {useState, useEffect} from 'react'
 import BookingFullDetails from '../../../../../components/BookingComs/BookingDetails/BookingFullDetails'
 import { useLocalSearchParams } from 'expo-router'
 import { DataStore } from 'aws-amplify/datastore';
-import {Booking, Realtor} from '@/src/models';
+import {Booking, Realtor, Post} from '@/src/models';
 
 const DetailedBooking = () => {
 
   const {id} = useLocalSearchParams()
   const [booking, setBooking] = useState(null)
   const [realtor, setRealtor] = useState(null);
+  const [post, setPost] = useState(null);
   const [isloading, setIsLoading] = useState(false);
 
   const fetchBooking = async (id) =>{
@@ -19,9 +20,15 @@ const DetailedBooking = () => {
         const foundBooking = await DataStore.query(Booking, id)
 
         if(foundBooking){
+          // Fetch associated realtor
           const foundRealtor = await DataStore.query(Realtor, foundBooking.realtorID);
+
+          // Fetch associated post
+          const foundPost = await DataStore.query(Post, foundBooking.PostID)
+          
           setBooking(foundBooking);
           setRealtor(foundRealtor);
+          setPost(foundPost);
 
         } else {
           setBooking(null);
@@ -79,7 +86,7 @@ const DetailedBooking = () => {
   return (
     <View style={{flex:1}}>
       <BookingFullDetails 
-        notification={{...booking, realtor}} 
+        notification={{...booking, realtor, post}} 
         onStatusChange={updateBookingStatus}
       />
     </View>
